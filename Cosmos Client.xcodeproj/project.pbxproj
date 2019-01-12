@@ -12,7 +12,46 @@
 		8867800221E9C54D0022A09E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8867800121E9C54D0022A09E /* Assets.xcassets */; };
 		8867800521E9C54D0022A09E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8867800321E9C54D0022A09E /* LaunchScreen.storyboard */; };
 		8867800D21E9C6A00022A09E /* GaiaKeysController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867800C21E9C6A00022A09E /* GaiaKeysController.swift */; };
+		8869753F21E9CAD000044EB8 /* background.html in Resources */ = {isa = PBXBuildFile; fileRef = 8869752521E9CACF00044EB8 /* background.html */; };
+		8869754021E9CAD000044EB8 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 8869752721E9CACF00044EB8 /* style.css */; };
+		8869754121E9CAD000044EB8 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 8869752921E9CACF00044EB8 /* index.js */; };
+		8869754221E9CAD000044EB8 /* particles.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8869752A21E9CACF00044EB8 /* particles.min.js */; };
+		8869754321E9CAD000044EB8 /* CenteringFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869752B21E9CACF00044EB8 /* CenteringFlowLayout.swift */; };
+		8869754421E9CAD000044EB8 /* SimpleWebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8869752D21E9CACF00044EB8 /* SimpleWebView.storyboard */; };
+		8869754521E9CAD000044EB8 /* SimpleWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869752F21E9CACF00044EB8 /* SimpleWebView.swift */; };
+		8869754621E9CAD000044EB8 /* SimpleWebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8869753021E9CACF00044EB8 /* SimpleWebView.storyboard */; };
+		8869754721E9CAD000044EB8 /* CustomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753221E9CACF00044EB8 /* CustomLoadingView.swift */; };
+		8869754821E9CAD000044EB8 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753321E9CACF00044EB8 /* CustomTabBar.swift */; };
+		8869754921E9CAD000044EB8 /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753421E9CACF00044EB8 /* CustomTabBarItem.swift */; };
+		8869754D21E9CAD000044EB8 /* RichTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753921E9CACF00044EB8 /* RichTextFieldView.swift */; };
+		8869754E21E9CAD000044EB8 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753A21E9CACF00044EB8 /* RoundedButton.swift */; };
+		8869754F21E9CAD000044EB8 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753B21E9CACF00044EB8 /* RoundedView.swift */; };
+		8869755021E9CAD000044EB8 /* ToastAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753D21E9CACF00044EB8 /* ToastAlertView.swift */; };
+		8869755121E9CAD000044EB8 /* ToastAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8869753E21E9CACF00044EB8 /* ToastAlertView.xib */; };
+		8869755321E9CB6700044EB8 /* UIColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869755221E9CB6700044EB8 /* UIColor+extensions.swift */; };
+		8869755521E9CBAE00044EB8 /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869755421E9CBAE00044EB8 /* UIView+extensions.swift */; };
+		8869755C21E9CC1600044EB8 /* CosmosRestApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */; };
+		8869755D21E9CC1600044EB8 /* CosmosRestApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8869756121E9DD3900044EB8 /* Templates.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8869756021E9DD3900044EB8 /* Templates.storyboard */; };
+		8869756321E9DDE600044EB8 /* TemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756221E9DDE600044EB8 /* TemplateController.swift */; };
+		8869756521E9DE8500044EB8 /* CellStateRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756421E9DE8500044EB8 /* CellStateRoundedView.swift */; };
+		8869756721E9E50100044EB8 /* Template1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756621E9E50100044EB8 /* Template1Cell.swift */; };
+		8869756921E9E5D600044EB8 /* Template1HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756821E9E5D600044EB8 /* Template1HeaderCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8869755921E9CBE300044EB8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8869755D21E9CC1600044EB8 /* CosmosRestApi.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		88677FF721E9C54A0022A09E /* Cosmos Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cosmos Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +61,30 @@
 		8867800421E9C54D0022A09E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8867800621E9C54D0022A09E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8867800C21E9C6A00022A09E /* GaiaKeysController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GaiaKeysController.swift; sourceTree = "<group>"; };
+		8869752521E9CACF00044EB8 /* background.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = background.html; sourceTree = "<group>"; };
+		8869752721E9CACF00044EB8 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		8869752921E9CACF00044EB8 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		8869752A21E9CACF00044EB8 /* particles.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = particles.min.js; sourceTree = "<group>"; };
+		8869752B21E9CACF00044EB8 /* CenteringFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenteringFlowLayout.swift; sourceTree = "<group>"; };
+		8869752E21E9CACF00044EB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SimpleWebView.storyboard; sourceTree = "<group>"; };
+		8869752F21E9CACF00044EB8 /* SimpleWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleWebView.swift; sourceTree = "<group>"; };
+		8869753021E9CACF00044EB8 /* SimpleWebView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SimpleWebView.storyboard; sourceTree = "<group>"; };
+		8869753221E9CACF00044EB8 /* CustomLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoadingView.swift; sourceTree = "<group>"; };
+		8869753321E9CACF00044EB8 /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		8869753421E9CACF00044EB8 /* CustomTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarItem.swift; sourceTree = "<group>"; };
+		8869753921E9CACF00044EB8 /* RichTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextFieldView.swift; sourceTree = "<group>"; };
+		8869753A21E9CACF00044EB8 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		8869753B21E9CACF00044EB8 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		8869753D21E9CACF00044EB8 /* ToastAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastAlertView.swift; sourceTree = "<group>"; };
+		8869753E21E9CACF00044EB8 /* ToastAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToastAlertView.xib; sourceTree = "<group>"; };
+		8869755221E9CB6700044EB8 /* UIColor+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extensions.swift"; sourceTree = "<group>"; };
+		8869755421E9CBAE00044EB8 /* UIView+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
+		8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CosmosRestApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8869756021E9DD3900044EB8 /* Templates.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Templates.storyboard; sourceTree = "<group>"; };
+		8869756221E9DDE600044EB8 /* TemplateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateController.swift; sourceTree = "<group>"; };
+		8869756421E9DE8500044EB8 /* CellStateRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellStateRoundedView.swift; sourceTree = "<group>"; };
+		8869756621E9E50100044EB8 /* Template1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template1Cell.swift; sourceTree = "<group>"; };
+		8869756821E9E5D600044EB8 /* Template1HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template1HeaderCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8869755C21E9CC1600044EB8 /* CosmosRestApi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +104,7 @@
 			children = (
 				88677FF921E9C54A0022A09E /* Cosmos Client */,
 				88677FF821E9C54A0022A09E /* Products */,
+				8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +119,101 @@
 		88677FF921E9C54A0022A09E /* Cosmos Client */ = {
 			isa = PBXGroup;
 			children = (
-				88677FFA21E9C54A0022A09E /* AppDelegate.swift */,
 				8867800C21E9C6A00022A09E /* GaiaKeysController.swift */,
+				88677FFA21E9C54A0022A09E /* AppDelegate.swift */,
 				88677FFE21E9C54A0022A09E /* Main.storyboard */,
+				8869752321E9CACF00044EB8 /* UI elements */,
 				8867800121E9C54D0022A09E /* Assets.xcassets */,
 				8867800321E9C54D0022A09E /* LaunchScreen.storyboard */,
 				8867800621E9C54D0022A09E /* Info.plist */,
 			);
 			path = "Cosmos Client";
+			sourceTree = "<group>";
+		};
+		8869752321E9CACF00044EB8 /* UI elements */ = {
+			isa = PBXGroup;
+			children = (
+				8869756A21E9F1C100044EB8 /* Templates */,
+				8869752421E9CACF00044EB8 /* Background Particles */,
+				8869752C21E9CACF00044EB8 /* SimpleWebView */,
+				8869755421E9CBAE00044EB8 /* UIView+extensions.swift */,
+				8869755221E9CB6700044EB8 /* UIColor+extensions.swift */,
+				8869752B21E9CACF00044EB8 /* CenteringFlowLayout.swift */,
+				8869753021E9CACF00044EB8 /* SimpleWebView.storyboard */,
+				8869753121E9CACF00044EB8 /* Views */,
+			);
+			path = "UI elements";
+			sourceTree = "<group>";
+		};
+		8869752421E9CACF00044EB8 /* Background Particles */ = {
+			isa = PBXGroup;
+			children = (
+				8869752521E9CACF00044EB8 /* background.html */,
+				8869752621E9CACF00044EB8 /* css */,
+				8869752821E9CACF00044EB8 /* js */,
+			);
+			path = "Background Particles";
+			sourceTree = "<group>";
+		};
+		8869752621E9CACF00044EB8 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				8869752721E9CACF00044EB8 /* style.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		8869752821E9CACF00044EB8 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				8869752921E9CACF00044EB8 /* index.js */,
+				8869752A21E9CACF00044EB8 /* particles.min.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		8869752C21E9CACF00044EB8 /* SimpleWebView */ = {
+			isa = PBXGroup;
+			children = (
+				8869752D21E9CACF00044EB8 /* SimpleWebView.storyboard */,
+				8869752F21E9CACF00044EB8 /* SimpleWebView.swift */,
+			);
+			path = SimpleWebView;
+			sourceTree = "<group>";
+		};
+		8869753121E9CACF00044EB8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8869756421E9DE8500044EB8 /* CellStateRoundedView.swift */,
+				8869753221E9CACF00044EB8 /* CustomLoadingView.swift */,
+				8869753321E9CACF00044EB8 /* CustomTabBar.swift */,
+				8869753421E9CACF00044EB8 /* CustomTabBarItem.swift */,
+				8869753921E9CACF00044EB8 /* RichTextFieldView.swift */,
+				8869753A21E9CACF00044EB8 /* RoundedButton.swift */,
+				8869753B21E9CACF00044EB8 /* RoundedView.swift */,
+				8869753C21E9CACF00044EB8 /* ToastAlertView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8869753C21E9CACF00044EB8 /* ToastAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				8869753D21E9CACF00044EB8 /* ToastAlertView.swift */,
+				8869753E21E9CACF00044EB8 /* ToastAlertView.xib */,
+			);
+			path = ToastAlertView;
+			sourceTree = "<group>";
+		};
+		8869756A21E9F1C100044EB8 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				8869756021E9DD3900044EB8 /* Templates.storyboard */,
+				8869756221E9DDE600044EB8 /* TemplateController.swift */,
+				8869756621E9E50100044EB8 /* Template1Cell.swift */,
+				8869756821E9E5D600044EB8 /* Template1HeaderCell.swift */,
+			);
+			path = Templates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +226,7 @@
 				88677FF321E9C54A0022A09E /* Sources */,
 				88677FF421E9C54A0022A09E /* Frameworks */,
 				88677FF521E9C54A0022A09E /* Resources */,
+				8869755921E9CBE300044EB8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,7 +277,15 @@
 			files = (
 				8867800521E9C54D0022A09E /* LaunchScreen.storyboard in Resources */,
 				8867800221E9C54D0022A09E /* Assets.xcassets in Resources */,
+				8869754421E9CAD000044EB8 /* SimpleWebView.storyboard in Resources */,
+				8869754621E9CAD000044EB8 /* SimpleWebView.storyboard in Resources */,
+				8869754221E9CAD000044EB8 /* particles.min.js in Resources */,
+				8869754021E9CAD000044EB8 /* style.css in Resources */,
+				8869754121E9CAD000044EB8 /* index.js in Resources */,
+				8869755121E9CAD000044EB8 /* ToastAlertView.xib in Resources */,
+				8869753F21E9CAD000044EB8 /* background.html in Resources */,
 				8867800021E9C54A0022A09E /* Main.storyboard in Resources */,
+				8869756121E9DD3900044EB8 /* Templates.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +296,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8869755521E9CBAE00044EB8 /* UIView+extensions.swift in Sources */,
 				8867800D21E9C6A00022A09E /* GaiaKeysController.swift in Sources */,
+				8869754521E9CAD000044EB8 /* SimpleWebView.swift in Sources */,
+				8869756321E9DDE600044EB8 /* TemplateController.swift in Sources */,
+				8869754921E9CAD000044EB8 /* CustomTabBarItem.swift in Sources */,
+				8869754321E9CAD000044EB8 /* CenteringFlowLayout.swift in Sources */,
+				8869754721E9CAD000044EB8 /* CustomLoadingView.swift in Sources */,
+				8869754F21E9CAD000044EB8 /* RoundedView.swift in Sources */,
+				8869756521E9DE8500044EB8 /* CellStateRoundedView.swift in Sources */,
+				8869755321E9CB6700044EB8 /* UIColor+extensions.swift in Sources */,
+				8869754E21E9CAD000044EB8 /* RoundedButton.swift in Sources */,
+				8869756721E9E50100044EB8 /* Template1Cell.swift in Sources */,
+				8869754D21E9CAD000044EB8 /* RichTextFieldView.swift in Sources */,
+				8869755021E9CAD000044EB8 /* ToastAlertView.swift in Sources */,
+				8869756921E9E5D600044EB8 /* Template1HeaderCell.swift in Sources */,
+				8869754821E9CAD000044EB8 /* CustomTabBar.swift in Sources */,
 				88677FFB21E9C54A0022A09E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +333,14 @@
 				8867800421E9C54D0022A09E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8869752D21E9CACF00044EB8 /* SimpleWebView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8869752E21E9CACF00044EB8 /* Base */,
+			);
+			name = SimpleWebView.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -213,7 +397,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -268,7 +452,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

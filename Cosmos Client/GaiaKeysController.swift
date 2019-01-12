@@ -9,21 +9,27 @@
 import UIKit
 import CosmosRestApi
 
-class GaiaKeysController: UIViewController, GaiaKeysManagementCapable {
+class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAlertViewPresentable {
     
-    @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
+    var toast: ToastAlertView?
     var node: GaiaNode = GaiaNode(scheme: "https", host: "localhost", port: 1317)
     var dataSource: [GaiaKeyDisplayable] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        toast = createToastAlert(creatorView: view, holderUnderView: tableView, holderTopDistanceConstraint: tableViewTopConstraint)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        toast?.showToastAlert("Fetch keys")
+        print("Fetch keys")
         retrieveAllKeys { gaiaKeys, errorMessage in
+            print("Fetch keys done")
             guard let keys = gaiaKeys else {
                 print(errorMessage ?? "Unknown error")
                 return

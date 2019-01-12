@@ -13,7 +13,7 @@
         <!--Gaia Keys Controller-->
         <scene sceneID="5hw-6n-Xvp">
             <objects>
-                <viewController id="4eL-Ay-fom" customClass="GaiaKeysController" customModule="CosmosSample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4eL-Ay-fom" customClass="GaiaKeysController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rPg-W5-Dj2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,6 +64,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Uqu-5J-gd0" id="SpC-B5-fyL"/>
+                        <outlet property="tableViewTopConstraint" destination="L9f-1h-0Mo" id="8Cl-J1-teq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mm8-Yf-r5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
