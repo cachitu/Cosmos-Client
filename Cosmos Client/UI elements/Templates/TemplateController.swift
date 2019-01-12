@@ -40,7 +40,7 @@ class TemplateController: UIViewController, ToastAlertViewPresentable {
         bottomTabbarView.onTap = { index in
             print("tabbartapped \(index)")
         }
-        addButton.isHidden = true
+        //addButton.isHidden = true
         closeButton.isHidden = true
         backButton.isHidden = true
         noDataView.isHidden = true
@@ -54,6 +54,15 @@ class TemplateController: UIViewController, ToastAlertViewPresentable {
             self.toast?.hideToastAlert() {
                 self.toast?.showToastAlert("Done fetching", type: .info, dismissable: true)
                 self.loadingView.stopAnimating()
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CollectDataSegue" {
+            let dest = segue.destination as? TemplateCollectController
+            dest?.onCollectDataComplete = { data in
+                print("Collected: ", data?.field1 ?? "Collected: nada")
             }
         }
     }

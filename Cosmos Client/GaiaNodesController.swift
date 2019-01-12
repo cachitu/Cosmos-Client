@@ -1,0 +1,130 @@
+//
+//  GaiaNodesController.swift
+//  Cosmos Client
+//
+//  Created by Calin Chitu on 12/01/2019.
+//  Copyright © 2019 Calin Chitu. All rights reserved.
+//
+
+import UIKit
+import CosmosRestApi
+
+class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
+    
+    var toast: ToastAlertView?
+    
+    @IBOutlet weak var loadingView: CustomLoadingView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noDataView: UIView!
+    @IBOutlet weak var toastHolderUnderView: UIView!
+    @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topNavBarView: UIView!
+    @IBOutlet weak var addButton: UIButton!
+    
+    @IBAction func addAction(_ sender: Any) {
+    }
+    
+    
+    fileprivate var nodes: [GaiaNode] =  []
+    fileprivate var selectedNode: GaiaNode?
+    fileprivate var selectedIndex: Int = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
+        
+        nodes = [GaiaNode(name: "kytzu",host: "kytzu.go.ro"),
+                 GaiaNode(name: "lupu",host: "80.211.6.156"),
+                 GaiaNode(name: "local",host: "localhost"),
+                 GaiaNode(name: "syncnode",host: "syncnode.com")]
+        
+        noDataView.isHidden = nodes.count > 0
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //loadingView.startAnimating()
+        for node in self.nodes {
+            node.getStatus {
+                self.tableView.reloadData()
+                if node.host == self.nodes.last?.host {
+                    //self.loadingView.stopAnimating()
+                }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NodeEditSegue" {
+            let dest = segue.destination as? GaiaNodeController
+            dest?.editMode = true
+            dest?.collectedData = self.selectedNode
+            dest?.onCollectDataComplete = { data in
+                self.nodes[self.selectedIndex] = data
+            }
+        }
+        if segue.identifier == "CollectDataSegue" {
+            let dest = segue.destination as? GaiaNodeController
+            dest?.onCollectDataComplete = { data in
+                self.nodes.append(data)
+            }
+        }
+        if segue.identifier == "ShowNodeKeysSegue", let selected = selectedNode {
+            let dest = segue.destination as? GaiaKeysController
+            dest?.node = selected
+        }
+    }
+}
+
+extension GaiaNodesController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return nodes.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaNodeCellID", for: indexPath) as! GaiaNodeCell
+        let node = nodes[indexPath.section]
+        cell.configure(with: node)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaNodeHeaderCellID") as? GaiaNodeHeaderCell
+        let node = nodes[section]
+        cell?.updateCell(sectionIndex: section, name: node.name)
+        cell?.onTap = { section in
+            self.selectedNode = self.nodes[section]
+            self.selectedIndex = section
+            self.performSegue(withIdentifier: "NodeEditSegue", sender: self)
+        }
+        return cell
+    }
+}
+
+extension GaiaNodesController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedNode = nodes[indexPath.section]
+        if selectedNode?.state == .active {
+            self.performSegue(withIdentifier: "ShowNodeKeysSegue", sender: self)
+        } else {
+            self.toast?.showToastAlert("The node is not active. Check the host and teh ports", autoHideAfter: 5, type: .info, dismissable: true)
+        }
+    }
+}

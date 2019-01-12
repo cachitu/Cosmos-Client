@@ -14,8 +14,12 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
+    @IBAction func backAction(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     var toast: ToastAlertView?
-    var node: GaiaNode = GaiaNode(scheme: "https", host: "localhost", port: 1317)
+    var node: GaiaNode = GaiaNode()
     var dataSource: [GaiaKeyDisplayable] = []
     
     override func viewDidLoad() {
@@ -26,12 +30,9 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        toast?.showToastAlert("Fetch keys")
-        print("Fetch keys")
-        retrieveAllKeys { gaiaKeys, errorMessage in
-            print("Fetch keys done")
+        retrieveAllKeys(node: node) { gaiaKeys, errorMessage in
             guard let keys = gaiaKeys else {
-                print(errorMessage ?? "Unknown error")
+                self.toast?.showToastAlert(errorMessage ?? "Unknown error")
                 return
             }
             self.dataSource = keys
