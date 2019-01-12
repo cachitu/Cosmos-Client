@@ -562,6 +562,44 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="Pia-hr-EBP">
                                 <rect key="frame" x="0.0" y="24" width="375" height="754"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0M5-k4-JaJ" customClass="RoundedButton" customModule="IPSX" customModuleProvider="target">
+                                <rect key="frame" x="15" y="649" width="345" height="44"/>
+                                <color key="backgroundColor" red="0.1647058824" green="0.67450980390000004" blue="0.87800002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="mLJ-Ho-SfI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Delete Node">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="border" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="deleteNode:" destination="9eS-Vl-7H1" eventType="touchUpInside" id="e01-sm-kCt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQE-Z9-u3v" customClass="RoundedButton" customModule="IPSX" customModuleProvider="target">
+                                <rect key="frame" x="15" y="704" width="345" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1V1-wL-WGU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="tintColor" red="0.16862745100000001" green="0.51399999860000001" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="More Details"/>
+                                <state key="disabled">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="border" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GvU-bZ-xII">
                                 <rect key="frame" x="16" y="114" width="171" height="21.666666666666657"/>
                                 <constraints>
@@ -798,15 +836,21 @@
                             <constraint firstItem="u0r-Lv-cTf" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" id="NVv-NI-SLa"/>
                             <constraint firstItem="Pia-hr-EBP" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" id="UIO-k8-jUr"/>
                             <constraint firstItem="pT9-sF-oWy" firstAttribute="top" secondItem="u0r-Lv-cTf" secondAttribute="bottom" id="UMn-5i-83N"/>
+                            <constraint firstItem="wcj-Y7-3kj" firstAttribute="bottom" secondItem="iQE-Z9-u3v" secondAttribute="bottom" constant="30" id="Vd6-HC-Ky0"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="top" secondItem="Pia-hr-EBP" secondAttribute="top" constant="20" id="Wgn-Ns-fxs"/>
+                            <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="iQE-Z9-u3v" secondAttribute="trailing" constant="15" id="XnI-4F-Vwq"/>
+                            <constraint firstItem="iQE-Z9-u3v" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" constant="15" id="bjt-Bv-qut"/>
                             <constraint firstItem="GvU-bZ-xII" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" constant="16" id="fQ0-Iq-5Cs"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="bottom" secondItem="Pia-hr-EBP" secondAttribute="bottom" id="i06-i0-Zba"/>
+                            <constraint firstItem="iQE-Z9-u3v" firstAttribute="top" secondItem="0M5-k4-JaJ" secondAttribute="bottom" constant="11" id="pSI-wI-Q6k"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="u0r-Lv-cTf" secondAttribute="trailing" id="qYP-aL-WSD"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="top" secondItem="u0r-Lv-cTf" secondAttribute="top" constant="50" id="r65-de-UPY"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="pT9-sF-oWy" secondAttribute="trailing" id="rB8-eF-xbX"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="Pia-hr-EBP" secondAttribute="trailing" id="s4R-ot-n7d"/>
                             <constraint firstItem="pT9-sF-oWy" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" id="v83-f7-5MJ"/>
+                            <constraint firstItem="iQE-Z9-u3v" firstAttribute="leading" secondItem="0M5-k4-JaJ" secondAttribute="leading" id="vDo-Xr-Zhd"/>
                             <constraint firstItem="QxA-Q6-Otc" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" constant="16" id="y9E-dm-YCH"/>
+                            <constraint firstItem="iQE-Z9-u3v" firstAttribute="trailing" secondItem="0M5-k4-JaJ" secondAttribute="trailing" id="zmV-cL-fc7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wcj-Y7-3kj"/>
                     </view>
@@ -814,10 +858,12 @@
                     <connections>
                         <outlet property="addButton" destination="YNc-eb-56r" id="Az3-TV-T6R"/>
                         <outlet property="closeButton" destination="b2P-qZ-u3y" id="ve4-1o-Bdb"/>
+                        <outlet property="deleteNode" destination="0M5-k4-JaJ" id="ENF-o2-aM1"/>
                         <outlet property="field1RtextField" destination="ULO-V6-jwU" id="tNz-zt-0qq"/>
                         <outlet property="field2RtextField" destination="CNt-Z9-mKS" id="ePA-2w-UYB"/>
                         <outlet property="field3RtextField" destination="VQg-Mv-lhB" id="1Bm-ng-70u"/>
                         <outlet property="field4RtextField" destination="RfM-oQ-gO5" id="YbD-sp-cqu"/>
+                        <outlet property="moreDetails" destination="iQE-Z9-u3v" id="Sa9-SR-XnX"/>
                         <outlet property="stackHeightConstraint" destination="BcV-2W-yQM" id="FyT-xO-3wB"/>
                         <outlet property="titleLabelTopConstraint" destination="5o6-Sx-o8i" id="3Ds-Ym-rgs"/>
                         <outlet property="topBarView" destination="u0r-Lv-cTf" id="nWd-pM-a4s"/>
@@ -857,6 +903,6 @@
         <image name="cosmosBlueLogo" width="200" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rTY-Cf-TXZ"/>
+        <segue reference="gIV-DK-wR1"/>
     </inferredMetricsTieBreakers>
 </document>

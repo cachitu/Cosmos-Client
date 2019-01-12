@@ -9,6 +9,15 @@
 import UIKit
 import CosmosRestApi
 
+class PersistableGaiaNodes: PersistCodable {
+    
+    let nodes: [GaiaNode]
+    
+    init(nodes: [GaiaNode]) {
+        self.nodes = nodes
+    }
+}
+
 class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     
     var toast: ToastAlertView?
@@ -36,10 +45,14 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         nodes = [GaiaNode(name: "kytzu",host: "kytzu.go.ro"),
                  GaiaNode(name: "lupu",host: "80.211.6.156"),
                  GaiaNode(name: "local",host: "localhost"),
-                 GaiaNode(name: "syncnode",host: "syncnode.com")]
+                 GaiaNode(name: "syncnode",host: "176.9.98.49")]
         
+        if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
+            nodes = savedNodes.nodes
+        }
+        
+        PersistableGaiaNodes(nodes: nodes).savetoDisk()
         noDataView.isHidden = nodes.count > 0
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,14 +74,21 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             let dest = segue.destination as? GaiaNodeController
             dest?.editMode = true
             dest?.collectedData = self.selectedNode
+            dest?.editedNodeIndex = self.selectedIndex
             dest?.onCollectDataComplete = { data in
                 self.nodes[self.selectedIndex] = data
+                PersistableGaiaNodes(nodes: self.nodes).savetoDisk()
+            }
+            dest?.onDeleteComplete = { index in
+                self.nodes.remove(at: index)
+                PersistableGaiaNodes(nodes: self.nodes).savetoDisk()
             }
         }
         if segue.identifier == "CollectDataSegue" {
             let dest = segue.destination as? GaiaNodeController
             dest?.onCollectDataComplete = { data in
                 self.nodes.append(data)
+                PersistableGaiaNodes(nodes: self.nodes).savetoDisk()
             }
         }
         if segue.identifier == "ShowNodeKeysSegue", let selected = selectedNode {

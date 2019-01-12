@@ -95,6 +95,7 @@
 		8869756F21EA105300044EB8 /* GaiaNodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaNodeController.swift; sourceTree = "<group>"; };
 		8869757121EA173000044EB8 /* GaiaNodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaNodeCell.swift; sourceTree = "<group>"; };
 		8869757321EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaNodeHeaderCell.swift; sourceTree = "<group>"; };
+		8869757521EA64EB00044EB8 /* Cosmos Client.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cosmos Client.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +130,7 @@
 		88677FF921E9C54A0022A09E /* Cosmos Client */ = {
 			isa = PBXGroup;
 			children = (
+				8869757521EA64EB00044EB8 /* Cosmos Client.entitlements */,
 				8869756D21EA0DBB00044EB8 /* GaiaNodesController.swift */,
 				8869756F21EA105300044EB8 /* GaiaNodeController.swift */,
 				8869757121EA173000044EB8 /* GaiaNodeCell.swift */,
@@ -264,6 +266,11 @@
 				TargetAttributes = {
 					88677FF621E9C54A0022A09E = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -486,6 +493,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LCQ88G23A6;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
@@ -504,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LCQ88G23A6;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";

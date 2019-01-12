@@ -22,6 +22,8 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var deleteNode: RoundedButton!
+    @IBOutlet weak var moreDetails: RoundedButton!
     
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
     
@@ -29,16 +31,20 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     
     var collectedData: GaiaNode?
     
-    private var fieldsStateDic: [String : Bool] = ["field1" : false, "field2" : false, "field3" : false, "field4" : false]
+    private var fieldsStateDic: [String : Bool] = ["field1" : false, "field2" : false, "field3" : true, "field4" : true]
     
     var onCollectDataComplete: ((_ data: GaiaNode)->())?
+    var onDeleteComplete: ((_ index: Int)->())?
     var editMode = false
+    var editedNodeIndex: Int?
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         setupTextViews()
         observreFieldsState()
+        deleteNode.isHidden = !editMode
+        moreDetails.isHidden = !editMode
         
         if editMode {
             prePopulate()
@@ -65,8 +71,15 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     @IBAction func collectAndClose(_ sender: Any) {
         self.view.endEditing(true)
         self.collectData()
-        self.dismiss(animated: true) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func deleteNode(_ sender: Any) {
+        self.view.endEditing(true)
+        if let index = editedNodeIndex {
+            onDeleteComplete?(index)
         }
+        self.dismiss(animated: true)
     }
     
     @IBAction func closeButtonAction(_ sender: Any) {
@@ -110,6 +123,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     }
     
     private func collectData() {
+        if collectedData == nil { collectedData = GaiaNode() }
         collectedData?.name = field1RtextField.contentTextField?.text ?? ""
         collectedData?.host = field2RtextField.contentTextField?.text ?? ""
         collectedData?.rcpPort = Int(field3RtextField.contentTextField?.text ?? "1317") ?? 1317
@@ -121,15 +135,15 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     
     private func prePopulate() {
         
-        self.fieldsStateDic["field1"] = true
-        self.fieldsStateDic["field2"] = true
-        self.fieldsStateDic["field3"] = true
-        self.fieldsStateDic["field4"] = true
-        
         field1RtextField.contentTextField?.text = collectedData?.name
         field2RtextField.contentTextField?.text = collectedData?.host
         field3RtextField.contentTextField?.text = "\(collectedData?.rcpPort ?? 1317)"
         field4RtextField.contentTextField?.text = "\(collectedData?.tendermintPort ?? 26657)"
+        
+        self.fieldsStateDic["field1"] = true
+        self.fieldsStateDic["field2"] = true
+        self.fieldsStateDic["field3"] = true
+        self.fieldsStateDic["field4"] = true
     }
     
     private func updateUI() {
