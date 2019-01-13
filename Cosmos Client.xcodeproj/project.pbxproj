@@ -42,6 +42,8 @@
 		8869757021EA105300044EB8 /* GaiaNodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756F21EA105300044EB8 /* GaiaNodeController.swift */; };
 		8869757221EA173000044EB8 /* GaiaNodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757121EA173000044EB8 /* GaiaNodeCell.swift */; };
 		8869757421EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757321EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift */; };
+		8869757721EB05B100044EB8 /* GaiaKeyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757621EB05B100044EB8 /* GaiaKeyCell.swift */; };
+		8869757921EB05C700044EB8 /* GaiaKeyHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,6 +98,8 @@
 		8869757121EA173000044EB8 /* GaiaNodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaNodeCell.swift; sourceTree = "<group>"; };
 		8869757321EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaNodeHeaderCell.swift; sourceTree = "<group>"; };
 		8869757521EA64EB00044EB8 /* Cosmos Client.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cosmos Client.entitlements"; sourceTree = "<group>"; };
+		8869757621EB05B100044EB8 /* GaiaKeyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyCell.swift; sourceTree = "<group>"; };
+		8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyHeaderCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,13 +134,15 @@
 		88677FF921E9C54A0022A09E /* Cosmos Client */ = {
 			isa = PBXGroup;
 			children = (
+				88677FFA21E9C54A0022A09E /* AppDelegate.swift */,
 				8869757521EA64EB00044EB8 /* Cosmos Client.entitlements */,
 				8869756D21EA0DBB00044EB8 /* GaiaNodesController.swift */,
 				8869756F21EA105300044EB8 /* GaiaNodeController.swift */,
 				8869757121EA173000044EB8 /* GaiaNodeCell.swift */,
 				8869757321EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift */,
 				8867800C21E9C6A00022A09E /* GaiaKeysController.swift */,
-				88677FFA21E9C54A0022A09E /* AppDelegate.swift */,
+				8869757621EB05B100044EB8 /* GaiaKeyCell.swift */,
+				8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */,
 				88677FFE21E9C54A0022A09E /* Main.storyboard */,
 				8869752321E9CACF00044EB8 /* UI elements */,
 				8867800121E9C54D0022A09E /* Assets.xcassets */,
@@ -324,8 +330,10 @@
 				8869754521E9CAD000044EB8 /* SimpleWebView.swift in Sources */,
 				8869756321E9DDE600044EB8 /* TemplateController.swift in Sources */,
 				8869754921E9CAD000044EB8 /* CustomTabBarItem.swift in Sources */,
+				8869757921EB05C700044EB8 /* GaiaKeyHeaderCell.swift in Sources */,
 				8869754321E9CAD000044EB8 /* CenteringFlowLayout.swift in Sources */,
 				8869754721E9CAD000044EB8 /* CustomLoadingView.swift in Sources */,
+				8869757721EB05B100044EB8 /* GaiaKeyCell.swift in Sources */,
 				8869757021EA105300044EB8 /* GaiaNodeController.swift in Sources */,
 				8869754F21E9CAD000044EB8 /* RoundedView.swift in Sources */,
 				8869756C21E9F61F00044EB8 /* TemplateCollectController.swift in Sources */,
@@ -495,7 +503,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LCQ88G23A6;
+				DEVELOPMENT_TEAM = 2C9D8PUQU5;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -514,7 +522,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LCQ88G23A6;
+				DEVELOPMENT_TEAM = 2C9D8PUQU5;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

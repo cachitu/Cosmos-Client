@@ -53,20 +53,16 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         
         PersistableGaiaNodes(nodes: nodes).savetoDisk()
         noDataView.isHidden = nodes.count > 0
+        
+        let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { (note) in
+            self.refreshNodes()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //loadingView.startAnimating()
-        for node in self.nodes {
-            node.getStatus {
-                self.tableView.reloadData()
-                if node.host == self.nodes.last?.host {
-                    //self.loadingView.stopAnimating()
-                }
-            }
-        }
+        refreshNodes()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -87,13 +83,24 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         if segue.identifier == "CollectDataSegue" {
             let dest = segue.destination as? GaiaNodeController
             dest?.onCollectDataComplete = { data in
-                self.nodes.append(data)
+                self.nodes.insert(data, at: 0)
                 PersistableGaiaNodes(nodes: self.nodes).savetoDisk()
             }
         }
         if segue.identifier == "ShowNodeKeysSegue", let selected = selectedNode {
             let dest = segue.destination as? GaiaKeysController
             dest?.node = selected
+        }
+    }
+    
+    private func refreshNodes() {
+        for node in self.nodes {
+            node.getStatus {
+                self.tableView.reloadData()
+            }
+            node.getNodeInfo {
+                self.tableView.reloadData()
+            }
         }
     }
 }
@@ -116,6 +123,10 @@ extension GaiaNodesController: UITableViewDataSource {
         return cell
     }
     
+}
+
+extension GaiaNodesController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
@@ -135,16 +146,13 @@ extension GaiaNodesController: UITableViewDataSource {
         }
         return cell
     }
-}
-
-extension GaiaNodesController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedNode = nodes[indexPath.section]
-        if selectedNode?.state == .active {
+        if (selectedNode?.state == .active || selectedNode?.state == .pending) {
             self.performSegue(withIdentifier: "ShowNodeKeysSegue", sender: self)
         } else {
-            self.toast?.showToastAlert("The node is not active. Check the host and teh ports", autoHideAfter: 5, type: .info, dismissable: true)
+            self.toast?.showToastAlert("The node is not active. Check the host and the ports", autoHideAfter: 5, type: .info, dismissable: true)
         }
     }
 }
