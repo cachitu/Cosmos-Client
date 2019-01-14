@@ -44,6 +44,7 @@
 		8869757421EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757321EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift */; };
 		8869757721EB05B100044EB8 /* GaiaKeyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757621EB05B100044EB8 /* GaiaKeyCell.swift */; };
 		8869757921EB05C700044EB8 /* GaiaKeyHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */; };
+		EE2D63DE21ECEF690002D51D /* GaiaKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -100,6 +101,7 @@
 		8869757521EA64EB00044EB8 /* Cosmos Client.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cosmos Client.entitlements"; sourceTree = "<group>"; };
 		8869757621EB05B100044EB8 /* GaiaKeyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyCell.swift; sourceTree = "<group>"; };
 		8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyHeaderCell.swift; sourceTree = "<group>"; };
+		EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				8869757121EA173000044EB8 /* GaiaNodeCell.swift */,
 				8869757321EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift */,
 				8867800C21E9C6A00022A09E /* GaiaKeysController.swift */,
+				EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */,
 				8869757621EB05B100044EB8 /* GaiaKeyCell.swift */,
 				8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */,
 				88677FFE21E9C54A0022A09E /* Main.storyboard */,
@@ -343,6 +346,7 @@
 				8869756521E9DE8500044EB8 /* CellStateRoundedView.swift in Sources */,
 				8869755321E9CB6700044EB8 /* UIColor+extensions.swift in Sources */,
 				8869754E21E9CAD000044EB8 /* RoundedButton.swift in Sources */,
+				EE2D63DE21ECEF690002D51D /* GaiaKeyController.swift in Sources */,
 				8869756E21EA0DBB00044EB8 /* GaiaNodesController.swift in Sources */,
 				8869756721E9E50100044EB8 /* Template1Cell.swift in Sources */,
 				8869754D21E9CAD000044EB8 /* RichTextFieldView.swift in Sources */,

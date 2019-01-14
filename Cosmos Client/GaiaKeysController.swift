@@ -58,9 +58,9 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         
         let alert = UIAlertController(title: nil, message: "Enter the password for \(name) to acces the wallet. It will be stored encripted in the device's keychain if the unlock is succesfull.", preferredStyle: UIAlertController.Style.alert)
         
-        let camcelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
-        let action = UIAlertAction(title: "Submit", style: .default) { (alertAction) in
+        let action = UIAlertAction(title: "Submit", style: .default) { alertAction in
             let textField = alert.textFields![0] as UITextField
             completion(textField.text ?? "")
         }
@@ -70,11 +70,27 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             textField.isSecureTextEntry = true
         }
         
-        alert.addAction(camcelAction)
+        alert.addAction(cancelAction)
         alert.addAction(action)
         
         return alert
     }
+    
+    fileprivate func forgetPasswordAlert(name: String, completion: @escaping (() -> ())) -> UIAlertController {
+        
+        let alert = UIAlertController(title: nil, message: "Tap Forget to confirm removal of \(name) from keychain.", preferredStyle: UIAlertController.Style.alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        let action = UIAlertAction(title: "Forget", style: .destructive) { alertAction in
+            completion()
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(action)
+        
+        return alert
+    }
+
 }
 
 
@@ -110,17 +126,22 @@ extension GaiaKeysController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyHeaderCellID") as? GaiaKeyHeaderCell
         let key = dataSource[section]
-        cell?.updateCell(sectionIndex: section, name: key.name)
+        cell?.updateCell(sectionIndex: section, key: key)
+
         cell?.onForgetPassTap = { section in
-            if key.forgetPassFromKeychain() == true {
-                self.toast?.showToastAlert("The password for \(key.name) has been removed from the keychain", autoHideAfter: 5, type: .info, dismissable: true)
-            } else {
-                self.toast?.showToastAlert("Opps, didn't manage to remove it or didn't find it.", autoHideAfter: 5, type: .error, dismissable: true)
+            let alert = self.forgetPasswordAlert(name: key.name) {
+                if key.forgetPassFromKeychain() == true {
+                    self.toast?.showToastAlert("The password for \(key.name) has been removed from the keychain", autoHideAfter: 5, type: .info, dismissable: true)
+                } else {
+                    self.toast?.showToastAlert("Opps, didn't manage to remove it or didn't find it.", autoHideAfter: 5, type: .error, dismissable: true)
+                }
+                self.tableView.reloadData()
             }
-            self.tableView.reloadData()
+            self.present(alert, animated:true, completion: nil)
         }
-        cell?.onDeleteTap = { section in
-            self.toast?.showToastAlert("Not yet implemented", autoHideAfter: 5, type: .info, dismissable: true)
+
+        cell?.onMoreOptionsTap = { section in
+            self.performSegue(withIdentifier: "ShowKeyDetailsSegue", sender: self)
         }
         return cell
     }

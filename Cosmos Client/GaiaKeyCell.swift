@@ -14,12 +14,10 @@ class GaiaKeyCell: UITableViewCell {
     @IBOutlet weak var leftImageView: UIImageView!
     @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var leftSubLabel: UILabel!
-    @IBOutlet weak var rightLabel: UILabel!
     
     func configure(key: GaiaKey) {
         leftLabel.text = key.name
         leftSubLabel.text = key.address
-        rightLabel.text = key.type
         let imageName = key.isUnlocked ? "approved" : "locked"
         if let image = UIImage(named: imageName) {
             leftImageView.image = image
