@@ -45,6 +45,12 @@
 		8869757721EB05B100044EB8 /* GaiaKeyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757621EB05B100044EB8 /* GaiaKeyCell.swift */; };
 		8869757921EB05C700044EB8 /* GaiaKeyHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */; };
 		EE2D63DE21ECEF690002D51D /* GaiaKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */; };
+		EE2D63E021ECF6AF0002D51D /* GaiaWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */; };
+		EE2D63E221ECF7770002D51D /* GaiaValidatorsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E121ECF7760002D51D /* GaiaValidatorsController.swift */; };
+		EE2D63E421ECF9440002D51D /* GaiaGovernanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E321ECF9440002D51D /* GaiaGovernanceController.swift */; };
+		EE2D63E621ECFA730002D51D /* GaiaTransactionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E521ECFA730002D51D /* GaiaTransactionsController.swift */; };
+		EE2D63E821EDAB270002D51D /* UViewController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */; };
+		EE2D63ED21EDCFD30002D51D /* GaiaKeyCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -102,6 +108,12 @@
 		8869757621EB05B100044EB8 /* GaiaKeyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyCell.swift; sourceTree = "<group>"; };
 		8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyHeaderCell.swift; sourceTree = "<group>"; };
 		EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyController.swift; sourceTree = "<group>"; };
+		EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaWalletController.swift; sourceTree = "<group>"; };
+		EE2D63E121ECF7760002D51D /* GaiaValidatorsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaValidatorsController.swift; sourceTree = "<group>"; };
+		EE2D63E321ECF9440002D51D /* GaiaGovernanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaGovernanceController.swift; sourceTree = "<group>"; };
+		EE2D63E521ECFA730002D51D /* GaiaTransactionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaTransactionsController.swift; sourceTree = "<group>"; };
+		EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UViewController+extensions.swift"; sourceTree = "<group>"; };
+		EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyCreateController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,14 +150,9 @@
 			children = (
 				88677FFA21E9C54A0022A09E /* AppDelegate.swift */,
 				8869757521EA64EB00044EB8 /* Cosmos Client.entitlements */,
-				8869756D21EA0DBB00044EB8 /* GaiaNodesController.swift */,
-				8869756F21EA105300044EB8 /* GaiaNodeController.swift */,
-				8869757121EA173000044EB8 /* GaiaNodeCell.swift */,
-				8869757321EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift */,
-				8867800C21E9C6A00022A09E /* GaiaKeysController.swift */,
-				EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */,
-				8869757621EB05B100044EB8 /* GaiaKeyCell.swift */,
-				8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */,
+				EE2D63E921EDC5850002D51D /* Nodes */,
+				EE2D63EA21EDC5900002D51D /* Keys */,
+				EE2D63EB21EDC5A70002D51D /* Main App */,
 				88677FFE21E9C54A0022A09E /* Main.storyboard */,
 				8869752321E9CACF00044EB8 /* UI elements */,
 				8867800121E9C54D0022A09E /* Assets.xcassets */,
@@ -162,6 +169,7 @@
 				8869752421E9CACF00044EB8 /* Background Particles */,
 				8869752C21E9CACF00044EB8 /* SimpleWebView */,
 				8869755421E9CBAE00044EB8 /* UIView+extensions.swift */,
+				EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */,
 				8869755221E9CB6700044EB8 /* UIColor+extensions.swift */,
 				8869752B21E9CACF00044EB8 /* CenteringFlowLayout.swift */,
 				8869753021E9CACF00044EB8 /* SimpleWebView.storyboard */,
@@ -240,6 +248,40 @@
 				8869756821E9E5D600044EB8 /* Template1HeaderCell.swift */,
 			);
 			path = Templates;
+			sourceTree = "<group>";
+		};
+		EE2D63E921EDC5850002D51D /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				8869756D21EA0DBB00044EB8 /* GaiaNodesController.swift */,
+				8869756F21EA105300044EB8 /* GaiaNodeController.swift */,
+				8869757121EA173000044EB8 /* GaiaNodeCell.swift */,
+				8869757321EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		EE2D63EA21EDC5900002D51D /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				8867800C21E9C6A00022A09E /* GaiaKeysController.swift */,
+				EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */,
+				EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */,
+				8869757621EB05B100044EB8 /* GaiaKeyCell.swift */,
+				8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */,
+			);
+			path = Keys;
+			sourceTree = "<group>";
+		};
+		EE2D63EB21EDC5A70002D51D /* Main App */ = {
+			isa = PBXGroup;
+			children = (
+				EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */,
+				EE2D63E121ECF7760002D51D /* GaiaValidatorsController.swift */,
+				EE2D63E321ECF9440002D51D /* GaiaGovernanceController.swift */,
+				EE2D63E521ECFA730002D51D /* GaiaTransactionsController.swift */,
+			);
+			path = "Main App";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,6 +372,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE2D63E621ECFA730002D51D /* GaiaTransactionsController.swift in Sources */,
+				EE2D63E221ECF7770002D51D /* GaiaValidatorsController.swift in Sources */,
 				8869755521E9CBAE00044EB8 /* UIView+extensions.swift in Sources */,
 				8867800D21E9C6A00022A09E /* GaiaKeysController.swift in Sources */,
 				8869757421EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift in Sources */,
@@ -342,16 +386,20 @@
 				8869757721EB05B100044EB8 /* GaiaKeyCell.swift in Sources */,
 				8869757021EA105300044EB8 /* GaiaNodeController.swift in Sources */,
 				8869754F21E9CAD000044EB8 /* RoundedView.swift in Sources */,
+				EE2D63ED21EDCFD30002D51D /* GaiaKeyCreateController.swift in Sources */,
+				EE2D63E021ECF6AF0002D51D /* GaiaWalletController.swift in Sources */,
 				8869756C21E9F61F00044EB8 /* TemplateCollectController.swift in Sources */,
 				8869756521E9DE8500044EB8 /* CellStateRoundedView.swift in Sources */,
 				8869755321E9CB6700044EB8 /* UIColor+extensions.swift in Sources */,
 				8869754E21E9CAD000044EB8 /* RoundedButton.swift in Sources */,
 				EE2D63DE21ECEF690002D51D /* GaiaKeyController.swift in Sources */,
+				EE2D63E421ECF9440002D51D /* GaiaGovernanceController.swift in Sources */,
 				8869756E21EA0DBB00044EB8 /* GaiaNodesController.swift in Sources */,
 				8869756721E9E50100044EB8 /* Template1Cell.swift in Sources */,
 				8869754D21E9CAD000044EB8 /* RichTextFieldView.swift in Sources */,
 				8869755021E9CAD000044EB8 /* ToastAlertView.swift in Sources */,
 				8869756921E9E5D600044EB8 /* Template1HeaderCell.swift in Sources */,
+				EE2D63E821EDAB270002D51D /* UViewController+extensions.swift in Sources */,
 				8869757221EA173000044EB8 /* GaiaNodeCell.swift in Sources */,
 				8869754821E9CAD000044EB8 /* CustomTabBar.swift in Sources */,
 				88677FFB21E9C54A0022A09E /* AppDelegate.swift in Sources */,
@@ -519,7 +567,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -538,7 +586,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

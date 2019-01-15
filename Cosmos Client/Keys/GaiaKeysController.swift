@@ -31,6 +31,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     
     var node: GaiaNode = GaiaNode()
     var dataSource: [GaiaKey] = []
+    var selectedKey: GaiaKey?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,43 +55,17 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         }
     }
     
-    fileprivate func passwordAlert(name: String, completion: @escaping ((_ pass: String) -> ())) -> UIAlertController {
-        
-        let alert = UIAlertController(title: nil, message: "Enter the password for \(name) to acces the wallet. It will be stored encripted in the device's keychain if the unlock is succesfull.", preferredStyle: UIAlertController.Style.alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        let action = UIAlertAction(title: "Submit", style: .default) { alertAction in
-            let textField = alert.textFields![0] as UITextField
-            completion(textField.text ?? "")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowKeyDetailsSegue" {
+            let dest = segue.destination as? GaiaKeyController
+            dest?.node = self.node
+            dest?.key = selectedKey
         }
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "Minimum 8 charactes"
-            textField.isSecureTextEntry = true
+        if segue.identifier == "CreateKeySegue" {
+            let dest = segue.destination as? GaiaKeyCreateController
+            dest?.node = self.node
         }
-        
-        alert.addAction(cancelAction)
-        alert.addAction(action)
-        
-        return alert
     }
-    
-    fileprivate func forgetPasswordAlert(name: String, completion: @escaping (() -> ())) -> UIAlertController {
-        
-        let alert = UIAlertController(title: nil, message: "Tap Forget to confirm removal of \(name) from keychain.", preferredStyle: UIAlertController.Style.alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        let action = UIAlertAction(title: "Forget", style: .destructive) { alertAction in
-            completion()
-        }
-        alert.addAction(cancelAction)
-        alert.addAction(action)
-        
-        return alert
-    }
-
 }
 
 
@@ -129,18 +104,20 @@ extension GaiaKeysController: UITableViewDelegate {
         cell?.updateCell(sectionIndex: section, key: key)
 
         cell?.onForgetPassTap = { section in
-            let alert = self.forgetPasswordAlert(name: key.name) {
-                if key.forgetPassFromKeychain() == true {
+            self.showPasswordAlert(title: nil, message: "The password for \(key.name) has been removed from the keychain", placeholder: "Minimum 8 charactes") { pass in
+                if key.getPassFromKeychain() != pass {
+                    self.toast?.showToastAlert("Incorrect password, try again..", autoHideAfter: 5, type: .error, dismissable: true)
+                }  else if key.forgetPassFromKeychain() == true {
                     self.toast?.showToastAlert("The password for \(key.name) has been removed from the keychain", autoHideAfter: 5, type: .info, dismissable: true)
                 } else {
                     self.toast?.showToastAlert("Opps, didn't manage to remove it or didn't find it.", autoHideAfter: 5, type: .error, dismissable: true)
                 }
                 self.tableView.reloadData()
             }
-            self.present(alert, animated:true, completion: nil)
         }
 
         cell?.onMoreOptionsTap = { section in
+            self.selectedKey = key
             self.performSegue(withIdentifier: "ShowKeyDetailsSegue", sender: self)
         }
         return cell
@@ -151,16 +128,18 @@ extension GaiaKeysController: UITableViewDelegate {
         let key = dataSource[indexPath.section]
         
         guard key.isUnlocked == false else {
-            print("Go to wallet")
+            performSegue(withIdentifier: "WalletSegueID", sender: self)
             return
         }
         
         DispatchQueue.main.async {
             
-            let alert = self.passwordAlert(name: key.name) { pass in
+            let alertMessage = "Enter the password for \(key.name) to acces the wallet. It will be stored encripted in the device's keychain if the unlock is succesfull."
+            self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { pass in
                 key.unlockKey(node: self.node, password: pass) { success, message in
                     if success == true {
                         key.savePassToKeychain(pass: pass)
+                        self.toast?.showToastAlert("The key has been unlocked. You can now acces your wallet.", autoHideAfter: 5, type: .info, dismissable: true)
                         self.tableView.reloadData()
                     } else if let msg = message {
                         self.toast?.showToastAlert(msg, autoHideAfter: 5, type: .error, dismissable: true)
@@ -169,7 +148,6 @@ extension GaiaKeysController: UITableViewDelegate {
                     }
                 }
             }
-            self.present(alert, animated:true, completion: nil)
         }
 
     }

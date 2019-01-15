@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CosmosRestApi
 
 class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
+    
+    var node: GaiaNode = GaiaNode()
     
     @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
@@ -18,7 +21,14 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var pubKeyLabel: UILabel!
+    @IBOutlet weak var seedLabel: UILabel!
+    
     var toast: ToastAlertView?
+    var key: GaiaKey?
     
     private var fieldsStateDic: [String : Bool] = ["field1" : false, "field2" : false, "field3" : true, "field4" : true]
     
@@ -29,6 +39,7 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: topSeparatorView, holderTopDistanceConstraint: topConstraintOutlet, coveringView: topBarView)
+        prePopulate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,27 +52,29 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         
     }
     
-    @IBAction func collectAndClose(_ sender: Any) {
-        self.view.endEditing(true)
-        self.dismiss(animated: true)
-    }
-    
-    @IBAction func deleteNode(_ sender: Any) {
-        self.view.endEditing(true)
-        if let index = selectedkeyIndex {
-            onDeleteComplete?(index)
+    @IBAction func deleteKey(_ sender: Any) {
+        key?.deleteKey(node: node, password: key?.getPassFromKeychain() ?? "") { success, errMsg in
+            if let index = self.selectedkeyIndex {
+                self.onDeleteComplete?(index)
+            }
+            self.dismiss(animated: true)
         }
-        self.dismiss(animated: true)
     }
     
     @IBAction func closeButtonAction(_ sender: Any) {
         
-        self.view.endEditing(true)
         self.dismiss(animated: true)
     }
     
     private func prePopulate() {
-        
+        nameLabel.text = key?.name ?? "No name"
+        addressLabel.text = key?.address ?? "cosmos..."
+        typeLabel.text = key?.type ?? "..."
+        pubKeyLabel.text = key?.pubKey ?? "cosmos..."
+        seedLabel.text = "No seed stored in keychain"
+        if let seed = key?.getSeedFromKeychain() {
+            seedLabel.text = seed
+        }
     }
     
     private func updateUI() {
