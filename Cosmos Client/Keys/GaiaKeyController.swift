@@ -26,6 +26,7 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var pubKeyLabel: UILabel!
     @IBOutlet weak var seedLabel: UILabel!
+    @IBOutlet weak var seedButton: UIButton!
     
     var toast: ToastAlertView?
     var key: GaiaKey?
@@ -52,6 +53,16 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         
     }
     
+    @IBAction func copyAddress(_ sender: Any) {
+        UIPasteboard.general.string = addressLabel.text
+        toast?.showToastAlert("Address copied to clipboard", autoHideAfter: 5, type: .info, dismissable: true)
+    }
+    
+    @IBAction func copySeed(_ sender: Any) {
+        UIPasteboard.general.string = seedLabel.text
+        toast?.showToastAlert("Seed copied to clipboard", autoHideAfter: 5, type: .info, dismissable: true)
+    }
+    
     @IBAction func deleteKey(_ sender: Any) {
         key?.deleteKey(node: node, password: key?.getPassFromKeychain() ?? "") { success, errMsg in
             if let index = self.selectedkeyIndex {
@@ -74,6 +85,7 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         seedLabel.text = "No seed stored in keychain"
         if let seed = key?.getSeedFromKeychain() {
             seedLabel.text = seed
+            seedButton.isHidden = false
         }
     }
     
