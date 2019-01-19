@@ -29,7 +29,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         navigationController?.popViewController(animated: true)
     }
     
-    var node: GaiaNode = GaiaNode()
+    var node: GaiaNode? = GaiaNode()
     var dataSource: [GaiaKey] = []
     var selectedKey: GaiaKey?
     
@@ -41,9 +41,9 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        guard let validNode = node else { return }
         loadingView.startAnimating()
-        retrieveAllKeys(node: node) { gaiaKeys, errorMessage in
+        retrieveAllKeys(node: validNode) { gaiaKeys, errorMessage in
             self.loadingView.stopAnimating()
             guard let keys = gaiaKeys else {
                 self.toast?.showToastAlert(errorMessage ?? "Unknown error")
@@ -64,6 +64,11 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         if segue.identifier == "CreateKeySegue" {
             let dest = segue.destination as? GaiaKeyCreateController
             dest?.node = self.node
+        }
+        if segue.identifier == "WalletSegueID" {
+            let dest = segue.destination as? GaiaWalletController
+            dest?.node = self.node
+            dest?.key = selectedKey
         }
     }
 }
@@ -126,6 +131,7 @@ extension GaiaKeysController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let key = dataSource[indexPath.section]
+        selectedKey = key
         
         guard key.isUnlocked == false else {
             performSegue(withIdentifier: "WalletSegueID", sender: self)
@@ -134,9 +140,11 @@ extension GaiaKeysController: UITableViewDelegate {
         
         DispatchQueue.main.async {
             
+            guard let validNode = self.node else { return }
+
             let alertMessage = "Enter the password for \(key.name) to acces the wallet. It will be stored encripted in the device's keychain if the unlock is succesfull."
             self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { pass in
-                key.unlockKey(node: self.node, password: pass) { success, message in
+                key.unlockKey(node: validNode, password: pass) { success, message in
                     if success == true {
                         key.savePassToKeychain(pass: pass)
                         self.toast?.showToastAlert("The key has been unlocked. You can now acces your wallet.", autoHideAfter: 5, type: .info, dismissable: true)
@@ -149,6 +157,5 @@ extension GaiaKeysController: UITableViewDelegate {
                 }
             }
         }
-
     }
 }

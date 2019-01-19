@@ -42,7 +42,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         
-        nodes = [GaiaNode(name: "local",host: "localhost")]
+        nodes = [GaiaNode(name: "local",host: "localhost"),
+                 GaiaNode(name: "devtest",host: "80.211.6.156")]
         
         if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
             nodes = savedNodes.nodes

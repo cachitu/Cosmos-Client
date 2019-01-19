@@ -11,7 +11,7 @@ import CosmosRestApi
 
 class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
-    var node: GaiaNode = GaiaNode()
+    var node: GaiaNode? = GaiaNode()
     
     @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
@@ -64,7 +64,8 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     }
     
     @IBAction func deleteKey(_ sender: Any) {
-        key?.deleteKey(node: node, password: key?.getPassFromKeychain() ?? "") { success, errMsg in
+        guard let validNode = node else { return }
+        key?.deleteKey(node: validNode, password: key?.getPassFromKeychain() ?? "") { success, errMsg in
             if let index = self.selectedkeyIndex {
                 self.onDeleteComplete?(index)
             }

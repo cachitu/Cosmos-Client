@@ -51,6 +51,7 @@
 		EE2D63E621ECFA730002D51D /* GaiaTransactionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E521ECFA730002D51D /* GaiaTransactionsController.swift */; };
 		EE2D63E821EDAB270002D51D /* UViewController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */; };
 		EE2D63ED21EDCFD30002D51D /* GaiaKeyCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */; };
+		EE2D643C21F306800002D51D /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D643B21F306800002D51D /* UIImage+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,6 +115,7 @@
 		EE2D63E521ECFA730002D51D /* GaiaTransactionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaTransactionsController.swift; sourceTree = "<group>"; };
 		EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UViewController+extensions.swift"; sourceTree = "<group>"; };
 		EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyCreateController.swift; sourceTree = "<group>"; };
+		EE2D643B21F306800002D51D /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				8869755421E9CBAE00044EB8 /* UIView+extensions.swift */,
 				EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */,
 				8869755221E9CB6700044EB8 /* UIColor+extensions.swift */,
+				EE2D643B21F306800002D51D /* UIImage+Extensions.swift */,
 				8869752B21E9CACF00044EB8 /* CenteringFlowLayout.swift */,
 				8869753021E9CACF00044EB8 /* SimpleWebView.storyboard */,
 				8869753121E9CACF00044EB8 /* Views */,
@@ -387,6 +390,7 @@
 				8869757021EA105300044EB8 /* GaiaNodeController.swift in Sources */,
 				8869754F21E9CAD000044EB8 /* RoundedView.swift in Sources */,
 				EE2D63ED21EDCFD30002D51D /* GaiaKeyCreateController.swift in Sources */,
+				EE2D643C21F306800002D51D /* UIImage+Extensions.swift in Sources */,
 				EE2D63E021ECF6AF0002D51D /* GaiaWalletController.swift in Sources */,
 				8869756C21E9F61F00044EB8 /* TemplateCollectController.swift in Sources */,
 				8869756521E9DE8500044EB8 /* CellStateRoundedView.swift in Sources */,
