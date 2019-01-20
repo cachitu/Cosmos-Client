@@ -92,18 +92,22 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                        amount: sendAmountTextField.text ?? "0",
                        denom: denom) { response, error in
                         DispatchQueue.main.async {
+                            
+                            self.sendAmountTextField.text = ""
+                            self.sendAmountButton.isEnabled = false
+
                             if let validResponse = response {
-                                self.toast?.showToastAlert("Hash [\(validResponse.hash ?? "...")] submited", autoHideAfter: 4, type: .validatePending, dismissable: false)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                                    self.loadData()
+                                self.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 5, type: .validatePending, dismissable: false)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                    self.loadData(animated: false)
                                 }
-                           } else if let errMsg = error {
+                            } else if let errMsg = error {
                                 self.loadingView.stopAnimating()
                                 self.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
                             } else {
                                 self.loadingView.stopAnimating()
                                 self.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
-                           }
+                            }
                         }
             }
             senderAddress = nil
@@ -131,6 +135,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             }
         }
         if segue.identifier == "nextSegue" {
+            amountValueLabel.text = ""
+            amountDenomLabel.text = ""
+            feeAmountValueLabel.text = ""
+            feeAmountDenomLabel.text = ""
             if let index = sender as? Int {
                 let dest = segue.destination as? GaiaValidatorsController
                 dest?.forwardCounter = index - 1
@@ -155,19 +163,26 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: self)
     }
     
-    private func loadData() {
+    private func loadData(animated: Bool = true) {
         
         if let validNode = node, let validKey = key {
             getAccount(node: validNode, key: validKey) { account, errMessage in
                 
                 self.loadingView.stopAnimating()
-                self.amountValueLabel.labelTransition(0.55)
-                self.amountDenomLabel.labelTransition(0.35)
-                self.feeAmountValueLabel.labelTransition(0.55)
-                self.feeAmountDenomLabel.labelTransition(0.35)
+                if animated {
+                    self.amountValueLabel.labelTransition(0.55)
+                    self.amountDenomLabel.labelTransition(0.35)
+                    self.feeAmountValueLabel.labelTransition(0.55)
+                    self.feeAmountDenomLabel.labelTransition(0.35)
+                }
                 
                 self.account = account
-                self.selectedAsset = account?.assets.first
+                if self.selectedAsset == nil {
+                    self.selectedAsset = account?.assets.first
+                }
+                if account?.assets.count == 1 {
+                    self.selectedAsset = account?.assets.first
+                }
                 self.denomPickerView.reloadAllComponents()
                 
                 if let validAccount = account {
@@ -176,6 +191,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     if let feeDenom = validAccount.feeDenom, let feeAmount = validAccount.feeAmount {
                         self.feeAmountValueLabel.text = "\(feeAmount)"
                         self.feeAmountDenomLabel.text = feeDenom
+                    } else {
+                        self.feeAmountValueLabel.text = ""
+                        self.feeAmountDenomLabel.text = ""
                     }
                 } else {
                     if let message = errMessage, message.count > 0 {
