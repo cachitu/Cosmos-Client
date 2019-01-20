@@ -43,7 +43,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
 
     private var selectedAsset: Coin?
-
+    private var senderAddress: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
@@ -61,12 +62,16 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             default: break
             }
         }
-        amountTitleLabel.text = key?.name
         amountValueLabel.text = ""
         amountDenomLabel.text = ""
         feeAmountValueLabel.text = ""
         feeAmountDenomLabel.text = ""
         
+        if let validKey = key {
+            qrTestImageView.image = UIImage.getQRCodeImage(from: validKey.address)
+            amountTitleLabel.text = validKey.name
+            addressLabel.text     = validKey.address
+        }
         sendAmountButton.isEnabled = false
     }
     
@@ -80,6 +85,78 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         bottomTabbarView.selectIndex(0)
+        if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
+            sendAssets(node: node!,
+                       key: key!,
+                       toAddress: addrToSend,
+                       amount: sendAmountTextField.text ?? "0",
+                       denom: denom) { response, error in
+                        DispatchQueue.main.async {
+                            if let validResponse = response {
+                                self.toast?.showToastAlert("Hash [\(validResponse.hash ?? "...")] submited", autoHideAfter: 4, type: .validatePending, dismissable: false)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                                    self.loadData()
+                                }
+                           } else if let errMsg = error {
+                                self.loadingView.stopAnimating()
+                                self.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                            } else {
+                                self.loadingView.stopAnimating()
+                                self.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
+                           }
+                        }
+            }
+            senderAddress = nil
+        } else {
+            loadData()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowAddressBookSegue" {
+            let nav = segue.destination as? UINavigationController
+            let dest = nav?.viewControllers.first as? AddressesListController
+            dest?.shouldPop = true
+            dest?.onSelectAddress = { selected in
+                if let validAddress = selected {
+                    self.senderAddress = validAddress.address
+                }
+            }
+        }
+        if segue.identifier == "nextSegue" {
+            if let index = sender as? Int {
+                let dest = segue.destination as? GaiaValidatorsController
+                dest?.forwardCounter = index - 1
+            }
+        }
+    }
+    
+    @IBAction func shareAddress(_ sender: Any) {
+        
+        let text = key?.address ?? ""
+        let textShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func unwindToWallet(segue:UIStoryboardSegue) {
+        bottomTabbarView.selectIndex(0)
+    }
+    
+    @IBAction func sendAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: self)
+    }
+    
+    private func loadData() {
+        
         if let validNode = node, let validKey = key {
             getAccount(node: validNode, key: validKey) { account, errMessage in
                 
@@ -88,15 +165,12 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 self.amountDenomLabel.labelTransition(0.35)
                 self.feeAmountValueLabel.labelTransition(0.55)
                 self.feeAmountDenomLabel.labelTransition(0.35)
-                self.addressLabel.labelTransition(0.35)
                 
                 self.account = account
                 self.selectedAsset = account?.assets.first
                 self.denomPickerView.reloadAllComponents()
                 
                 if let validAccount = account {
-                    self.addressLabel.text = validAccount.address
-                    self.qrTestImageView.image = UIImage.getQRCodeImage(from: validAccount.address)
                     self.amountValueLabel.text = "\(validAccount.amount)"
                     self.amountDenomLabel.text = validAccount.denom
                     if let feeDenom = validAccount.feeDenom, let feeAmount = validAccount.feeAmount {
@@ -112,24 +186,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 }
             }
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let index = sender as? Int {
-            let dest = segue.destination as? GaiaValidatorsController
-            dest?.forwardCounter = index - 1
-        }
-    }
-    
-    @IBAction func unwindToWallet(segue:UIStoryboardSegue) {
-        bottomTabbarView.selectIndex(0)
     }
     
     @objc

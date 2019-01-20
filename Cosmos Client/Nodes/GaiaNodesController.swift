@@ -30,9 +30,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var topNavBarView: UIView!
     @IBOutlet weak var addButton: UIButton!
     
-    @IBAction func addAction(_ sender: Any) {
-    }
-    
+    var addressBook: GaiaAddressBook = GaiaAddressBook(items: [])
     
     fileprivate var nodes: [GaiaNode] =  []
     fileprivate var selectedNode: GaiaNode?
@@ -54,6 +52,12 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { (note) in
             self.refreshNodes()
+        }
+        
+        if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook {
+            addressBook = storedBook
+        } else {
+            addressBook.savetoDisk()
         }
     }
     

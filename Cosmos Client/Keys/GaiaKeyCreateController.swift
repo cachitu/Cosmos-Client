@@ -20,6 +20,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var deleteNode: RoundedButton!
+    @IBOutlet weak var loadingView: CustomLoadingView!
     
     @IBOutlet weak var stackTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var seedTextView: UITextView!
@@ -78,14 +79,40 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
         guard let validNode = node, let name = field1RtextField.contentTextField?.text, let pass = field2RtextField.contentTextField?.text else {
             return
         }
+        
+        let seedOk = seedTextView.isHidden || seedTextView.text.split(separator: " ").count == 24
+
+        guard seedOk else {
+            toast?.showToastAlert("The seed must have 24 words", autoHideAfter: 5, type: .info, dismissable: true)
+            return
+        }
+        
         var seed: String? = nil
         if seedTextView.isHidden == false, let text = seedTextView.text {
             let words = text.components(separatedBy: " ")
-            if words.count == 24 { seed = text }
+            if words.count == 24 {
+                seed = text }
         }
+        self.loadingView.startAnimating()
         self.createKey(node: validNode, name: name, pass: pass, seed: seed) { key,error in
             DispatchQueue.main.async {
-                self.dismiss(animated: true)
+                self.loadingView.stopAnimating()
+                if key != nil {
+                    
+                    if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook, let name = key?.name, let address = key?.address {
+                        var addrItems: [GaiaAddressBookItem] = []
+                        let item = GaiaAddressBookItem(name: name, address: address)
+                        addrItems.append(item)
+                        storedBook.items.mergeElements(newElements: addrItems)
+                        storedBook.savetoDisk()
+                    }
+
+                    self.dismiss(animated: true)
+                } else if let errMsg = error {
+                    self.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .info, dismissable: true)
+                } else {
+                    self.toast?.showToastAlert("Ooops! I failed!", autoHideAfter: 5, type: .info, dismissable: true)
+                }
             }
         }
     }

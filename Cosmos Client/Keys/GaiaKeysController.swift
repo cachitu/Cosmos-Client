@@ -32,7 +32,8 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     var node: GaiaNode? = GaiaNode()
     var dataSource: [GaiaKey] = []
     var selectedKey: GaiaKey?
-    
+    var selectedIndex: Int?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
@@ -51,6 +52,17 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             }
             self.dataSource = keys
             self.noDataView.isHidden = keys.count > 0
+            
+            if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook, storedBook.items.count < 1 {
+                var addrItems: [GaiaAddressBookItem] = []
+                for key in keys {
+                    let item = GaiaAddressBookItem(name: key.name, address: key.address)
+                    addrItems.append(item)
+                }
+                storedBook.items.mergeElements(newElements: addrItems)
+                storedBook.savetoDisk()
+            }
+
             self.tableView?.reloadData()
         }
     }
@@ -60,6 +72,11 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             let dest = segue.destination as? GaiaKeyController
             dest?.node = self.node
             dest?.key = selectedKey
+            dest?.selectedkeyIndex = self.selectedIndex
+            dest?.onDeleteComplete = { index in
+                self.dataSource.remove(at: index)
+                self.tableView.reloadData()
+            }
         }
         if segue.identifier == "CreateKeySegue" {
             let dest = segue.destination as? GaiaKeyCreateController
@@ -123,6 +140,7 @@ extension GaiaKeysController: UITableViewDelegate {
 
         cell?.onMoreOptionsTap = { section in
             self.selectedKey = key
+            self.selectedIndex = section
             self.performSegue(withIdentifier: "ShowKeyDetailsSegue", sender: self)
         }
         return cell
@@ -144,7 +162,9 @@ extension GaiaKeysController: UITableViewDelegate {
 
             let alertMessage = "Enter the password for \(key.name) to acces the wallet. It will be stored encripted in the device's keychain if the unlock is succesfull."
             self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { pass in
+                self.loadingView.startAnimating()
                 key.unlockKey(node: validNode, password: pass) { success, message in
+                    self.loadingView.stopAnimating()
                     if success == true {
                         key.savePassToKeychain(pass: pass)
                         self.toast?.showToastAlert("The key has been unlocked. You can now acces your wallet.", autoHideAfter: 5, type: .info, dismissable: true)
@@ -158,4 +178,13 @@ extension GaiaKeysController: UITableViewDelegate {
             }
         }
     }
+}
+
+extension Array where Element : Equatable {
+    
+    public mutating func mergeElements<C : Collection>(newElements: C) where C.Iterator.Element == Element{
+        let filteredList = newElements.filter({!self.contains($0)})
+        self.append(contentsOf: filteredList)
+    }
+    
 }
