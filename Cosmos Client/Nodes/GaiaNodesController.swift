@@ -36,12 +36,13 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     fileprivate var selectedNode: GaiaNode?
     fileprivate var selectedIndex: Int = 0
     
+    private var timer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         
-        nodes = [GaiaNode(name: "local",host: "localhost"),
-                 GaiaNode(name: "devtest",host: "80.211.6.156")]
+        nodes = [GaiaNode(name: "devtest",host: "80.211.6.156")]
         
         if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
             nodes = savedNodes.nodes
@@ -65,6 +66,15 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         super.viewDidAppear(animated)
         
         refreshNodes()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { timer in
+            self.refreshNodes()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -96,13 +106,22 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     }
     
     private func refreshNodes() {
+        let dispatch = DispatchGroup()
+        loadingView.startAnimating()
         for node in self.nodes {
+            dispatch.enter()
             node.getStatus {
-                self.tableView.reloadData()
-            }
+                dispatch.leave()
+             }
+            dispatch.enter()
             node.getNodeInfo {
-                self.tableView.reloadData()
+                dispatch.leave()
             }
+        }
+        dispatch.notify(queue: DispatchQueue.main) {
+            print("\n... refresh Completed ...")
+            self.loadingView.stopAnimating()
+            self.tableView.reloadData()
         }
     }
 }

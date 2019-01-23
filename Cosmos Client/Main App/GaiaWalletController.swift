@@ -34,6 +34,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     @IBOutlet weak var sendAmountTextField: UITextField!
     @IBOutlet weak var sendAmountButton: RoundedButton!
     @IBOutlet weak var denomPickerView: UIPickerView!
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var qrTestImageView: UIImageView!
     @IBAction func backAction(_ sender: Any) {
@@ -45,6 +46,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private var selectedAsset: Coin?
     private var senderAddress: String?
     
+    var dataSource: [GaiaDelegation] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
@@ -85,6 +88,14 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         bottomTabbarView.selectIndex(0)
+        
+        key?.getDelegations(node: node!) { delegations, error in
+            if let validDelegations = delegations {
+                self.dataSource = validDelegations
+                self.tableView.reloadData()
+            }
+        }
+        
         if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
             sendAssets(node: node!,
                        key: key!,
@@ -142,6 +153,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             if let index = sender as? Int {
                 let dest = segue.destination as? GaiaValidatorsController
                 dest?.forwardCounter = index - 1
+                dest?.node = node
+                dest?.account = account
+                dest?.key = key
             }
         }
     }
@@ -271,4 +285,21 @@ extension GaiaWalletController: UITextFieldDelegate {
         return true
     }
 
+}
+
+extension GaiaWalletController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCellID", for: indexPath) as! GaiaKeyCell
+        let delegation = dataSource[indexPath.item]
+        let intShares = Double(delegation.shares) ?? 0
+        cell.leftLabel.text = "\(intShares) shares delegated to:"
+        cell.leftSubLabel.text = delegation.validatorAddr
+        return cell
+    }
+    
 }

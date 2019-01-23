@@ -7,21 +7,29 @@
 //
 
 import UIKit
+import CosmosRestApi
 
-class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable {
+class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, GaiaValidatorsCapable {
     
     var toast: ToastAlertView?
     
+    var node: GaiaNode?
+    var key: GaiaKey?
+    var account: GaiaAccount?
+
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
     @IBOutlet weak var bottomTabbarView: CustomTabBar!
     @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
     
     var forwardCounter = 0
     var onUnwind: ((_ toIndex: Int) -> ())?
     var lockLifeCicleDelegates = false
+
+    var dataSource: [GaiaValidator] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,11 +69,31 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable {
             forwardCounter = 0
             return
         }
+        
+        if let validNode = node {
+            loadingView.startAnimating()
+            retrieveAllValidators(node: validNode) { validators, errMsg in
+                self.loadingView.stopAnimating()
+                if let validvalidators = validators {
+                    self.dataSource = validvalidators.sorted() { (left, right) -> Bool in
+                        left.votingPower > right.votingPower
+                    }
+                    self.tableView.reloadData()
+                } else if let validErr = errMsg {
+                    self.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+                } else {
+                    self.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
+               }
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let index = sender as? Int {
             let dest = segue.destination as? GaiaGovernanceController
+            dest?.node = node
+            dest?.account = account
+            dest?.key = key
             dest?.forwardCounter = index - 2
             dest?.onUnwind = { index in
                 self.bottomTabbarView.selectIndex(-1)
@@ -79,4 +107,20 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable {
         bottomTabbarView.selectIndex(1)
     }
 
+}
+
+
+extension GaiaValidatorsController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaValidatorCellID", for: indexPath) as! GaiaValidatorCell
+        let validator = dataSource[indexPath.item]
+        cell.configure(validator: validator, index: indexPath.item)
+        return cell
+    }
+    
 }

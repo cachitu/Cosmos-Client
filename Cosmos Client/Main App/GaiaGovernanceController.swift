@@ -7,22 +7,30 @@
 //
 
 import UIKit
+import CosmosRestApi
 
-class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable {
+class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, GaiaGovernaceCapable {
 
     var toast: ToastAlertView?
-    
+
+    var node: GaiaNode?
+    var key: GaiaKey?
+    var account: GaiaAccount?
+
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
     @IBOutlet weak var bottomTabbarView: CustomTabBar!
     @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
     
     var forwardCounter = 0
     var onUnwind: ((_ toIndex: Int) -> ())?
     var lockLifeCicleDelegates = false
     
+    var dataSource: [GaiaProposal] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
@@ -62,6 +70,21 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable {
             return
         }
         
+        if let validNode = node {
+            loadingView.startAnimating()
+            retrieveAllPropsals(node: validNode) { proposals, errMsg in
+                self.loadingView.stopAnimating()
+                if let validProposals = proposals {
+                    self.dataSource = validProposals
+                    self.tableView.reloadData()
+                } else if let validErr = errMsg {
+                    self.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+                } else {
+                    self.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
+                }
+
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,4 +104,19 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable {
         bottomTabbarView.selectIndex(2)
     }
 
+}
+
+extension GaiaGovernanceController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaGovernanceCellID", for: indexPath) as! GaiaGovernanceCell
+        let proposal = dataSource[indexPath.item]
+        cell.configure(proposal: proposal)
+        return cell
+    }
+    
 }

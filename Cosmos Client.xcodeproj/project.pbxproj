@@ -55,6 +55,8 @@
 		EEAFBF6221F4678D001B01EA /* Addressbook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAFBF5C21F4678D001B01EA /* Addressbook.storyboard */; };
 		EEAFBF6321F4678D001B01EA /* AddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFBF5F21F4678D001B01EA /* AddressController.swift */; };
 		EEAFBF6421F4678D001B01EA /* AddressesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFBF6021F4678D001B01EA /* AddressesListController.swift */; };
+		EEE87A7621F8521B00CA9CDA /* GaiaValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */; };
+		EEE87A7821F860BD00CA9CDA /* GaiaGovernanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE87A7721F860BD00CA9CDA /* GaiaGovernanceCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,6 +124,8 @@
 		EEAFBF5D21F4678D001B01EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Addressbook.storyboard; sourceTree = "<group>"; };
 		EEAFBF5F21F4678D001B01EA /* AddressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressController.swift; sourceTree = "<group>"; };
 		EEAFBF6021F4678D001B01EA /* AddressesListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesListController.swift; sourceTree = "<group>"; };
+		EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaValidatorCell.swift; sourceTree = "<group>"; };
+		EEE87A7721F860BD00CA9CDA /* GaiaGovernanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaGovernanceCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,7 +292,9 @@
 			children = (
 				EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */,
 				EE2D63E121ECF7760002D51D /* GaiaValidatorsController.swift */,
+				EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */,
 				EE2D63E321ECF9440002D51D /* GaiaGovernanceController.swift */,
+				EEE87A7721F860BD00CA9CDA /* GaiaGovernanceCell.swift */,
 				EE2D63E521ECFA730002D51D /* GaiaTransactionsController.swift */,
 			);
 			path = "Main App";
@@ -410,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE2D63E621ECFA730002D51D /* GaiaTransactionsController.swift in Sources */,
+				EEE87A7821F860BD00CA9CDA /* GaiaGovernanceCell.swift in Sources */,
 				EE2D63E221ECF7770002D51D /* GaiaValidatorsController.swift in Sources */,
 				8869755521E9CBAE00044EB8 /* UIView+extensions.swift in Sources */,
 				8867800D21E9C6A00022A09E /* GaiaKeysController.swift in Sources */,
@@ -421,6 +428,7 @@
 				8869757921EB05C700044EB8 /* GaiaKeyHeaderCell.swift in Sources */,
 				8869754321E9CAD000044EB8 /* CenteringFlowLayout.swift in Sources */,
 				8869754721E9CAD000044EB8 /* CustomLoadingView.swift in Sources */,
+				EEE87A7621F8521B00CA9CDA /* GaiaValidatorCell.swift in Sources */,
 				8869757721EB05B100044EB8 /* GaiaKeyCell.swift in Sources */,
 				8869757021EA105300044EB8 /* GaiaNodeController.swift in Sources */,
 				8869754F21E9CAD000044EB8 /* RoundedView.swift in Sources */,
