@@ -124,3 +124,21 @@ extension GaiaValidatorsController: UITableViewDataSource {
     }
     
 }
+
+extension GaiaValidatorsController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let validator = dataSource[indexPath.item]
+        guard let validNode = node, let validKey = key, validator.jailed == true else { return }
+        loadingView.startAnimating()
+        validator.unjail(node: validNode, key: validKey) { resp, errMsg in
+            self.loadingView.stopAnimating()
+            if let msg = errMsg {
+                self.toast?.showToastAlert(msg, autoHideAfter: 3, type: .error, dismissable: true)
+            } else  {
+                self.toast?.showToastAlert("Unjail request submited", autoHideAfter: 3, type: .info, dismissable: true)
+                self.tableView.reloadData()
+            }
+        }
+    }
+}
