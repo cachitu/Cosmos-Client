@@ -17,13 +17,13 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var field4RtextField: RichTextFieldView!
     
     @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var deleteNode: RoundedButton!
     @IBOutlet weak var moreDetails: RoundedButton!
+    @IBOutlet weak var serverInfoLabel: UILabel!
     
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
     
@@ -88,6 +88,11 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         self.dismiss(animated: true)
     }
     
+    @IBAction func copyServerCommand(_ sender: Any) {
+        UIPasteboard.general.string = serverInfoLabel.text
+        toast?.showToastAlert("Copied. Paste this command in a terminal on your node to start the RPC server", type: .info, dismissable: true)
+    }
+    
     private func setupTextViews() {
         field1RtextField.validationRegex    = RichTextFieldView.minOneCharRegex
         field1RtextField.nextResponderField = field2RtextField.contentTextField
@@ -100,21 +105,21 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     
     private func observreFieldsState() {
         self.addButton.isEnabled = false
-        field1RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field1"] = state
-            self.addButton.isEnabled = self.canContinue()
+        field1RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field1"] = state
+            self?.addButton.isEnabled = self!.canContinue()
         }
-        field2RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field2"] = state
-            self.addButton.isEnabled = self.canContinue()
+        field2RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field2"] = state
+            self?.addButton.isEnabled = self?.canContinue() ?? false
         }
-        field3RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field3"] = state
-            self.addButton.isEnabled = self.canContinue()
+        field3RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field3"] = state
+            self?.addButton.isEnabled = self?.canContinue() ?? false
         }
-        field4RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field4"] = state
-            self.addButton.isEnabled = self.canContinue()
+        field4RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field4"] = state
+            self?.addButton.isEnabled = self?.canContinue() ?? false
         }
     }
     
@@ -127,7 +132,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         collectedData?.name = field1RtextField.contentTextField?.text ?? ""
         collectedData?.host = field2RtextField.contentTextField?.text ?? ""
         collectedData?.rcpPort = Int(field3RtextField.contentTextField?.text ?? "1317") ?? 1317
-        collectedData?.tendermintPort = Int(field4RtextField.contentTextField?.text ?? "26657") ?? 1317
+        collectedData?.scheme = field4RtextField.contentTextField?.text ?? "http"
         if let data = collectedData {
             onCollectDataComplete?(data)
         }
@@ -138,7 +143,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         field1RtextField.contentTextField?.text = collectedData?.name
         field2RtextField.contentTextField?.text = collectedData?.host
         field3RtextField.contentTextField?.text = "\(collectedData?.rcpPort ?? 1317)"
-        field4RtextField.contentTextField?.text = "\(collectedData?.tendermintPort ?? 26657)"
+        field4RtextField.contentTextField?.text = collectedData?.scheme
         
         self.fieldsStateDic["field1"] = true
         self.fieldsStateDic["field2"] = true
@@ -156,8 +161,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         
         guard view.frame.size.height <= 568 else { return }
         
-        titleLabelTopConstraint.constant = -30
-        stackHeightConstraint.constant   = 270
+        stackHeightConstraint.constant   = 250
         UIView.animate(withDuration: 0.25) { self.view.layoutIfNeeded() }
     }
     
@@ -166,8 +170,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         
         guard view.frame.size.height <= 568 else { return }
         
-        titleLabelTopConstraint.constant = 26
-        stackHeightConstraint.constant   = 320
+        stackHeightConstraint.constant   = 270
         UIView.animate(withDuration: 0.25) { self.view.layoutIfNeeded() }
     }
     

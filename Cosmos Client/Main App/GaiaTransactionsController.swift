@@ -26,15 +26,15 @@ class GaiaTransactionsController: UIViewController, ToastAlertViewPresentable {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         bottomTabbarView.selectIndex(3)
-        bottomTabbarView.onTap = { index in
+        bottomTabbarView.onTap = { [weak self] index in
             switch index {
             case 0:
-                self.onUnwind?(0)
-                self.performSegue(withIdentifier: "UnwindToWallet", sender: nil)
+                self?.onUnwind?(0)
+                self?.performSegue(withIdentifier: "UnwindToWallet", sender: nil)
             case 1:
-                self.onUnwind?(1)
-                self.performSegue(withIdentifier: "UnwindToValidators", sender: nil)
-            case 2: self.dismiss(animated: true)
+                self?.onUnwind?(1)
+                self?.performSegue(withIdentifier: "UnwindToValidators", sender: nil)
+            case 2: self?.dismiss(animated: true)
             default: break
             }
         }

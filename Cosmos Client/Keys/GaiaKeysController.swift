@@ -44,14 +44,14 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         super.viewDidAppear(animated)
         guard let validNode = node else { return }
         loadingView.startAnimating()
-        retrieveAllKeys(node: validNode) { gaiaKeys, errorMessage in
-            self.loadingView.stopAnimating()
+        retrieveAllKeys(node: validNode) { [weak self] gaiaKeys, errorMessage in
+            self?.loadingView.stopAnimating()
             guard let keys = gaiaKeys else {
-                self.toast?.showToastAlert(errorMessage ?? "Unknown error")
+                self?.toast?.showToastAlert(errorMessage ?? "Unknown error")
                 return
             }
-            self.dataSource = keys
-            self.noDataView.isHidden = keys.count > 0
+            self?.dataSource = keys
+            self?.noDataView.isHidden = keys.count > 0
             
             if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook, storedBook.items.count < 1 {
                 var addrItems: [GaiaAddressBookItem] = []
@@ -63,7 +63,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
                 storedBook.savetoDisk()
             }
 
-            self.tableView?.reloadData()
+            self?.tableView?.reloadData()
         }
     }
     
@@ -73,9 +73,9 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             dest?.node = self.node
             dest?.key = selectedKey
             dest?.selectedkeyIndex = self.selectedIndex
-            dest?.onDeleteComplete = { index in
-                self.dataSource.remove(at: index)
-                self.tableView.reloadData()
+            dest?.onDeleteComplete = { [weak self] index in
+                self?.dataSource.remove(at: index)
+                self?.tableView.reloadData()
             }
         }
         if segue.identifier == "CreateKeySegue" {
@@ -104,6 +104,9 @@ extension GaiaKeysController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCellID", for: indexPath) as! GaiaKeyCell
         let key = dataSource[indexPath.section]
+        cell.onCopy = { [weak self] in
+            self?.toast?.showToastAlert("Address copied to clipboard", autoHideAfter: 3, type: .info, dismissable: true)
+        }
         cell.configure(key: key)
         return cell
     }
@@ -125,23 +128,23 @@ extension GaiaKeysController: UITableViewDelegate {
         let key = dataSource[section]
         cell?.updateCell(sectionIndex: section, key: key)
 
-        cell?.onForgetPassTap = { section in
-            self.showPasswordAlert(title: nil, message: "The password for \(key.name) has been removed from the keychain", placeholder: "Minimum 8 charactes") { pass in
+        cell?.onForgetPassTap = { [weak self] section in
+            self?.showPasswordAlert(title: nil, message: "The password for \(key.name) has been removed from the keychain", placeholder: "Minimum 8 charactes") { pass in
                 if key.getPassFromKeychain() != pass {
-                    self.toast?.showToastAlert("Incorrect password, try again..", autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Incorrect password, try again..", autoHideAfter: 5, type: .error, dismissable: true)
                 }  else if key.forgetPassFromKeychain() == true {
-                    self.toast?.showToastAlert("The password for \(key.name) has been removed from the keychain", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("The password for \(key.name) has been removed from the keychain", autoHideAfter: 5, type: .info, dismissable: true)
                 } else {
-                    self.toast?.showToastAlert("Opps, didn't manage to remove it or didn't find it.", autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Opps, didn't manage to remove it or didn't find it.", autoHideAfter: 5, type: .error, dismissable: true)
                 }
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }
 
-        cell?.onMoreOptionsTap = { section in
-            self.selectedKey = key
-            self.selectedIndex = section
-            self.performSegue(withIdentifier: "ShowKeyDetailsSegue", sender: self)
+        cell?.onMoreOptionsTap = { [weak self] section in
+            self?.selectedKey = key
+            self?.selectedIndex = section
+            self?.performSegue(withIdentifier: "ShowKeyDetailsSegue", sender: self)
         }
         return cell
     }
@@ -161,18 +164,18 @@ extension GaiaKeysController: UITableViewDelegate {
             guard let validNode = self.node else { return }
 
             let alertMessage = "Enter the password for \(key.name) to acces the wallet. It will be stored encripted in the device's keychain if the unlock is succesfull."
-            self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { pass in
-                self.loadingView.startAnimating()
-                key.unlockKey(node: validNode, password: pass) { success, message in
-                    self.loadingView.stopAnimating()
+            self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
+                self?.loadingView.startAnimating()
+                key.unlockKey(node: validNode, password: pass) { [weak self] success, message in
+                    self?.loadingView.stopAnimating()
                     if success == true {
                         key.savePassToKeychain(pass: pass)
-                        self.toast?.showToastAlert("The key has been unlocked. You can now acces your wallet.", autoHideAfter: 5, type: .info, dismissable: true)
-                        self.tableView.reloadData()
+                        self?.toast?.showToastAlert("The key has been unlocked. You can now acces your wallet.", autoHideAfter: 5, type: .info, dismissable: true)
+                        self?.tableView.reloadData()
                     } else if let msg = message {
-                        self.toast?.showToastAlert(msg, autoHideAfter: 5, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(msg, autoHideAfter: 5, type: .error, dismissable: true)
                     } else {
-                        self.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
                     }
                 }
             }

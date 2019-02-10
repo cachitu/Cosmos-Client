@@ -15,6 +15,13 @@ class GaiaKeyCell: UITableViewCell {
     @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var leftSubLabel: UILabel!
     
+    @IBAction func copyAction(_ sender: Any) {
+        UIPasteboard.general.string = leftSubLabel.text
+        onCopy?()
+    }
+    
+    var onCopy:(() -> ())?
+    
     func configure(key: GaiaKey) {
         leftLabel.text = key.name
         leftSubLabel.text = key.address

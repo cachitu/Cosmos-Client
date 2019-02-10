@@ -69,28 +69,28 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         
         let keyName = key?.name ?? "this account"
         let alertMessage = "Enter the password for \(keyName) to delete the wallet. The passowrd and seed will be permanentely removed from the keychain."
-        self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { pass in
-            self.loadingView.startAnimating()
-            self.key?.unlockKey(node: validNode, password: pass) { success, message in
-                self.loadingView.stopAnimating()
+        self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
+            self?.loadingView.startAnimating()
+            self?.key?.unlockKey(node: validNode, password: pass) { [weak self] success, message in
+                self?.loadingView.stopAnimating()
                 if success == true {
-                    self.key?.deleteKey(node: validNode, password: self.key?.getPassFromKeychain() ?? "") { success, errMsg in
+                    self?.key?.deleteKey(node: validNode, password: self?.key?.getPassFromKeychain() ?? "") { [weak self] success, errMsg in
                         if success {
-                            if let index = self.selectedkeyIndex {
-                                self.onDeleteComplete?(index)
+                            if let index = self?.selectedkeyIndex {
+                                self?.onDeleteComplete?(index)
                             }
-                            self.loadingView.stopAnimating()
-                            self.dismiss(animated: true)
+                            self?.loadingView.stopAnimating()
+                            self?.dismiss(animated: true)
                         } else if let errMessage = errMsg {
-                            self.toast?.showToastAlert(errMessage, autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMessage, autoHideAfter: 5, type: .error, dismissable: true)
                         } else {
-                            self.toast?.showToastAlert("Opps, I failed to delete the key.", autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert("Opps, I failed to delete the key.", autoHideAfter: 5, type: .error, dismissable: true)
                         }
                     }
                 } else if let msg = message {
-                    self.toast?.showToastAlert(msg, autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(msg, autoHideAfter: 5, type: .error, dismissable: true)
                 } else {
-                    self.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
                 }
             }
         }

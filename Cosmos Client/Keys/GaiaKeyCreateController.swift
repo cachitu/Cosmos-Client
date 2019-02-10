@@ -56,8 +56,8 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         self.deleteNode.isEnabled = self.canContinue()
     }
@@ -65,8 +65,8 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
     }
     
     @IBAction func seedRecover(_ sender: UIButton) {
@@ -94,9 +94,9 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
                 seed = text }
         }
         self.loadingView.startAnimating()
-        self.createKey(node: validNode, name: name, pass: pass, seed: seed) { key,error in
+        self.createKey(node: validNode, name: name, pass: pass, seed: seed) { [weak self] key,error in
             DispatchQueue.main.async {
-                self.loadingView.stopAnimating()
+                self?.loadingView.stopAnimating()
                 if key != nil {
                     
                     if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook, let name = key?.name, let address = key?.address {
@@ -107,11 +107,11 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
                         storedBook.savetoDisk()
                     }
 
-                    self.dismiss(animated: true)
+                    self?.dismiss(animated: true)
                 } else if let errMsg = error {
-                    self.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .info, dismissable: true)
                 } else {
-                    self.toast?.showToastAlert("Ooops! I failed!", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("Ooops! I failed!", autoHideAfter: 5, type: .info, dismissable: true)
                 }
             }
         }
@@ -135,13 +135,13 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
     
     private func observreFieldsState() {
         self.deleteNode.isEnabled = false
-        field1RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field1"] = state
-            self.deleteNode.isEnabled = self.canContinue()
+        field1RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field1"] = state
+            self?.deleteNode.isEnabled = self?.canContinue() ?? false
         }
-        field2RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field2"] = state
-            self.deleteNode.isEnabled = self.canContinue()
+        field2RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field2"] = state
+            self?.deleteNode.isEnabled = self?.canContinue() ?? false
         }
     }
     

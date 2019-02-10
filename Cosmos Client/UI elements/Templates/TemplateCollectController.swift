@@ -96,21 +96,21 @@ class TemplateCollectController: UIViewController, ToastAlertViewPresentable {
     
     private func observreFieldsState() {
         self.addButton.isEnabled = false
-        field1RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field1"] = state
-            self.addButton.isEnabled = self.canContinue()
+        field1RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field1"] = state
+            self?.addButton.isEnabled = self?.canContinue() ?? false
         }
-        field2RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field2"] = state
-            self.addButton.isEnabled = self.canContinue()
+        field2RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field2"] = state
+            self?.addButton.isEnabled = self?.canContinue() ?? false
         }
-        field3RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field3"] = state
-            self.addButton.isEnabled = self.canContinue()
+        field3RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field3"] = state
+            self?.addButton.isEnabled = self?.canContinue() ?? false
         }
-        field4RtextField.onFieldStateChange = { state in
-            self.fieldsStateDic["field4"] = state
-            self.addButton.isEnabled = self.canContinue()
+        field4RtextField.onFieldStateChange = { [weak self] state in
+            self?.fieldsStateDic["field4"] = state
+            self?.addButton.isEnabled = self?.canContinue() ?? false
         }
     }
     

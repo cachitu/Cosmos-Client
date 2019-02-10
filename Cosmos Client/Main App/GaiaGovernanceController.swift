@@ -34,13 +34,13 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
-        bottomTabbarView.onTap = { index in
+        bottomTabbarView.onTap = { [weak self] index in
             switch index {
             case 0:
-                self.onUnwind?(0)
-                self.performSegue(withIdentifier: "UnwindToWallet", sender: nil)
-            case 1: self.dismiss(animated: true)
-            case 3: self.performSegue(withIdentifier: "nextSegue", sender: index)
+                self?.onUnwind?(0)
+                self?.performSegue(withIdentifier: "UnwindToWallet", sender: nil)
+            case 1: self?.dismiss(animated: true)
+            case 3: self?.performSegue(withIdentifier: "nextSegue", sender: index)
             default: break
             }
         }
@@ -72,15 +72,15 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         
         if let validNode = node {
             loadingView.startAnimating()
-            retrieveAllPropsals(node: validNode) { proposals, errMsg in
-                self.loadingView.stopAnimating()
+            retrieveAllPropsals(node: validNode) { [weak self] proposals, errMsg in
+                self?.loadingView.stopAnimating()
                 if let validProposals = proposals {
-                    self.dataSource = validProposals
-                    self.tableView.reloadData()
+                    self?.dataSource = validProposals
+                    self?.tableView.reloadData()
                 } else if let validErr = errMsg {
-                    self.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
                 } else {
-                    self.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
                 }
 
             }
@@ -91,10 +91,10 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         if let index = sender as? Int {
             let dest = segue.destination as? GaiaTransactionsController
             dest?.forwardCounter = index - 3
-            dest?.onUnwind = { index in
-                self.lockLifeCicleDelegates = true
-                self.bottomTabbarView.selectIndex(-1)
-                if index == 0 { self.onUnwind?(index) }
+            dest?.onUnwind = { [weak self] index in
+                self?.lockLifeCicleDelegates = true
+                self?.bottomTabbarView.selectIndex(-1)
+                if index == 0 { self?.onUnwind?(index) }
             }
             forwardCounter = 0
         }

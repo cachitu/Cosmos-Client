@@ -70,10 +70,10 @@ class AddressesListController: UIViewController, ToastAlertViewPresentable {
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action:UIAlertAction) in
         }
         
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action:UIAlertAction) in
-            self.gaiaAddresses.remove(at: index.item)
-            let _ = GaiaAddressBook(items: self.gaiaAddresses).savetoDisk()
-            self.tableView.reloadData()
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action:UIAlertAction) in
+            self?.gaiaAddresses.remove(at: index.item)
+            let _ = GaiaAddressBook(items: self?.gaiaAddresses ?? []).savetoDisk()
+            self?.tableView.reloadData()
         }
         
         alertController.addAction(cancelAction)

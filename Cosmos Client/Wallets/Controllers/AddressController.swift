@@ -86,15 +86,17 @@ class AddressController: UIViewController, ToastAlertViewPresentable {
     }
     
     private func observreFieldsState() {
-        walletNameRichTextField.onFieldStateChange = { state in
-            let curentNameText = self.walletNameRichTextField.contentTextField?.text ?? ""
-            self.fieldsStateDic["walletName"] = state
-            self.saveButton?.isEnabled = !self.fieldsStateDic.values.contains(false) && curentNameText != self.gaiaAddress?.name && curentNameText.count > 0
+        walletNameRichTextField.onFieldStateChange = { [weak self] state in
+            guard let weakSelf = self else { return }
+            let curentNameText = weakSelf.walletNameRichTextField.contentTextField?.text ?? ""
+            weakSelf.fieldsStateDic["walletName"] = state
+            weakSelf.saveButton?.isEnabled = !weakSelf.fieldsStateDic.values.contains(false) && curentNameText != weakSelf.gaiaAddress?.name && curentNameText.count > 0
         }
-        ethAddresRichTextField.onFieldStateChange = { state in
-            let curentNameText = self.walletNameRichTextField.contentTextField?.text ?? ""
-            self.fieldsStateDic["gaiaAddress"] = state
-            self.saveButton?.isEnabled = !self.fieldsStateDic.values.contains(false) && self.ethAddresRichTextField.contentTextField?.text != self.gaiaAddress?.address && curentNameText.count > 0
+        ethAddresRichTextField.onFieldStateChange = { [weak self] state in
+            guard let weakSelf = self else { return }
+            let curentNameText = weakSelf.walletNameRichTextField.contentTextField?.text ?? ""
+            weakSelf.fieldsStateDic["gaiaAddress"] = state
+            weakSelf.saveButton?.isEnabled = !weakSelf.fieldsStateDic.values.contains(false) && weakSelf.ethAddresRichTextField.contentTextField?.text != weakSelf.gaiaAddress?.address && curentNameText.count > 0
         }
     }
     
@@ -110,7 +112,7 @@ class AddressController: UIViewController, ToastAlertViewPresentable {
         if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook {
             var addrItems: [GaiaAddressBookItem] = []
             let item = GaiaAddressBookItem(name: alias, address: address)
-            addrItems.append(item)
+            addrItems.insert(item, at: 0)
             storedBook.items.mergeElements(newElements: addrItems)
             storedBook.savetoDisk()
         }
@@ -122,12 +124,12 @@ class AddressController: UIViewController, ToastAlertViewPresentable {
         if AVCaptureDevice.authorizationStatus(for: .video) ==  .authorized {
             presentQRScanner()
         } else {
-            AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] (granted: Bool) in
                 DispatchQueue.main.async {
                     if granted {
-                        self.presentQRScanner()
+                        self?.presentQRScanner()
                     } else {
-                        self.openSettingsAction()
+                        self?.openSettingsAction()
                     }
                 }
             })
@@ -156,9 +158,9 @@ class AddressController: UIViewController, ToastAlertViewPresentable {
     private func presentQRScanner() {
         DispatchQueue.main.async {
             let scannerController = QRScannViewController()
-            scannerController.onCodeFound = { code in
-                self.ethAddresRichTextField.contentTextField?.text = code
-                self.ethAddresRichTextField.refreshStatus()
+            scannerController.onCodeFound = { [weak self] code in
+                self?.ethAddresRichTextField.contentTextField?.text = code
+                self?.ethAddresRichTextField.refreshStatus()
             }
             self.present(scannerController, animated: true) {
             }
@@ -175,15 +177,15 @@ class AddressController: UIViewController, ToastAlertViewPresentable {
         
         let alertController = UIAlertController(title: "No Camera Title Alert", message: "No Camera Message Alert", preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action:UIAlertAction) in
-            self.toast?.showToastAlert("Settings Camera Redirect Message", type: .error)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { [weak self] (action:UIAlertAction) in
+            self?.toast?.showToastAlert("Settings Camera Redirect Message", type: .error)
         }
         
-        let deleteAction = UIAlertAction(title: "Go to Settings", style: .default) { (action:UIAlertAction) in
+        let deleteAction = UIAlertAction(title: "Go to Settings", style: .default) { [weak self] (action:UIAlertAction) in
             if UIApplication.shared.canOpenURL(settingsUrl) {
                 UIApplication.shared.open(settingsUrl)
             } else {
-                self.toast?.showToastAlert("Settings Camera Redirect Message", type: .error)
+                self?.toast?.showToastAlert("Settings Camera Redirect Message", type: .error)
             }
         }
         

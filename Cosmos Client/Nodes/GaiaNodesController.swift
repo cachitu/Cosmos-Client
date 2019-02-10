@@ -33,10 +33,10 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     var addressBook: GaiaAddressBook = GaiaAddressBook(items: [])
     
     fileprivate var nodes: [GaiaNode] =  []
-    fileprivate var selectedNode: GaiaNode?
+    fileprivate weak var selectedNode: GaiaNode?
     fileprivate var selectedIndex: Int = 0
     
-    private var timer: Timer?
+    private weak var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +48,14 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             nodes = savedNodes.nodes
         }
         
+        for node in nodes {
+            node.scheme = "http"
+        }
         PersistableGaiaNodes(nodes: nodes).savetoDisk()
         noDataView.isHidden = nodes.count > 0
         
-        let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { (note) in
-            self.refreshNodes()
+        let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            self?.refreshNodes()
         }
         
         if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook {
@@ -67,8 +70,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         
         refreshNodes()
         
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { timer in
-            self.refreshNodes()
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
+            self?.refreshNodes()
         }
     }
     
@@ -83,20 +86,23 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             dest?.editMode = true
             dest?.collectedData = self.selectedNode
             dest?.editedNodeIndex = self.selectedIndex
-            dest?.onCollectDataComplete = { data in
-                self.nodes[self.selectedIndex] = data
-                PersistableGaiaNodes(nodes: self.nodes).savetoDisk()
+            dest?.onCollectDataComplete = { [weak self] data in
+                guard let weakSelf = self else { return }
+                self?.nodes[weakSelf.selectedIndex] = data
+                PersistableGaiaNodes(nodes: weakSelf.nodes).savetoDisk()
             }
-            dest?.onDeleteComplete = { index in
-                self.nodes.remove(at: index)
-                PersistableGaiaNodes(nodes: self.nodes).savetoDisk()
+            dest?.onDeleteComplete = { [weak self] index in
+                guard let weakSelf = self else { return }
+                self?.nodes.remove(at: index)
+                PersistableGaiaNodes(nodes: weakSelf.nodes).savetoDisk()
             }
         }
         if segue.identifier == "CollectDataSegue" {
             let dest = segue.destination as? GaiaNodeController
-            dest?.onCollectDataComplete = { data in
-                self.nodes.insert(data, at: 0)
-                PersistableGaiaNodes(nodes: self.nodes).savetoDisk()
+            dest?.onCollectDataComplete = { [weak self] data in
+                guard let weakSelf = self else { return }
+                weakSelf.nodes.insert(data, at: 0)
+                PersistableGaiaNodes(nodes: weakSelf.nodes).savetoDisk()
             }
         }
         if segue.identifier == "ShowNodeKeysSegue", let selected = selectedNode {
@@ -106,9 +112,10 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     }
     
     private func refreshNodes() {
+        weak var weakSelf = self
         let dispatch = DispatchGroup()
-        loadingView.startAnimating()
-        for node in self.nodes {
+        weakSelf?.loadingView.startAnimating()
+        for node in weakSelf?.nodes ?? [] {
             dispatch.enter()
             node.getStatus {
                 dispatch.leave()
@@ -120,8 +127,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         }
         dispatch.notify(queue: DispatchQueue.main) {
             print("\n... refresh Completed ...")
-            self.loadingView.stopAnimating()
-            self.tableView.reloadData()
+            weakSelf?.loadingView.stopAnimating()
+            weakSelf?.tableView.reloadData()
         }
     }
 }
@@ -160,10 +167,10 @@ extension GaiaNodesController: UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaNodeHeaderCellID") as? GaiaNodeHeaderCell
         let node = nodes[section]
         cell?.updateCell(sectionIndex: section, name: node.name)
-        cell?.onTap = { section in
-            self.selectedNode = self.nodes[section]
-            self.selectedIndex = section
-            self.performSegue(withIdentifier: "NodeEditSegue", sender: self)
+        cell?.onTap = { [weak self] section in
+            self?.selectedNode = self?.nodes[section]
+            self?.selectedIndex = section
+            self?.performSegue(withIdentifier: "NodeEditSegue", sender: self)
         }
         return cell
     }
