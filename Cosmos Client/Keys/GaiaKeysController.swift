@@ -64,6 +64,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             }
 
             self?.tableView?.reloadData()
+            self?.node?.getStakingInfo() { denom in }
         }
     }
     
