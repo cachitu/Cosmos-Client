@@ -384,31 +384,52 @@
                                     <constraint firstAttribute="height" constant="0.5" id="0EK-zG-u62"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xmv-mB-8NE">
-                                <rect key="frame" x="15" y="114" width="74" height="27"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                                <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qby-RM-c0l" userLabel="Separator">
-                                <rect key="frame" x="0.0" y="148.66666666666666" width="375" height="0.33333333333334281"/>
+                                <rect key="frame" x="0.0" y="89" width="375" height="0.6666666666666714"/>
                                 <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="0.29915823060000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="wjx-Kg-qCb"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Add to link your first wallet to this account" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8g-uf-5VR">
-                                <rect key="frame" x="16" y="154" width="343" height="15.666666666666657"/>
+                                <rect key="frame" x="16" y="94.666666666666671" width="343" height="15.666666666666671"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="24" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="V30-Dc-18s">
-                                <rect key="frame" x="0.0" y="149" width="375" height="629"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="24" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="V30-Dc-18s">
+                                <rect key="frame" x="0.0" y="89.666666666666686" width="375" height="688.33333333333326"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="waG-Ar-ibf">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="930-fA-hby" userLabel="Separator">
+                                            <rect key="frame" x="0.0" y="63.666666666666664" width="375" height="0.3333333333333357"/>
+                                            <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="0.29915823060000002" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="0.5" id="DnX-st-zaT"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpy-UC-1UC">
+                                            <rect key="frame" x="16" y="24" width="74" height="26.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="930-fA-hby" secondAttribute="trailing" id="2Ew-xJ-Tqq"/>
+                                        <constraint firstItem="Tpy-UC-1UC" firstAttribute="leading" secondItem="waG-Ar-ibf" secondAttribute="leading" constant="16" id="dmr-G1-EEc"/>
+                                        <constraint firstAttribute="bottom" secondItem="930-fA-hby" secondAttribute="bottom" id="e4x-h6-VE0"/>
+                                        <constraint firstItem="Tpy-UC-1UC" firstAttribute="top" secondItem="waG-Ar-ibf" secondAttribute="top" constant="24" id="sO1-PK-bsk"/>
+                                        <constraint firstItem="930-fA-hby" firstAttribute="leading" secondItem="waG-Ar-ibf" secondAttribute="leading" id="zeV-mP-YgO"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaAddressCellID" id="nzA-TN-jku" customClass="GaiaWalletCell" customModule="Cosmos_Client" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24" width="375" height="58"/>
+                                        <rect key="frame" x="0.0" y="88" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nzA-TN-jku" id="5oK-w3-b6e">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
@@ -483,13 +504,12 @@
                         <constraints>
                             <constraint firstItem="Z9Q-Q6-0gT" firstAttribute="centerY" secondItem="7B7-C1-WKZ" secondAttribute="centerY" id="50v-Ra-BGB"/>
                             <constraint firstItem="7B7-C1-WKZ" firstAttribute="trailing" secondItem="Qby-RM-c0l" secondAttribute="trailing" id="9zJ-aB-o0a"/>
-                            <constraint firstItem="Xmv-mB-8NE" firstAttribute="top" secondItem="etY-zZ-efQ" secondAttribute="bottom" constant="25.5" id="C0L-K8-eb4"/>
-                            <constraint firstItem="Xmv-mB-8NE" firstAttribute="leading" secondItem="7B7-C1-WKZ" secondAttribute="leading" constant="15" id="Hig-8L-VdK"/>
                             <constraint firstItem="WmU-tc-htQ" firstAttribute="top" secondItem="OvQ-H4-m3v" secondAttribute="bottom" id="L5k-Z1-XIw"/>
                             <constraint firstItem="etY-zZ-efQ" firstAttribute="leading" secondItem="OvQ-H4-m3v" secondAttribute="leading" id="Leu-jT-lrn"/>
                             <constraint firstItem="7B7-C1-WKZ" firstAttribute="bottom" secondItem="V30-Dc-18s" secondAttribute="bottom" id="O8q-eL-Mox"/>
                             <constraint firstItem="R8g-uf-5VR" firstAttribute="top" secondItem="Qby-RM-c0l" secondAttribute="bottom" constant="5" id="R91-xD-mZn"/>
                             <constraint firstItem="Z9Q-Q6-0gT" firstAttribute="centerX" secondItem="7B7-C1-WKZ" secondAttribute="centerX" id="Tr5-hi-QeG"/>
+                            <constraint firstItem="V30-Dc-18s" firstAttribute="top" secondItem="etY-zZ-efQ" secondAttribute="bottom" constant="1" id="WcS-8i-py4"/>
                             <constraint firstItem="V30-Dc-18s" firstAttribute="top" secondItem="Qby-RM-c0l" secondAttribute="bottom" id="d7j-GR-6OF"/>
                             <constraint firstItem="OvQ-H4-m3v" firstAttribute="leading" secondItem="7B7-C1-WKZ" secondAttribute="leading" id="dO2-qg-TiL"/>
                             <constraint firstItem="7B7-C1-WKZ" firstAttribute="top" secondItem="OvQ-H4-m3v" secondAttribute="top" constant="50" id="eFa-2d-97K"/>
@@ -498,10 +518,8 @@
                             <constraint firstItem="7B7-C1-WKZ" firstAttribute="trailing" secondItem="R8g-uf-5VR" secondAttribute="trailing" constant="16" id="g1r-gM-WLW"/>
                             <constraint firstItem="7B7-C1-WKZ" firstAttribute="trailing" secondItem="OvQ-H4-m3v" secondAttribute="trailing" id="iJ0-Bc-M1b"/>
                             <constraint firstItem="R8g-uf-5VR" firstAttribute="leading" secondItem="7B7-C1-WKZ" secondAttribute="leading" constant="16" id="iYq-BK-Nfz"/>
-                            <constraint firstItem="V30-Dc-18s" firstAttribute="top" secondItem="Xmv-mB-8NE" secondAttribute="bottom" constant="8" id="jn4-NM-x0r"/>
                             <constraint firstItem="V30-Dc-18s" firstAttribute="leading" secondItem="7B7-C1-WKZ" secondAttribute="leading" id="kWj-o1-5GL"/>
                             <constraint firstItem="7B7-C1-WKZ" firstAttribute="trailing" secondItem="V30-Dc-18s" secondAttribute="trailing" id="lH6-7q-ICg"/>
-                            <constraint firstItem="7B7-C1-WKZ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xmv-mB-8NE" secondAttribute="trailing" constant="15" id="mHh-5l-WPb"/>
                             <constraint firstItem="etY-zZ-efQ" firstAttribute="top" secondItem="OvQ-H4-m3v" secondAttribute="bottom" id="qHa-sf-4v9"/>
                             <constraint firstItem="Qby-RM-c0l" firstAttribute="leading" secondItem="7B7-C1-WKZ" secondAttribute="leading" id="vis-xO-fCf"/>
                             <constraint firstItem="7B7-C1-WKZ" firstAttribute="trailing" secondItem="WmU-tc-htQ" secondAttribute="trailing" id="xxY-zz-fbK"/>

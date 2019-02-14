@@ -34,6 +34,34 @@ public extension UIViewController {
         self.present(optionMenu, animated: true, completion: nil)
     }
 
+    public func showVotingAlert(title: String?, message: String?, completion: @escaping ((_ option: String?) -> ())) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        let action1 = UIAlertAction(title: "Yes", style: .default) { alertAction in
+            completion("yes")
+        }
+        let action2 = UIAlertAction(title: "No", style: .default) { alertAction in
+            completion("no")
+        }
+        let action3 = UIAlertAction(title: "Abstain", style: .default) { alertAction in
+            completion("abstain")
+        }
+        let action4 = UIAlertAction(title: "No With Veto", style: .default) { alertAction in
+            completion("no_with_veto")
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(action1)
+        alert.addAction(action2)
+        alert.addAction(action3)
+        alert.addAction(action4)
+
+        self.present(alert, animated:true, completion: nil)
+    }
+
     public func showAmountAlert(title: String?, message: String?, placeholder: String?, completion: @escaping ((_ amount: String?) -> ())) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)

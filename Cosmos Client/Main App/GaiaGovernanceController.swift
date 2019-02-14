@@ -120,3 +120,28 @@ extension GaiaGovernanceController: UITableViewDataSource {
     }
     
 }
+
+extension GaiaGovernanceController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let proposal = dataSource[indexPath.item]
+        DispatchQueue.main.async {
+            self.showVotingAlert(title: proposal.title, message: proposal.description) { [weak self] vote in
+                guard let vote = vote, let node = self?.node, let key = self?.key  else { return }
+                self?.loadingView.startAnimating()
+                self?.vote(
+                    for: proposal.proposalId,
+                    option: vote,
+                    node: node,
+                    key: key)
+                {  response, err in
+                    self?.loadingView.stopAnimating()
+                    if err == nil {
+                        self?.toast?.showToastAlert("Vote submited", autoHideAfter: 5, type: .info, dismissable: true)
+                    } else if let errMsg = err {
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                    }
+                }
+            }
+        }
+    }
+}

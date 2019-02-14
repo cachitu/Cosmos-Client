@@ -186,7 +186,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
                 self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to delegate to:", message: "\(validator.validator)", placeholder: "0 \(denom ?? "stake")") { amount in
                     if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
                         self?.loadingView.startAnimating()
-                        self?.delegateStake(
+                        self?.delegateStake (
                             node: validNode,
                             key: validKey,
                             toValidator: validator.validator,
