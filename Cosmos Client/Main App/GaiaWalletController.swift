@@ -14,6 +14,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     var node: GaiaNode?
     var key: GaiaKey?
     var account: GaiaAccount?
+    var feeAmount: String = "0" //this is by default in fee denom, can't send in stake denom for now
     
     var toast: ToastAlertView?
     
@@ -88,9 +89,12 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        guard let node = node, let key = key else { return }
+        
         bottomTabbarView.selectIndex(0)
         
-        key?.getDelegations(node: node!) { [weak self] delegations, error in
+        key.getDelegations(node: node) { [weak self] delegations, error in
             if let validDelegations = delegations {
                 self?.dataSource = validDelegations
                 self?.tableView.reloadData()
@@ -98,8 +102,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         }
         
         if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
-            sendAssets(node: node!,
-                       key: key!,
+            sendAssets(node: node,
+                       key: key,
+                       feeAmount: feeAmount,
                        toAddress: addrToSend,
                        amount: sendAmountTextField.text ?? "0",
                        denom: denom) { [weak self] response, error in
@@ -158,6 +163,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 dest?.account = account
                 dest?.key = key
                 dest?.redelgateFrom = redelgateFrom
+                dest?.feeAmount = feeAmount
                 redelgateFrom = nil
             }
         }
@@ -322,6 +328,7 @@ extension GaiaWalletController: UITableViewDelegate {
                             self?.loadingView.startAnimating()
                             self?.delegateStake(node: validNode,
                                                 key: validKey,
+                                                feeAmount: self?.feeAmount ?? "0",
                                                 toValidator: delegation.validatorAddr,
                                                 amount: validAmount,
                                                 denom: validDenom) { (resp, err) in
@@ -348,7 +355,7 @@ extension GaiaWalletController: UITableViewDelegate {
                     self?.showAmountAlert(title: "Type the amount of \(validDenom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(validDenom)", placeholder: "0 \(validDenom)") { amount in
                         if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
                             self?.loadingView.startAnimating()
-                            self?.unbondStake(node: validNode, key: validKey, fromValidator: delegation.validatorAddr, amount: validAmount, denom: validDenom) { (resp, err) in
+                            self?.unbondStake(node: validNode, key: validKey, feeAmount: self?.feeAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: validDenom) { (resp, err) in
                                 if err == nil {
                                     self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 5, type: .info, dismissable: true)
                                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in

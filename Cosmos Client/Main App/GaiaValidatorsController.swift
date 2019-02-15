@@ -16,6 +16,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     var node: GaiaNode?
     var key: GaiaKey?
     var account: GaiaAccount?
+    var feeAmount: String = "0" // Will get it from GaiaWalletController in prepareForSegue
 
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -104,6 +105,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             dest?.account = account
             dest?.key = key
             dest?.forwardCounter = index - 2
+            dest?.feeAmount = feeAmount
             dest?.onUnwind = { [weak self] index in
                 self?.bottomTabbarView.selectIndex(-1)
                 self?.lockLifeCicleDelegates = true
@@ -143,7 +145,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
         if validator.jailed == true {
             
             loadingView.startAnimating()
-            validator.unjail(node: validNode, key: validKey) { [weak self] resp, errMsg in
+            validator.unjail(node: validNode, key: validKey, feeAmount: feeAmount) { [weak self] resp, errMsg in
                 self?.loadingView.stopAnimating()
                 if let msg = errMsg {
                     self?.toast?.showToastAlert(msg, autoHideAfter: 3, type: .error, dismissable: true)
@@ -162,6 +164,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
                         self?.redelegateStake(
                             node: validNode,
                             key: validKey,
+                            feeAmount: self?.feeAmount ?? "0",
                             fromValidator: redelagateAddr,
                             toValidator: validator.validator,
                             amount: validAmount) { (resp, err) in
@@ -189,6 +192,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
                         self?.delegateStake (
                             node: validNode,
                             key: validKey,
+                            feeAmount: self?.feeAmount ?? "0",
                             toValidator: validator.validator,
                             amount: validAmount,
                             denom: denom ?? "stake") { (resp, err) in

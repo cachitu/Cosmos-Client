@@ -16,6 +16,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     var node: GaiaNode?
     var key: GaiaKey?
     var account: GaiaAccount?
+    var feeAmount: String = "0" // Will get it from GaiaWalletController in prepareForSegue
 
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -132,7 +133,8 @@ extension GaiaGovernanceController: UITableViewDelegate {
                     for: proposal.proposalId,
                     option: vote,
                     node: node,
-                    key: key)
+                    key: key,
+                    feeAmount: self?.feeAmount ?? "0")
                 {  response, err in
                     self?.loadingView.stopAnimating()
                     if err == nil {
