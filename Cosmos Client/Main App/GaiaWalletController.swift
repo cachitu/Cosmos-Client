@@ -189,7 +189,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func loadData(animated: Bool = true) {
         
         if let validNode = node, let validKey = key {
-            getAccount(node: validNode, key: validKey) { [weak self] account, errMessage in
+            validKey.getGaiaAccount(node: validNode) { [weak self] account, errMessage in
                 
                 self?.loadingView.stopAnimating()
                 if animated {

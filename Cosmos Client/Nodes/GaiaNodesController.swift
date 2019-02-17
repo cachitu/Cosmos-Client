@@ -113,22 +113,14 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     
     private func refreshNodes() {
         weak var weakSelf = self
-        let dispatch = DispatchGroup()
         weakSelf?.loadingView.startAnimating()
         for node in weakSelf?.nodes ?? [] {
-            dispatch.enter()
             node.getStatus {
-                dispatch.leave()
-             }
-            dispatch.enter()
-            node.getNodeInfo {
-                dispatch.leave()
+                node.getNodeInfo {
+                    weakSelf?.loadingView.stopAnimating()
+                    weakSelf?.tableView.reloadData()
+                }
             }
-        }
-        dispatch.notify(queue: DispatchQueue.main) {
-            print("\n... refresh Completed ...")
-            weakSelf?.loadingView.stopAnimating()
-            weakSelf?.tableView.reloadData()
         }
     }
 }
