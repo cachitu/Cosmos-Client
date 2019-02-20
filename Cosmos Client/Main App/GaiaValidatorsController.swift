@@ -128,22 +128,6 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     @IBAction func unwindToValidator(segue:UIStoryboardSegue) {
         bottomTabbarView.selectIndex(1)
     }
-
-}
-
-
-extension GaiaValidatorsController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaValidatorCellID", for: indexPath) as! GaiaValidatorCell
-        let validator = dataSource[indexPath.item]
-        cell.configure(validator: validator, index: indexPath.item)
-        return cell
-    }
     
     private func handleUnjail(validator: GaiaValidator) {
         
@@ -220,6 +204,23 @@ extension GaiaValidatorsController: UITableViewDataSource {
             }
         }
     }
+
+}
+
+
+extension GaiaValidatorsController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaValidatorCellID", for: indexPath) as! GaiaValidatorCell
+        let validator = dataSource[indexPath.item]
+        cell.configure(validator: validator, index: indexPath.item)
+        return cell
+    }
+    
 }
 
 extension GaiaValidatorsController: UITableViewDelegate {
@@ -228,33 +229,35 @@ extension GaiaValidatorsController: UITableViewDelegate {
         
         let validator = dataSource[indexPath.item]
 
-        if let redelagateAddr = redelgateFrom {
-            
-            handleRedelegate(redelgateFrom: redelagateAddr, validator: validator)
-        } else {
-            
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let detailsAction = UIAlertAction(title: "Validator details", style: .default) { [weak self] alertAction in
-                self?.toast?.showToastAlert("Soon to come", autoHideAfter: 5, type: .info, dismissable: true)
-            }
-            let delegateAction = UIAlertAction(title: "Delegate", style: .default) { [weak self] alertAction in
-                self?.handleDelegate(to: validator)
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-            
-            optionMenu.addAction(detailsAction)
-            optionMenu.addAction(delegateAction)
-            optionMenu.addAction(cancelAction)
-
-            if validator.jailed == true {
-                let unjailAction = UIAlertAction(title: "Unjail", style: .default) { [weak self] alertAction in
-                    self?.handleUnjail(validator: validator)
+        DispatchQueue.main.async {
+            if let redelagateAddr = self.redelgateFrom {
+                
+                self.handleRedelegate(redelgateFrom: redelagateAddr, validator: validator)
+            } else {
+                
+                let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                let detailsAction = UIAlertAction(title: "Validator details", style: .default) { [weak self] alertAction in
+                    self?.toast?.showToastAlert("Soon to come", autoHideAfter: 5, type: .info, dismissable: true)
                 }
-                optionMenu.addAction(unjailAction)
+                let delegateAction = UIAlertAction(title: "Delegate", style: .default) { [weak self] alertAction in
+                    self?.handleDelegate(to: validator)
+                }
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+                
+                optionMenu.addAction(detailsAction)
+                optionMenu.addAction(delegateAction)
+                optionMenu.addAction(cancelAction)
+                
+                if validator.jailed == true {
+                    let unjailAction = UIAlertAction(title: "Unjail", style: .default) { [weak self] alertAction in
+                        self?.handleUnjail(validator: validator)
+                    }
+                    optionMenu.addAction(unjailAction)
+                }
+                
+                self.present(optionMenu, animated: true, completion: nil)
             }
-            
-            self.present(optionMenu, animated: true, completion: nil)
         }
     }
 }
