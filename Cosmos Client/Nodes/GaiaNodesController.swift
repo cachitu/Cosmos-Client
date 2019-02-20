@@ -37,21 +37,20 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     fileprivate var selectedIndex: Int = 0
     
     private weak var timer: Timer?
+    private var showHint = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         
-        nodes = [GaiaNode(name: "devtest",host: "80.211.6.156")]
-        
         if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
             nodes = savedNodes.nodes
+            showHint = false
+        } else {
+            nodes = [GaiaNode(name: "IPSX Dev Node", scheme: "http", host: "80.211.6.156")]
+            PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
         
-        for node in nodes {
-            node.scheme = "http"
-        }
-        PersistableGaiaNodes(nodes: nodes).savetoDisk()
         noDataView.isHidden = nodes.count > 0
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
@@ -73,11 +72,17 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
             self?.refreshNodes()
         }
+        
+        if showHint {
+            toast?.showToastAlert("Use IPSX dev node 80.211.6.156 for test purposes only, add your own trusted node for real use.", type: .info, dismissable: true)
+        }
+        showHint = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer?.invalidate()
+        toast?.hideToast()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -94,6 +99,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             dest?.onDeleteComplete = { [weak self] index in
                 guard let weakSelf = self else { return }
                 self?.nodes.remove(at: index)
+                self?.tableView.reloadData()
                 PersistableGaiaNodes(nodes: weakSelf.nodes).savetoDisk()
             }
         }

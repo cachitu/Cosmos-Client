@@ -47,7 +47,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private var selectedAsset: Coin?
     private var senderAddress: String?
     private var redelgateFrom: String?
-    
+    private weak var timer: Timer?
+
     var dataSource: [GaiaDelegation] = []
     
     override func viewDidLoad() {
@@ -94,13 +95,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         bottomTabbarView.selectIndex(0)
         
-        key.getDelegations(node: node) { [weak self] delegations, error in
-            if let validDelegations = delegations {
-                self?.dataSource = validDelegations
-                self?.tableView.reloadData()
-            }
-        }
-        
         if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
             sendAssets(node: node,
                        key: key,
@@ -112,30 +106,31 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             
                             self?.sendAmountTextField.text = ""
                             self?.sendAmountButton.isEnabled = false
+                            self?.loadingView.stopAnimating()
                             
                             if let validResponse = response {
                                 self?.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 5, type: .validatePending, dismissable: false)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                    self?.loadData(animated: false)
-                                }
                             } else if let errMsg = error {
-                                self?.loadingView.stopAnimating()
                                 self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
                             } else {
-                                self?.loadingView.stopAnimating()
                                 self?.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
                             }
                         }
             }
             senderAddress = nil
         } else {
-            loadData()
+            self.loadData()
+        }
+        print(node.knownValidators)
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
+            self?.loadData(animated: false, spinner: false)
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        timer?.invalidate()
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
     }
@@ -186,7 +181,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: self)
     }
     
-    private func loadData(animated: Bool = true) {
+    private func loadData(animated: Bool = true, spinner: Bool = true) {
         
         if animated {
             self.amountValueLabel.labelTransition(0.55)
@@ -198,7 +193,14 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         if let validNode = node, let validKey = key {
             validKey.getGaiaAccount(node: validNode) { [weak self] account, errMessage in
                 
-                self?.loadingView.stopAnimating()
+                validKey.getDelegations(node: validNode) { [weak self] delegations, error in
+                    if let validDelegations = delegations {
+                        self?.dataSource = validDelegations
+                        self?.tableView.reloadData()
+                    }
+                }
+
+                if spinner { self?.loadingView.stopAnimating() }
                 
                 self?.account = account
                 if self?.selectedAsset == nil {
@@ -210,10 +212,12 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 self?.denomPickerView.reloadAllComponents()
                 
                 if let validAccount = account {
-                    self?.amountValueLabel.text = "\(validAccount.amount)"
+                    let finalVal = "\(validAccount.amount)".split(separator: ".").first ?? "0"
+                    self?.amountValueLabel.text = "\(finalVal)"
                     self?.amountDenomLabel.text = validAccount.denom
                     if let feeDenom = validAccount.feeDenom, let feeAmount = validAccount.feeAmount {
-                        self?.feeAmountValueLabel.text = "\(feeAmount)"
+                        let finalVal = "\(feeAmount)".split(separator: ".").first ?? "0"
+                        self?.feeAmountValueLabel.text = "\(finalVal)"
                         self?.feeAmountDenomLabel.text = feeDenom
                     } else {
                         self?.feeAmountValueLabel.text = ""
@@ -252,7 +256,88 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         self.view.endEditing(true)
     }
     
+    func killZeroes(_ temp: Double) -> String {
+        let tempVar = String(format: "%g", temp)
+        return tempVar
+    }
     
+    private func handleDelegate(delegation: GaiaDelegation, denom: String) {
+        
+        showAmountAlert(title: "Type the amount of \(denom) you want to delegate to:", message: "\(delegation.validatorAddr)\nIt holds\n\(Double(delegation.shares) ?? 0) \(denom) from you.", placeholder: "0 \(denom)") { [weak self] amount in
+            if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
+                self?.loadingView.startAnimating()
+                self?.delegateStake(
+                    node: validNode,
+                    key: validKey,
+                    feeAmount: self?.feeAmount ?? "0",
+                    toValidator: delegation.validatorAddr,
+                    amount: validAmount,
+                    denom: denom) { (resp, err) in
+                        if err == nil {
+                            self?.toast?.showToastAlert("Delegation successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                            self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                                self?.loadingView.stopAnimating()
+                                if let validDelegations = delegations {
+                                    self?.dataSource = validDelegations
+                                    self?.tableView.reloadData()
+                                }
+                            }
+                        } else if let errMsg = err {
+                            self?.loadingView.stopAnimating()
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                        }
+                }
+            }
+        }
+    }
+    
+    private func handleUnbound(delegation: GaiaDelegation, denom: String) {
+        
+        self.showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
+            if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
+                self?.loadingView.startAnimating()
+                self?.unbondStake(node: validNode, key: validKey, feeAmount: self?.feeAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { (resp, err) in
+                    if err == nil {
+                        self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                        self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                            self?.loadingView.stopAnimating()
+                            if let validDelegations = delegations {
+                                self?.dataSource = validDelegations
+                                self?.tableView.reloadData()
+                            }
+                        }
+                    } else if let errMsg = err {
+                        self?.loadingView.stopAnimating()
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func handleWithdraw(delegation: GaiaDelegation) {
+        
+        if let validNode = node, let validKey = key {
+            loadingView.startAnimating()
+            withdraw(node: validNode, key: validKey, feeAmount: feeAmount, validator: delegation.validatorAddr) { [weak self] resp, err in
+                if err == nil {
+                    self?.toast?.showToastAlert("Withdraw successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                        self?.loadingView.stopAnimating()
+                        if let validDelegations = delegations {
+                            self?.dataSource = validDelegations
+                            self?.tableView.reloadData()
+                        }
+                    }
+                } else if let errMsg = err {
+                    self?.loadingView.stopAnimating()
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                }
+            }
+        }
+    }
+    
+
 }
 
 extension GaiaWalletController: UIPickerViewDelegate {
@@ -287,8 +372,8 @@ extension GaiaWalletController: UITextFieldDelegate {
         guard  !textField.isSecureTextEntry else { return true }
         
         let newString = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
-        if let amount = Double(newString), let balanceStr = selectedAsset?.amount, let balance = Double(balanceStr) {
-            self.sendAmountButton.isEnabled = amount <= balance
+        if let amount = Double(newString) {
+            self.sendAmountButton.isEnabled = amount >= 0
         } else {
             self.sendAmountButton.isEnabled = false
         }
@@ -299,6 +384,10 @@ extension GaiaWalletController: UITextFieldDelegate {
 
 extension GaiaWalletController: UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 11
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -306,12 +395,12 @@ extension GaiaWalletController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCellID", for: indexPath) as! GaiaKeyCell
         let delegation = dataSource[indexPath.item]
-        let intShares = Double(delegation.shares) ?? 0
-        cell.leftLabel.text = "\(intShares) shares delegated to:"
+        let parts = delegation.shares.split(separator: ".")
+        let validatorName = node?.knownValidators[delegation.validatorAddr] ?? ""
+        cell.leftLabel.text = "\(parts.first ?? "0") shares to " + validatorName
         cell.leftSubLabel.text = delegation.validatorAddr
         return cell
     }
-    
 }
 
 extension GaiaWalletController: UITableViewDelegate {
@@ -322,58 +411,16 @@ extension GaiaWalletController: UITableViewDelegate {
             
             if let validDenom = denom {
                 
-                let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+                let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                let withdrawAction = UIAlertAction(title: "Withdraw rewards", style: .default) { alertAction in
+                    self?.handleWithdraw(delegation: delegation)
+                }
                 let delegateAction = UIAlertAction(title: "Delegate", style: .default) { alertAction in
-                    self?.showAmountAlert(title: "Type the amount of \(validDenom) you want to delegate to:", message: "\(delegation.validatorAddr)\nIt holds\n\(Double(delegation.shares) ?? 0) \(validDenom) from you.", placeholder: "0 \(validDenom)") { amount in
-                        if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
-                            self?.loadingView.startAnimating()
-                            self?.delegateStake(
-                                node: validNode,
-                                key: validKey,
-                                feeAmount: self?.feeAmount ?? "0",
-                                toValidator: delegation.validatorAddr,
-                                amount: validAmount,
-                                denom: validDenom) { (resp, err) in
-                                    if err == nil {
-                                        self?.toast?.showToastAlert("Delegation successfull", autoHideAfter: 5, type: .info, dismissable: true)
-                                        self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                                            self?.loadingView.stopAnimating()
-                                            if let validDelegations = delegations {
-                                                self?.dataSource = validDelegations
-                                                self?.tableView.reloadData()
-                                            }
-                                        }
-                                    } else if let errMsg = err {
-                                        self?.loadingView.stopAnimating()
-                                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
-                                    }
-                                    
-                            }
-                        }
-                    }
+                    self?.handleDelegate(delegation: delegation, denom: validDenom)
                 }
                 
                 let unboundAction = UIAlertAction(title: "Unbond", style: .default) { alertAction in
-                    self?.showAmountAlert(title: "Type the amount of \(validDenom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(validDenom)", placeholder: "0 \(validDenom)") { amount in
-                        if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
-                            self?.loadingView.startAnimating()
-                            self?.unbondStake(node: validNode, key: validKey, feeAmount: self?.feeAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: validDenom) { (resp, err) in
-                                if err == nil {
-                                    self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 5, type: .info, dismissable: true)
-                                    self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                                        self?.loadingView.stopAnimating()
-                                        if let validDelegations = delegations {
-                                            self?.dataSource = validDelegations
-                                            self?.tableView.reloadData()
-                                        }
-                                    }
-                                } else if let errMsg = err {
-                                    self?.loadingView.stopAnimating()
-                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
-                                }
-                            }
-                        }
-                    }
+                    self?.handleUnbound(delegation: delegation, denom: validDenom)
                 }
                 
                 let redelegateAction = UIAlertAction(title: "Redelegate", style: .default) { alertAction in
@@ -383,9 +430,10 @@ extension GaiaWalletController: UITableViewDelegate {
                 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
                 
+                optionMenu.addAction(withdrawAction)
+                optionMenu.addAction(redelegateAction)
                 optionMenu.addAction(delegateAction)
                 optionMenu.addAction(unboundAction)
-                optionMenu.addAction(redelegateAction)
                 optionMenu.addAction(cancelAction)
                 
                 self?.present(optionMenu, animated: true, completion: nil)

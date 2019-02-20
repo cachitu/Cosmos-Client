@@ -81,12 +81,23 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             loadingView.startAnimating()
             retrieveAllValidators(node: validNode) { [weak self] validators, errMsg in
                 self?.loadingView.stopAnimating()
-                if let validvalidators = validators {
-                    self?.dataSource = validvalidators.sorted() { (left, right) -> Bool in
+                if let validValidators = validators {
+                    for validator in validValidators {
+                        validNode.knownValidators[validator.validator] = validator.moniker
+                    }
+                    if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
+                        for savedNode in savedNodes.nodes {
+                            if savedNode.network == validNode.network {
+                                savedNode.knownValidators = validNode.knownValidators
+                            }
+                        }
+                        PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
+                    }
+                    self?.dataSource = validValidators.sorted() { (left, right) -> Bool in
                         left.votingPower > right.votingPower
                     }
                     self?.tableView.reloadData()
-                    if let redelagateAddr = self?.redelgateFrom {
+                     if let redelagateAddr = self?.redelgateFrom {
                         self?.toast?.showToastAlert("Tap any validator to redelegate from \(redelagateAddr)", type: .validatePending, dismissable: false)
                     }
                 } else if let validErr = errMsg {
@@ -134,83 +145,116 @@ extension GaiaValidatorsController: UITableViewDataSource {
         return cell
     }
     
+    private func handleUnjail(validator: GaiaValidator) {
+        
+        guard let validNode = node, let validKey = key else { return }
+        
+        loadingView.startAnimating()
+        validator.unjail(node: validNode, key: validKey, feeAmount: feeAmount) { [weak self] resp, errMsg in
+            self?.loadingView.stopAnimating()
+            if let msg = errMsg {
+                self?.toast?.showToastAlert(msg, autoHideAfter: 3, type: .error, dismissable: true)
+            } else  {
+                self?.toast?.showToastAlert("Unjail request submited", autoHideAfter: 3, type: .info, dismissable: true)
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    private func handleRedelegate(redelgateFrom: String, validator: GaiaValidator) {
+        print("redelegate from \(redelgateFrom) to \(validator.validator)")
+        node?.getStakingInfo() { [weak self] denom in
+            self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to redelegate to:", message: "\(validator.validator)\nfrom\n\(redelgateFrom)", placeholder: "0 \(denom ?? "stake")") { amount in
+                if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
+                    self?.loadingView.startAnimating()
+                    self?.redelegateStake(
+                        node: validNode,
+                        key: validKey,
+                        feeAmount: self?.feeAmount ?? "0",
+                        fromValidator: redelgateFrom,
+                        toValidator: validator.validator,
+                        amount: validAmount) { (resp, err) in
+                            self?.redelgateFrom = nil
+                            if err == nil {
+                                self?.toast?.showToastAlert("Redelegation successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                                self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                                    self?.loadingView.stopAnimating()
+                                    self?.loadData()
+                                }
+                            } else if let errMsg = err {
+                                self?.loadingView.stopAnimating()
+                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                            }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func handleDelegate(to validator: GaiaValidator) {
+        
+        print("Should delegate to \(validator.validator)")
+        node?.getStakingInfo() { [weak self] denom in
+            self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to delegate to:", message: "\(validator.validator)", placeholder: "0 \(denom ?? "stake")") { amount in
+                if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
+                    self?.loadingView.startAnimating()
+                    self?.delegateStake (
+                        node: validNode,
+                        key: validKey,
+                        feeAmount: self?.feeAmount ?? "0",
+                        toValidator: validator.validator,
+                        amount: validAmount,
+                        denom: denom ?? "stake") { (resp, err) in
+                            if err == nil {
+                                self?.toast?.showToastAlert("Delegation successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                                self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                                    self?.loadingView.stopAnimating()
+                                    self?.loadData()
+                                }
+                            } else if let errMsg = err {
+                                self?.loadingView.stopAnimating()
+                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                            }
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension GaiaValidatorsController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let validator = dataSource[indexPath.item]
-        guard let validNode = node, let validKey = key else { return }
         
-        if validator.jailed == true {
-            
-            loadingView.startAnimating()
-            validator.unjail(node: validNode, key: validKey, feeAmount: feeAmount) { [weak self] resp, errMsg in
-                self?.loadingView.stopAnimating()
-                if let msg = errMsg {
-                    self?.toast?.showToastAlert(msg, autoHideAfter: 3, type: .error, dismissable: true)
-                } else  {
-                    self?.toast?.showToastAlert("Unjail request submited", autoHideAfter: 3, type: .info, dismissable: true)
-                    self?.tableView.reloadData()
-                }
-            }
+        let validator = dataSource[indexPath.item]
 
-        } else if let redelagateAddr = redelgateFrom {
-            print("redelegate from \(redelagateAddr) to \(validator.validator)")
-            node?.getStakingInfo() { [weak self] denom in
-                self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to redelegate to:", message: "\(validator.validator)\nfrom\n\(redelagateAddr)", placeholder: "0 \(denom ?? "stake")") { amount in
-                    if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
-                        self?.loadingView.startAnimating()
-                        self?.redelegateStake(
-                            node: validNode,
-                            key: validKey,
-                            feeAmount: self?.feeAmount ?? "0",
-                            fromValidator: redelagateAddr,
-                            toValidator: validator.validator,
-                            amount: validAmount) { (resp, err) in
-                                self?.redelgateFrom = nil
-                                if err == nil {
-                                    self?.toast?.showToastAlert("Redelegation successfull", autoHideAfter: 5, type: .info, dismissable: true)
-                                    self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                                        self?.loadingView.stopAnimating()
-                                        self?.loadData()
-                                    }
-                                } else if let errMsg = err {
-                                    self?.loadingView.stopAnimating()
-                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
-                                }
-                        }
-                    }
-                }
+        if let redelagateAddr = redelgateFrom {
+            
+            handleRedelegate(redelgateFrom: redelagateAddr, validator: validator)
+        } else {
+            
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let detailsAction = UIAlertAction(title: "Validator details", style: .default) { [weak self] alertAction in
+                self?.toast?.showToastAlert("Soon to come", autoHideAfter: 5, type: .info, dismissable: true)
             }
-       } else {
-            print("Should delegate to \(validator.validator)")
-            node?.getStakingInfo() { [weak self] denom in
-                self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to delegate to:", message: "\(validator.validator)", placeholder: "0 \(denom ?? "stake")") { amount in
-                    if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
-                        self?.loadingView.startAnimating()
-                        self?.delegateStake (
-                            node: validNode,
-                            key: validKey,
-                            feeAmount: self?.feeAmount ?? "0",
-                            toValidator: validator.validator,
-                            amount: validAmount,
-                            denom: denom ?? "stake") { (resp, err) in
-                                if err == nil {
-                                    self?.toast?.showToastAlert("Delegation successfull", autoHideAfter: 5, type: .info, dismissable: true)
-                                    self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                                        self?.loadingView.stopAnimating()
-                                        self?.loadData()
-                                    }
-                                } else if let errMsg = err {
-                                    self?.loadingView.stopAnimating()
-                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
-                                }
-                                
-                        }
-                    }
-                }
+            let delegateAction = UIAlertAction(title: "Delegate", style: .default) { [weak self] alertAction in
+                self?.handleDelegate(to: validator)
             }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            
+            optionMenu.addAction(detailsAction)
+            optionMenu.addAction(delegateAction)
+            optionMenu.addAction(cancelAction)
+
+            if validator.jailed == true {
+                let unjailAction = UIAlertAction(title: "Unjail", style: .default) { [weak self] alertAction in
+                    self?.handleUnjail(validator: validator)
+                }
+                optionMenu.addAction(unjailAction)
+            }
+            
+            self.present(optionMenu, animated: true, completion: nil)
         }
     }
 }
