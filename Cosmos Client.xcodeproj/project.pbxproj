@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8801CF78221F22EF004781C1 /* GaiaProposalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801CF77221F22EF004781C1 /* GaiaProposalController.swift */; };
 		88677FFB21E9C54A0022A09E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88677FFA21E9C54A0022A09E /* AppDelegate.swift */; };
 		8867800021E9C54A0022A09E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88677FFE21E9C54A0022A09E /* Main.storyboard */; };
 		8867800221E9C54D0022A09E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8867800121E9C54D0022A09E /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8801CF77221F22EF004781C1 /* GaiaProposalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaProposalController.swift; sourceTree = "<group>"; };
 		88677FF721E9C54A0022A09E /* Cosmos Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cosmos Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88677FFA21E9C54A0022A09E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88677FFF21E9C54A0022A09E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				EE2D63E121ECF7760002D51D /* GaiaValidatorsController.swift */,
 				EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */,
 				EE2D63E321ECF9440002D51D /* GaiaGovernanceController.swift */,
+				8801CF77221F22EF004781C1 /* GaiaProposalController.swift */,
 				EEE87A7721F860BD00CA9CDA /* GaiaGovernanceCell.swift */,
 				EE2D63E521ECFA730002D51D /* GaiaTransactionsController.swift */,
 			);
@@ -421,6 +424,7 @@
 				8869755521E9CBAE00044EB8 /* UIView+extensions.swift in Sources */,
 				8867800D21E9C6A00022A09E /* GaiaKeysController.swift in Sources */,
 				8869757421EA1B7E00044EB8 /* GaiaNodeHeaderCell.swift in Sources */,
+				8801CF78221F22EF004781C1 /* GaiaProposalController.swift in Sources */,
 				8869754521E9CAD000044EB8 /* SimpleWebView.swift in Sources */,
 				EEAFBF6321F4678D001B01EA /* AddressController.swift in Sources */,
 				8869756321E9DDE600044EB8 /* TemplateController.swift in Sources */,

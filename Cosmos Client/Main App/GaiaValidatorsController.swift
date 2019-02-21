@@ -38,7 +38,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         bottomTabbarView.onTap = { [weak self] index in
             switch index {
-            case 0: self?.dismiss(animated: true)
+            case 0: self?.dismiss(animated: false)
             case 2: self?.performSegue(withIdentifier: "nextSegue", sender: index)
             case 3:
                 self?.performSegue(withIdentifier: "nextSegue", sender: index)

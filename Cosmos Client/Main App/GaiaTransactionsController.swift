@@ -34,7 +34,7 @@ class GaiaTransactionsController: UIViewController, ToastAlertViewPresentable {
             case 1:
                 self?.onUnwind?(1)
                 self?.performSegue(withIdentifier: "UnwindToValidators", sender: nil)
-            case 2: self?.dismiss(animated: true)
+            case 2: self?.dismiss(animated: false)
             default: break
             }
         }

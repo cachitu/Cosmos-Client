@@ -31,7 +31,8 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     var lockLifeCicleDelegates = false
     
     var dataSource: [GaiaProposal] = []
-
+    var proposeData: ProposalData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
@@ -40,7 +41,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             case 0:
                 self?.onUnwind?(0)
                 self?.performSegue(withIdentifier: "UnwindToWallet", sender: nil)
-            case 1: self?.dismiss(animated: true)
+            case 1: self?.dismiss(animated: false)
             case 3: self?.performSegue(withIdentifier: "nextSegue", sender: index)
             default: break
             }
@@ -71,25 +72,41 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             return
         }
         
-        if let validNode = node {
-            loadingView.startAnimating()
-            retrieveAllPropsals(node: validNode) { [weak self] proposals, errMsg in
-                self?.loadingView.stopAnimating()
-                if let validProposals = proposals {
-                    self?.dataSource = validProposals
-                    self?.tableView.reloadData()
-                } else if let validErr = errMsg {
-                    self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
-                } else {
-                    self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
-                }
-
+        if let data = proposeData, let node = node, let key = key {
+            self.loadingView.startAnimating()
+            self.toast?.showToastAlert("Proposal create request submited", autoHideAfter: 3, type: .validatePending, dismissable: true)
+            self.propose(
+                deposit: data.amount,
+                title: data.title,
+                description: data.description,
+                type: data.type,
+                node: node,
+                key: key,
+                feeAmount: self.feeAmount) { [weak self] response, err in
+                    self?.loadingView.stopAnimating()
+                    if err == nil {
+                        self?.toast?.showToastAlert("Vote submited", autoHideAfter: 5, type: .info, dismissable: true)
+                        self?.loadData(validNode: node)
+                    } else if let errMsg = err {
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                    }
             }
+        } else if let validNode = node {
+            loadData(validNode: validNode)
         }
+        proposeData = nil
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let index = sender as? Int {
+        
+        if segue.identifier == "CreateProposalSegueID" {
+            
+            guard let dest = segue.destination as? GaiaProposalController else { return }
+            dest.onCollectDataComplete = { [weak self] data in
+                self?.proposeData = data
+            }
+        } else if let index = sender as? Int {
+            
             let dest = segue.destination as? GaiaTransactionsController
             dest?.forwardCounter = index - 3
             dest?.onUnwind = { [weak self] index in
@@ -101,10 +118,46 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         }
     }
 
+    func loadData(validNode: GaiaNode) {
+        
+        loadingView.startAnimating()
+        retrieveAllPropsals(node: validNode) { [weak self] proposals, errMsg in
+            self?.loadingView.stopAnimating()
+            if let validProposals = proposals {
+                self?.dataSource = validProposals
+                self?.tableView.reloadData()
+            } else if let validErr = errMsg {
+                self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+            } else {
+                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
+            }
+        }
+    }
+    
     @IBAction func unwindToGovernance(segue:UIStoryboardSegue) {
         bottomTabbarView.selectIndex(2)
     }
 
+    func handleVoting(proposal: GaiaProposal) {
+        self.showVotingAlert(title: proposal.title, message: proposal.description) { [weak self] vote in
+            guard let vote = vote, let node = self?.node, let key = self?.key  else { return }
+            self?.loadingView.startAnimating()
+            self?.vote(
+                for: proposal.proposalId,
+                option: vote,
+                node: node,
+                key: key,
+                feeAmount: self?.feeAmount ?? "0")
+            {  response, err in
+                self?.loadingView.stopAnimating()
+                if err == nil {
+                    self?.toast?.showToastAlert("Vote submited", autoHideAfter: 5, type: .info, dismissable: true)
+                } else if let errMsg = err {
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                }
+            }
+        }
+    }
 }
 
 extension GaiaGovernanceController: UITableViewDataSource {
@@ -125,25 +178,15 @@ extension GaiaGovernanceController: UITableViewDataSource {
 extension GaiaGovernanceController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let proposal = dataSource[indexPath.item]
-        DispatchQueue.main.async {
-            self.showVotingAlert(title: proposal.title, message: proposal.description) { [weak self] vote in
-                guard let vote = vote, let node = self?.node, let key = self?.key  else { return }
-                self?.loadingView.startAnimating()
-                self?.vote(
-                    for: proposal.proposalId,
-                    option: vote,
-                    node: node,
-                    key: key,
-                    feeAmount: self?.feeAmount ?? "0")
-                {  response, err in
-                    self?.loadingView.stopAnimating()
-                    if err == nil {
-                        self?.toast?.showToastAlert("Vote submited", autoHideAfter: 5, type: .info, dismissable: true)
-                    } else if let errMsg = err {
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
-                    }
-                }
+        
+        switch proposal.status {
+        case "Passed"  : toast?.showToastAlert("This proposal has passed. You can no longer vote.", autoHideAfter: 5, type: .info, dismissable: true)
+        case "Rejected": toast?.showToastAlert("This proposal has been rejected. You can no longer vote.", autoHideAfter: 5, type: .info, dismissable: true)
+        case "DepositPeriod": toast?.showToastAlert("Not enough staking deposited to vote", autoHideAfter: 5, type: .validatePending, dismissable: true)
+        default        :
+            DispatchQueue.main.async {
+                self.handleVoting(proposal: proposal)
             }
         }
-    }
+     }
 }
