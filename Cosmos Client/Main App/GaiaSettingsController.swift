@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import CosmosRestApi
 
-class GaiaTransactionsController: UIViewController, ToastAlertViewPresentable {
+class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
+
+    var node: GaiaNode?
+    var key: GaiaKey?
+    var account: GaiaAccount?
+    var feeAmount: String { return node?.defaultTxFee  ?? "0" }
 
     var toast: ToastAlertView?
     
@@ -19,9 +25,30 @@ class GaiaTransactionsController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var bottomTabbarView: CustomTabBar!
     @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var feeSectionTitleLabel: UILabel!
+    @IBOutlet weak var feeTextField: UITextField!
+    @IBOutlet weak var feeApplyButton: UIButton!
+    
+    
     var forwardCounter = 0
     var onUnwind: ((_ toIndex: Int) -> ())?
 
+    @IBAction func applyFee(_ sender: Any) {
+        feeTextField.resignFirstResponder()
+        if let value = feeTextField.text {
+            node?.defaultTxFee = value
+            updateFeeLabel()
+            if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = node {
+                for savedNode in savedNodes.nodes {
+                    if savedNode.network == validNode.network {
+                        savedNode.defaultTxFee = validNode.defaultTxFee
+                    }
+                }
+                PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
@@ -38,6 +65,18 @@ class GaiaTransactionsController: UIViewController, ToastAlertViewPresentable {
             default: break
             }
         }
+        updateFeeLabel()
+    }
+    
+    func updateFeeLabel() {
+        var feeText = "Set the default fee for this node. It will apply to all types of transactions"
+        if let amount = node?.defaultTxFee, let denom = account?.feeDenom {
+            feeText += " (current settings: \(amount) \(denom))"
+            if Double(amount) ?? 0 > 0.0 {
+                feeTextField.text = amount
+            }
+        }
+        feeSectionTitleLabel.text = feeText
     }
     
     override func viewWillAppear(_ animated: Bool) {

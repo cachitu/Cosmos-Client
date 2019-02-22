@@ -14,8 +14,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     var node: GaiaNode?
     var key: GaiaKey?
     var account: GaiaAccount?
-    var feeAmount: String = "0" //this is by default in fee denom, can't send in stake denom for now
-    
+    var feeAmount: String { return node?.defaultTxFee  ?? "0" }
+
     var toast: ToastAlertView?
     
     @IBOutlet weak var loadingView: CustomLoadingView!
@@ -26,7 +26,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
     @IBOutlet weak var backButton: UIButton!
     
-    @IBOutlet weak var amountTitleLabel: UILabel!
+    @IBOutlet weak var txFeeLabel: UILabel!
+    @IBOutlet weak var accountTitleLabel: UILabel!
     @IBOutlet weak var amountValueLabel: UILabel!
     @IBOutlet weak var amountDenomLabel: UILabel!
     @IBOutlet weak var feeAmountValueLabel: UILabel!
@@ -75,9 +76,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let validKey = key {
             qrTestImageView.image = UIImage.getQRCodeImage(from: validKey.address)
-            amountTitleLabel.text = validKey.name
+            accountTitleLabel.text = validKey.name
             addressLabel.text     = validKey.address
         }
+        txFeeLabel.text = "Default txs fee: 0"
         sendAmountButton.isEnabled = false
     }
     
@@ -157,7 +159,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 dest?.account = account
                 dest?.key = key
                 dest?.redelgateFrom = redelgateFrom
-                dest?.feeAmount = feeAmount
                 redelgateFrom = nil
             }
         }
@@ -222,6 +223,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         self?.feeAmountValueLabel.text = ""
                         self?.feeAmountDenomLabel.text = ""
                     }
+                    self?.txFeeLabel.text = "Default txs fee: \(validNode.defaultTxFee) \(validAccount.feeDenom ?? "photino")"
                 } else {
                     if let message = errMessage, message.count > 0 {
                         self?.toast?.showToastAlert(errMessage, autoHideAfter: 5, type: .error, dismissable: true)

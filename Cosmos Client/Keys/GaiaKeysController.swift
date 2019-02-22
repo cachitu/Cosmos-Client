@@ -50,7 +50,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
                 self?.toast?.showToastAlert(errorMessage ?? "Unknown error")
                 return
             }
-            self?.dataSource = keys
+            self?.dataSource = keys.filter { $0.isUnlocked || $0.name == "appleTest1" }
             self?.noDataView.isHidden = keys.count > 0
             
             if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook, storedBook.items.count < 1 {

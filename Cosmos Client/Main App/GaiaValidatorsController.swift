@@ -16,7 +16,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     var node: GaiaNode?
     var key: GaiaKey?
     var account: GaiaAccount?
-    var feeAmount: String = "0" // Will get it from GaiaWalletController in prepareForSegue
+    var feeAmount: String { return node?.defaultTxFee  ?? "0" }
 
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -116,7 +116,6 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             dest?.account = account
             dest?.key = key
             dest?.forwardCounter = index - 2
-            dest?.feeAmount = feeAmount
             dest?.onUnwind = { [weak self] index in
                 self?.bottomTabbarView.selectIndex(-1)
                 self?.lockLifeCicleDelegates = true

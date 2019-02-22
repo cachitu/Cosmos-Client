@@ -16,8 +16,8 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     var node: GaiaNode?
     var key: GaiaKey?
     var account: GaiaAccount?
-    var feeAmount: String = "0" // Will get it from GaiaWalletController in prepareForSegue
-
+    var feeAmount: String { return node?.defaultTxFee  ?? "0" }
+    
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
@@ -85,8 +85,10 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 feeAmount: self.feeAmount) { [weak self] response, err in
                     self?.loadingView.stopAnimating()
                     if err == nil {
-                        self?.toast?.showToastAlert("Vote submited", autoHideAfter: 5, type: .info, dismissable: true)
-                        self?.loadData(validNode: node)
+                        self?.toast?.showToastAlert("Proposal Created", autoHideAfter: 5, type: .info, dismissable: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            self?.loadData(validNode: node)
+                        }
                     } else if let errMsg = err {
                         self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
                     }
@@ -107,8 +109,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             }
         } else if let index = sender as? Int {
             
-            let dest = segue.destination as? GaiaTransactionsController
+            let dest = segue.destination as? GaiaSettingsController
             dest?.forwardCounter = index - 3
+            dest?.node = node
+            dest?.account = account
+            dest?.key = key
             dest?.onUnwind = { [weak self] index in
                 self?.lockLifeCicleDelegates = true
                 self?.bottomTabbarView.selectIndex(-1)
@@ -124,7 +129,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         retrieveAllPropsals(node: validNode) { [weak self] proposals, errMsg in
             self?.loadingView.stopAnimating()
             if let validProposals = proposals {
-                self?.dataSource = validProposals
+                self?.dataSource = validProposals.reversed()
                 self?.tableView.reloadData()
             } else if let validErr = errMsg {
                 self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
@@ -173,6 +178,9 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                     self?.loadingView.stopAnimating()
                     if err == nil {
                         self?.toast?.showToastAlert("Deposit submited", autoHideAfter: 5, type: .info, dismissable: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            self?.loadData(validNode: node)
+                        }
                     } else if let errMsg = err {
                         self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
                     }
