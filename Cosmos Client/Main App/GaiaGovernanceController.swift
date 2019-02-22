@@ -158,6 +158,27 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             }
         }
     }
+    
+    func handleDeposit(proposal: GaiaProposal) {
+        let denom = node?.stakeDenom ?? "stake"
+        showAmountAlert(title: "Type the amount of \(denom) you want to deposit to proposal with id \(proposal.proposalId)", message: nil, placeholder: "0 \(denom)") { [weak self] amount in
+            guard let node = self?.node, let key = self?.key  else { return }
+            self?.loadingView.startAnimating()
+            self?.depositToProposal(
+                proposalId: proposal.proposalId,
+                amount: amount ?? "0",
+                node: node,
+                key: key,
+                feeAmount: self?.feeAmount ?? "0") { response, err in
+                    self?.loadingView.stopAnimating()
+                    if err == nil {
+                        self?.toast?.showToastAlert("Deposit submited", autoHideAfter: 5, type: .info, dismissable: true)
+                    } else if let errMsg = err {
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                    }
+            }
+        }
+    }
 }
 
 extension GaiaGovernanceController: UITableViewDataSource {
@@ -179,14 +200,13 @@ extension GaiaGovernanceController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let proposal = dataSource[indexPath.item]
         
-        switch proposal.status {
-        case "Passed"  : toast?.showToastAlert("This proposal has passed. You can no longer vote.", autoHideAfter: 5, type: .info, dismissable: true)
-        case "Rejected": toast?.showToastAlert("This proposal has been rejected. You can no longer vote.", autoHideAfter: 5, type: .info, dismissable: true)
-        case "DepositPeriod": toast?.showToastAlert("Not enough staking deposited to vote", autoHideAfter: 5, type: .validatePending, dismissable: true)
-        default        :
-            DispatchQueue.main.async {
-                self.handleVoting(proposal: proposal)
+        DispatchQueue.main.async {
+            switch proposal.status {
+            case "Passed"  : self.toast?.showToastAlert("This proposal has passed. You can no longer vote.", autoHideAfter: 5, type: .info, dismissable: true)
+            case "Rejected": self.toast?.showToastAlert("This proposal has been rejected. You can no longer vote.", autoHideAfter: 5, type: .info, dismissable: true)
+            case "DepositPeriod": self.handleDeposit(proposal: proposal)
+            default: self.handleVoting(proposal: proposal)
             }
         }
-     }
+    }
 }

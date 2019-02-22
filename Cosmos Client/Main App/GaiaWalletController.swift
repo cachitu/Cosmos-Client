@@ -408,40 +408,37 @@ extension GaiaWalletController: UITableViewDelegate {
         let delegation = dataSource[indexPath.item]
         
         DispatchQueue.main.async {
-            self.node?.getStakingInfo() { [weak self] denom in
+            
+            if let validDenom = self.node?.stakeDenom {
                 
-                if let validDenom = denom {
-                    
-                    let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                    let withdrawAction = UIAlertAction(title: "Withdraw rewards", style: .default) { alertAction in
-                        self?.handleWithdraw(delegation: delegation)
-                    }
-                    let delegateAction = UIAlertAction(title: "Delegate", style: .default) { alertAction in
-                        self?.handleDelegate(delegation: delegation, denom: validDenom)
-                    }
-                    
-                    let unboundAction = UIAlertAction(title: "Unbond", style: .default) { alertAction in
-                        self?.handleUnbound(delegation: delegation, denom: validDenom)
-                    }
-                    
-                    let redelegateAction = UIAlertAction(title: "Redelegate", style: .default) { alertAction in
-                        self?.redelgateFrom = delegation.validatorAddr
-                        self?.performSegue(withIdentifier: "nextSegue", sender: 1)
-                    }
-                    
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-                    
-                    optionMenu.addAction(withdrawAction)
-                    optionMenu.addAction(redelegateAction)
-                    optionMenu.addAction(delegateAction)
-                    optionMenu.addAction(unboundAction)
-                    optionMenu.addAction(cancelAction)
-                    
-                    self?.present(optionMenu, animated: true, completion: nil)
-                    
+                let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                let withdrawAction = UIAlertAction(title: "Withdraw rewards", style: .default) { [weak self] alertAction in
+                    self?.handleWithdraw(delegation: delegation)
                 }
+                let delegateAction = UIAlertAction(title: "Delegate", style: .default) { [weak self] alertAction in
+                    self?.handleDelegate(delegation: delegation, denom: validDenom)
+                }
+                
+                let unboundAction = UIAlertAction(title: "Unbond", style: .default) { [weak self] alertAction in
+                    self?.handleUnbound(delegation: delegation, denom: validDenom)
+                }
+                
+                let redelegateAction = UIAlertAction(title: "Redelegate", style: .default) { [weak self] alertAction in
+                    self?.redelgateFrom = delegation.validatorAddr
+                    self?.performSegue(withIdentifier: "nextSegue", sender: 1)
+                }
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+                
+                optionMenu.addAction(withdrawAction)
+                optionMenu.addAction(redelegateAction)
+                optionMenu.addAction(delegateAction)
+                optionMenu.addAction(unboundAction)
+                optionMenu.addAction(cancelAction)
+                
+                self.present(optionMenu, animated: true, completion: nil)
+                
             }
-
         }
     }
 }
