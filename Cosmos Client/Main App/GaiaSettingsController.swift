@@ -35,6 +35,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
 
     @IBAction func applyFee(_ sender: Any) {
         feeTextField.resignFirstResponder()
+        if feeTextField.text == "" { feeTextField.text = "0" }
         if let value = feeTextField.text {
             node?.defaultTxFee = value
             updateFeeLabel()
@@ -66,12 +67,21 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
             }
         }
         updateFeeLabel()
+        
+        let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            self?.node?.getStatus {
+                if self?.node?.state == .unknown {
+                    self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
+                }
+            }
+        }
     }
     
     func updateFeeLabel() {
-        var feeText = "Set the default fee for this node. It will apply to all types of transactions"
-        if let amount = node?.defaultTxFee, let denom = account?.feeDenom {
-            feeText += " (current settings: \(amount) \(denom))"
+        var feeText = "Current settings: 0"
+        if let amount = node?.defaultTxFee {
+            let denom = account?.feeDenom ?? ""
+            feeText = "Current settings: \(amount) \(denom)"
             if Double(amount) ?? 0 > 0.0 {
                 feeTextField.text = amount
             }

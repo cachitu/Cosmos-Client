@@ -110,10 +110,8 @@ class AddressController: UIViewController, ToastAlertViewPresentable {
         let address = ethAddresRichTextField.contentTextField?.text ?? ""
         
         if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook {
-            var addrItems: [GaiaAddressBookItem] = []
             let item = GaiaAddressBookItem(name: alias, address: address)
-            addrItems.insert(item, at: 0)
-            storedBook.items.mergeElements(newElements: addrItems)
+            storedBook.items.insert(item, at: 0)
             storedBook.savetoDisk()
         }
         

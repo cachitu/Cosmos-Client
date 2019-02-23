@@ -46,6 +46,16 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             default: break
             }
         }
+        
+        let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            self?.node?.getStatus {
+                if self?.node?.state == .unknown {
+                    self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
+                } else if let validNode = self?.node {
+                    self?.loadData(validNode: validNode)
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -29,6 +29,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
     @IBOutlet weak var addButton: UIButton!
+    @IBAction func unwindToNodes(segue:UIStoryboardSegue) { }
     
     var addressBook: GaiaAddressBook = GaiaAddressBook(items: [])
     
@@ -83,6 +84,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         super.viewWillDisappear(animated)
         timer?.invalidate()
         toast?.hideToast()
+        PersistableGaiaNodes(nodes: nodes).savetoDisk()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

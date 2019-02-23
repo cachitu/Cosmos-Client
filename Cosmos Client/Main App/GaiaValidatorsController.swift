@@ -46,6 +46,16 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             default: break
             }
         }
+        
+        let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            self?.node?.getStatus {
+                if self?.node?.state == .unknown {
+                    self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
+                } else {
+                    self?.loadData()
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,9 +103,15 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         }
                         PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
                     }
-                    self?.dataSource = validValidators.sorted() { (left, right) -> Bool in
+                    let jailed = validators?.filter() { $0.jailed == true }.sorted() { left, right in
                         left.votingPower > right.votingPower
-                    }
+                    } ?? []
+                    let active = validators?.filter() { $0.jailed == false }.sorted() { left, right in
+                        left.votingPower > right.votingPower
+                    } ?? []
+                    self?.dataSource.append(contentsOf: active)
+                    self?.dataSource.append(contentsOf: jailed)
+
                     self?.tableView.reloadData()
                      if let redelagateAddr = self?.redelgateFrom {
                         self?.toast?.showToastAlert("Tap any validator to redelegate from \(redelagateAddr)", type: .validatePending, dismissable: false)

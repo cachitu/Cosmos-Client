@@ -18,6 +18,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
 
     var toast: ToastAlertView?
     
+    @IBOutlet weak var screenTitleLabel: UILabel!
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
@@ -79,8 +80,19 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             accountTitleLabel.text = validKey.name
             addressLabel.text     = validKey.address
         }
-        txFeeLabel.text = "Default txs fee: 0"
+        txFeeLabel.text = "Default Fee: 0"
         sendAmountButton.isEnabled = false
+        screenTitleLabel.text = node?.network ?? "Wallet"
+        
+        let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            self?.node?.getStatus {
+                if self?.node?.state == .unknown {
+                    self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
+                } else {
+                    self?.loadData()
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,6 +176,12 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         }
     }
     
+    @IBAction func historyButton(_ sender: Any) {
+        key?.getTransactions(node: node!) { txs, err in
+            print(txs)
+        }
+    }
+    
     @IBAction func shareAddress(_ sender: Any) {
         
         let text = key?.address ?? ""
@@ -223,8 +241,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         self?.feeAmountValueLabel.text = ""
                         self?.feeAmountDenomLabel.text = ""
                     }
-                    self?.txFeeLabel.text = "Default txs fee: \(validNode.defaultTxFee) \(validAccount.feeDenom ?? "photino")"
+                    self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee) \(validAccount.feeDenom ?? "")"
                 } else {
+                    self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee)"
                     if let message = errMessage, message.count > 0 {
                         self?.toast?.showToastAlert(errMessage, autoHideAfter: 5, type: .error, dismissable: true)
                     }

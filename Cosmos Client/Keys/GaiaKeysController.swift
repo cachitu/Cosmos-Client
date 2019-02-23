@@ -21,6 +21,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     @IBOutlet weak var topNavBarView: UIView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBAction func addAction(_ sender: Any) {
     }
@@ -29,15 +30,29 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func swipeAction(_ sender: Any) {
+        debugMode = true
+    }
+    
     var node: GaiaNode? = GaiaNode()
     var dataSource: [GaiaKey] = []
     var selectedKey: GaiaKey?
     var selectedIndex: Int?
 
+    private var debugMode = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         noDataView.isHidden = true
+        
+        let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            self?.node?.getStatus {
+                if self?.node?.state == .unknown {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -50,7 +65,8 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
                 self?.toast?.showToastAlert(errorMessage ?? "Unknown error")
                 return
             }
-            self?.dataSource = keys.filter { $0.isUnlocked || $0.name == "appleTest1" }
+            let debug = self?.debugMode ?? false
+            self?.dataSource = debug ? keys : keys.filter { $0.isUnlocked || $0.name == "appleTest1" }
             self?.noDataView.isHidden = keys.count > 0
             
             if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook, storedBook.items.count < 1 {
@@ -64,6 +80,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             }
 
             self?.tableView?.reloadData()
+            self?.debugMode = false
             self?.node?.getStakingInfo() { denom in }
         }
     }
@@ -182,6 +199,8 @@ extension GaiaKeysController: UITableViewDelegate {
             }
         }
     }
+    
+    
 }
 
 extension Array where Element : Equatable {
