@@ -103,6 +103,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         }
                         PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
                     }
+                    self?.dataSource = []
                     let jailed = validators?.filter() { $0.jailed == true }.sorted() { left, right in
                         left.votingPower > right.votingPower
                     } ?? []
@@ -126,6 +127,13 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MoreSegueID", let validator = sender as? GaiaValidator {
+            let dest = segue.destination as? GaiaDelegationsController
+            dest?.node = node
+            dest?.account = account
+            dest?.key = key
+            dest?.validator = validator
+        }
         if let index = sender as? Int {
             let dest = segue.destination as? GaiaGovernanceController
             dest?.node = node
@@ -219,7 +227,6 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             }
         }
     }
-
 }
 
 
@@ -251,8 +258,8 @@ extension GaiaValidatorsController: UITableViewDelegate {
             } else {
                 
                 let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                let detailsAction = UIAlertAction(title: "Validator details", style: .default) { [weak self] alertAction in
-                    self?.toast?.showToastAlert("Soon to come", autoHideAfter: 5, type: .info, dismissable: true)
+                let detailsAction = UIAlertAction(title: "Validator Delegations", style: .default) { [weak self] alertAction in
+                    self?.performSegue(withIdentifier: "MoreSegueID", sender: validator)
                 }
                 let delegateAction = UIAlertAction(title: "Delegate", style: .default) { [weak self] alertAction in
                     self?.handleDelegate(to: validator)

@@ -70,11 +70,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             default: break
             }
         }
-        amountValueLabel.text = ""
-        amountDenomLabel.text = ""
-        feeAmountValueLabel.text = ""
-        feeAmountDenomLabel.text = ""
-        
+        clearFields()
         if let validKey = key {
             qrTestImageView.image = UIImage.getQRCodeImage(from: validKey.address)
             accountTitleLabel.text = validKey.name
@@ -85,6 +81,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         screenTitleLabel.text = node?.network ?? "Wallet"
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            self?.clearFields()
             self?.node?.getStatus {
                 if self?.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
@@ -149,7 +146,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowAddressBookSegue" {
+        switch segue.identifier {
+        case "ShowAddressBookSegue":
             let nav = segue.destination as? UINavigationController
             let dest = nav?.viewControllers.first as? AddressesListController
             dest?.shouldPop = true
@@ -158,12 +156,16 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     self?.senderAddress = validAddress.address
                 }
             }
-        }
-        if segue.identifier == "nextSegue" {
-            amountValueLabel.text = ""
-            amountDenomLabel.text = ""
-            feeAmountValueLabel.text = ""
-            feeAmountDenomLabel.text = ""
+
+        case "HistorySegueID":
+            let dest = segue.destination as? GaiaHistoryController
+            dest?.node = node
+            dest?.account = account
+            dest?.key = key
+            clearFields()
+            
+        case "nextSegue":
+            clearFields()
             if let index = sender as? Int {
                 let dest = segue.destination as? GaiaValidatorsController
                 dest?.forwardCounter = index - 1
@@ -173,13 +175,16 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 dest?.redelgateFrom = redelgateFrom
                 redelgateFrom = nil
             }
+            
+        default: clearFields()
         }
     }
     
-    @IBAction func historyButton(_ sender: Any) {
-        key?.getTransactions(node: node!) { txs, err in
-            print(txs)
-        }
+    func clearFields() {
+        amountValueLabel.text = ""
+        amountDenomLabel.text = ""
+        feeAmountValueLabel.text = ""
+        feeAmountDenomLabel.text = ""
     }
     
     @IBAction func shareAddress(_ sender: Any) {

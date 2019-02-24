@@ -22,7 +22,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var deleteNode: RoundedButton!
-    @IBOutlet weak var moreDetails: RoundedButton!
+    @IBOutlet weak var moreDetails: RoundedButton?
     @IBOutlet weak var serverInfoLabel: UILabel!
     
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
@@ -44,7 +44,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         setupTextViews()
         observreFieldsState()
         deleteNode.isHidden = !editMode
-        moreDetails.isHidden = !editMode
+        moreDetails?.isHidden = !editMode
         
         if editMode {
             prePopulate()
