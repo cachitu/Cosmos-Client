@@ -109,7 +109,6 @@ extension GaiaDelegationsController: UITableViewDelegate {
             let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
-            
         }
     }
 }

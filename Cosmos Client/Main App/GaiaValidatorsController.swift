@@ -85,6 +85,12 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         loadData()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        redelgateFrom = nil
+        toast?.hideToast()
+    }
+    
     func loadData() {
         
         if let validNode = node {
@@ -250,7 +256,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let validator = dataSource[indexPath.item]
-
+        
         DispatchQueue.main.async {
             if let redelagateAddr = self.redelgateFrom {
                 
@@ -261,6 +267,13 @@ extension GaiaValidatorsController: UITableViewDelegate {
                 let detailsAction = UIAlertAction(title: "Validator Delegations", style: .default) { [weak self] alertAction in
                     self?.performSegue(withIdentifier: "MoreSegueID", sender: validator)
                 }
+                let shareAction = UIAlertAction(title: "Share Address", style: .default) { [weak self] alertAction in
+                    let text = "\(validator.validator)"
+                    let textShare = [ text ]
+                    let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self?.view
+                    self?.present(activityViewController, animated: true, completion: nil)
+                }
                 let delegateAction = UIAlertAction(title: "Delegate", style: .default) { [weak self] alertAction in
                     self?.handleDelegate(to: validator)
                 }
@@ -268,6 +281,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
                 
                 optionMenu.addAction(detailsAction)
+                optionMenu.addAction(shareAction)
                 optionMenu.addAction(delegateAction)
                 optionMenu.addAction(cancelAction)
                 
