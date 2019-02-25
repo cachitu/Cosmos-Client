@@ -109,7 +109,8 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         seedLabel.text    = "No seed stored in keychain"
         if let seed = key?.getSeedFromKeychain() {
             seedLabel.text = seed
-            seedButton.isHidden = false
+            //TODO: check if this is safe with a security audit
+            //seedButton.isHidden = false
         }
     }
     

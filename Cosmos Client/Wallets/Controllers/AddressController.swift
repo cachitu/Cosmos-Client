@@ -42,14 +42,14 @@ class AddressController: UIViewController, ToastAlertViewPresentable {
             fieldsStateDic = ["walletName" : true, "gaiaAddress" : true]
             walletNameRichTextField.contentTextField?.text = address.name
             ethAddresRichTextField.contentTextField?.text  = address.address
-            screenTitleLabel?.text = "Edit ETH Address text"
-            sectionTitleLabel?.text = "Edit your ETH address text"
+            screenTitleLabel?.text = "Edit Address"
+            sectionTitleLabel?.text = "Edit your address"
             ethAddresRichTextField.contentTextField?.isEnabled = false
             qrcodeButton.isHidden = true
             pasteAddrButton.isHidden = true
         } else {
-            screenTitleLabel?.text = "Add ETH Address text"
-            sectionTitleLabel?.text = "Add your ETH address text"
+            screenTitleLabel?.text = "Add Address"
+            sectionTitleLabel?.text = "Add your address"
         }
         copyAddrButton?.isHidden = !pasteAddrButton.isHidden
         NotificationCenter.default.addObserver(self,
