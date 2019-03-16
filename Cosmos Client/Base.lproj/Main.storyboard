@@ -1102,7 +1102,6 @@
                                         <state key="normal" image="NavbarAdd"/>
                                         <connections>
                                             <action selector="addAction:" destination="C66-qx-PyC" eventType="touchUpInside" id="zWX-Vp-KL9"/>
-                                            <segue destination="3go-4Q-YDw" kind="presentation" identifier="CreateKeySegue" id="bXf-1r-qaq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNp-US-lhg" userLabel="Back">
@@ -1174,6 +1173,8 @@
                         <outlet property="topNavBarView" destination="C4o-dK-myJ" id="ix1-57-i8b"/>
                         <segue destination="JGL-u5-Pdz" kind="presentation" identifier="ShowKeyDetailsSegue" id="IQj-ue-FGK"/>
                         <segue destination="hPr-Gq-sdB" kind="show" identifier="WalletSegueID" id="dqJ-Td-z6e"/>
+                        <segue destination="3go-4Q-YDw" kind="presentation" identifier="CreateKeySegue" id="tnP-2J-pPh"/>
+                        <segue destination="p4n-41-3xa" kind="presentation" identifier="ShowAddressBookSegue" id="KyJ-Mr-vI6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKl-aq-sVi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1423,7 +1424,7 @@
                 <viewControllerPlaceholder storyboardName="Addressbook" id="p4n-41-3xa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyr-p9-EJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630" y="-183"/>
+            <point key="canvasLocation" x="-290" y="-178"/>
         </scene>
         <!--Wallet-->
         <scene sceneID="dHu-DA-hfV">
@@ -4225,6 +4226,7 @@
         <image name="rcheckBoxEmpty" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="KyJ-Mr-vI6"/>
         <segue reference="gIV-DK-wR1"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -24,6 +24,11 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBAction func addAction(_ sender: Any) {
+        if GaiaLocalClient.signingImplemented {
+            self.performSegue(withIdentifier: "CreateKeySegue", sender: nil)
+        } else {
+            self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: nil)
+        }
     }
 
     @IBAction func backAction(_ sender: Any) {
@@ -62,23 +67,18 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         retrieveAllKeys(node: validNode) { [weak self] gaiaKeys, errorMessage in
             self?.loadingView.stopAnimating()
             guard let keys = gaiaKeys else {
-                self?.toast?.showToastAlert(errorMessage ?? "Unknown error")
+                //self?.toast?.showToastAlert(errorMessage ?? "Unknown error")
+                let hk = GaiaKey(seed: nil, nodeId: self?.node?.nodeID ?? "test")
+                self?.dataSource = [hk]
+                self?.tableView?.reloadData()
+                self?.node?.getStakingInfo() { denom in }
                 return
             }
             let debug = self?.debugMode ?? false
+            
             self?.dataSource = debug ? keys : keys.filter { $0.isUnlocked || $0.name == "appleTest1" }
             self?.noDataView.isHidden = keys.count > 0
             
-            if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook, storedBook.items.count < 1 {
-                var addrItems: [GaiaAddressBookItem] = []
-                for key in keys {
-                    let item = GaiaAddressBookItem(name: key.name, address: key.address)
-                    addrItems.append(item)
-                }
-                storedBook.items.mergeElements(newElements: addrItems)
-                storedBook.savetoDisk()
-            }
-
             self?.tableView?.reloadData()
             self?.debugMode = false
             self?.node?.getStakingInfo() { denom in }
@@ -104,6 +104,14 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             let dest = segue.destination as? GaiaWalletController
             dest?.node = self.node
             dest?.key = selectedKey
+        }
+        if segue.identifier == "ShowAddressBookSegue" {
+            let nav = segue.destination as? UINavigationController
+            let dest = nav?.viewControllers.first as? AddressesListController
+            dest?.shouldPop = true
+            dest?.onSelectAddress = { [weak self] selected in
+                self?.tableView.reloadData()
+            }
         }
     }
 }
