@@ -10,8 +10,9 @@ import UIKit
 import CosmosRestApi
 
 class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, GaiaKeysManagementCapable {
-
+    
     var node: GaiaNode? = GaiaNode()
+    let keysDelegate = LocalClient()
     
     @IBOutlet weak var field1RtextField: RichTextFieldView!
     @IBOutlet weak var field2RtextField: RichTextFieldView!
@@ -34,7 +35,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
     private var fieldsStateDic: [String : Bool] = ["field1" : false, "field2" : false]
     
     var onCollectDataComplete: ((_ data: GaiaKey)->())?
-    var onDeleteComplete: ((_ index: Int)->())?
+    var onCreateComplete: (()->())?
     
     override func viewDidLoad() {
         
@@ -94,14 +95,20 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
                 seed = text }
         }
         self.loadingView.startAnimating()
-        self.createKey(node: validNode, name: name, pass: pass, seed: seed) { [weak self] key,error in
+        self.createKey(node: validNode, clientDelegate: keysDelegate, name: name, pass: pass, seed: seed) { [weak self] key, error in
             DispatchQueue.main.async {
                 self?.loadingView.stopAnimating()
-                if key != nil {
+                if let validKey = key {
                     
-                    if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook, let name = key?.name, let address = key?.address {
+                    if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
+                        var list = savedKeys.keys
+                        list.append(validKey)
+                        PersistableGaiaKeys(keys: list).savetoDisk()
+                    }
+                    
+                    if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook {
                         var addrItems: [GaiaAddressBookItem] = []
-                        let item = GaiaAddressBookItem(name: name, address: address)
+                        let item = GaiaAddressBookItem(name: validKey.name, address: validKey.address)
                         addrItems.append(item)
                         storedBook.items.mergeElements(newElements: addrItems)
                         storedBook.savetoDisk()

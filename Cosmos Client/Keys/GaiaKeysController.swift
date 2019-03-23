@@ -9,9 +9,19 @@
 import UIKit
 import CosmosRestApi
 
+class PersistableGaiaKeys: PersistCodable {
+    
+    let keys: [GaiaKey]
+    
+    init(keys: [GaiaKey]) {
+        self.keys = keys
+    }
+}
+
 class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAlertViewPresentable {
     
     var toast: ToastAlertView?
+    let keysDelegate = LocalClient()
     
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var tableView: UITableView!
@@ -36,7 +46,6 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     }
     
     @IBAction func swipeAction(_ sender: Any) {
-        debugMode = true
     }
     
     var node: GaiaNode? = GaiaNode()
@@ -44,10 +53,20 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     var selectedKey: GaiaKey?
     var selectedIndex: Int?
 
-    private var debugMode = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        keysDelegate.test()
+        
+        if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
+            dataSource = savedKeys.keys
+        } else {
+            let appleKey = keysDelegate.createKey(with: "appleTest1", password: "test1234")
+            let gaiaKey = GaiaKey(data: appleKey, nodeId: node?.nodeID ?? "")
+            dataSource = [gaiaKey]
+            PersistableGaiaKeys(keys: dataSource).savetoDisk()
+        }
+
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         noDataView.isHidden = true
         
@@ -62,25 +81,23 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         guard let validNode = node else { return }
         loadingView.startAnimating()
-        retrieveAllKeys(node: validNode) { [weak self] gaiaKeys, errorMessage in
+        retrieveAllKeys(node: validNode, clientDelegate: keysDelegate) { [weak self] gaiaKeys, errorMessage in
             self?.loadingView.stopAnimating()
             guard let keys = gaiaKeys else {
                 //self?.toast?.showToastAlert(errorMessage ?? "Unknown error")
-                let hk = GaiaKey(seed: nil, nodeId: self?.node?.nodeID ?? "test")
-                self?.dataSource = [hk]
+                self?.dataSource = []
                 self?.tableView?.reloadData()
                 self?.node?.getStakingInfo() { denom in }
                 return
             }
-            let debug = self?.debugMode ?? false
             
-            self?.dataSource = debug ? keys : keys.filter { $0.isUnlocked || $0.name == "appleTest1" }
+            self?.dataSource = keys
             self?.noDataView.isHidden = keys.count > 0
             
             self?.tableView?.reloadData()
-            self?.debugMode = false
             self?.node?.getStakingInfo() { denom in }
         }
     }
@@ -180,35 +197,10 @@ extension GaiaKeysController: UITableViewDelegate {
         let key = dataSource[indexPath.section]
         selectedKey = key
         
-        guard key.isUnlocked == false else {
-            performSegue(withIdentifier: "WalletSegueID", sender: self)
-            return
-        }
-        
         DispatchQueue.main.async {
-            
-            guard let validNode = self.node else { return }
-
-            let alertMessage = "Enter the password for \(key.name) to acces the wallet. It will be stored encripted in the device's keychain if the unlock is succesfull."
-            self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
-                self?.loadingView.startAnimating()
-                key.unlockKey(node: validNode, password: pass) { [weak self] success, message in
-                    self?.loadingView.stopAnimating()
-                    if success == true {
-                        key.savePassToKeychain(pass: pass)
-                        self?.toast?.showToastAlert("The key has been unlocked. You can now acces your wallet.", autoHideAfter: 5, type: .info, dismissable: true)
-                        self?.tableView.reloadData()
-                    } else if let msg = message {
-                        self?.toast?.showToastAlert(msg, autoHideAfter: 5, type: .error, dismissable: true)
-                    } else {
-                        self?.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
-                    }
-                }
-            }
+            self.performSegue(withIdentifier: "WalletSegueID", sender: self)
         }
     }
-    
-    
 }
 
 extension Array where Element : Equatable {

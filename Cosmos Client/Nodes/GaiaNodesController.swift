@@ -48,7 +48,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             nodes = savedNodes.nodes
             showHint = false
         } else {
-            nodes = [GaiaNode(name: "IPSX Dev Node", scheme: "http", host: "80.211.6.156")]
+            nodes = [GaiaNode(name: "IPSX Main Net", scheme: "https", host: "node01.ip.sx"),
+                     GaiaNode(name: "IPSX Test Net", scheme: "http", host: "209.126.79.21")]
             PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
         
@@ -75,7 +76,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         }
         
         if showHint {
-            toast?.showToastAlert("Use IPSX dev node 80.211.6.156 for test purposes only, add your own trusted node for real use.", type: .info, dismissable: true)
+            toast?.showToastAlert("Use IPSX nodes for test purposes only, add your own trusted node for real use.", type: .info, dismissable: true)
         }
         showHint = false
     }

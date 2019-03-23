@@ -12,6 +12,7 @@ import CosmosRestApi
 class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
     var node: GaiaNode? = GaiaNode()
+    let keysDelegate = LocalClient()
     
     @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
@@ -73,8 +74,8 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
             self?.loadingView.startAnimating()
             self?.key?.unlockKey(node: validNode, password: pass) { [weak self] success, message in
                 self?.loadingView.stopAnimating()
-                if success == true {
-                    self?.key?.deleteKey(node: validNode, password: self?.key?.getPassFromKeychain() ?? "") { [weak self] success, errMsg in
+                if success == true, let delegate = self?.keysDelegate {
+                    self?.key?.deleteKey(node: validNode, clientDelegate: delegate, password: self?.key?.getPassFromKeychain() ?? "") { [weak self] success, errMsg in
                         if success {
                             if let index = self?.selectedkeyIndex {
                                 self?.onDeleteComplete?(index)
@@ -105,9 +106,9 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         nameLabel.text    = key?.name ?? "No name"
         addressLabel.text = key?.address ?? "cosmos..."
         typeLabel.text    = key?.type ?? "..."
-        pubKeyLabel.text  = key?.pubKey ?? "cosmos..."
+        pubKeyLabel.text  = key?.pubAddress ?? "cosmos..."
         seedLabel.text    = "No seed stored in keychain"
-        if let seed = key?.getSeedFromKeychain() {
+        if let seed = key?.getMnemonicFromKeychain() {
             seedLabel.text = seed
             //TODO: check if this is safe with a security audit
             //seedButton.isHidden = false

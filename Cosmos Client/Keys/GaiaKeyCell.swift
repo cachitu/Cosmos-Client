@@ -25,7 +25,7 @@ class GaiaKeyCell: UITableViewCell {
     func configure(key: GaiaKey) {
         leftLabel.text = key.name
         leftSubLabel.text = key.address
-        let imageName = key.isUnlocked ? "approved" : "locked"
+        let imageName = "approved"
         if let image = UIImage(named: imageName) {
             leftImageView.image = image
         }
