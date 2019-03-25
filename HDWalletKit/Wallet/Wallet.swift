@@ -48,15 +48,8 @@ public final class Wallet {
         return hash
     }
     
-    public func sign(rawTransaction: TxSignable) throws -> String {
-        let signer = EIP155Signer(chainId: 118)
-        let rawData = try signer.sign(rawTransaction, privateKey: privateKey)
-        let hash = rawData.toHexString()
-        return hash
-    }
-
     public func sign(sha256Data: Data) throws -> String {
-        let signer = EIP155Signer(chainId: 0)
+        let signer = EIP155Signer(chainId: 118)
         let rawData = try signer.sign(sha256Data, privateKey: privateKey)
         let hash = rawData.base64EncodedString()
         return hash

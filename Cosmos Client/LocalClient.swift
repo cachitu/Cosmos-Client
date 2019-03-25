@@ -88,17 +88,6 @@ public class LocalClient: KeysClientDelegate {
         return nil
     }
     
-    /*
-     The SDK expects a certain message format to serialize and then sign.
-     type StdSignMsg struct {
-     ChainID       string      `json:"chain_id"`
-     AccountNumber uint64      `json:"account_number"`
-     Sequence      uint64      `json:"sequence"`
-     Fee           auth.StdFee `json:"fee"`
-     Msgs          []sdk.Msg   `json:"msgs"`
-     Memo          string      `json:"memo"`
-     }
-     */
     public func sign(transferData: TransactionTx?, account: GaiaAccount, node: GaiaNode, completion:((RestResult<[TransactionTx]>) -> Void)?) {
         
         var signable = TxSignable()
@@ -109,92 +98,53 @@ public class LocalClient: KeysClientDelegate {
         signable.msgs = transferData?.value?.msg
         signable.sequence = account.accSequence
         
-        var values: [String] = []
-        var dvalues: [String : String] = [:]
-        values.append(signable.accountNumber ?? "")
-        dvalues["account_number"] = values.last
-        values.append(signable.chainId ?? "")
-        dvalues["chain_id"] = values.last
-        values.append(signable.fee?.amount?.first?.amount ?? "")
-        dvalues["amount"] = values.last
-        values.append(signable.fee?.amount?.first?.denom ?? "")
-        dvalues["denom"] = values.last
-        values.append(signable.fee?.gas ?? "")
-        dvalues["gas"] = values.last
-        values.append(signable.memo ?? "")
-        dvalues["memo"] = values.last
-        for msg in signable.msgs ?? [] {
-            values.append(msg.type ?? "")
-            dvalues["type"] = values.last
-            if let keys = try? msg.value?.allProperties() {
-                let sorted = keys?.sorted() { a, b in  a.0 < b.0 }
-                for item in sorted ?? [] {
-                    if let value = item.value as? String {
-                        values.append(value)
-                        dvalues[item.key] = values.last
-                    }
-                    if let value = item.value as? TxFeeAmount {
-                        values.append(value.amount ?? "")
-                        dvalues[item.key] = values.last
-                        values.append(value.denom ?? "")
-                        dvalues[item.key] = values.last
-                    }
-                    if let vals = item.value as? [TxFeeAmount] {
-                        for value in vals {
-                            values.append(value.amount ?? "")
-                            dvalues[item.key] = values.last
-                            values.append(value.denom ?? "")
-                            dvalues[item.key] = values.last
-                        }
-                    }
-                }
-            }
-        }
-        values.append(signable.sequence ?? "")
-        dvalues["sequence"] = values.last
-        
-        let hardcoded = "{\"account_number\":\"391\",\"chain_id\":\"gaia-13002\",\"amount\":\"1\",\"denom\":\"muon\",\"gas\":\"81199\",\"memo\":\"KytzuIOS\",\"type\":\"cosmos-sdk/MsgWithdrawDelegationReward\",\"delegatorAddr\":\"cosmos1wtv0kp6ydt03edd8kyr5arr4f3yc52vp5g7na0\",\"validatorAddr\":\"cosmosvaloper1g8xwmm3tp7pgdrmjgt4fm7d26anrrnlehk42nq\",\"sequence\":\"37\"}"
-        
         var jsonData = Data()
         var jsString = ""
         let encoder = JSONEncoder()
-        //encoder.outputFormatting = .prettyPrinted
-        //encoder.dataEncodingStrategy = .base64
+        encoder.outputFormatting = .sortedKeys
+        encoder.dataEncodingStrategy = .base64
         do {
-            jsonData = try encoder.encode(dvalues)
-            jsString = String(data: jsonData, encoding: String.Encoding.ascii) ?? ""
+            jsonData = try encoder.encode(signable)
+            jsString = String(data: jsonData, encoding: String.Encoding.macOSRoman) ?? ""
         } catch {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
             completion?(.failure(error))
         }
-        print(jsString)
-        
-        
+        jsString = jsString.replacingOccurrences(of: "\\", with: "")
+
+        let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
         let seed = Mnemonic.createSeed(mnemonic: account.gaiaKey.mnemonic)
         let coin: HDCoin = .cosmos
         let wallet = Wallet(seed: seed, coin: coin)
-        let account = wallet.generateAccount()
+        let hdaccount = wallet.generateAccount()
 
         let type = "tendermint/PubKeySecp256k1"
-        let value = account.privateKey.publicKey.getBase64()
-        var hash1 = ""
-        var hash2 = ""
-        let prefixed = TypePrefix.SignatureSecp256k1 + hardcoded.toHexString()
-        //let prefixed = hardcoded.toHexString()
+        let value = hdaccount.privateKey.publicKey.getBase64()
+        var hash = ""
 
         do {
-            try hash1 = wallet.privateKey.sign(hash: jsonData.sha256()).base64EncodedString()
-            try hash2 = wallet.sign(sha256Data: Data(hex: prefixed.sha256()))
+            try hash = hdaccount.privateKey.sign(hash: goodBuffer).base64EncodedString()
         } catch {
             print("failed")
         }
-        print(type)
-        print(value)
-        print("?OK: ", hash1)
-        print("?OK: ", hash2)
+        hash = String(hash.dropLast().dropLast())
+        hash += "=="
+        
+        let sig = TxValueSignature(
+            sig: hash,
+            type: type,
+            value: value,
+            accNum: account.accNumber,
+            seq: account.accSequence)
+        var signed = transferData
+        signed?.value?.signatures = [sig]
 
-        let signer = Signer()
-        signer.unsafeSign(transferData: transferData, completion: completion)
+        if let final = signed {
+            completion?(.success([final]))
+        }
+        
+        //let signer = Signer()
+        //signer.unsafeSign(transferData: transferData, completion: completion)
     }
 }
 

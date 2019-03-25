@@ -14,12 +14,6 @@ public struct EIP155Signer {
         return try signTransaction(signature: signature, rawTransaction: rawTransaction)
     }
     
-    public func sign(_ rawTransaction: TxSignable, privateKey: PrivateKey) throws -> Data {
-        let transactionHash = try hash(rawTransaction: rawTransaction)
-        let signature = try privateKey.sign(hash: transactionHash)
-        return try signTransaction(signature: signature, rawTransaction: rawTransaction)
-    }
-
     public func sign(_ sha256Data: Data, privateKey: PrivateKey) throws -> Data {
         return try privateKey.sign(hash: sha256Data)
     }
@@ -41,19 +35,6 @@ public struct EIP155Signer {
             rawTransaction.data,
             v, r, s
         ])
-    }
-    
-    private func signTransaction(signature: Data, rawTransaction: TxSignable) throws -> Data {
-        let (r, s, v) = calculateRSV(signature: signature)
-        return try RLP.encode([
-            rawTransaction.chainId ?? "",
-            rawTransaction.accountNumber,
-            rawTransaction.sequence,
-            rawTransaction.fee ?? [],
-            rawTransaction.msgs ?? "",
-            rawTransaction.memo ?? "",
-            v, r, s
-            ])
     }
 
     public func hash(rawTransaction: EthereumRawTransaction) throws -> Data {
