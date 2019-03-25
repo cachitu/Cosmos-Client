@@ -13,6 +13,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     var node: GaiaNode?
     var key: GaiaKey?
+    let keysDelegate = LocalClient()
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
 
@@ -108,6 +109,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
             sendAssets(node: node,
+                       clientDelegate: keysDelegate,
                        key: key,
                        feeAmount: feeAmount,
                        toAddress: addrToSend,
@@ -214,7 +216,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         }
         
         if let validNode = node, let validKey = key {
-            validKey.getGaiaAccount(node: validNode) { [weak self] account, errMessage in
+            validKey.getGaiaAccount(node: validNode, gaiaKey: validKey) { [weak self] account, errMessage in
                 
                 validKey.getDelegations(node: validNode) { [weak self] delegations, error in
                     if let validDelegations = delegations {
@@ -289,10 +291,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func handleDelegate(delegation: GaiaDelegation, denom: String) {
         
         showAmountAlert(title: "Type the amount of \(denom) you want to delegate to:", message: "\(delegation.validatorAddr)\nIt holds\n\(Double(delegation.shares) ?? 0) \(denom) from you.", placeholder: "0 \(denom)") { [weak self] amount in
-            if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
+            if let validAmount = amount, let validNode = self?.node, let validKey = self?.key, let delegate = self?.keysDelegate {
                 self?.loadingView.startAnimating()
                 self?.delegateStake(
                     node: validNode,
+                    clientDelegate: delegate,
                     key: validKey,
                     feeAmount: self?.feeAmount ?? "0",
                     toValidator: delegation.validatorAddr,
@@ -319,9 +322,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func handleUnbound(delegation: GaiaDelegation, denom: String) {
         
         self.showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
-            if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
+            if let validAmount = amount, let validNode = self?.node, let validKey = self?.key, let delegate = self?.keysDelegate {
                 self?.loadingView.startAnimating()
-                self?.unbondStake(node: validNode, key: validKey, feeAmount: self?.feeAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { (resp, err) in
+                self?.unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: self?.feeAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { (resp, err) in
                     if err == nil {
                         self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 5, type: .info, dismissable: true)
                         self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
@@ -344,7 +347,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let validNode = node, let validKey = key {
             loadingView.startAnimating()
-            withdraw(node: validNode, key: validKey, feeAmount: feeAmount, validator: delegation.validatorAddr) { [weak self] resp, err in
+            withdraw(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount, validator: delegation.validatorAddr) { [weak self] resp, err in
                 if err == nil {
                     self?.toast?.showToastAlert("Withdraw successfull", autoHideAfter: 5, type: .info, dismissable: true)
                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in

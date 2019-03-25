@@ -139,6 +139,11 @@ public struct PublicKey {
         return publicKey.toHexString()
     }
     
+    public func getBase64() -> String {
+        let publicKey = getPublicKey(compressed: true)
+        return publicKey.base64EncodedString()
+    }
+
     public var data: Data {
         return Data(hex: get())
     }

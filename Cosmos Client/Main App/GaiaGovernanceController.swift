@@ -15,6 +15,8 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     var node: GaiaNode?
     var key: GaiaKey?
+    let keysDelegate = LocalClient()
+
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
     
@@ -91,6 +93,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 description: data.description,
                 type: data.type,
                 node: node,
+                clientDelegate: keysDelegate,
                 key: key,
                 feeAmount: self.feeAmount) { [weak self] response, err in
                     self?.loadingView.stopAnimating()
@@ -155,12 +158,13 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     func handleVoting(proposal: GaiaProposal) {
         self.showVotingAlert(title: proposal.title, message: proposal.description) { [weak self] vote in
-            guard let vote = vote, let node = self?.node, let key = self?.key  else { return }
+            guard let vote = vote, let node = self?.node, let key = self?.key, let delegate = self?.keysDelegate  else { return }
             self?.loadingView.startAnimating()
             self?.vote(
                 for: proposal.proposalId,
                 option: vote,
                 node: node,
+                clientDelegate: delegate,
                 key: key,
                 feeAmount: self?.feeAmount ?? "0")
             {  response, err in
@@ -177,12 +181,13 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     func handleDeposit(proposal: GaiaProposal) {
         let denom = node?.stakeDenom ?? "stake"
         showAmountAlert(title: "Type the amount of \(denom) you want to deposit to proposal with id \(proposal.proposalId)", message: nil, placeholder: "0 \(denom)") { [weak self] amount in
-            guard let node = self?.node, let key = self?.key  else { return }
+            guard let node = self?.node, let key = self?.key, let delegate = self?.keysDelegate  else { return }
             self?.loadingView.startAnimating()
             self?.depositToProposal(
                 proposalId: proposal.proposalId,
                 amount: amount ?? "0",
                 node: node,
+                clientDelegate: delegate,
                 key: key,
                 feeAmount: self?.feeAmount ?? "0") { response, err in
                     self?.loadingView.stopAnimating()

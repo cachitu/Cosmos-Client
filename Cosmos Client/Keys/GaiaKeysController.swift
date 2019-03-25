@@ -34,11 +34,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBAction func addAction(_ sender: Any) {
-        if GaiaLocalClient.signingImplemented {
-            self.performSegue(withIdentifier: "CreateKeySegue", sender: nil)
-        } else {
-            self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: nil)
-        }
+        self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: nil)
     }
 
     @IBAction func backAction(_ sender: Any) {

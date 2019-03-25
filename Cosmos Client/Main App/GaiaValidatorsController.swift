@@ -15,6 +15,8 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     var node: GaiaNode?
     var key: GaiaKey?
+    let keysDelegate = LocalClient()
+
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
 
@@ -163,7 +165,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         guard let validNode = node, let validKey = key else { return }
         
         loadingView.startAnimating()
-        validator.unjail(node: validNode, key: validKey, feeAmount: feeAmount) { [weak self] resp, errMsg in
+        validator.unjail(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, errMsg in
             self?.loadingView.stopAnimating()
             if let msg = errMsg {
                 self?.toast?.showToastAlert(msg, autoHideAfter: 3, type: .error, dismissable: true)
@@ -178,10 +180,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         print("redelegate from \(redelgateFrom) to \(validator.validator)")
         node?.getStakingInfo() { [weak self] denom in
             self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to redelegate to:", message: "\(validator.validator)\nfrom\n\(redelgateFrom)", placeholder: "0 \(denom ?? "stake")") { amount in
-                if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
+                if let validAmount = amount, let validNode = self?.node, let validKey = self?.key, let delegate = self?.keysDelegate {
                     self?.loadingView.startAnimating()
                     self?.redelegateStake(
                         node: validNode,
+                        clientDelegate: delegate,
                         key: validKey,
                         feeAmount: self?.feeAmount ?? "0",
                         fromValidator: redelgateFrom,
@@ -209,10 +212,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         print("Should delegate to \(validator.validator)")
         node?.getStakingInfo() { [weak self] denom in
             self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to delegate to:", message: "\(validator.validator)", placeholder: "0 \(denom ?? "stake")") { amount in
-                if let validAmount = amount, let validNode = self?.node, let validKey = self?.key {
+                if let validAmount = amount, let validNode = self?.node, let validKey = self?.key, let delegate = self?.keysDelegate {
                     self?.loadingView.startAnimating()
                     self?.delegateStake (
                         node: validNode,
+                        clientDelegate: delegate,
                         key: validKey,
                         feeAmount: self?.feeAmount ?? "0",
                         toValidator: validator.validator,

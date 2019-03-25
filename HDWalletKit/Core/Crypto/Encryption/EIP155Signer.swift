@@ -14,6 +14,16 @@ public struct EIP155Signer {
         return try signTransaction(signature: signature, rawTransaction: rawTransaction)
     }
     
+    public func sign(_ rawTransaction: TxSignable, privateKey: PrivateKey) throws -> Data {
+        let transactionHash = try hash(rawTransaction: rawTransaction)
+        let signature = try privateKey.sign(hash: transactionHash)
+        return try signTransaction(signature: signature, rawTransaction: rawTransaction)
+    }
+
+    public func sign(_ sha256Data: Data, privateKey: PrivateKey) throws -> Data {
+        return try privateKey.sign(hash: sha256Data)
+    }
+
     public func sign(_ rawTransaction: EthereumRawTransaction, privateKey: Data) throws -> Data {
         let transactionHash = try hash(rawTransaction: rawTransaction)
         let signature = try Crypto.sign(transactionHash, privateKey: privateKey)
@@ -33,10 +43,27 @@ public struct EIP155Signer {
         ])
     }
     
+    private func signTransaction(signature: Data, rawTransaction: TxSignable) throws -> Data {
+        let (r, s, v) = calculateRSV(signature: signature)
+        return try RLP.encode([
+            rawTransaction.chainId ?? "",
+            rawTransaction.accountNumber,
+            rawTransaction.sequence,
+            rawTransaction.fee ?? [],
+            rawTransaction.msgs ?? "",
+            rawTransaction.memo ?? "",
+            v, r, s
+            ])
+    }
+
     public func hash(rawTransaction: EthereumRawTransaction) throws -> Data {
         return Crypto.sha3keccak256(data: try encode(rawTransaction: rawTransaction))
     }
     
+    public func hash(rawTransaction: TxSignable) throws -> Data {
+        return Crypto.sha3keccak256(data: try encode(rawTransaction: rawTransaction))
+    }
+
     public func encode(rawTransaction: EthereumRawTransaction) throws -> Data {
         var toEncode: [Any] = [
             rawTransaction.nonce,
@@ -51,6 +78,20 @@ public struct EIP155Signer {
         return try RLP.encode(toEncode)
     }
     
+    public func encode(rawTransaction: TxSignable) throws -> Data {
+        var toEncode: [Any] = [
+            rawTransaction.chainId ?? "",
+            rawTransaction.accountNumber,
+            rawTransaction.sequence,
+            rawTransaction.fee ?? [],
+            rawTransaction.msgs ?? "",
+            rawTransaction.memo ?? ""]
+        if chainId != 0 {
+            toEncode.append(contentsOf: [chainId, 0, 0 ]) // EIP155
+        }
+        return try RLP.encode(toEncode)
+    }
+
     public func calculateRSV(signature: Data) -> (r: BInt, s: BInt, v: BInt) {
         return (
             r: BInt(str: signature[..<32].toHexString(), radix: 16)!,
