@@ -29,6 +29,7 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var seedLabel: UILabel!
     @IBOutlet weak var seedButton: UIButton!
     @IBOutlet weak var loadingView: CustomLoadingView!
+    @IBOutlet weak var showHideSeedButton: UIButton!
     
     var toast: ToastAlertView?
     var key: GaiaKey?
@@ -48,6 +49,8 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        seedLabel.text = "Tap Show Seed to unhide"
+        showHideSeedButton.isSelected = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,6 +100,24 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         }
     }
     
+    @IBAction func showOrHideSeed(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        seedLabel.text = "..."
+        if sender.isSelected {
+            let alertMessage = "Enter the password for \(key?.name ?? "this key") to display the seed."
+            self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
+                if pass == self?.key?.password {
+                    self?.seedLabel.text = sender.isSelected ? self?.key?.pubAddress ?? "Unavailable" : "Tap Show Seed to unhide"
+                } else {
+                    sender.isSelected = false
+                    self?.seedLabel.text = "Tap Show Seed to unhide"
+                }
+            }
+        } else {
+            seedLabel.text = "Tap Show Seed to unhide"
+        }
+    }
+    
     @IBAction func closeButtonAction(_ sender: Any) {
         
         self.dismiss(animated: true)
@@ -107,7 +128,7 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         addressLabel.text = key?.address ?? "cosmos..."
         typeLabel.text    = key?.type ?? "..."
         pubKeyLabel.text  = key?.pubAddress ?? "cosmos..."
-        seedLabel.text    = "No seed stored in keychain"
+        seedLabel.text    = "Tap Show Seed to unhide"
         if let seed = key?.getMnemonicFromKeychain() {
             seedLabel.text = seed
             //TODO: check if this is safe with a security audit

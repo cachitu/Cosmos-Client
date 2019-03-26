@@ -57,7 +57,7 @@ public class LocalClient: KeysClientDelegate {
         
         var key = Key()
         key.name = name
-        key.type = "Local managed \(password)"
+        key.type = "Local managed"
         key.password = password
         key.mnemonic = mnemonic
         key.address = account.address

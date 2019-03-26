@@ -1334,6 +1334,17 @@
                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uO6-cz-7t0">
+                                <rect key="frame" x="16" y="429" width="67" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <state key="normal" title="Show Seed">
+                                    <color key="titleColor" red="0.1647058824" green="0.67450980390000004" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="selected" title="Hide Seed"/>
+                                <connections>
+                                    <action selector="showOrHideSeed:" destination="JGL-u5-Pdz" eventType="touchUpInside" id="fBy-6S-wzr"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8c7-MK-oLC" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1347,6 +1358,7 @@
                         <constraints>
                             <constraint firstItem="d0h-dL-rIN" firstAttribute="top" secondItem="OtK-IV-NUg" secondAttribute="bottom" constant="24" id="0CP-m2-jMI"/>
                             <constraint firstItem="tth-wg-gIN" firstAttribute="top" secondItem="d0h-dL-rIN" secondAttribute="bottom" constant="7" id="0cm-HI-avK"/>
+                            <constraint firstItem="uO6-cz-7t0" firstAttribute="top" secondItem="w1a-VA-vbc" secondAttribute="bottom" constant="11" id="24U-X5-H78"/>
                             <constraint firstItem="508-9v-vsg" firstAttribute="trailing" secondItem="ZpX-GD-Vk3" secondAttribute="trailing" id="2UC-o8-xlB"/>
                             <constraint firstItem="ZFe-cm-nn7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uxF-lF-mam" secondAttribute="trailing" constant="8" symbolic="YES" id="2a1-Zx-njh"/>
                             <constraint firstItem="8c7-MK-oLC" firstAttribute="centerX" secondItem="2Nw-a9-kMd" secondAttribute="centerX" id="3TO-Pn-i6q"/>
@@ -1372,10 +1384,12 @@
                             <constraint firstItem="8c7-MK-oLC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xsS-XI-FYJ" secondAttribute="trailing" constant="8" symbolic="YES" id="MTA-I4-8Wh"/>
                             <constraint firstItem="w1a-VA-vbc" firstAttribute="top" secondItem="xsS-XI-FYJ" secondAttribute="bottom" constant="7" id="OWN-g0-du6"/>
                             <constraint firstItem="ZpX-GD-Vk3" firstAttribute="leading" secondItem="tth-wg-gIN" secondAttribute="leading" id="Po3-f6-kul"/>
+                            <constraint firstItem="2Nw-a9-kMd" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uO6-cz-7t0" secondAttribute="trailing" symbolic="YES" id="SXR-f7-HQO"/>
                             <constraint firstItem="d0h-dL-rIN" firstAttribute="leading" secondItem="OtK-IV-NUg" secondAttribute="leading" id="UYs-oE-G1l"/>
                             <constraint firstItem="OtK-IV-NUg" firstAttribute="top" secondItem="uxF-lF-mam" secondAttribute="bottom" constant="7" id="VOT-dJ-FK5"/>
                             <constraint firstItem="8c7-MK-oLC" firstAttribute="centerY" secondItem="2Nw-a9-kMd" secondAttribute="centerY" id="W9X-ih-RCp"/>
                             <constraint firstItem="2Nw-a9-kMd" firstAttribute="trailing" secondItem="ZFe-cm-nn7" secondAttribute="trailing" constant="15" id="YEE-op-phV"/>
+                            <constraint firstItem="uO6-cz-7t0" firstAttribute="leading" secondItem="xsS-XI-FYJ" secondAttribute="leading" id="ZNg-jh-7MA"/>
                             <constraint firstItem="2Nw-a9-kMd" firstAttribute="top" secondItem="rfH-5G-Kin" secondAttribute="top" constant="50" id="aFW-ca-Cqp"/>
                             <constraint firstItem="508-9v-vsg" firstAttribute="leading" secondItem="ZpX-GD-Vk3" secondAttribute="leading" id="b4Z-Gj-NfQ"/>
                             <constraint firstItem="2Nw-a9-kMd" firstAttribute="top" secondItem="yYW-w3-NOh" secondAttribute="top" constant="20" id="bSZ-co-EDA"/>
@@ -1408,6 +1422,7 @@
                         <outlet property="pubKeyLabel" destination="508-9v-vsg" id="o83-G0-2NP"/>
                         <outlet property="seedButton" destination="L7i-Bi-7Cl" id="ATx-5a-U27"/>
                         <outlet property="seedLabel" destination="w1a-VA-vbc" id="utG-Ug-FXj"/>
+                        <outlet property="showHideSeedButton" destination="uO6-cz-7t0" id="ea5-I5-pT8"/>
                         <outlet property="topBarView" destination="rfH-5G-Kin" id="rb8-sA-AYQ"/>
                         <outlet property="topConstraintOutlet" destination="5Ox-N6-Ke1" id="GMw-Xa-jfg"/>
                         <outlet property="topSeparatorView" destination="pKe-Tx-6x8" id="NWk-bF-cuS"/>
@@ -1416,7 +1431,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wv9-k1-lPU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-831" y="892"/>
+            <point key="canvasLocation" x="-831.20000000000005" y="891.87192118226608"/>
         </scene>
         <!--Addressbook-->
         <scene sceneID="ncl-vn-qbd">
