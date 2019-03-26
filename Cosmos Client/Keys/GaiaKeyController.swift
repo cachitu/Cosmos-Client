@@ -107,10 +107,10 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
             let alertMessage = "Enter the password for \(key?.name ?? "this key") to display the seed."
             self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
                 if pass == self?.key?.password {
-                    self?.seedLabel.text = sender.isSelected ? self?.key?.pubAddress ?? "Unavailable" : "Tap Show Seed to unhide"
+                    self?.seedLabel.text = sender.isSelected ? self?.key?.mnemonic ?? "Unavailable" : "Tap Show Seed to unhide"
                 } else {
                     sender.isSelected = false
-                    self?.seedLabel.text = "Tap Show Seed to unhide"
+                    self?.seedLabel.text = "Wrong password"
                 }
             }
         } else {
