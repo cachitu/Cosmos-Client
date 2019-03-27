@@ -20,20 +20,20 @@ public extension UIView {
      
      - Returns: The top level UIView of the xib file
      */
-    public static func viewFromNib(withOwner: UIView, bundle: Bundle) -> UIView {
+    static func viewFromNib(withOwner: UIView, bundle: Bundle) -> UIView {
         
         let nib = UINib(nibName: "\(type(of: withOwner))", bundle: bundle)
         let view = nib.instantiate(withOwner: withOwner, options: nil).first as! UIView
         return view
     }
     
-    public func removeParticlesAnimation() {
+    func removeParticlesAnimation() {
         if subviews.first is WKWebView {
             subviews.first?.removeFromSuperview()
         }
     }
     
-    public func createParticlesAnimation() {
+    func createParticlesAnimation() {
         
         if subviews.first is WKWebView { return }
         

@@ -1164,6 +1164,7 @@
 				TargetAttributes = {
 					88677FF621E9C54A0022A09E = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -1640,7 +1641,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1660,7 +1661,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

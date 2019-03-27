@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIViewController {
 
-    public func showDelegationOptions(completion: @escaping ((_ amount: String?) -> ())) {
+    func showDelegationOptions(completion: @escaping ((_ amount: String?) -> ())) {
         
         let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
         
@@ -34,7 +34,7 @@ public extension UIViewController {
         self.present(optionMenu, animated: true, completion: nil)
     }
 
-    public func showVotingAlert(title: String?, message: String?, completion: @escaping ((_ option: String?) -> ())) {
+    func showVotingAlert(title: String?, message: String?, completion: @escaping ((_ option: String?) -> ())) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.actionSheet)
         
@@ -62,7 +62,7 @@ public extension UIViewController {
         self.present(alert, animated:true, completion: nil)
     }
 
-    public func showAmountAlert(title: String?, message: String?, placeholder: String?, completion: @escaping ((_ amount: String?) -> ())) {
+    func showAmountAlert(title: String?, message: String?, placeholder: String?, completion: @escaping ((_ amount: String?) -> ())) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
@@ -84,7 +84,7 @@ public extension UIViewController {
         self.present(alert, animated:true, completion: nil)
     }
 
-    public func showPasswordAlert(title: String?, message: String?, placeholder: String?, completion: @escaping ((_ password: String) -> ())) {
+    func showPasswordAlert(title: String?, message: String?, placeholder: String?, completion: @escaping ((_ password: String) -> ())) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         

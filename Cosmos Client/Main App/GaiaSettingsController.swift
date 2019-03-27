@@ -36,7 +36,16 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     @IBAction func applyFee(_ sender: Any) {
         feeTextField.resignFirstResponder()
         if feeTextField.text == "" { feeTextField.text = "0" }
-        if let value = feeTextField.text {
+        if var value = feeTextField.text, let intVal = Int(value) {
+            if intVal > 1000000 {
+                value = "\(1000000)"
+                feeTextField.text = value
+                
+                let alert = UIAlertController(title: nil, message: "One million should be enough, don't waste them on fees.", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+            }
             node?.defaultTxFee = value
             updateFeeLabel()
             if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = node {

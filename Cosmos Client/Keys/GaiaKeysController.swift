@@ -18,7 +18,7 @@ class PersistableGaiaKeys: PersistCodable {
     }
 }
 
-class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAlertViewPresentable {
+class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAlertViewPresentable, GaiaValidatorsCapable {
     
     var toast: ToastAlertView?
     let keysDelegate = LocalClient()
@@ -79,9 +79,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         super.viewDidAppear(animated)
         
         guard let validNode = node else { return }
-        loadingView.startAnimating()
         retrieveAllKeys(node: validNode, clientDelegate: keysDelegate) { [weak self] gaiaKeys, errorMessage in
-            self?.loadingView.stopAnimating()
             guard let keys = gaiaKeys else {
                 //self?.toast?.showToastAlert(errorMessage ?? "Unknown error")
                 self?.dataSource = []
@@ -95,6 +93,24 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             
             self?.tableView?.reloadData()
             self?.node?.getStakingInfo() { denom in }
+        }
+        
+        loadingView.startAnimating()
+        retrieveAllValidators(node: validNode) { [weak self] validators, errMsg in
+            self?.loadingView.stopAnimating()
+            if let validValidators = validators {
+                for validator in validValidators {
+                    validNode.knownValidators[validator.validator] = validator.moniker
+                }
+                if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
+                    for savedNode in savedNodes.nodes {
+                        if savedNode.network == validNode.network {
+                            savedNode.knownValidators = validNode.knownValidators
+                        }
+                    }
+                    PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
+                }
+            }
         }
     }
     

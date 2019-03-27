@@ -18,7 +18,7 @@ class GaiaValidatorCell: UITableViewCell {
     @IBOutlet weak var delegationsLabel: UILabel!
     @IBOutlet weak var rateLabel: UILabel!
     
-    func configure(validator: GaiaValidator, index: Int) {
+    func configure(account: GaiaAccount?, validator: GaiaValidator, index: Int) {
         
         let dShares = Double(validator.shares) ?? 0
         let dTokens = Double(validator.tokens) ?? 0
@@ -32,6 +32,11 @@ class GaiaValidatorCell: UITableViewCell {
         let finalTokens = "\(dTokens)".split(separator: ".").first ?? "0"
         delegationsLabel.text = "\(finalTokens) Tokens"
         rateLabel.text = "\(dRate) rate"
+        
+        monikerLabel.textColor = .darktext
+        if account?.gaiaKey.validator == validator.validator {
+            monikerLabel.textColor = .darkBlue
+        }
     }
     
 }

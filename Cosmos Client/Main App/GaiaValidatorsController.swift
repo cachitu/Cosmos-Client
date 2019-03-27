@@ -243,13 +243,36 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
 extension GaiaValidatorsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        let validator: Bool = account?.isValidator ?? false
+        switch (section, validator) {
+        case (0, true): return 1
+        case (0, false): return dataSource.count
+        case (1, true): return dataSource.count
+        default: return dataSource.count
+        }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        let validator: Bool = account?.isValidator ?? false
+        return validator ? 2 : 1
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaValidatorCellID", for: indexPath) as! GaiaValidatorCell
-        let validator = dataSource[indexPath.item]
-        cell.configure(validator: validator, index: indexPath.item)
+        let validator: Bool = account?.isValidator ?? false
+        switch (indexPath.section, validator) {
+        case (0, true):
+            let matches = dataSource.filter { $0.validator == account?.gaiaKey.validator }
+            let poz = dataSource.firstIndex { $0.validator == account?.gaiaKey.validator }
+            let index = poz?.advanced(by: 0) ?? 0
+            if let valid = matches.first {
+                cell.configure(account: account, validator: valid, index: index + 1)
+            }
+        case (0, false), (1, true):
+            let validator = dataSource[indexPath.item]
+            cell.configure(account: account, validator: validator, index: indexPath.item + 1)
+        default: break
+        }
+
         return cell
     }
     

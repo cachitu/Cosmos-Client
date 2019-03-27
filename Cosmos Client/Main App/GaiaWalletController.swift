@@ -257,6 +257,13 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     self?.amountValueLabel.text = "0.00"
                     self?.amountDenomLabel.text = "-"
                 }
+                
+                if account?.noFeeToken == true {
+                    let num = account?.accNumber ?? "0"
+                    let seq = account?.accSequence ?? "0"
+                    self?.feeAmountValueLabel.text = num + "/" + seq
+                    self?.feeAmountDenomLabel.text = "num/seq"
+                }
             }
         }
     }
@@ -365,7 +372,27 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         }
     }
     
-
+    private func handleWithdrawComission(delegation: GaiaDelegation) {
+        
+        if let validNode = node, let validKey = key {
+            loadingView.startAnimating()
+            withdrawComission(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, err in
+                if err == nil {
+                    self?.toast?.showToastAlert("Comission withdraw successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                        self?.loadingView.stopAnimating()
+                        if let validDelegations = delegations {
+                            self?.dataSource = validDelegations
+                            self?.tableView.reloadData()
+                        }
+                    }
+                } else if let errMsg = err {
+                    self?.loadingView.stopAnimating()
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                }
+            }
+        }
+    }
 }
 
 extension GaiaWalletController: UIPickerViewDelegate {
@@ -427,6 +454,11 @@ extension GaiaWalletController: UITableViewDataSource {
         let validatorName = node?.knownValidators[delegation.validatorAddr] ?? ""
         cell.leftLabel.text = "\(parts.first ?? "0") shares to " + validatorName
         cell.leftSubLabel.text = delegation.validatorAddr
+        cell.leftLabel.textColor = .darktext
+        if account?.gaiaKey.validator == delegation.validatorAddr {
+            cell.leftLabel.textColor = .darkBlue
+            account?.isValidator = true
+        }
         return cell
     }
 }
@@ -441,6 +473,13 @@ extension GaiaWalletController: UITableViewDelegate {
             if let validDenom = self.node?.stakeDenom {
                 
                 let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                
+                if delegation.validatorAddr == self.account?.gaiaKey.validator {
+                    let withdrawCommissionAction = UIAlertAction(title: "Withdraw commissions", style: .default) { [weak self] alertAction in
+                        self?.handleWithdrawComission(delegation: delegation)
+                    }
+                    optionMenu.addAction(withdrawCommissionAction)
+                }
                 let withdrawAction = UIAlertAction(title: "Withdraw rewards", style: .default) { [weak self] alertAction in
                     self?.handleWithdraw(delegation: delegation)
                 }
@@ -466,7 +505,6 @@ extension GaiaWalletController: UITableViewDelegate {
                 optionMenu.addAction(cancelAction)
                 
                 self.present(optionMenu, animated: true, completion: nil)
-                
             }
         }
     }
