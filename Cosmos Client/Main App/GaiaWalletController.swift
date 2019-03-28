@@ -261,8 +261,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 if account?.noFeeToken == true {
                     let num = account?.accNumber ?? "0"
                     let seq = account?.accSequence ?? "0"
-                    self?.feeAmountValueLabel.text = num + "/" + seq
-                    self?.feeAmountDenomLabel.text = "num/seq"
+                    self?.feeAmountValueLabel.text = num + "|" + seq
+                    self?.feeAmountDenomLabel.text = "num|seq"
                 }
             }
         }

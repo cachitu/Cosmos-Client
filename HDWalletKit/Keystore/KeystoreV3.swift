@@ -84,9 +84,9 @@ public class KeystoreV3: KeystoreInterface {
     }
     
     private func encryptData(passwordData: Data, salt: Data, length: Int, N: Int, R: Int, P: Int) -> Data? {
-        guard let deriver = try? Scrypt(password: passwordData.bytes, salt: salt.bytes, dkLen: length, N: N, r: R, p: P) else {return nil}
-        guard let result = try? deriver.calculate() else {return nil}
-        return Data(result)
+        //guard let deriver = try? Scrypt(password: passwordData.bytes, salt: salt.bytes, dkLen: length, N: N, r: R, p: P) else {return nil}
+        //guard let result = try? deriver.calculate() else {return nil}
+        return nil//Data(result)
     }
     
     private func encryptDataToStorage(_ passwordData: Data, data: Data, dkLen: Int=32, N: Int = 1024, R: Int = 8, P: Int = 1) throws {

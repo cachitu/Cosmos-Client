@@ -62,6 +62,14 @@ public extension UIViewController {
         self.present(alert, animated:true, completion: nil)
     }
 
+    func showProposalDetailsAlert(title: String?, message: String?) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.actionSheet)
+        let cancelAction = UIAlertAction(title: "Close", style: .cancel)
+        alert.addAction(cancelAction)
+        self.present(alert, animated:true, completion: nil)
+    }
+
     func showAmountAlert(title: String?, message: String?, placeholder: String?, completion: @escaping ((_ amount: String?) -> ())) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)

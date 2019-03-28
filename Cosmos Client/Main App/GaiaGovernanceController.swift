@@ -19,6 +19,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
+    var selectedProposal: GaiaProposal?
     
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -114,7 +115,12 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "CreateProposalSegueID" {
+        if segue.identifier == "VotesSegueID" {
+            
+            let dest = segue.destination as? GaiaVotesController
+            dest?.dataSource = selectedProposal?.votes ?? []
+            
+        } else if segue.identifier == "CreateProposalSegueID" {
             
             guard let dest = segue.destination as? GaiaProposalController else { return }
             dest.onCollectDataComplete = { [weak self] data in
@@ -140,10 +146,18 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         
         loadingView.startAnimating()
         retrieveAllPropsals(node: validNode) { [weak self] proposals, errMsg in
-            self?.loadingView.stopAnimating()
+            self?.dataSource = []
             if let validProposals = proposals {
-                self?.dataSource = validProposals.reversed()
-                self?.tableView.reloadData()
+                for proposal in validProposals {
+                    self?.getPropsalDetails(node: validNode, proposal: proposal) { proposal, error in
+                        self?.loadingView.stopAnimating()
+                        if let valid = proposal {
+                            self?.dataSource.append(valid)
+                            self?.dataSource = validProposals.reversed()
+                            self?.tableView.reloadData()
+                        }
+                    }
+                }
             } else if let validErr = errMsg {
                 self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
             } else {
@@ -171,6 +185,10 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 self?.loadingView.stopAnimating()
                 if err == nil {
                     self?.toast?.showToastAlert("Vote submited", autoHideAfter: 5, type: .info, dismissable: true)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        self?.loadingView.startAnimating()
+                        self?.loadData(validNode: node)
+                    }
                 } else if let errMsg = err {
                     self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
                 }
@@ -194,6 +212,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                     if err == nil {
                         self?.toast?.showToastAlert("Deposit submited", autoHideAfter: 5, type: .info, dismissable: true)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            self?.loadingView.startAnimating()
                             self?.loadData(validNode: node)
                         }
                     } else if let errMsg = err {
@@ -213,23 +232,57 @@ extension GaiaGovernanceController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaGovernanceCellID", for: indexPath) as! GaiaGovernanceCell
         let proposal = dataSource[indexPath.item]
-        cell.configure(proposal: proposal)
+        cell.configure(proposal: proposal, voter: account)
         return cell
     }
     
 }
 
 extension GaiaGovernanceController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let proposal = dataSource[indexPath.item]
+        selectedProposal = proposal
         
         DispatchQueue.main.async {
-            switch proposal.status {
-            case "Passed"  : self.toast?.showToastAlert("This proposal has passed. You can no longer vote.", autoHideAfter: 5, type: .info, dismissable: true)
-            case "Rejected": self.toast?.showToastAlert("This proposal has been rejected. You can no longer vote.", autoHideAfter: 5, type: .info, dismissable: true)
-            case "DepositPeriod": self.handleDeposit(proposal: proposal)
-            default: self.handleVoting(proposal: proposal)
+            
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let votesAction = UIAlertAction(title: "View Votes", style: .default) { [weak self] alertAction in
+                self?.performSegue(withIdentifier: "VotesSegueID", sender: self)
             }
+            
+            let detailsAction = UIAlertAction(title: "Details", style: .default) { [weak self] alertAction in
+                self?.showProposalDetailsAlert(title: proposal.title, message: proposal.description)
+            }
+            
+            let voteAction = UIAlertAction(title: "Submit Vote", style: .default) { [weak self] alertAction in
+                self?.handleVoting(proposal: proposal)
+            }
+            
+            let depositAction = UIAlertAction(title: "Add Deposit", style: .default) { [weak self] alertAction in
+                self?.handleDeposit(proposal: proposal)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            
+            switch proposal.status {
+            case "Passed"  :
+                optionMenu.addAction(votesAction)
+            case "Rejected":
+                optionMenu.addAction(votesAction)
+            case "DepositPeriod":
+                optionMenu.addAction(depositAction)
+            default: //voting
+                optionMenu.addAction(voteAction)
+                optionMenu.addAction(votesAction)
+            }
+            
+            optionMenu.addAction(detailsAction)
+            optionMenu.addAction(cancelAction)
+            
+            self.present(optionMenu, animated: true, completion: nil)
         }
     }
 }

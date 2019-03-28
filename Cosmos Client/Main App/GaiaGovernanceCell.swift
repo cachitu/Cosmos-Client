@@ -13,15 +13,19 @@ class GaiaGovernanceCell: UITableViewCell {
 
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var proposalTitleLabel: UILabel!
-    @IBOutlet weak var proposalDescriptionLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var yesLabel: UILabel!
     @IBOutlet weak var noLabel: UILabel!
     @IBOutlet weak var abstainLabel: UILabel!
     @IBOutlet weak var noVetoLabel: UILabel!
+    @IBOutlet weak var yesValLabel: UILabel!
+    @IBOutlet weak var noVallabel: UILabel!
+    @IBOutlet weak var abstainValueLabel: UILabel!
+    @IBOutlet weak var noVetoValueLabel: UILabel!
+    
     @IBOutlet weak var totalDeposited: UILabel!
     
-    func configure(proposal: GaiaProposal) {
+    func configure(proposal: GaiaProposal, voter: GaiaAccount?) {
         
         let dYes = Double(proposal.yes) ?? 0
         let dNo  = Double(proposal.no) ?? 0
@@ -30,7 +34,6 @@ class GaiaGovernanceCell: UITableViewCell {
 
         typeLabel.text = proposal.type
         proposalTitleLabel.text = proposal.title
-        proposalDescriptionLabel.text = proposal.description
         switch proposal.status {
         case "Passed"  : statusLabel.textColor = UIColor.progressGreen
         case "Rejected": statusLabel.textColor = UIColor.darkRed
@@ -41,10 +44,35 @@ class GaiaGovernanceCell: UITableViewCell {
         let finalNo  = "\(dNo)".split(separator: ".").first ?? "0"
         let finalAbs = "\(dAbs)".split(separator: ".").first ?? "0"
         let finalNoV = "\(dNoV)".split(separator: ".").first ?? "0"
-        yesLabel.text     = finalYes + " - Yes"
-        noLabel.text      = finalNo + " - No"
-        abstainLabel.text = finalAbs + " - Abstain"
-        noVetoLabel.text  = finalNoV + " - No (Veto)"
+        
+        yesLabel.text     = "Yes:"
+        noLabel.text      = "No:"
+        abstainLabel.text = "Abstain:"
+        noVetoLabel.text  = "No (veto):"
+        
         totalDeposited.text = "Dep: \(proposal.totalDepopsit)"
+        
+        yesValLabel.text       = "" + finalYes
+        noVallabel.text        = "" + finalNo
+        abstainValueLabel.text = "" + finalAbs
+        noVetoValueLabel.text  = "" + finalNoV
+
+        yesLabel.textColor = .darkText
+        noLabel.textColor = .darkText
+        abstainLabel.textColor = .darkText
+        noVetoLabel.textColor = .darkText
+        if let voterAddr = voter?.address {
+            let matches = proposal.votes.filter { $0.voter == voterAddr }
+            if let first = matches.first {
+                switch first.option {
+                case "No": noLabel.textColor             = .pendingYellow
+                case "Yes": yesLabel.textColor           = .pendingYellow
+                case "Abstain": abstainLabel.textColor   = .pendingYellow
+                case "NoWithVeto": noVetoLabel.textColor = .pendingYellow
+                default: break
+                    
+                }
+            }
+        }
     }
 }

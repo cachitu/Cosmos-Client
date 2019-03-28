@@ -256,6 +256,7 @@ extension GaiaValidatorsController: UITableViewDataSource {
         let validator: Bool = account?.isValidator ?? false
         return validator ? 2 : 1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaValidatorCellID", for: indexPath) as! GaiaValidatorCell
         let validator: Bool = account?.isValidator ?? false
@@ -282,8 +283,18 @@ extension GaiaValidatorsController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let validator = dataSource[indexPath.item]
+        var validator = dataSource[indexPath.item]
         
+        let isValidator: Bool = account?.isValidator ?? false
+        switch (indexPath.section, isValidator) {
+        case (0, true):
+            let matches = dataSource.filter { $0.validator == account?.gaiaKey.validator }
+            if let match = matches.first {
+                validator = match
+            }
+        default: break
+        }
+
         DispatchQueue.main.async {
             if let redelagateAddr = self.redelgateFrom {
                 
