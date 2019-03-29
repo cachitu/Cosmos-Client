@@ -206,6 +206,34 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: self)
     }
     
+    private func queryRewards(validDelegations: [GaiaDelegation]) {
+        guard let validNode = node else { return }
+        for delegation in validDelegations {
+            if account?.gaiaKey.validator == delegation.validatorAddr {
+                key?.queryValidatorRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
+                    if let rew = rewards, let selfBonded = rew.selfBondRewards?.first?.amount, let selfCommision = rew.valCommission?.first?.amount {
+                        let c1 = selfCommision.split(separator: ".").first ?? "0"
+                        let c2 = selfBonded.split(separator: ".").first ?? "0"
+                        let int1 = Int(c1) ?? 0
+                        let int2 = Int(c2) ?? 0
+                        let total = int1 + int2
+                        delegation.availableReward = "\(total)💰"
+                        self?.tableView.reloadData()
+                    }
+                }
+            } else {
+                key?.queryDelegationRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
+                    if let amount = rewards?.amount {
+                        let c1 = amount.split(separator: ".").first ?? "0"
+                        let int1 = Int(c1) ?? 0
+                        delegation.availableReward = "\(int1)💰"
+                        self?.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
     private func loadData(animated: Bool = true, spinner: Bool = true) {
         
         if animated {
@@ -222,6 +250,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     if let validDelegations = delegations {
                         self?.dataSource = validDelegations
                         self?.tableView.reloadData()
+                        self?.queryRewards(validDelegations: validDelegations)
                     }
                 }
 
@@ -259,10 +288,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 }
                 
                 if account?.noFeeToken == true {
-                    let num = account?.accNumber ?? "0"
                     let seq = account?.accSequence ?? "0"
-                    self?.feeAmountValueLabel.text = num + "|" + seq
-                    self?.feeAmountDenomLabel.text = "num|seq"
+                    self?.feeAmountValueLabel.text = "" + seq
+                    self?.feeAmountDenomLabel.text = "sequence"
                 }
             }
         }
@@ -315,6 +343,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                                 if let validDelegations = delegations {
                                     self?.dataSource = validDelegations
                                     self?.tableView.reloadData()
+                                    self?.queryRewards(validDelegations: validDelegations)
                                 }
                             }
                         } else if let errMsg = err {
@@ -339,6 +368,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             if let validDelegations = delegations {
                                 self?.dataSource = validDelegations
                                 self?.tableView.reloadData()
+                                self?.queryRewards(validDelegations: validDelegations)
                             }
                         }
                     } else if let errMsg = err {
@@ -362,6 +392,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         if let validDelegations = delegations {
                             self?.dataSource = validDelegations
                             self?.tableView.reloadData()
+                            self?.queryRewards(validDelegations: validDelegations)
                         }
                     }
                 } else if let errMsg = err {
@@ -384,6 +415,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         if let validDelegations = delegations {
                             self?.dataSource = validDelegations
                             self?.tableView.reloadData()
+                            self?.queryRewards(validDelegations: validDelegations)
                         }
                     }
                 } else if let errMsg = err {
@@ -455,6 +487,7 @@ extension GaiaWalletController: UITableViewDataSource {
         cell.leftLabel.text = "\(parts.first ?? "0") shares to " + validatorName
         cell.leftSubLabel.text = delegation.validatorAddr
         cell.leftLabel.textColor = .darktext
+        cell.upRightLabel?.text = delegation.availableReward
         if account?.gaiaKey.validator == delegation.validatorAddr {
             cell.leftLabel.textColor = .darkBlue
             account?.isValidator = true
@@ -498,7 +531,9 @@ extension GaiaWalletController: UITableViewDelegate {
                 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
                 
-                optionMenu.addAction(withdrawAction)
+                if delegation.validatorAddr != self.account?.gaiaKey.validator {
+                    optionMenu.addAction(withdrawAction)
+                }
                 optionMenu.addAction(redelegateAction)
                 optionMenu.addAction(delegateAction)
                 optionMenu.addAction(unboundAction)

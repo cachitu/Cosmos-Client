@@ -14,6 +14,7 @@ class GaiaKeyCell: UITableViewCell {
     @IBOutlet weak var leftImageView: UIImageView!
     @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var leftSubLabel: UILabel!
+    @IBOutlet weak var upRightLabel: UILabel?
     
     @IBAction func copyAction(_ sender: Any) {
         UIPasteboard.general.string = leftSubLabel.text
@@ -22,7 +23,8 @@ class GaiaKeyCell: UITableViewCell {
     
     var onCopy:(() -> ())?
     
-    func configure(key: GaiaKey) {
+    func configure(key: GaiaKey, amount: String = "") {
+        upRightLabel?.text = amount
         leftLabel.text = key.name
         leftSubLabel.text = key.address
         let imageName = "approved"
