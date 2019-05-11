@@ -70,9 +70,11 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
     @IBAction func deleteKey(_ sender: Any) {
         guard let validNode = node else { return }
-        
         let keyName = key?.name ?? "this account"
-        let alertMessage = "Enter the password for \(keyName) to delete the wallet. The passowrd and seed will be permanentely removed from the keychain."
+        var alertMessage = "Enter the password for \(keyName) to delete the wallet. The passowrd and seed will be permanentely removed from the keychain."
+        if key?.address == "cosmos104l6kttdmnwh5lytwkgccnc8l9zpjr64y8qcmu" {
+            alertMessage = "This is the Apple Test key, needed for the iOS Appstore review. To delete this address, type: \ntest1234"
+        }
         self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
             self?.loadingView.startAnimating()
             self?.key?.unlockKey(node: validNode, password: pass) { [weak self] success, message in

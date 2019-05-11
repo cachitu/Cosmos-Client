@@ -97,46 +97,74 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        loadingView.startAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard let node = node, let key = key else { return }
-        
         bottomTabbarView.selectIndex(0)
         
         if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
-            sendAssets(node: node,
-                       clientDelegate: keysDelegate,
-                       key: key,
-                       feeAmount: feeAmount,
-                       toAddress: addrToSend,
-                       amount: sendAmountTextField.text ?? "0",
-                       denom: denom) { [weak self] response, error in
-                        DispatchQueue.main.async {
-                            
-                            self?.sendAmountTextField.text = ""
-                            self?.sendAmountButton.isEnabled = false
-                            self?.loadingView.stopAnimating()
-                            
-                            if let validResponse = response {
-                                self?.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 5, type: .validatePending, dismissable: false)
-                            } else if let errMsg = error {
-                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
-                            } else {
-                                self?.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
-                            }
-                        }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                
+                let amount = self?.sendAmountTextField.text ?? "0"
+                let memo = self?.node?.defaultMemo ?? ""
+                let alert = UIAlertController(title: "Send \(amount) \(denom) to \(addrToSend)", message: "Memo: \(memo)", preferredStyle: UIAlertController.Style.alert)
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] alertAction in
+                    self?.sendAmountTextField.text = ""
+                    self?.sendAmountButton.isEnabled = false
+                    self?.loadingView.stopAnimating()
+                    self?.senderAddress = nil
+                }
+                
+                let action = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] alertAction in
+                    self?.loadingView.startAnimating()
+                    self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
+                }
+                
+                alert.addAction(cancelAction)
+                alert.addAction(action)
+                
+                self?.present(alert, animated:true, completion: nil)
             }
-            senderAddress = nil
+
         } else {
+            loadingView.startAnimating()
             self.loadData()
         }
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) { [weak self] timer in
             self?.loadData(animated: false, spinner: false)
         }
+    }
+    
+    private func sendAssetsTo(destAddress: String, denom: String) {
+        
+        guard let node = node, let key = key else { return }
+        sendAssets(node: node,
+                   clientDelegate: keysDelegate,
+                   key: key,
+                   feeAmount: feeAmount,
+                   toAddress: destAddress,
+                   amount: sendAmountTextField.text ?? "0",
+                   denom: denom) { [weak self] response, error in
+                    DispatchQueue.main.async {
+                        
+                        self?.sendAmountTextField.text = ""
+                        self?.sendAmountButton.isEnabled = false
+                        self?.loadingView.stopAnimating()
+                        
+                        if let validResponse = response {
+                            self?.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 5, type: .validatePending, dismissable: false)
+                        } else if let errMsg = error {
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                        } else {
+                            self?.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
+                        }
+                    }
+        }
+        senderAddress = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {

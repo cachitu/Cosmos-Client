@@ -29,7 +29,9 @@ public struct PublicKey {
         case .ethereum:
             return generateEthAddress()
         case .cosmos:
-            return generateCosmosAddress()
+            return generateTdmAddress(prefix: "cosmos")
+        case .terra:
+            return generateTdmAddress(prefix: "terra")
         }
     }
     
@@ -42,7 +44,9 @@ public struct PublicKey {
         case .ethereum:
             return generateEthAddress()
         case .cosmos:
-            return generateCosmosPublicAddress()
+            return generateTdmPublicAddress(prefix: "cosmos")
+        case .terra:
+            return generateTdmPublicAddress(prefix: "terra")
         }
     }
 
@@ -55,7 +59,9 @@ public struct PublicKey {
         case .ethereum:
             return generateEthAddress()
         case .cosmos:
-            return generateCosmosValidator()
+            return generateTdmValidator(prefix: "cosmos")
+        case .terra:
+            return generateTdmValidator(prefix: "terra")
         }
     }
 
@@ -68,7 +74,9 @@ public struct PublicKey {
         case .ethereum:
             return generateEthAddress()
         case .cosmos:
-            return generateCosmosPublicValidator()
+            return generateTdmPublicValidator(prefix: "cosmos")
+        case .terra:
+            return generateTdmPublicValidator(prefix: "terra")
         }
     }
 
@@ -98,38 +106,38 @@ public struct PublicKey {
         return coin.addressPrefix + EIP55.encode(addressData)
     }
     
-    func generateCosmosAddress() -> String {
+    func generateTdmAddress(prefix: String) -> String {
         
         let publicKey = getPublicKey(compressed: true)
         let payload = RIPEMD160.hash(publicKey.sha256()).toHexString()
-        let address = Bech32.encode1(Data(hex: payload), prefix: "cosmos")
+        let address = Bech32.encode1(Data(hex: payload), prefix: prefix)
         
         return address
     }
 
-    func generateCosmosPublicAddress() -> String {
+    func generateTdmPublicAddress(prefix: String) -> String {
         
         let publicKey = getPublicKey(compressed: true)
         let phex = "EB5AE98721" + publicKey.toHexString()
-        let pubAddress = Bech32.encode1(Data(hex: phex), prefix: "cosmospub")
+        let pubAddress = Bech32.encode1(Data(hex: phex), prefix: prefix + "pub")
         
         return pubAddress
     }
 
-    func generateCosmosValidator() -> String {
+    func generateTdmValidator(prefix: String) -> String {
         
         let publicKey = getPublicKey(compressed: true)
         let payload = RIPEMD160.hash(publicKey.sha256()).toHexString()
-        let address = Bech32.encode1(Data(hex: payload), prefix: "cosmosvaloper")
+        let address = Bech32.encode1(Data(hex: payload), prefix: prefix + "valoper")
         
         return address
     }
     
-    func generateCosmosPublicValidator() -> String {
+    func generateTdmPublicValidator(prefix: String) -> String {
         
         let publicKey = getPublicKey(compressed: true)
         let phex = "EB5AE98721" + publicKey.toHexString()
-        let pubAddress = Bech32.encode1(Data(hex: phex), prefix: "cosmosvaloperpub")
+        let pubAddress = Bech32.encode1(Data(hex: phex), prefix: prefix + "valoperpub")
         
         return pubAddress
     }

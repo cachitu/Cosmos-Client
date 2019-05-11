@@ -11,6 +11,8 @@ import CosmosRestApi
 
 public class LocalClient: KeysClientDelegate {
     
+    let coin: HDCoin = .cosmos
+    
     func test() {
         //cosmos14kxxegskp8lfuhpwj27hrv9uj8ufjvhzu5ucv5
         //cosmospub1addwnpepqvcu4mlcjpacdk28xh9e3ex0t5yrw877ylp82gpg8j7y32qf3zdjys07yww
@@ -22,7 +24,6 @@ public class LocalClient: KeysClientDelegate {
         //let mnemonic = Mnemonic.create()
         
         let seed = Mnemonic.createSeed(mnemonic: mnemonic)
-        let coin: HDCoin = .cosmos
         let wallet = Wallet(seed: seed, coin: coin)
         let account = wallet.generateAccount()
         print("cosmos14kxxegskp8lfuhpwj27hrv9uj8ufjvhzu5ucv5")
@@ -51,7 +52,6 @@ public class LocalClient: KeysClientDelegate {
     public func recoverKey(from mnemonic: String, name: String, password: String) -> Key {
         
         let seed = Mnemonic.createSeed(mnemonic: mnemonic)
-        let coin: HDCoin = .cosmos
         let wallet = Wallet(seed: seed, coin: coin)
         let account = wallet.generateAccount()
         
@@ -114,7 +114,6 @@ public class LocalClient: KeysClientDelegate {
 
         let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
         let seed = Mnemonic.createSeed(mnemonic: account.gaiaKey.mnemonic)
-        let coin: HDCoin = .cosmos
         let wallet = Wallet(seed: seed, coin: coin)
         let hdaccount = wallet.generateAccount()
 

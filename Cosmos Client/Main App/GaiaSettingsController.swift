@@ -15,6 +15,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     var key: GaiaKey?
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
+    var memo: String { return node?.defaultMemo  ?? "IPSX iOS Wallet" }
 
     var toast: ToastAlertView?
     
@@ -27,14 +28,25 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     
     @IBOutlet weak var feeSectionTitleLabel: UILabel!
     @IBOutlet weak var feeTextField: UITextField!
+    @IBOutlet weak var memoTextField: UITextField!
     @IBOutlet weak var feeApplyButton: UIButton!
     
     
     var forwardCounter = 0
     var onUnwind: ((_ toIndex: Int) -> ())?
 
+    @IBAction func applyMemo(_ sender: Any) {
+        let memo = memoTextField.text ?? ""
+        let nodeName = node?.network ?? ""
+        view.endEditing(true)
+        toast?.showToastAlert("Memo set for node \(nodeName): \(memo)", autoHideAfter: 5, type: .info, dismissable: true)
+        node?.defaultMemo = memo
+        peristNodes()
+    }
+    
     @IBAction func applyFee(_ sender: Any) {
-        feeTextField.resignFirstResponder()
+        let nodeName = node?.network ?? ""
+        view.endEditing(true)
         if feeTextField.text == "" { feeTextField.text = "0" }
         if var value = feeTextField.text, let intVal = Int(value) {
             if intVal > 1000000 {
@@ -46,16 +58,42 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
                 alert.addAction(cancelAction)
                 self.present(alert, animated: true, completion: nil)
             }
-            node?.defaultTxFee = value
+            toast?.showToastAlert("Fee set for node \(nodeName): \(intVal)", autoHideAfter: 5, type: .info, dismissable: true)
+            node?.defaultTxFee = "\(intVal)"
             updateFeeLabel()
-            if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = node {
-                for savedNode in savedNodes.nodes {
-                    if savedNode.network == validNode.network {
-                        savedNode.defaultTxFee = validNode.defaultTxFee
-                    }
+            peristNodes()
+        }
+    }
+    
+    @IBAction func openKytzuUrl(_ sender: Any) {
+        guard let url = URL(string: "https://www.linkedin.com/in/calinchitu/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func openSyncnodeUrl(_ sender: Any) {
+        guard let url = URL(string: "https://www.linkedin.com/in/gbunea/asse") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func openIpsxUrl(_ sender: Any) {
+        guard let url = URL(string: "https://ip.sx") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func openBitSentinel(_ sender: Any) {
+        guard let url = URL(string: "https://bit-sentinel.com/") else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    private func peristNodes() {
+        if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = node {
+            for savedNode in savedNodes.nodes {
+                if savedNode.network == validNode.network {
+                    savedNode.defaultTxFee = validNode.defaultTxFee
+                    savedNode.defaultMemo  = validNode.defaultMemo
                 }
-                PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
             }
+            PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
         }
     }
     
@@ -100,6 +138,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        memoTextField.text = memo
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,5 +151,16 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     @IBAction func unwindToTarnsactions(segue:UIStoryboardSegue) {
         bottomTabbarView.selectIndex(3)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
 
+extension GaiaSettingsController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

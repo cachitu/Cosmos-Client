@@ -14,6 +14,7 @@ public enum HDCoin {
     case litecoin
     case bitcoinCash
     case cosmos
+    case terra
 
     //https://github.com/satoshilabs/slips/blob/master/slip-0132.md
     public var privateKeyVersion: UInt32 {
@@ -43,8 +44,6 @@ public enum HDCoin {
         case .litecoin:
             return 0x30
         case .bitcoin:
-            return 0x00
-        case .cosmos:
             return 0x00
         default:
             return 0x00
@@ -79,8 +78,10 @@ public enum HDCoin {
         case .ethereum:
             return "0x"
         case .cosmos:
-            return "cosmmos"
-        default:
+            return "cosmos"
+        case .terra:
+            return "terra"
+       default:
             return ""
         }
     }
@@ -97,6 +98,8 @@ public enum HDCoin {
         case .bitcoinCash:
             return 145
         case .cosmos:
+            return 118
+        case .terra:
             return 118
         }
     }

@@ -48,9 +48,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             nodes = savedNodes.nodes
             showHint = false
         } else {
-            nodes = [GaiaNode(name: "IPSX Main Net", scheme: "https", host: "node01.ip.sx"),
-                     GaiaNode(name: "IPSX Test Net", scheme: "http", host: "209.126.79.21")]
-            PersistableGaiaNodes(nodes: nodes).savetoDisk()
+            //nodes = [GaiaNode(name: "IPSX Main Net", scheme: "http", host: "node01.ip.sx")]
+            //PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
         
         noDataView.isHidden = nodes.count > 0
@@ -76,7 +75,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         }
         
         if showHint {
-            toast?.showToastAlert("Use IPSX nodes for test purposes only, add your own trusted node for real use.", type: .info, dismissable: true)
+            //toast?.showToastAlert("Use IPSX nodes for test purposes only, add your own trusted node for real use.", type: .info, dismissable: true)
         }
         showHint = false
     }
@@ -122,14 +121,19 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     
     private func refreshNodes() {
         weak var weakSelf = self
-        weakSelf?.loadingView.startAnimating()
-        for node in weakSelf?.nodes ?? [] {
-            node.getStatus {
-                node.getNodeInfo {
-                    weakSelf?.loadingView.stopAnimating()
-                    weakSelf?.tableView.reloadData()
+        if let validNodes = weakSelf?.nodes, validNodes.count > 0 {
+            noDataView.isHidden = true
+            loadingView.startAnimating()
+            for node in validNodes {
+                node.getStatus {
+                    node.getNodeInfo {
+                        weakSelf?.loadingView.stopAnimating()
+                        weakSelf?.tableView.reloadData()
+                    }
                 }
             }
+        } else {
+            noDataView.isHidden = false
         }
     }
 }

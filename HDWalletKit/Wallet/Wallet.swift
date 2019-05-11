@@ -49,7 +49,7 @@ public final class Wallet {
     }
     
     public func sign(sha256Data: Data) throws -> String {
-        let signer = EIP155Signer(chainId: 118)
+        let signer = EIP155Signer(chainId: Int(coin.coinType))
         let rawData = try signer.sign(sha256Data, privateKey: privateKey)
         let hash = rawData.base64EncodedString()
         return hash
