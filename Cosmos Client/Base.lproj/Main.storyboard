@@ -61,13 +61,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View node" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrC-Nl-fbc">
-                                                    <rect key="frame" x="292.5" y="24" width="67.5" height="17"/>
+                                                    <rect key="frame" x="237.5" y="24" width="67.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtN-Hp-1cp">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <connections>
                                                         <action selector="headerTap:" destination="NTE-JI-IrB" eventType="touchUpInside" id="OTA-zt-8ZH"/>
                                                     </connections>
@@ -99,7 +99,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYN-og-Nvl" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="345" height="67"/>
+                                                    <rect key="frame" x="15" y="3" width="290" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="IHO-it-09C">
                                                             <rect key="frame" x="15" y="13" width="12" height="22"/>
@@ -121,13 +121,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.29.1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZW-wG-P4t">
-                                                            <rect key="frame" x="305.5" y="16" width="31.5" height="13"/>
+                                                            <rect key="frame" x="250.5" y="16" width="31.5" height="13"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHn-CZ-nVS" customClass="CellStateRoundedView" customModule="Cosmos_Client" customModuleProvider="target">
-                                                            <rect key="frame" x="115" y="56" width="115" height="22"/>
+                                                            <rect key="frame" x="87.5" y="56" width="115" height="22"/>
                                                             <subviews>
                                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2v-Xp-dkm" userLabel="Canceled View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
@@ -946,19 +946,19 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forget Password" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4A-Uk-g4Z">
-                                                    <rect key="frame" x="252" y="24" width="108" height="17"/>
+                                                    <rect key="frame" x="197" y="24" width="108" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWN-ae-6Ji" userLabel="Delete Button">
-                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="44"/>
                                                     <connections>
                                                         <action selector="leftHeaderTap:" destination="SEt-zc-9aL" eventType="touchUpInside" id="btf-pL-HQx"/>
                                                     </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLQ-SS-DNR" userLabel="Forget Button">
-                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="44"/>
+                                                    <rect key="frame" x="160" y="0.0" width="160" height="44"/>
                                                     <connections>
                                                         <action selector="rightHeaderTap:" destination="SEt-zc-9aL" eventType="touchUpInside" id="nwy-hS-uSV"/>
                                                     </connections>
@@ -997,7 +997,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-Oy-rap" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="345" height="67"/>
+                                                    <rect key="frame" x="15" y="3" width="290" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locked" translatesAutoresizingMaskIntoConstraints="NO" id="UvC-lT-ZDc">
                                                             <rect key="frame" x="15" y="13" width="12" height="22"/>
@@ -1007,19 +1007,19 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="kytzu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTr-kk-JQ7">
-                                                            <rect key="frame" x="35" y="15.5" width="302" height="17"/>
+                                                            <rect key="frame" x="35" y="15.5" width="247" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6jp-91-yCy">
-                                                            <rect key="frame" x="35" y="35.5" width="302" height="17"/>
+                                                            <rect key="frame" x="35" y="35.5" width="247" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVG-pR-yrL">
-                                                            <rect key="frame" x="307" y="10.5" width="30" height="27"/>
+                                                            <rect key="frame" x="252" y="10.5" width="30" height="27"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <state key="normal" title="Copy">
                                                                 <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1844,7 +1844,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLP-k0-kpV" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="345" height="67"/>
+                                                    <rect key="frame" x="15" y="3" width="290" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delegation" translatesAutoresizingMaskIntoConstraints="NO" id="uEa-Eq-jZE">
                                                             <rect key="frame" x="15" y="13" width="12" height="22"/>
@@ -1854,19 +1854,19 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="kytzu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="G8b-UA-O3G">
-                                                            <rect key="frame" x="35" y="15.5" width="292" height="17"/>
+                                                            <rect key="frame" x="35" y="15.5" width="237" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P70-Ys-i37">
-                                                            <rect key="frame" x="332" y="17" width="8" height="14"/>
+                                                            <rect key="frame" x="277" y="17" width="8" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haO-RA-Rrf">
-                                                            <rect key="frame" x="15" y="35.5" width="325" height="17"/>
+                                                            <rect key="frame" x="15" y="35.5" width="270" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2073,7 +2073,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-G6-prq" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="345" height="104"/>
+                                                    <rect key="frame" x="15" y="3" width="290" height="104"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="EYg-M3-u5c">
                                                             <rect key="frame" x="5" y="13" width="12" height="22"/>
@@ -2089,13 +2089,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWM-f7-yKL">
-                                                            <rect key="frame" x="340" y="24" width="0.0" height="0.0"/>
+                                                            <rect key="frame" x="285" y="24" width="0.0" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1..." textAlignment="justified" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EG9-7S-eQB">
-                                                            <rect key="frame" x="5" y="35.5" width="335" height="18"/>
+                                                            <rect key="frame" x="5" y="35.5" width="280" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2113,7 +2113,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="0.0 rate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeL-DU-cTP">
-                                                            <rect key="frame" x="291" y="79" width="49" height="16"/>
+                                                            <rect key="frame" x="236" y="79" width="49" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                             <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2475,7 +2475,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZL-ru-xu7" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="345" height="174"/>
+                                                    <rect key="frame" x="15" y="3" width="290" height="174"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friendship" translatesAutoresizingMaskIntoConstraints="NO" id="O3V-gS-aUU">
                                                             <rect key="frame" x="5" y="13" width="12" height="22"/>
@@ -2491,7 +2491,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="justified" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02C-AU-gyA">
-                                                            <rect key="frame" x="5" y="35.5" width="335" height="17"/>
+                                                            <rect key="frame" x="5" y="35.5" width="280" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2509,7 +2509,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="rejected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9D-dG-sz4">
-                                                            <rect key="frame" x="287" y="147" width="53" height="16"/>
+                                                            <rect key="frame" x="232" y="147" width="53" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                             <color key="textColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2991,10 +2991,10 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ipsxLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Brv-98-9kR">
-                                <rect key="frame" x="145" y="385.5" width="30" height="30"/>
+                                <rect key="frame" x="57" y="330" width="206.00000000000006" height="40.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WrN-0c-CpR">
-                                <rect key="frame" x="145" y="385.5" width="30" height="30"/>
+                                <rect key="frame" x="57" y="330" width="206" height="40.5"/>
                                 <connections>
                                     <action selector="openIpsxUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="a7f-nO-YLt"/>
                                 </connections>
@@ -3205,7 +3205,7 @@
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqK-PE-kmt">
-                                <rect key="frame" x="32" y="353" width="256" height="21.5"/>
+                                <rect key="frame" x="32" y="284.5" width="256" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21.5" id="5ux-RH-6SP"/>
                                 </constraints>
@@ -3238,7 +3238,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYT-d5-A7q" userLabel="kytzu link">
-                                <rect key="frame" x="32" y="349" width="137" height="30"/>
+                                <rect key="frame" x="32" y="280.5" width="137" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3248,7 +3248,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSq-W8-voj" userLabel="syncnode link">
-                                <rect key="frame" x="174" y="349" width="114" height="30"/>
+                                <rect key="frame" x="174" y="280.5" width="114" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3310,7 +3310,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jF8-97-M3F">
-                                <rect key="frame" x="44" y="439.5" width="232.5" height="21.5"/>
+                                <rect key="frame" x="44" y="394.5" width="232" height="21.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Security audit by ">
                                         <attributes>
@@ -3319,7 +3319,7 @@
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Bit Sebtinel">
+                                    <fragment content="Bit Sentinel">
                                         <attributes>
                                             <color key="NSColor" red="0.16862745098039217" green="0.51372549019607838" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" metaFont="system" size="18"/>
@@ -3330,10 +3330,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-bitsentinel" translatesAutoresizingMaskIntoConstraints="NO" id="TcP-zt-fEz">
-                                <rect key="frame" x="152" y="472" width="16" height="16"/>
+                                <rect key="frame" x="66" y="440" width="188.5" height="48"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFd-Aj-xUP">
-                                <rect key="frame" x="44" y="439.5" width="232.5" height="48.5"/>
+                                <rect key="frame" x="44" y="394.5" width="232" height="93.5"/>
                                 <connections>
                                     <action selector="openBitSentinel:" destination="0ep-XW-mYa" eventType="touchUpInside" id="wOp-dT-F8J"/>
                                     <action selector="openIpsxUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="Hsh-4g-qGa"/>
@@ -3367,7 +3367,7 @@
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="top" secondItem="EIY-z3-0J8" secondAttribute="top" constant="50" id="Ty5-pO-HFq"/>
                             <constraint firstItem="Bry-hz-MEj" firstAttribute="leading" secondItem="Egx-AK-Z65" secondAttribute="leading" id="Ulg-Ci-V2V"/>
                             <constraint firstItem="fQ6-TJ-xfY" firstAttribute="leading" secondItem="Nt5-pB-f9S" secondAttribute="leading" id="Viy-6U-kNr"/>
-                            <constraint firstItem="Brv-98-9kR" firstAttribute="top" secondItem="pqK-PE-kmt" secondAttribute="bottom" constant="11" id="Vra-zL-YwU"/>
+                            <constraint firstItem="Brv-98-9kR" firstAttribute="top" secondItem="pqK-PE-kmt" secondAttribute="bottom" constant="24" id="Vra-zL-YwU"/>
                             <constraint firstItem="Brv-98-9kR" firstAttribute="centerX" secondItem="Nt5-pB-f9S" secondAttribute="centerX" id="WFd-PG-pkP"/>
                             <constraint firstItem="WrN-0c-CpR" firstAttribute="width" secondItem="Brv-98-9kR" secondAttribute="width" id="XQh-8e-TwF"/>
                             <constraint firstItem="qks-9A-cwS" firstAttribute="trailing" secondItem="9i2-F6-jHN" secondAttribute="trailing" id="a1A-kR-XTl"/>
@@ -3379,7 +3379,7 @@
                             <constraint firstItem="qks-9A-cwS" firstAttribute="leading" secondItem="Egx-AK-Z65" secondAttribute="trailing" constant="8" id="dKu-rb-ECv"/>
                             <constraint firstItem="gFA-jj-FXj" firstAttribute="leading" secondItem="Egx-AK-Z65" secondAttribute="leading" id="etE-JQ-JHj"/>
                             <constraint firstItem="oFd-Aj-xUP" firstAttribute="top" secondItem="jF8-97-M3F" secondAttribute="top" id="eue-vb-nYl"/>
-                            <constraint firstItem="TcP-zt-fEz" firstAttribute="top" secondItem="jF8-97-M3F" secondAttribute="bottom" constant="11" id="ezG-oB-tD7"/>
+                            <constraint firstItem="TcP-zt-fEz" firstAttribute="top" secondItem="jF8-97-M3F" secondAttribute="bottom" constant="24" id="ezG-oB-tD7"/>
                             <constraint firstItem="zBV-Xg-Hrh" firstAttribute="top" secondItem="EIY-z3-0J8" secondAttribute="bottom" id="fIB-nC-AZX"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="399-Qh-Ert" secondAttribute="trailing" constant="16" id="fLG-Ff-GWW"/>
                             <constraint firstItem="Egx-AK-Z65" firstAttribute="leading" secondItem="9i2-F6-jHN" secondAttribute="leading" id="gQf-iq-a65"/>
@@ -4045,16 +4045,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pR5-5I-Oa9" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="345" height="104"/>
+                                                    <rect key="frame" x="15" y="3" width="290" height="104"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" textAlignment="justified" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FTf-XG-A6B">
-                                                            <rect key="frame" x="5" y="5" width="335" height="16"/>
+                                                            <rect key="frame" x="5" y="5" width="280" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" textAlignment="justified" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pLN-8B-ohN">
-                                                            <rect key="frame" x="5" y="23" width="335" height="16"/>
+                                                            <rect key="frame" x="5" y="23" width="280" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4066,7 +4066,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" text="hashghgshagshags ahgahsgahg hjshajhhajh gshdgshdgsh" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaI-uZ-pMr">
-                                                            <rect key="frame" x="5" y="64.5" width="335" height="14.5"/>
+                                                            <rect key="frame" x="5" y="64.5" width="280" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4078,7 +4078,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="sent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CEn-Bd-5Qv">
-                                                            <rect key="frame" x="313.5" y="47" width="26.5" height="16"/>
+                                                            <rect key="frame" x="258.5" y="47" width="26.5" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4250,7 +4250,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="463-ej-pqP" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="345" height="67"/>
+                                                    <rect key="frame" x="15" y="3" width="290" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delegation" translatesAutoresizingMaskIntoConstraints="NO" id="vWu-wx-6QC">
                                                             <rect key="frame" x="15" y="13" width="12" height="22"/>
@@ -4260,13 +4260,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="kytzu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hk-tP-AoF">
-                                                            <rect key="frame" x="35" y="15.5" width="302" height="17"/>
+                                                            <rect key="frame" x="35" y="15.5" width="247" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jpe-4Q-pc5">
-                                                            <rect key="frame" x="15" y="35.5" width="322" height="17"/>
+                                                            <rect key="frame" x="15" y="35.5" width="267" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4424,7 +4424,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXi-le-Xrc" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="345" height="67"/>
+                                                    <rect key="frame" x="15" y="3" width="290" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friendship" translatesAutoresizingMaskIntoConstraints="NO" id="AhI-zR-Rvb">
                                                             <rect key="frame" x="15" y="13" width="12" height="22"/>
@@ -4434,13 +4434,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="kytzu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cms-fU-D6E">
-                                                            <rect key="frame" x="35" y="15.5" width="302" height="17"/>
+                                                            <rect key="frame" x="35" y="15.5" width="247" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Afw-8K-xvC">
-                                                            <rect key="frame" x="15" y="35.5" width="322" height="17"/>
+                                                            <rect key="frame" x="15" y="35.5" width="267" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
