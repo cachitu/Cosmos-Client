@@ -13,7 +13,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     var node: GaiaNode?
     var key: GaiaKey?
-    let keysDelegate = LocalClient()
+    var keysDelegate: LocalClient?
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
 
@@ -141,7 +141,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     private func sendAssetsTo(destAddress: String, denom: String) {
         
-        guard let node = node, let key = key else { return }
+        guard let node = node, let key = key, let keysDelegate = keysDelegate else { return }
         sendAssets(node: node,
                    clientDelegate: keysDelegate,
                    key: key,
@@ -203,6 +203,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 dest?.account = account
                 dest?.key = key
                 dest?.redelgateFrom = redelgateFrom
+                dest?.keysDelegate = keysDelegate
                 redelgateFrom = nil
             }
             
@@ -288,23 +289,16 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 if self?.selectedAsset == nil {
                     self?.selectedAsset = account?.assets.first
                 }
-                if account?.assets.count == 1 {
-                    self?.selectedAsset = account?.assets.first
+                if let matches = account?.assets.filter({ $0.denom == self?.selectedAsset?.denom }) {
+                    self?.selectedAsset = matches.first
                 }
                 self?.denomPickerView.reloadAllComponents()
                 
-                if let validAccount = account {
-                    let finalVal = "\(validAccount.amount)".split(separator: ".").first ?? "0"
+                if let validAccount = account, let asset = self?.selectedAsset, let amount = asset.amount {
+                    let finalVal = amount.split(separator: ".").first ?? "0"
                     self?.amountValueLabel.text = "\(finalVal)"
-                    self?.amountDenomLabel.text = validAccount.denom
-                    if let feeDenom = validAccount.feeDenom, let feeAmount = validAccount.feeAmount {
-                        let finalVal = "\(feeAmount)".split(separator: ".").first ?? "0"
-                        self?.feeAmountValueLabel.text = "\(finalVal)"
-                        self?.feeAmountDenomLabel.text = feeDenom
-                    } else {
-                        self?.feeAmountValueLabel.text = ""
-                        self?.feeAmountDenomLabel.text = ""
-                    }
+                    self?.amountDenomLabel.text = asset.denom
+                    
                     self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee) \(validAccount.feeDenom ?? "")"
                 } else {
                     self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee)"
@@ -315,11 +309,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     self?.amountDenomLabel.text = "-"
                 }
                 
-                if account?.noFeeToken == true {
-                    let seq = account?.accSequence ?? "0"
-                    self?.feeAmountValueLabel.text = "" + seq
-                    self?.feeAmountDenomLabel.text = "sequence"
-                }
+                let seq = account?.accSequence ?? "0"
+                self?.feeAmountValueLabel.text = "" + seq
+                self?.feeAmountDenomLabel.text = "sequence"
             }
         }
     }
@@ -410,7 +402,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     private func handleWithdraw(delegation: GaiaDelegation) {
         
-        if let validNode = node, let validKey = key {
+        if let validNode = node, let validKey = key, let keysDelegate = keysDelegate {
             loadingView.startAnimating()
             withdraw(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount, validator: delegation.validatorAddr) { [weak self] resp, err in
                 if err == nil {
@@ -433,7 +425,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     private func handleWithdrawComission(delegation: GaiaDelegation) {
         
-        if let validNode = node, let validKey = key {
+        if let validNode = node, let validKey = key, let keysDelegate = keysDelegate {
             loadingView.startAnimating()
             withdrawComission(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, err in
                 if err == nil {
@@ -459,6 +451,9 @@ extension GaiaWalletController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selectedAsset = account?.assets[row]
+        self.amountValueLabel.text = self.selectedAsset?.amount
+        self.amountDenomLabel.text = self.selectedAsset?.denom
+
         if let amount = Double(sendAmountTextField.text ?? "0"), let balanceStr = selectedAsset?.amount, let balance = Double(balanceStr) {
             self.sendAmountButton.isEnabled = amount <= balance
         }

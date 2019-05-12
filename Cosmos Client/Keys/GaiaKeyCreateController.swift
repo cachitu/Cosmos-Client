@@ -12,7 +12,7 @@ import CosmosRestApi
 class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, GaiaKeysManagementCapable {
     
     var node: GaiaNode? = GaiaNode()
-    let keysDelegate = LocalClient()
+    var keysDelegate: LocalClient?
     
     @IBOutlet weak var field1RtextField: RichTextFieldView!
     @IBOutlet weak var field2RtextField: RichTextFieldView!
@@ -77,7 +77,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
     }
     
     @IBAction func createKey(_ sender: Any) {
-        guard let validNode = node, let name = field1RtextField.contentTextField?.text, let pass = field2RtextField.contentTextField?.text else {
+        guard let validNode = node, let name = field1RtextField.contentTextField?.text, let pass = field2RtextField.contentTextField?.text, let keysDelegate = keysDelegate else {
             return
         }
         

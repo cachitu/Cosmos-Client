@@ -12,7 +12,7 @@ import CosmosRestApi
 class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
     var node: GaiaNode? = GaiaNode()
-    let keysDelegate = LocalClient()
+    var keysDelegate: LocalClient?
     
     @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!

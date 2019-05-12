@@ -118,9 +118,10 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowKeyDetailsSegue" {
             let dest = segue.destination as? GaiaKeyController
-            dest?.node = self.node
+            dest?.node = node
+            dest?.keysDelegate = keysDelegate
             dest?.key = selectedKey
-            dest?.selectedkeyIndex = self.selectedIndex
+            dest?.selectedkeyIndex = selectedIndex
             dest?.onDeleteComplete = { [weak self] index in
                 self?.dataSource.remove(at: index)
                 self?.tableView.reloadData()
@@ -128,11 +129,13 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         }
         if segue.identifier == "CreateKeySegue" {
             let dest = segue.destination as? GaiaKeyCreateController
-            dest?.node = self.node
+            dest?.node = node
+            dest?.keysDelegate = keysDelegate
         }
         if segue.identifier == "WalletSegueID" {
             let dest = segue.destination as? GaiaWalletController
-            dest?.node = self.node
+            dest?.node = node
+            dest?.keysDelegate = keysDelegate
             dest?.key = selectedKey
         }
         if segue.identifier == "ShowAddressBookSegue" {

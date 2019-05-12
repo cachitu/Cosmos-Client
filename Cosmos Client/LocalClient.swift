@@ -11,7 +11,7 @@ import CosmosRestApi
 
 public class LocalClient: KeysClientDelegate {
     
-    let coin: HDCoin = .cosmos
+    var coinType: HDCoin = .cosmos
     
     func test() {
         //cosmos14kxxegskp8lfuhpwj27hrv9uj8ufjvhzu5ucv5
@@ -24,7 +24,7 @@ public class LocalClient: KeysClientDelegate {
         //let mnemonic = Mnemonic.create()
         
         let seed = Mnemonic.createSeed(mnemonic: mnemonic)
-        let wallet = Wallet(seed: seed, coin: coin)
+        let wallet = Wallet(seed: seed, coin: coinType)
         let account = wallet.generateAccount()
         print("cosmos14kxxegskp8lfuhpwj27hrv9uj8ufjvhzu5ucv5")
         print(account.address)
@@ -52,7 +52,7 @@ public class LocalClient: KeysClientDelegate {
     public func recoverKey(from mnemonic: String, name: String, password: String) -> Key {
         
         let seed = Mnemonic.createSeed(mnemonic: mnemonic)
-        let wallet = Wallet(seed: seed, coin: coin)
+        let wallet = Wallet(seed: seed, coin: coinType)
         let account = wallet.generateAccount()
         
         var key = Key()
@@ -114,7 +114,7 @@ public class LocalClient: KeysClientDelegate {
 
         let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
         let seed = Mnemonic.createSeed(mnemonic: account.gaiaKey.mnemonic)
-        let wallet = Wallet(seed: seed, coin: coin)
+        let wallet = Wallet(seed: seed, coin: coinType)
         let hdaccount = wallet.generateAccount()
 
         let type = "tendermint/PubKeySecp256k1"

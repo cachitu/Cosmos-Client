@@ -15,7 +15,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     var node: GaiaNode?
     var key: GaiaKey?
-    let keysDelegate = LocalClient()
+    var keysDelegate: LocalClient?
 
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
@@ -85,7 +85,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             return
         }
         
-        if let data = proposeData, let node = node, let key = key {
+        if let data = proposeData, let node = node, let key = key, let keysDelegate = keysDelegate {
             self.loadingView.startAnimating()
             self.toast?.showToastAlert("Proposal create request submited", autoHideAfter: 3, type: .validatePending, dismissable: true)
             self.propose(

@@ -15,7 +15,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     var node: GaiaNode?
     var key: GaiaKey?
-    let keysDelegate = LocalClient()
+    var keysDelegate: LocalClient?
 
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
@@ -147,6 +147,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             dest?.node = node
             dest?.account = account
             dest?.key = key
+            dest?.keysDelegate = keysDelegate
             dest?.forwardCounter = index - 2
             dest?.onUnwind = { [weak self] index in
                 self?.bottomTabbarView.selectIndex(-1)
@@ -162,7 +163,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     private func handleUnjail(validator: GaiaValidator) {
         
-        guard let validNode = node, let validKey = key else { return }
+        guard let validNode = node, let validKey = key, let keysDelegate = keysDelegate else { return }
         
         loadingView.startAnimating()
         validator.unjail(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, errMsg in
