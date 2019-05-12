@@ -72,8 +72,15 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         bottomTabbarView.selectIndex(2)
     }
 
+    let oraclesImplemented = false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        guard oraclesImplemented else {
+            toast?.showToastAlert("Orcales not yet implemented. Coming soon", type: .validatePending, dismissable: false)
+            return
+        }
+        
         guard !lockLifeCicleDelegates else {
             lockLifeCicleDelegates = false
             return

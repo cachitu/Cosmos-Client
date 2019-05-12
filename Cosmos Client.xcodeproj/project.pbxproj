@@ -206,7 +206,7 @@
 		88A8B7E422463AD0004F0B82 /* UtxoSelectorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8B74822463AD0004F0B82 /* UtxoSelectorInterface.swift */; };
 		88A8B7E522463AD0004F0B82 /* UtxoTransactionSignerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8B74922463AD0004F0B82 /* UtxoTransactionSignerInterface.swift */; };
 		88A8B7E722464236004F0B82 /* LocalClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8B7E622464236004F0B82 /* LocalClient.swift */; };
-		89214DC97177662AF07EBF6F /* Pods_Cosmos_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C0E297518B5633D3F1620C6 /* Pods_Cosmos_Client.framework */; };
+		A79D883A97BFC653660EA48F /* Pods_Terra_Money.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6721C4A4083AAF58A044D426 /* Pods_Terra_Money.framework */; };
 		EE2D63DE21ECEF690002D51D /* GaiaKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */; };
 		EE2D63E021ECF6AF0002D51D /* GaiaWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */; };
 		EE2D63E221ECF7770002D51D /* GaiaValidatorsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E121ECF7760002D51D /* GaiaValidatorsController.swift */; };
@@ -237,13 +237,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1769CCD2778CD78DA9621D2A /* Pods-Terra Money.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra Money.release.xcconfig"; path = "Target Support Files/Pods-Terra Money/Pods-Terra Money.release.xcconfig"; sourceTree = "<group>"; };
 		489D105420D2052C8A403949 /* Pods-Cosmos Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmos Client.debug.xcconfig"; path = "Target Support Files/Pods-Cosmos Client/Pods-Cosmos Client.debug.xcconfig"; sourceTree = "<group>"; };
+		6721C4A4083AAF58A044D426 /* Pods_Terra_Money.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terra_Money.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C0E297518B5633D3F1620C6 /* Pods_Cosmos_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cosmos_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8801CF77221F22EF004781C1 /* GaiaProposalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaProposalController.swift; sourceTree = "<group>"; };
 		8801CF792221921A004781C1 /* GaiaHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaHistoryController.swift; sourceTree = "<group>"; };
 		8801CF7B2221923D004781C1 /* GaiaHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaHistoryCell.swift; sourceTree = "<group>"; };
 		8801CF7D222273D9004781C1 /* GaiaDelegationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaDelegationsController.swift; sourceTree = "<group>"; };
-		88677FF721E9C54A0022A09E /* Cosmos Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cosmos Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88677FF721E9C54A0022A09E /* Terra Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terra Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88677FFA21E9C54A0022A09E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88677FFF21E9C54A0022A09E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8867800121E9C54D0022A09E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 		88A8B74922463AD0004F0B82 /* UtxoTransactionSignerInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtxoTransactionSignerInterface.swift; sourceTree = "<group>"; };
 		88A8B7E622464236004F0B82 /* LocalClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalClient.swift; sourceTree = "<group>"; };
 		BEA438624DF9C1E8786B3D88 /* Pods-Cosmos Client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmos Client.release.xcconfig"; path = "Target Support Files/Pods-Cosmos Client/Pods-Cosmos Client.release.xcconfig"; sourceTree = "<group>"; };
+		C03D04F3A275B1BA5105D63D /* Pods-Terra Money.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra Money.debug.xcconfig"; path = "Target Support Files/Pods-Terra Money/Pods-Terra Money.debug.xcconfig"; sourceTree = "<group>"; };
 		EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyController.swift; sourceTree = "<group>"; };
 		EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaWalletController.swift; sourceTree = "<group>"; };
 		EE2D63E121ECF7760002D51D /* GaiaValidatorsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaValidatorsController.swift; sourceTree = "<group>"; };
@@ -462,7 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8869755C21E9CC1600044EB8 /* CosmosRestApi.framework in Frameworks */,
-				89214DC97177662AF07EBF6F /* Pods_Cosmos_Client.framework in Frameworks */,
+				A79D883A97BFC653660EA48F /* Pods_Terra_Money.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				7C0E297518B5633D3F1620C6 /* Pods_Cosmos_Client.framework */,
+				6721C4A4083AAF58A044D426 /* Pods_Terra_Money.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -492,7 +496,7 @@
 		88677FF821E9C54A0022A09E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				88677FF721E9C54A0022A09E /* Cosmos Client.app */,
+				88677FF721E9C54A0022A09E /* Terra Money.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1061,6 +1065,8 @@
 			children = (
 				489D105420D2052C8A403949 /* Pods-Cosmos Client.debug.xcconfig */,
 				BEA438624DF9C1E8786B3D88 /* Pods-Cosmos Client.release.xcconfig */,
+				C03D04F3A275B1BA5105D63D /* Pods-Terra Money.debug.xcconfig */,
+				1769CCD2778CD78DA9621D2A /* Pods-Terra Money.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1135,9 +1141,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		88677FF621E9C54A0022A09E /* Cosmos Client */ = {
+		88677FF621E9C54A0022A09E /* Terra Money */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8867800921E9C54D0022A09E /* Build configuration list for PBXNativeTarget "Cosmos Client" */;
+			buildConfigurationList = 8867800921E9C54D0022A09E /* Build configuration list for PBXNativeTarget "Terra Money" */;
 			buildPhases = (
 				0DCB47FC413DE9919B1C6162 /* [CP] Check Pods Manifest.lock */,
 				88677FF321E9C54A0022A09E /* Sources */,
@@ -1150,9 +1156,9 @@
 			);
 			dependencies = (
 			);
-			name = "Cosmos Client";
+			name = "Terra Money";
 			productName = "Cosmos Client";
-			productReference = 88677FF721E9C54A0022A09E /* Cosmos Client.app */;
+			productReference = 88677FF721E9C54A0022A09E /* Terra Money.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1192,7 +1198,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				88677FF621E9C54A0022A09E /* Cosmos Client */,
+				88677FF621E9C54A0022A09E /* Terra Money */,
 			);
 		};
 /* End PBXProject section */
@@ -1235,7 +1241,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cosmos Client-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Terra Money-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1250,7 +1256,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cosmos Client/Pods-Cosmos Client-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Terra Money/Pods-Terra Money-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
@@ -1265,7 +1271,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cosmos Client/Pods-Cosmos Client-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Terra Money/Pods-Terra Money-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1632,7 +1638,7 @@
 		};
 		8867800A21E9C54D0022A09E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 489D105420D2052C8A403949 /* Pods-Cosmos Client.debug.xcconfig */;
+			baseConfigurationReference = C03D04F3A275B1BA5105D63D /* Pods-Terra Money.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
@@ -1643,7 +1649,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.terramoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1652,7 +1658,7 @@
 		};
 		8867800B21E9C54D0022A09E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEA438624DF9C1E8786B3D88 /* Pods-Cosmos Client.release.xcconfig */;
+			baseConfigurationReference = 1769CCD2778CD78DA9621D2A /* Pods-Terra Money.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
@@ -1663,7 +1669,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.terramoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1682,7 +1688,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8867800921E9C54D0022A09E /* Build configuration list for PBXNativeTarget "Cosmos Client" */ = {
+		8867800921E9C54D0022A09E /* Build configuration list for PBXNativeTarget "Terra Money" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8867800A21E9C54D0022A09E /* Debug */,

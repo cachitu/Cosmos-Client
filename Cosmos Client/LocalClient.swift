@@ -11,7 +11,7 @@ import CosmosRestApi
 
 public class LocalClient: KeysClientDelegate {
     
-    var coinType: HDCoin = .cosmos
+    var coinType: HDCoin = .terra
     
     func test() {
         //cosmos14kxxegskp8lfuhpwj27hrv9uj8ufjvhzu5ucv5
