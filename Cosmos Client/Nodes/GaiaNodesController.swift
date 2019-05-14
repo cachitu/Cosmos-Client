@@ -48,8 +48,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             nodes = savedNodes.nodes
             showHint = false
         } else {
-            //nodes = [GaiaNode(name: "IPSX Main Net", scheme: "http", host: "node01.ip.sx")]
-            //PersistableGaiaNodes(nodes: nodes).savetoDisk()
+            nodes = [GaiaNode(name: "IPSX testnet", scheme: "http", host: "95.179.140.154")]
+            PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
         
         noDataView.isHidden = nodes.count > 0
