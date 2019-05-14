@@ -32,6 +32,8 @@ public struct PublicKey {
             return generateTdmAddress(prefix: "cosmos")
         case .terra:
             return generateTdmAddress(prefix: "terra")
+        case .iris:
+            return generateTdmAddress(prefix: "iaa")
         }
     }
     
@@ -47,6 +49,8 @@ public struct PublicKey {
             return generateTdmPublicAddress(prefix: "cosmos")
         case .terra:
             return generateTdmPublicAddress(prefix: "terra")
+        case .iris:
+            return generateTdmPublicAddress(prefix: "iaa")
         }
     }
 
@@ -62,6 +66,8 @@ public struct PublicKey {
             return generateTdmValidator(prefix: "cosmos")
         case .terra:
             return generateTdmValidator(prefix: "terra")
+        case .iris:
+            return generateTdmValidator(prefix: "iaa")
         }
     }
 
@@ -77,6 +83,8 @@ public struct PublicKey {
             return generateTdmPublicValidator(prefix: "cosmos")
         case .terra:
             return generateTdmPublicValidator(prefix: "terra")
+        case .iris:
+            return generateTdmPublicValidator(prefix: "iaa")
         }
     }
 

@@ -75,7 +75,7 @@ public struct PrivateKey {
             return self.raw.toHexString()
         case .cosmos:
             return self.raw.toHexString()
-        case .terra:
+        case .terra, .iris:
             return self.raw.toHexString()
        }
     }
