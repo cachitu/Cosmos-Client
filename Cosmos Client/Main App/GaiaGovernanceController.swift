@@ -76,6 +76,13 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        if forwardCounter > 0 {
+            UIView.setAnimationsEnabled(true)
+            self.performSegue(withIdentifier: "nextSegue", sender: 3)
+            forwardCounter = 0
+            return
+        }
+        
         guard oraclesImplemented else {
             toast?.showToastAlert("Orcales not yet implemented. Coming soon", type: .validatePending, dismissable: false)
             return
@@ -83,12 +90,6 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         
         guard !lockLifeCicleDelegates else {
             lockLifeCicleDelegates = false
-            return
-        }
-        if forwardCounter > 0 {
-            UIView.setAnimationsEnabled(true)
-            self.performSegue(withIdentifier: "nextSegue", sender: 3)
-            forwardCounter = 0
             return
         }
         
