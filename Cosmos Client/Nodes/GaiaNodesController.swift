@@ -48,7 +48,9 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             nodes = savedNodes.nodes
             showHint = false
         } else {
-            nodes = [GaiaNode(name: "IPSX testnet", scheme: "http", host: "95.179.140.154")]
+            let defaultNode = GaiaNode(name: "IPSX testnet", scheme: "http", host: "node01.ip.sx", rcpPort: 1337)
+            defaultNode.defaultTxFee = "0.3"
+            nodes = [defaultNode]
             PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
         
