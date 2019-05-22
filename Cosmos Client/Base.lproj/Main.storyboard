@@ -1844,7 +1844,7 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="S3P-lh-O5M" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCell" id="S3P-lh-O5M" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S3P-lh-O5M" id="eZk-ML-Koh">
@@ -1912,7 +1912,6 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="leftImageView" destination="uEa-Eq-jZE" id="itN-o4-QXQ"/>
                                             <outlet property="leftLabel" destination="G8b-UA-O3G" id="hyQ-NV-rRG"/>
                                             <outlet property="leftSubLabel" destination="haO-RA-Rrf" id="g2U-vZ-UBr"/>
                                             <outlet property="upRightLabel" destination="P70-Ys-i37" id="Nup-D1-Fft"/>
@@ -4518,7 +4517,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KyJ-Mr-vI6"/>
+        <segue reference="rZw-Iy-wVt"/>
         <segue reference="gIV-DK-wR1"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="TerraBlue"/>

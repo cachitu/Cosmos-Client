@@ -503,7 +503,7 @@ extension GaiaWalletController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCellID", for: indexPath) as! GaiaKeyCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCell", for: indexPath) as! GaiaKeyCell
         let delegation = dataSource[indexPath.item]
         let parts = delegation.shares.split(separator: ".")
         let validatorName = node?.knownValidators[delegation.validatorAddr] ?? ""
