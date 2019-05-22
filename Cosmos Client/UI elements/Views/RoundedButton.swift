@@ -12,7 +12,7 @@ import UIKit
 class RoundedButton: UIButton {
     
     var isBordered: Bool?
-    @IBInspectable open var activeColor: UIColor = .lightBlue {
+    @IBInspectable open var activeColor: UIColor = .terraBlue {
         didSet {
             backgroundColor = activeColor
         }

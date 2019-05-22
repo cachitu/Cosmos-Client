@@ -70,6 +70,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         super.viewDidAppear(animated)
         
         refreshNodes()
+        navigationController?.navigationBar.barStyle = .default
         
         timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
             self?.refreshNodes()
@@ -86,6 +87,10 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         timer?.invalidate()
         toast?.hideToast()
         PersistableGaiaNodes(nodes: nodes).savetoDisk()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

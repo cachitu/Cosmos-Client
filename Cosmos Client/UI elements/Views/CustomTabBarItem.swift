@@ -13,8 +13,8 @@ class CustomTabBarItem: UIView {
     var onTap:( () -> () )?
     var selected = false {
         didSet {
-            image?.tintColor      = selected ? .lightBlue : .tabBarGray
-            titleLabel?.textColor = selected ? .lightBlue : .tabBarGray
+            image?.tintColor      = selected ? .terraBlue : .tabBarGray
+            titleLabel?.textColor = selected ? .terraBlue : .tabBarGray
         }
     }
     

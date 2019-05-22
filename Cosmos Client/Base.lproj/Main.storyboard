@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,10 +23,10 @@
                                 <rect key="frame" x="37.666666666666657" y="347" width="300" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="cOA-CN-epA">
-                                        <rect key="frame" x="142" y="0.0" width="16" height="16"/>
+                                        <rect key="frame" x="124" y="0.0" width="52" height="52"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add nodes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4k-Xl-msf">
-                                        <rect key="frame" x="61.666666666666671" y="38" width="176.33333333333331" height="20.333333333333329"/>
+                                        <rect key="frame" x="61.666666666666671" y="74" width="176.33333333333331" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -63,7 +64,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View node" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrC-Nl-fbc">
                                                     <rect key="frame" x="292.66666666666669" y="24" width="67.333333333333314" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="TerraBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtN-Hp-1cp">
@@ -103,6 +104,7 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="IHO-it-09C">
                                                             <rect key="frame" x="15" y="13" width="12" height="22"/>
+                                                            <color key="tintColor" name="TerraBlue"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="12" id="CNc-CA-GHX"/>
                                                                 <constraint firstAttribute="height" constant="22" id="bC4-ZU-mkH"/>
@@ -219,7 +221,7 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5k-0e-iyk" userLabel="ACTIVE">
                                                                             <rect key="frame" x="11" y="4" width="36" height="12"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                                            <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <color key="textColor" name="TerraBlue"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -414,19 +416,20 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYb-9p-mKn">
                                         <rect key="frame" x="161.66666666666666" y="64" width="52" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-Uy-mu3" userLabel="Add">
                                         <rect key="frame" x="331" y="56" width="44" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarAdd"/>
                                         <connections>
                                             <segue destination="9eS-Vl-7H1" kind="presentation" identifier="CollectDataSegue" id="gIV-DK-wR1"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstItem="cYb-9p-mKn" firstAttribute="centerX" secondItem="Ej6-Qd-hJq" secondAttribute="centerX" id="9rb-HL-qYb"/>
                                     <constraint firstAttribute="bottom" secondItem="cYb-9p-mKn" secondAttribute="bottom" constant="9" id="Lzo-0i-UD6"/>
@@ -494,7 +497,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0M5-k4-JaJ" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
                                 <rect key="frame" x="15" y="707" width="345" height="44"/>
-                                <color key="backgroundColor" red="0.1647058824" green="0.67450980390000004" blue="0.87800002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="mLJ-Ho-SfI"/>
                                 </constraints>
@@ -752,7 +755,7 @@
                                 <rect key="frame" x="329" y="376.33333333333331" width="30" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Copy">
-                                    <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="TerraBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="copyServerCommand:" destination="9eS-Vl-7H1" eventType="touchUpInside" id="5ey-vK-19y"/>
@@ -773,8 +776,9 @@
                                             <constraint firstAttribute="width" constant="44" id="Lei-lQ-j9O"/>
                                             <constraint firstAttribute="height" constant="44" id="UQq-VB-qRi"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarClose">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="closeButtonAction:" destination="9eS-Vl-7H1" eventType="touchUpInside" id="Ssf-cC-BR0"/>
@@ -786,8 +790,9 @@
                                             <constraint firstAttribute="height" constant="44" id="rBL-jm-eYr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Save">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <state key="disabled">
                                             <color key="titleColor" red="0.80784313730000001" green="0.82745098039999998" blue="0.85500001910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -799,11 +804,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gaia Node" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oT5-fC-YAl">
                                         <rect key="frame" x="146.33333333333334" y="62.000000000000007" width="82.333333333333343" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstItem="oT5-fC-YAl" firstAttribute="centerX" secondItem="u0r-Lv-cTf" secondAttribute="centerX" id="25g-Qo-daa"/>
                                     <constraint firstAttribute="bottom" secondItem="b2P-qZ-u3y" secondAttribute="bottom" id="Sfy-fe-bQk"/>
@@ -883,7 +888,7 @@
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SCC-jC-Vgz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="SCC-jC-Vgz">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -942,13 +947,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Options" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Tf-hR-hVD">
                                                     <rect key="frame" x="15" y="24" width="87.666666666666671" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="TerraBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forget Password" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4A-Uk-g4Z">
                                                     <rect key="frame" x="252" y="24" width="108" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="TerraBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWN-ae-6Ji" userLabel="Delete Button">
@@ -999,7 +1004,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-Oy-rap" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locked" translatesAutoresizingMaskIntoConstraints="NO" id="UvC-lT-ZDc">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="UvC-lT-ZDc">
                                                             <rect key="frame" x="15" y="13" width="12" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="22" id="4RP-vS-4zI"/>
@@ -1021,8 +1026,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVG-pR-yrL">
                                                             <rect key="frame" x="307" y="10.666666666666664" width="30" height="27"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="tintColor" name="TerraBlue"/>
                                                             <state key="normal" title="Copy">
-                                                                <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" name="TerraBlue"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="copyAction:" destination="v3g-Ar-Cqy" eventType="touchUpInside" id="eD9-Lb-PtF"/>
@@ -1061,7 +1067,6 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="leftImageView" destination="UvC-lT-ZDc" id="Cp1-vL-EJl"/>
                                             <outlet property="leftLabel" destination="cTr-kk-JQ7" id="rqh-QH-IpD"/>
                                             <outlet property="leftSubLabel" destination="6jp-91-yCy" id="9fc-AR-EQx"/>
                                         </connections>
@@ -1093,12 +1098,13 @@
                                         <rect key="frame" x="168" y="64" width="39" height="21"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bm0-v6-aq8" userLabel="Add">
                                         <rect key="frame" x="331" y="56" width="44" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarAdd"/>
                                         <connections>
                                             <action selector="addAction:" destination="C66-qx-PyC" eventType="touchUpInside" id="zWX-Vp-KL9"/>
@@ -1110,13 +1116,14 @@
                                             <constraint firstAttribute="height" constant="37" id="0Xo-zW-hdI"/>
                                             <constraint firstAttribute="width" constant="44" id="H4B-tM-Hyz"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarBack"/>
                                         <connections>
                                             <action selector="backAction:" destination="C66-qx-PyC" eventType="touchUpInside" id="K6A-Tv-BTh"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="Aa9-wE-cKm" firstAttribute="centerX" secondItem="C4o-dK-myJ" secondAttribute="centerX" id="GBD-h0-Erx"/>
@@ -1230,8 +1237,9 @@
                                             <constraint firstAttribute="width" constant="44" id="MGc-Gk-YUp"/>
                                             <constraint firstAttribute="height" constant="44" id="UqP-3R-s3y"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarClose">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="closeButtonAction:" destination="JGL-u5-Pdz" eventType="touchUpInside" id="x1Z-ze-0dR"/>
@@ -1240,11 +1248,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gaia Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxP-my-xF6">
                                         <rect key="frame" x="143.66666666666666" y="57.666666666666657" width="88" height="26"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                                        <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="pxP-my-xF6" secondAttribute="bottom" constant="10.333333333333343" id="2KF-kN-eh0"/>
                                     <constraint firstAttribute="height" constant="94" id="An2-v4-Z1r"/>
@@ -1262,7 +1270,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aw0-At-lEB" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
                                 <rect key="frame" x="15" y="714" width="345" height="44"/>
-                                <color key="backgroundColor" red="0.1647058824" green="0.67450980390000004" blue="0.87800002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="wik-bQ-dRn"/>
                                 </constraints>
@@ -1294,7 +1302,7 @@
                                 <rect key="frame" x="329" y="172.33333333333334" width="31" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <state key="normal" title="Copy">
-                                    <color key="titleColor" red="0.1647058824" green="0.67450980390000004" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="TerraBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="copyAddress:" destination="JGL-u5-Pdz" eventType="touchUpInside" id="mON-s2-w8z"/>
@@ -1322,7 +1330,7 @@
                                 <rect key="frame" x="329" y="370.66666666666669" width="31" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <state key="normal" title="Copy">
-                                    <color key="titleColor" red="0.1647058824" green="0.67450980390000004" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="TerraBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="copySeed:" destination="JGL-u5-Pdz" eventType="touchUpInside" id="17p-eO-JDy"/>
@@ -1338,7 +1346,7 @@
                                 <rect key="frame" x="16" y="429.33333333333331" width="67" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <state key="normal" title="Show Seed">
-                                    <color key="titleColor" red="0.1647058824" green="0.67450980390000004" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="TerraBlue"/>
                                 </state>
                                 <state key="selected" title="Hide Seed"/>
                                 <connections>
@@ -1667,7 +1675,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx fee: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uOJ-6B-HTT">
                                         <rect key="frame" x="8" y="8" width="64" height="20"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" name="TerraBlue"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="2.357.050,90" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZTo-sJ-2Sh">
@@ -1848,6 +1856,7 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delegation" translatesAutoresizingMaskIntoConstraints="NO" id="uEa-Eq-jZE">
                                                             <rect key="frame" x="15" y="13" width="12" height="22"/>
+                                                            <color key="tintColor" name="TerraBlue"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="12" id="0ho-37-2WA"/>
                                                                 <constraint firstAttribute="height" constant="22" id="X3U-m2-Z5z"/>
@@ -1862,7 +1871,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P70-Ys-i37">
                                                             <rect key="frame" x="332" y="17" width="8" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="TerraBlue"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haO-RA-Rrf">
@@ -1921,7 +1930,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVa-kC-V0d">
                                         <rect key="frame" x="162.66666666666666" y="53.666666666666664" width="50" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCU-eN-pVv" userLabel="Back">
@@ -1930,6 +1939,7 @@
                                             <constraint firstAttribute="width" constant="44" id="2a6-r3-b7g"/>
                                             <constraint firstAttribute="height" constant="37" id="akI-vu-fXa"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarBack"/>
                                         <connections>
                                             <action selector="backAction:" destination="hPr-Gq-sdB" eventType="touchUpInside" id="ZhZ-uk-C70"/>
@@ -1938,7 +1948,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kytzu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="a17-Qg-QqJ">
                                         <rect key="frame" x="170.66666666666666" y="74" width="34" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.92797461851126761" green="0.91611832449718311" blue="0.90990133506056337" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6a-wq-4ZW" userLabel="History">
@@ -1947,13 +1957,14 @@
                                             <constraint firstAttribute="width" constant="44" id="1x2-S3-eeG"/>
                                             <constraint firstAttribute="height" constant="37" id="oNr-ZS-K5T"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="history"/>
                                         <connections>
                                             <segue destination="ccf-MA-ojY" kind="presentation" identifier="HistorySegueID" id="jgc-hA-QKr"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="T6a-wq-4ZW" secondAttribute="trailing" id="1EP-OI-IF3"/>
                                     <constraint firstAttribute="height" constant="94" id="8mJ-6f-M1Q"/>
@@ -2077,6 +2088,7 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="EYg-M3-u5c">
                                                             <rect key="frame" x="5" y="13" width="12" height="22"/>
+                                                            <color key="tintColor" name="TerraBlue"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="12" id="634-yd-rn7"/>
                                                                 <constraint firstAttribute="height" constant="22" id="g9n-Cq-1yv"/>
@@ -2114,8 +2126,9 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="0.0 rate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeL-DU-cTP">
                                                             <rect key="frame" x="291" y="79" width="49" height="16"/>
+                                                            <color key="tintColor" name="TerraBlue"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                                                            <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="TerraBlue"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -2185,11 +2198,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validators" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cl-zo-Lvg">
                                         <rect key="frame" x="147" y="64" width="81" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="9Cl-zo-Lvg" secondAttribute="bottom" constant="9" id="8sr-Fq-bhp"/>
                                     <constraint firstItem="9Cl-zo-Lvg" firstAttribute="centerX" secondItem="fej-b2-DDY" secondAttribute="centerX" id="FJ7-Ho-h60"/>
@@ -2479,6 +2492,7 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="O3V-gS-aUU">
                                                             <rect key="frame" x="5" y="21" width="12" height="22"/>
+                                                            <color key="tintColor" name="TerraBlue"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="12" id="hO8-Nk-7FP"/>
                                                                 <constraint firstAttribute="height" constant="22" id="jxq-Py-4cJ"/>
@@ -2493,7 +2507,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.0" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02C-AU-gyA">
                                                             <rect key="frame" x="315.33333333333331" y="23.666666666666671" width="21.666666666666686" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                            <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="TerraBlue"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -2556,7 +2570,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2KB-0I-dzH">
                                         <rect key="frame" x="156.66666666666666" y="64" width="62" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zj5-S6-Gay" userLabel="Add">
@@ -2565,13 +2579,14 @@
                                             <constraint firstAttribute="height" constant="37" id="ZPp-M6-mwE"/>
                                             <constraint firstAttribute="width" constant="44" id="apV-Ns-PL7"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarAdd"/>
                                         <connections>
                                             <segue destination="zmf-Wa-kLi" kind="presentation" identifier="CreateProposalSegueID" id="PKL-Cf-2ee"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Zj5-S6-Gay" secondAttribute="bottom" id="1eS-nM-zUB"/>
                                     <constraint firstAttribute="bottom" secondItem="2KB-0I-dzH" secondAttribute="bottom" constant="9" id="2pF-IV-d28"/>
@@ -2873,11 +2888,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yje-IX-wGj">
                                         <rect key="frame" x="154" y="64" width="67" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstItem="Yje-IX-wGj" firstAttribute="centerX" secondItem="EIY-z3-0J8" secondAttribute="centerX" id="K3V-Ul-yfd"/>
                                     <constraint firstAttribute="height" constant="94" id="cp7-uZ-dU5"/>
@@ -3120,7 +3135,7 @@
                                     </fragment>
                                     <fragment content="kytzu">
                                         <attributes>
-                                            <color key="NSColor" red="0.16862745098039217" green="0.51372549019607838" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="NSColor" red="0.17254901960784313" green="0.30196078431372547" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" metaFont="system" size="18"/>
                                         </attributes>
                                     </fragment>
@@ -3132,7 +3147,7 @@
                                     </fragment>
                                     <fragment content="syncnode">
                                         <attributes>
-                                            <color key="NSColor" red="0.16862745098039217" green="0.51372549019607838" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="NSColor" red="0.17254901960784313" green="0.30196078431372547" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" metaFont="system" size="18"/>
                                         </attributes>
                                     </fragment>
@@ -3162,7 +3177,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Current settings: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFA-jj-FXj">
                                 <rect key="frame" x="16" y="156.33333333333334" width="343" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="TerraBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Egx-AK-Z65">
@@ -3180,7 +3195,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qks-9A-cwS">
                                 <rect key="frame" x="312" y="176.33333333333334" width="47" height="34"/>
                                 <state key="normal" title="Apply">
-                                    <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="TerraBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="applyFee:" destination="0ep-XW-mYa" eventType="touchUpInside" id="3D2-J9-cIP"/>
@@ -3189,7 +3204,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Default memo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aJ-E3-X0x">
                                 <rect key="frame" x="16" y="226" width="94.666666666666671" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="TerraBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Transaction memo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bry-hz-MEj">
@@ -3204,7 +3219,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="399-Qh-Ert">
                                 <rect key="frame" x="312" y="246" width="47" height="34"/>
                                 <state key="normal" title="Apply">
-                                    <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="TerraBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="applyFee:" destination="0ep-XW-mYa" eventType="touchUpInside" id="5Et-gf-97x"/>
@@ -3223,7 +3238,7 @@
                                     </fragment>
                                     <fragment content="Bit Sentinel">
                                         <attributes>
-                                            <color key="NSColor" red="0.16862745098039217" green="0.51372549019607838" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="NSColor" red="0.17254901960784313" green="0.30196078431372547" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" metaFont="system" size="18"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -3339,7 +3354,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDQ-5e-aZL" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
                                 <rect key="frame" x="15" y="704" width="345" height="44"/>
-                                <color key="backgroundColor" red="0.1647058824" green="0.67450980390000004" blue="0.87800002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="TBC-tJ-S18"/>
                                 </constraints>
@@ -3492,7 +3507,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="   Paste" image="clipboard">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" name="TerraBlue"/>
                                         </state>
                                         <connections>
                                             <action selector="pasteAction:" destination="3go-4Q-YDw" eventType="touchUpInside" id="qVz-21-Ft3"/>
@@ -3533,7 +3548,7 @@
                                             <constraint firstAttribute="height" constant="21.5" id="82d-HD-z1B"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4g-af-Qtm" userLabel="Close">
@@ -3542,15 +3557,16 @@
                                             <constraint firstAttribute="height" constant="44" id="8P4-MM-Sad"/>
                                             <constraint firstAttribute="width" constant="44" id="use-rU-2O6"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarClose">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="closeButtonAction:" destination="3go-4Q-YDw" eventType="touchUpInside" id="NWg-sW-GfZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstItem="tWP-7d-pMG" firstAttribute="centerY" secondItem="S4g-af-Qtm" secondAttribute="centerY" id="A88-Vl-tSe"/>
                                     <constraint firstAttribute="height" constant="94" id="NZ1-Xe-Zdf"/>
@@ -3637,7 +3653,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2O-4V-uHu" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
                                 <rect key="frame" x="15" y="704" width="345" height="44"/>
-                                <color key="backgroundColor" red="0.1647058824" green="0.67450980390000004" blue="0.87800002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="zwd-Y8-8Lp"/>
                                 </constraints>
@@ -3785,8 +3801,9 @@
                                             <constraint firstAttribute="height" constant="30" id="Swn-jI-NMX"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="tintColor" name="TerraBlue"/>
                                         <state key="normal" title="   Paste" image="clipboard">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" name="TerraBlue"/>
                                         </state>
                                         <connections>
                                             <action selector="pasteAction:" destination="zmf-Wa-kLi" eventType="touchUpInside" id="t8T-kK-scU"/>
@@ -3827,7 +3844,7 @@
                                             <constraint firstAttribute="height" constant="21.5" id="ejd-JF-nj5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnE-C0-O6f" userLabel="Close">
@@ -3836,15 +3853,16 @@
                                             <constraint firstAttribute="height" constant="44" id="2jN-Km-4xT"/>
                                             <constraint firstAttribute="width" constant="44" id="B2y-85-0iD"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarClose">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" name="TerraBlue"/>
                                         </state>
                                         <connections>
                                             <action selector="closeButtonAction:" destination="zmf-Wa-kLi" eventType="touchUpInside" id="tNF-ch-R6h"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstItem="yeV-hV-3Wy" firstAttribute="centerX" secondItem="80u-LO-Sp8" secondAttribute="centerX" id="LiH-15-DcM"/>
                                     <constraint firstItem="yeV-hV-3Wy" firstAttribute="centerY" secondItem="QnE-C0-O6f" secondAttribute="centerY" id="SmM-Ue-0Aj"/>
@@ -3964,7 +3982,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="100 atoms" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMi-sM-RWQ">
                                                             <rect key="frame" x="5" y="47" width="66" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                                                            <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="TerraBlue"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" text="hashghgshagshags ahgahsgahg hjshajhhajh gshdgshdgsh" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaI-uZ-pMr">
@@ -4053,7 +4071,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yo-re-NIZ">
                                         <rect key="frame" x="158" y="64" width="59" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRu-76-Zb8" userLabel="Close">
@@ -4062,6 +4080,7 @@
                                             <constraint firstAttribute="height" constant="44" id="6KF-LG-2kl"/>
                                             <constraint firstAttribute="width" constant="44" id="d3D-Us-DDf"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarClose">
                                             <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -4070,7 +4089,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="94" id="J5C-nd-Aud"/>
                                     <constraint firstItem="3Yo-re-NIZ" firstAttribute="centerX" secondItem="b9m-j9-lem" secondAttribute="centerX" id="Q2p-bS-IEt"/>
@@ -4227,7 +4246,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Delegations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAO-2F-tRI">
                                         <rect key="frame" x="127.66666666666669" y="64" width="120" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOB-Gf-WEE" userLabel="Close">
@@ -4236,6 +4255,7 @@
                                             <constraint firstAttribute="width" constant="44" id="NWm-Ki-FuL"/>
                                             <constraint firstAttribute="height" constant="44" id="Y4D-wj-xia"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarClose">
                                             <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -4244,7 +4264,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="94" id="F24-fk-JW1"/>
                                     <constraint firstAttribute="bottom" secondItem="bAO-2F-tRI" secondAttribute="bottom" constant="9" id="IU7-wG-c9K"/>
@@ -4330,6 +4350,7 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friendship" translatesAutoresizingMaskIntoConstraints="NO" id="AhI-zR-Rvb">
                                                             <rect key="frame" x="15" y="13" width="12" height="22"/>
+                                                            <color key="tintColor" name="TerraBlue"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="12" id="9Yg-Rp-ow1"/>
                                                                 <constraint firstAttribute="height" constant="22" id="Xej-bc-lfa"/>
@@ -4401,7 +4422,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ5-Nk-Kc4">
                                         <rect key="frame" x="164.66666666666666" y="64" width="46" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axk-rs-kas" userLabel="Close">
@@ -4410,6 +4431,7 @@
                                             <constraint firstAttribute="height" constant="44" id="Swt-o0-s4n"/>
                                             <constraint firstAttribute="width" constant="44" id="jRz-st-dr7"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarClose">
                                             <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -4418,7 +4440,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstItem="axk-rs-kas" firstAttribute="leading" secondItem="VRn-1N-gbA" secondAttribute="leading" id="8fS-kG-k5Q"/>
                                     <constraint firstAttribute="bottom" secondItem="axk-rs-kas" secondAttribute="bottom" constant="-2" id="Fo1-RC-AtF"/>
@@ -4488,13 +4510,16 @@
         <image name="history" width="20.333333969116211" height="18.333333969116211"/>
         <image name="ipsxLogo" width="206" height="40.333332061767578"/>
         <image name="keyIcon" width="29" height="29.333333969116211"/>
-        <image name="locked" width="12.333333015441895" height="16"/>
         <image name="logo-bitsentinel" width="189.66667175292969" height="48.333332061767578"/>
         <image name="rcheckBoxChecked" width="20" height="20"/>
         <image name="rcheckBoxEmpty" width="20" height="20"/>
+        <namedColor name="TerraBlue">
+            <color red="0.17254901960784313" green="0.28235294117647058" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rZw-Iy-wVt"/>
+        <segue reference="KyJ-Mr-vI6"/>
         <segue reference="gIV-DK-wR1"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" name="TerraBlue"/>
 </document>
