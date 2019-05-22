@@ -9,7 +9,7 @@
 import UIKit
 import CosmosRestApi
 
-class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, GaiaGovernaceCapable {
+class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, TerraOraclesCapable {
 
     var toast: ToastAlertView?
 
@@ -19,7 +19,6 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
-    var selectedProposal: GaiaProposal?
     
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -33,8 +32,8 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     var onUnwind: ((_ toIndex: Int) -> ())?
     var lockLifeCicleDelegates = false
     
-    var dataSource: [GaiaProposal] = []
-    var proposeData: ProposalData?
+    var dataSource: [(denom: String, price: Double)] = []
+    var offeredDenom: String?  = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +71,6 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         bottomTabbarView.selectIndex(2)
     }
 
-    let oraclesImplemented = false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -83,58 +81,27 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             return
         }
         
-        guard oraclesImplemented else {
-            toast?.showToastAlert("Orcales not yet implemented. Coming soon", type: .validatePending, dismissable: false)
-            return
-        }
-        
         guard !lockLifeCicleDelegates else {
             lockLifeCicleDelegates = false
             return
         }
         
-        if let data = proposeData, let node = node, let key = key, let keysDelegate = keysDelegate {
-            self.loadingView.startAnimating()
-            self.toast?.showToastAlert("Proposal create request submited", autoHideAfter: 3, type: .validatePending, dismissable: true)
-            self.propose(
-                deposit: data.amount,
-                title: data.title,
-                description: data.description,
-                type: data.type,
-                node: node,
-                clientDelegate: keysDelegate,
-                key: key,
-                feeAmount: self.feeAmount) { [weak self] response, err in
-                    self?.loadingView.stopAnimating()
-                    if err == nil {
-                        self?.toast?.showToastAlert("Proposal Created", autoHideAfter: 5, type: .info, dismissable: true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            self?.loadData(validNode: node)
-                        }
-                    } else if let errMsg = err {
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
-                    }
-            }
-        } else if let validNode = node {
+        if let validNode = node {
             loadData(validNode: validNode)
         }
-        proposeData = nil
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dataSource = []
+        offeredDenom = nil
+        toast?.hideToastAlert()
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "VotesSegueID" {
-            
-            let dest = segue.destination as? GaiaVotesController
-            dest?.dataSource = selectedProposal?.votes ?? []
-            
-        } else if segue.identifier == "CreateProposalSegueID" {
-            
-            guard let dest = segue.destination as? GaiaProposalController else { return }
-            dest.onCollectDataComplete = { [weak self] data in
-                self?.proposeData = data
-            }
-        } else if let index = sender as? Int {
+        if let index = sender as? Int {
             
             let dest = segue.destination as? GaiaSettingsController
             dest?.forwardCounter = index - 3
@@ -152,18 +119,28 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     func loadData(validNode: GaiaNode) {
         
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        
         loadingView.startAnimating()
-        retrieveAllPropsals(node: validNode) { [weak self] proposals, errMsg in
+        retrieveAllActives(node: validNode) { [weak self] actives, errMsg in
             self?.dataSource = []
-            if let validProposals = proposals {
-                for proposal in validProposals {
-                    self?.getPropsalDetails(node: validNode, proposal: proposal) { proposal, error in
-                        self?.loadingView.stopAnimating()
-                        if let valid = proposal {
-                            self?.dataSource.append(valid)
-                            self?.dataSource = validProposals.reversed()
-                            self?.tableView.reloadData()
+            self?.dataSource.insert((validNode.stakeDenom, 1.0), at: 0)
+            self?.loadingView.stopAnimating()
+            if let validActives = actives {
+                for active in validActives {
+                    dispatchGroup.enter()
+                    self?.retrievePrice(node: validNode, active: active) { price, errMsg in
+                        if let validprice = price {
+                            let dv = Double(validprice.replacingOccurrences(of: "\"", with: "")) ?? 0
+                            self?.dataSource.append((active, dv))
+                        } else if let validErr = errMsg {
+                            self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+                        } else {
+                            self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
                         }
+                        dispatchGroup.leave()
                     }
                 }
             } else if let validErr = errMsg {
@@ -171,61 +148,38 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             } else {
                 self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
             }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.tableView.reloadData()
         }
     }
     
     @IBAction func unwindToGovernance(segue:UIStoryboardSegue) {
         bottomTabbarView.selectIndex(2)
     }
-
-    func handleVoting(proposal: GaiaProposal) {
-        self.showVotingAlert(title: proposal.title, message: proposal.description) { [weak self] vote in
-            guard let vote = vote, let node = self?.node, let key = self?.key, let delegate = self?.keysDelegate  else { return }
-            self?.loadingView.startAnimating()
-            self?.vote(
-                for: proposal.proposalId,
-                option: vote,
-                node: node,
-                clientDelegate: delegate,
-                key: key,
-                feeAmount: self?.feeAmount ?? "0")
-            {  response, err in
-                self?.loadingView.stopAnimating()
-                if err == nil {
-                    self?.toast?.showToastAlert("Vote submited", autoHideAfter: 5, type: .info, dismissable: true)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        self?.loadingView.startAnimating()
-                        self?.loadData(validNode: node)
-                    }
-                } else if let errMsg = err {
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
-                }
-            }
-        }
-    }
     
-    func handleDeposit(proposal: GaiaProposal) {
-        let denom = node?.stakeDenom ?? "stake"
-        showAmountAlert(title: "Type the amount of \(denom) you want to deposit to proposal with id \(proposal.proposalId)", message: nil, placeholder: "0 \(denom)") { [weak self] amount in
-            guard let node = self?.node, let key = self?.key, let delegate = self?.keysDelegate  else { return }
-            self?.loadingView.startAnimating()
-            self?.depositToProposal(
-                proposalId: proposal.proposalId,
-                amount: amount ?? "0",
-                node: node,
-                clientDelegate: delegate,
-                key: key,
-                feeAmount: self?.feeAmount ?? "0") { response, err in
-                    self?.loadingView.stopAnimating()
-                    if err == nil {
-                        self?.toast?.showToastAlert("Deposit submited", autoHideAfter: 5, type: .info, dismissable: true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            self?.loadingView.startAnimating()
-                            self?.loadData(validNode: node)
-                        }
-                    } else if let errMsg = err {
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
-                    }
+    private func handleSwap(offerDenom: String, askDenom: String) {
+        
+        print("Should swap to \(askDenom)")
+        showAmountAlert(title: "Type the amount of \(offerDenom) you want to swap to \(askDenom)", message: "", placeholder: "0 \(askDenom)") { amount in
+            if let validAmount = amount, let validNode = self.node, let validKey = self.key, let delegate = self.keysDelegate {
+                self.loadingView.startAnimating()
+                self.swapActives(node: validNode,
+                                 clientDelegate: delegate,
+                                 key: validKey,
+                                 offerAmount: validAmount,
+                                 offerDenom: offerDenom,
+                                 askDenom: askDenom,
+                                 feeAmount: self.feeAmount) { [weak self] resp, err in
+                                    self?.loadingView.stopAnimating()
+                                    if err == nil {
+                                        self?.toast?.showToastAlert("Swap successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                                    } else if let errMsg = err {
+                                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                                    }
+                }
             }
         }
     }
@@ -238,9 +192,8 @@ extension GaiaGovernanceController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaGovernanceCellID", for: indexPath) as! GaiaGovernanceCell
-        let proposal = dataSource[indexPath.item]
-        cell.configure(proposal: proposal, voter: account)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaOraclesCellID", for: indexPath) as! GaiaOracleCell
+        cell.configure(proposal: dataSource[indexPath.item])
         return cell
     }
     
@@ -249,48 +202,29 @@ extension GaiaGovernanceController: UITableViewDataSource {
 extension GaiaGovernanceController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let proposal = dataSource[indexPath.item]
-        selectedProposal = proposal
-        
+        let tapped = dataSource[indexPath.item]
         DispatchQueue.main.async {
-            
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            
-            let votesAction = UIAlertAction(title: "View Votes", style: .default) { [weak self] alertAction in
-                self?.performSegue(withIdentifier: "VotesSegueID", sender: self)
+            if let validOffered = self.offeredDenom {
+                self.toast?.hideToastAlert()
+                self.handleSwap(offerDenom: validOffered, askDenom: tapped.denom)
+                self.offeredDenom = nil
+            } else {
+                self.offeredDenom = tapped.denom
+                self.toast?.showToastAlert("Pick the denom you want to convert \(tapped.denom) to!", type: .validatePending, dismissable: false)
             }
-            
-            let detailsAction = UIAlertAction(title: "Details", style: .default) { [weak self] alertAction in
-                self?.showProposalDetailsAlert(title: proposal.title, message: proposal.description)
-            }
-            
-            let voteAction = UIAlertAction(title: "Submit Vote", style: .default) { [weak self] alertAction in
-                self?.handleVoting(proposal: proposal)
-            }
-            
-            let depositAction = UIAlertAction(title: "Add Deposit", style: .default) { [weak self] alertAction in
-                self?.handleDeposit(proposal: proposal)
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-            
-            switch proposal.status {
-            case "Passed"  :
-                optionMenu.addAction(votesAction)
-            case "Rejected":
-                optionMenu.addAction(votesAction)
-            case "DepositPeriod":
-                optionMenu.addAction(depositAction)
-            default: //voting
-                optionMenu.addAction(voteAction)
-                optionMenu.addAction(votesAction)
-            }
-            
-            optionMenu.addAction(detailsAction)
-            optionMenu.addAction(cancelAction)
-            
-            self.present(optionMenu, animated: true, completion: nil)
         }
     }
+}
+
+class GaiaOracleCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    
+    func configure(proposal: (denom: String, price: Double)) {
+        let strAmount = String(format: "%.6f", proposal.price)
+        nameLabel.text = proposal.denom
+        priceLabel.text = strAmount
+    }
+    
 }

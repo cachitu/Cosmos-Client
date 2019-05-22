@@ -25,7 +25,7 @@ class CustomLoadingView: UIView {
     }
     
     @IBInspectable open var singleCircle: Bool = false
-    @IBInspectable open var ignoreInteractionEvents: Bool = true
+    @IBInspectable open var ignoreInteractionEvents: Bool = false
     
     public func startAnimating() {
         
