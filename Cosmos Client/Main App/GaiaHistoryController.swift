@@ -64,9 +64,9 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
                 self?.dataSource = transactions.sorted() { $0.height > $1.height }
                 self?.tableView.reloadData()
             } else if let validErr = err {
-                self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+                self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
             } else {
-                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
+                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
             }
         }
     }

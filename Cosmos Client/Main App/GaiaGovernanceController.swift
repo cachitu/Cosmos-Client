@@ -32,9 +32,10 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Ter
     var onUnwind: ((_ toIndex: Int) -> ())?
     var lockLifeCicleDelegates = false
     
-    var dataSource: [(denom: String, price: Double)] = []
+    var dataSource: [(denom: String, price: Double, amount: String)] = []
     var offeredDenom: String?  = nil
-    
+    private weak var timer: Timer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
@@ -89,6 +90,10 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Ter
         if let validNode = node {
             loadData(validNode: validNode)
         }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) { [weak self] timer in
+            self?.loadAccount()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -96,6 +101,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Ter
         dataSource = []
         offeredDenom = nil
         toast?.hideToastAlert()
+        timer?.invalidate()
         tableView.reloadData()
     }
     
@@ -117,6 +123,24 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Ter
         }
     }
 
+    private func loadAccount() {
+        
+        if let validNode = node, let validKey = key {
+            loadingView.startAnimating()
+            validKey.getGaiaAccount(node: validNode, gaiaKey: validKey) { [weak self] account, errMessage in
+                self?.loadingView.stopAnimating()
+                self?.account = account
+                var tmpData: [(denom: String, price: Double, amount: String)] = []
+                for touple in self?.dataSource ?? [] {
+                    let amount = self?.account?.assets.filter { $0.denom == touple.denom }.first?.amount ?? "0"
+                    tmpData.append((denom: touple.denom, price: touple.price, amount: amount))
+                }
+                self?.dataSource = tmpData
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
     func loadData(validNode: GaiaNode) {
         
         let dispatchGroup = DispatchGroup()
@@ -126,7 +150,6 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Ter
         loadingView.startAnimating()
         retrieveAllActives(node: validNode) { [weak self] actives, errMsg in
             self?.dataSource = []
-            self?.dataSource.insert((validNode.stakeDenom, 1.0), at: 0)
             self?.loadingView.stopAnimating()
             if let validActives = actives {
                 for active in validActives {
@@ -134,24 +157,28 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Ter
                     self?.retrievePrice(node: validNode, active: active) { price, errMsg in
                         if let validprice = price {
                             let dv = Double(validprice.replacingOccurrences(of: "\"", with: "")) ?? 0
-                            self?.dataSource.append((active, dv))
+                            let amount = self?.account?.assets.filter { $0.denom == active }.first?.amount ?? "0"
+                            self?.dataSource.append((active, dv, amount))
                         } else if let validErr = errMsg {
-                            self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
                         } else {
-                            self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
                         }
                         dispatchGroup.leave()
                     }
                 }
             } else if let validErr = errMsg {
-                self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+                self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
             } else {
-                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
+                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
             }
             dispatchGroup.leave()
         }
         
         dispatchGroup.notify(queue: .main) {
+            self.dataSource = self.dataSource.sorted(by: { $0.denom < $1.denom })
+            let ulunas = self.account?.assets.filter { $0.denom == validNode.stakeDenom }.first?.amount ?? "0"
+            self.dataSource.insert((validNode.stakeDenom, 1.0, ulunas), at: 0)
             self.tableView.reloadData()
         }
     }
@@ -175,9 +202,12 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Ter
                                  feeAmount: self.feeAmount) { [weak self] resp, err in
                                     self?.loadingView.stopAnimating()
                                     if err == nil {
-                                        self?.toast?.showToastAlert("Swap successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                                        self?.toast?.showToastAlert("Swap successfull", autoHideAfter: 15, type: .info, dismissable: true)
+                                        self?.timer = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) { [weak self] timer in
+                                            self?.loadAccount()
+                                        }
                                     } else if let errMsg = err {
-                                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                                     }
                 }
             }
@@ -193,7 +223,7 @@ extension GaiaGovernanceController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaOraclesCellID", for: indexPath) as! GaiaOracleCell
-        cell.configure(proposal: dataSource[indexPath.item])
+        cell.configure(proposal: dataSource[indexPath.item], baseDenom: node?.stakeDenom ?? "")
         return cell
     }
     
@@ -204,27 +234,47 @@ extension GaiaGovernanceController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tapped = dataSource[indexPath.item]
         DispatchQueue.main.async {
+            self.timer?.invalidate()
             if let validOffered = self.offeredDenom {
-                self.toast?.hideToastAlert()
-                self.handleSwap(offerDenom: validOffered, askDenom: tapped.denom)
                 self.offeredDenom = nil
+                self.toast?.hideToast()
+                tableView.reloadData()
+                 if validOffered != tapped.denom {
+                    self.handleSwap(offerDenom: validOffered, askDenom: tapped.denom)
+                }
             } else {
                 self.offeredDenom = tapped.denom
-                self.toast?.showToastAlert("Pick the denom you want to convert \(tapped.denom) to!", type: .validatePending, dismissable: false)
+                self.toast?.showToastAlert("Pick the denom you want to convert \(tapped.denom) to", type: .validatePending, dismissable: false)
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.item == 0 ? 80 : 70
     }
 }
 
 class GaiaOracleCell: UITableViewCell {
     
+    @IBOutlet weak var roundedView: RoundedView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var priceTitle: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
     
-    func configure(proposal: (denom: String, price: Double)) {
-        let strAmount = String(format: "%.6f", proposal.price)
+    func configure(proposal: (denom: String, price: Double, amount: String), baseDenom: String) {
+        let strAmount = String(format: "%.2f", proposal.price)
         nameLabel.text = proposal.denom
         priceLabel.text = strAmount
+        amountLabel.text = proposal.amount
+        priceTitle.text = "rate / \(baseDenom)"
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        roundedView.backgroundColor = selected ? UIColor(named: "TerraBlueAlpha") : .white
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        roundedView.backgroundColor = highlighted ? UIColor(named: "TerraBlueAlpha") : .white
+    }
 }

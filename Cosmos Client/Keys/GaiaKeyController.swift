@@ -60,12 +60,12 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = addressLabel.text
-        toast?.showToastAlert("Address copied to clipboard", autoHideAfter: 5, type: .info, dismissable: true)
+        toast?.showToastAlert("Address copied to clipboard", autoHideAfter: 15, type: .info, dismissable: true)
     }
     
     @IBAction func copySeed(_ sender: Any) {
         UIPasteboard.general.string = seedLabel.text
-        toast?.showToastAlert("Seed copied to clipboard", autoHideAfter: 5, type: .info, dismissable: true)
+        toast?.showToastAlert("Seed copied to clipboard", autoHideAfter: 15, type: .info, dismissable: true)
     }
     
     @IBAction func deleteKey(_ sender: Any) {
@@ -88,15 +88,15 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
                             self?.loadingView.stopAnimating()
                             self?.dismiss(animated: true)
                         } else if let errMessage = errMsg {
-                            self?.toast?.showToastAlert(errMessage, autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMessage, autoHideAfter: 15, type: .error, dismissable: true)
                         } else {
-                            self?.toast?.showToastAlert("Opps, I failed to delete the key.", autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert("Opps, I failed to delete the key.", autoHideAfter: 15, type: .error, dismissable: true)
                         }
                     }
                 } else if let msg = message {
-                    self?.toast?.showToastAlert(msg, autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(msg, autoHideAfter: 15, type: .error, dismissable: true)
                 } else {
-                    self?.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 15, type: .error, dismissable: true)
                 }
             }
         }

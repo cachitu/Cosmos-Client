@@ -156,11 +156,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         self?.loadingView.stopAnimating()
                         
                         if let validResponse = response {
-                            self?.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 5, type: .validatePending, dismissable: false)
+                            self?.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 15, type: .validatePending, dismissable: false)
                         } else if let errMsg = error {
-                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                         } else {
-                            self?.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 15, type: .error, dismissable: true)
                         }
                     }
         }
@@ -303,7 +303,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 } else {
                     self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee)"
                     if let message = errMessage, message.count > 0 {
-                        self?.toast?.showToastAlert(errMessage, autoHideAfter: 5, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(errMessage, autoHideAfter: 15, type: .error, dismissable: true)
                     }
                     self?.amountValueLabel.text = "0.00"
                     self?.amountDenomLabel.text = "-"
@@ -368,7 +368,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             }
                         } else if let errMsg = err {
                             self?.loadingView.stopAnimating()
-                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                         }
                 }
             }
@@ -382,7 +382,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 self?.loadingView.startAnimating()
                 self?.unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: self?.feeAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { (resp, err) in
                     if err == nil {
-                        self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                        self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 15, type: .info, dismissable: true)
                         self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                             self?.loadingView.stopAnimating()
                             if let validDelegations = delegations {
@@ -393,7 +393,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         }
                     } else if let errMsg = err {
                         self?.loadingView.stopAnimating()
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                     }
                 }
             }
@@ -406,7 +406,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             loadingView.startAnimating()
             withdraw(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount, validator: delegation.validatorAddr) { [weak self] resp, err in
                 if err == nil {
-                    self?.toast?.showToastAlert("Withdraw successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("Withdraw successfull", autoHideAfter: 15, type: .info, dismissable: true)
                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                         self?.loadingView.stopAnimating()
                         if let validDelegations = delegations {
@@ -417,7 +417,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     }
                 } else if let errMsg = err {
                     self?.loadingView.stopAnimating()
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                 }
             }
         }
@@ -429,7 +429,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             loadingView.startAnimating()
             withdrawComission(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, err in
                 if err == nil {
-                    self?.toast?.showToastAlert("Comission withdraw successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("Comission withdraw successfull", autoHideAfter: 15, type: .info, dismissable: true)
                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                         self?.loadingView.stopAnimating()
                         if let validDelegations = delegations {
@@ -440,7 +440,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     }
                 } else if let errMsg = err {
                     self?.loadingView.stopAnimating()
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                 }
             }
         }

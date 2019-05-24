@@ -190,11 +190,11 @@ extension GaiaKeysController: UITableViewDelegate {
         cell?.onForgetPassTap = { [weak self] section in
             self?.showPasswordAlert(title: nil, message: "The password for \(key.name) has been removed from the keychain", placeholder: "Minimum 8 charactes") { pass in
                 if key.getPassFromKeychain() != pass {
-                    self?.toast?.showToastAlert("Incorrect password, try again..", autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Incorrect password, try again..", autoHideAfter: 15, type: .error, dismissable: true)
                 }  else if key.forgetPassFromKeychain() == true {
-                    self?.toast?.showToastAlert("The password for \(key.name) has been removed from the keychain", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("The password for \(key.name) has been removed from the keychain", autoHideAfter: 15, type: .info, dismissable: true)
                 } else {
-                    self?.toast?.showToastAlert("Opps, didn't manage to remove it or didn't find it.", autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Opps, didn't manage to remove it or didn't find it.", autoHideAfter: 15, type: .error, dismissable: true)
                 }
                 self?.tableView.reloadData()
             }

@@ -126,9 +126,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         self?.toast?.showToastAlert("Tap any validator to redelegate from \(redelagateAddr)", type: .validatePending, dismissable: false)
                     }
                 } else if let validErr = errMsg {
-                    self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
                 } else {
-                    self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
                 }
             }
         }
@@ -169,9 +169,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         validator.unjail(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, errMsg in
             self?.loadingView.stopAnimating()
             if let msg = errMsg {
-                self?.toast?.showToastAlert(msg, autoHideAfter: 3, type: .error, dismissable: true)
+                self?.toast?.showToastAlert(msg, autoHideAfter: 13, type: .error, dismissable: true)
             } else  {
-                self?.toast?.showToastAlert("Unjail request submited", autoHideAfter: 3, type: .info, dismissable: true)
+                self?.toast?.showToastAlert("Unjail request submited", autoHideAfter: 13, type: .info, dismissable: true)
                 self?.tableView.reloadData()
             }
         }
@@ -193,14 +193,14 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         amount: validAmount) { (resp, err) in
                             self?.redelgateFrom = nil
                             if err == nil {
-                                self?.toast?.showToastAlert("Redelegation successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                                self?.toast?.showToastAlert("Redelegation successfull", autoHideAfter: 15, type: .info, dismissable: true)
                                 self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                     self?.loadingView.stopAnimating()
                                     self?.loadData()
                                 }
                             } else if let errMsg = err {
                                 self?.loadingView.stopAnimating()
-                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                             }
                     }
                 }
@@ -224,14 +224,14 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         amount: validAmount,
                         denom: denom ?? "stake") { (resp, err) in
                             if err == nil {
-                                self?.toast?.showToastAlert("Delegation successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                                self?.toast?.showToastAlert("Delegation successfull", autoHideAfter: 15, type: .info, dismissable: true)
                                 self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                     self?.loadingView.stopAnimating()
                                     self?.loadData()
                                 }
                             } else if let errMsg = err {
                                 self?.loadingView.stopAnimating()
-                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                             }
                     }
                 }

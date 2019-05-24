@@ -191,7 +191,7 @@ extension GaiaNodesController: UITableViewDelegate {
         if (selectedNode?.state == .active || selectedNode?.state == .pending) {
             self.performSegue(withIdentifier: "ShowNodeKeysSegue", sender: self)
         } else {
-            self.toast?.showToastAlert("The node is not active. Check the host and the ports", autoHideAfter: 5, type: .info, dismissable: true)
+            self.toast?.showToastAlert("The node is not active. Check the host and the ports", autoHideAfter: 15, type: .info, dismissable: true)
         }
     }
 }
