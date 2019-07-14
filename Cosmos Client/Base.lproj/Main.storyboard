@@ -1950,7 +1950,7 @@
                                         <color key="textColor" red="0.92797461851126761" green="0.91611832449718311" blue="0.90990133506056337" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6a-wq-4ZW" userLabel="History">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6a-wq-4ZW" userLabel="History">
                                         <rect key="frame" x="331" y="57" width="44" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="1x2-S3-eeG"/>
