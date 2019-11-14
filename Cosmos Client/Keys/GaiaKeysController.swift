@@ -52,8 +52,6 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        keysDelegate.test()
-        
         if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
             dataSource = savedKeys.keys
         } else {

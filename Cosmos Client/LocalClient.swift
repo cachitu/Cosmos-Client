@@ -8,33 +8,13 @@
 
 import Foundation
 import CosmosRestApi
+import TendermintSigner
+import CryptoKit
+import CommonCrypto
 
 public class LocalClient: KeysClientDelegate {
     
-    var coinType: HDCoin = .terra
-    
-    func test() {
-        //cosmos14kxxegskp8lfuhpwj27hrv9uj8ufjvhzu5ucv5
-        //cosmospub1addwnpepqvcu4mlcjpacdk28xh9e3ex0t5yrw877ylp82gpg8j7y32qf3zdjys07yww
-        //cosmosvaloper14kxxegskp8lfuhpwj27hrv9uj8ufjvhzeqgdq8
-        //cosmosvaloperpub1addwnpepqvcu4mlcjpacdk28xh9e3ex0t5yrw877ylp82gpg8j7y32qf3zdjyevmfpa
-        //century possible car impact mutual grace place bomb drip expand search cube border elite ensure draft immune warrior route steak cram confirm kit sudden
-        
-        let mnemonic = "century possible car impact mutual grace place bomb drip expand search cube border elite ensure draft immune warrior route steak cram confirm kit sudden"
-        //let mnemonic = Mnemonic.create()
-        
-        let seed = Mnemonic.createSeed(mnemonic: mnemonic)
-        let wallet = Wallet(seed: seed, coin: coinType)
-        let account = wallet.generateAccount()
-        print("cosmos14kxxegskp8lfuhpwj27hrv9uj8ufjvhzu5ucv5")
-        print(account.address)
-        print("cosmospub1addwnpepqvcu4mlcjpacdk28xh9e3ex0t5yrw877ylp82gpg8j7y32qf3zdjys07yww")
-        print(account.publicAddress)
-        print("cosmosvaloper14kxxegskp8lfuhpwj27hrv9uj8ufjvhzeqgdq8")
-        print(account.validator)
-        print("cosmosvaloperpub1addwnpepqvcu4mlcjpacdk28xh9e3ex0t5yrw877ylp82gpg8j7y32qf3zdjyevmfpa")
-        print(account.publicValidator)
-    }
+    var coinType: HDCoin = .cosmos
     
     public func getSavedKeys() -> [GaiaKey] {
         
@@ -157,7 +137,7 @@ public struct TypePrefix {
 }
 
 public struct TxSignable: Codable {
-    
+
     public var accountNumber: String?
     public var chainId: String?
     public var fee: TxValueFee?
@@ -166,9 +146,9 @@ public struct TxSignable: Codable {
     public var sequence: String?
 
     public init() {
-        
+
     }
-    
+
     enum CodingKeys : String, CodingKey {
         case accountNumber = "account_number"
         case chainId = "chain_id"
