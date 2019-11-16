@@ -49,10 +49,11 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             showHint = false
         } else {
             nodes = [
-                TDMNode(name: "Cosmos", type: .cosmos, scheme: "http", host: "node01.ip.sx", rcpPort: 1317),
-                TDMNode(name: "Iris",  type: .iris,scheme: "http", host: "node01.ip.sx", rcpPort: 1327),
-                TDMNode(name: "Terra",  type: .terra,scheme: "http", host: "node01.ip.sx", rcpPort: 1337),
-                TDMNode(name: "Kava",  type: .kava,scheme: "http", host: "node01.ip.sx", rcpPort: 1347)]
+                TDMNode(name: TDMNodeType.cosmos.rawValue, type: .cosmos, scheme: "http", host: "node01.ip.sx", rcpPort: 1317),
+                TDMNode(name: TDMNodeType.iris.rawValue,  type: .iris,scheme: "http", host: "node01.ip.sx", rcpPort: 1327),
+                TDMNode(name: TDMNodeType.terra.rawValue,  type: .terra,scheme: "http", host: "node01.ip.sx", rcpPort: 1337),
+                TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava,scheme: "http", host: "node01.ip.sx", rcpPort: 1347),
+                TDMNode(name: TDMNodeType.cosmosTestnet.rawValue,  type: .cosmosTestnet,scheme: "http", host: "node01.ip.sx", rcpPort: 2317)]
             PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
         

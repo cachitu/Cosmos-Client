@@ -20,7 +20,8 @@ public class LocalClient: KeysClientDelegate {
     init(networkType: TDMNodeType) {
         self.type = networkType
         switch networkType {
-        case .cosmos: self.signer = TendermintClient(coin: .cosmos)
+        case .cosmos, .cosmosTestnet:
+            self.signer = TendermintClient(coin: .cosmos)
         case .iris  : self.signer = TendermintClient(coin: .iris)
         case .terra : self.signer = TendermintClient(coin: .terra)
         case .kava  : self.signer = TendermintClient(coin: .kava)

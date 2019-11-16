@@ -11,6 +11,8 @@ import CosmosRestApi
 
 class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     
+    @IBOutlet weak var pickerView: UIPickerView!
+    
     @IBOutlet weak var field1RtextField: RichTextFieldView!
     @IBOutlet weak var field2RtextField: RichTextFieldView!
     @IBOutlet weak var field3RtextField: RichTextFieldView!
@@ -35,6 +37,10 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     var onDeleteComplete: ((_ index: Int)->())?
     var editMode = false
     var editedNodeIndex: Int?
+    
+    var pickerDataSource: [TDMNodeType] {
+        return TDMNodeType.allCases
+    }
     
     override func viewDidLoad() {
         
@@ -141,6 +147,10 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         self.fieldsStateDic["field2"] = true
         self.fieldsStateDic["field3"] = true
         self.fieldsStateDic["field4"] = true
+        
+        if let type = collectedData?.type, let index = pickerDataSource.firstIndex(of: type) {
+            pickerView.selectRow(index, inComponent: 0, animated: false)
+        }
     }
     
     private func updateUI() {
@@ -170,4 +180,26 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         self.view.endEditing(true)
     }
     
+}
+
+extension GaiaNodeController: UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        collectedData?.type = pickerDataSource[row]
+    }
+}
+
+extension GaiaNodeController: UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerDataSource.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerDataSource[row].rawValue
+    }
 }

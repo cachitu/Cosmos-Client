@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I42-aJ-9pG">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,7 +12,7 @@
         <!--Nodes-->
         <scene sceneID="CGU-nu-VWF">
             <objects>
-                <viewController title="Nodes" extendedLayoutIncludesOpaqueBars="YES" id="K5f-QS-aKw" customClass="GaiaNodesController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Nodes" extendedLayoutIncludesOpaqueBars="YES" id="K5f-QS-aKw" customClass="GaiaNodesController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kbc-3r-Lkf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +46,7 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeHeaderCellID" rowHeight="44" id="NTE-JI-IrB" customClass="GaiaNodeHeaderCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeHeaderCellID" rowHeight="44" id="NTE-JI-IrB" customClass="GaiaNodeHeaderCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NTE-JI-IrB" id="RxT-MU-DGT">
@@ -89,14 +90,14 @@
                                             <outlet property="leftlabel" destination="aRw-nb-sRY" id="rOm-6H-WxC"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeCellID" id="wnq-OL-Bo1" customClass="GaiaNodeCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeCellID" id="wnq-OL-Bo1" customClass="GaiaNodeCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.333332061767578" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wnq-OL-Bo1" id="OUh-fp-I3W">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYN-og-Nvl" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYN-og-Nvl" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="IHO-it-09C">
@@ -125,10 +126,10 @@
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHn-CZ-nVS" customClass="CellStateRoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHn-CZ-nVS" customClass="CellStateRoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                             <rect key="frame" x="115" y="56" width="115" height="22"/>
                                                             <subviews>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2v-Xp-dkm" userLabel="Canceled View" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2v-Xp-dkm" userLabel="Canceled View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPr-3w-Fmc">
@@ -149,7 +150,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WUE-QR-PW0" userLabel="Closed View" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WUE-QR-PW0" userLabel="Closed View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLOSED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qp9-TO-ef0">
@@ -170,7 +171,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mT3-If-DlK" userLabel="Expired View" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mT3-If-DlK" userLabel="Expired View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXPIRED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRw-Wl-Fvr">
@@ -191,7 +192,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTa-Qm-wkW" userLabel="Consumed View" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTa-Qm-wkW" userLabel="Consumed View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONSUMED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FcV-Pn-LyW">
@@ -212,7 +213,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zI-MJ-OKD" userLabel="Active View" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zI-MJ-OKD" userLabel="Active View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                                     <rect key="frame" x="28" y="1" width="58" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5k-0e-iyk" userLabel="ACTIVE">
@@ -233,7 +234,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvi-5E-nam" userLabel="Pending View" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvi-5E-nam" userLabel="Pending View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                                     <rect key="frame" x="28" y="1" width="58" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SYNCING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ad-KC-ykn" userLabel="Pending">
@@ -254,7 +255,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VNH-AY-wWg" userLabel="Unavailable View" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VNH-AY-wWg" userLabel="Unavailable View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                                     <rect key="frame" x="14" y="1" width="88" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNAVAILABLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsW-W3-rsm" userLabel="Unavailable">
@@ -275,7 +276,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-YS-rQv" userLabel="Unknown View" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-YS-rQv" userLabel="Unknown View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNKNOWN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKj-Cv-jyS" userLabel="Unknown">
@@ -433,7 +434,7 @@
                                     <constraint firstAttribute="height" constant="94" id="qmC-Sr-kx6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbh-Pw-PiM" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbh-Pw-PiM" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -484,7 +485,7 @@
         <!--Gaia Node Controller-->
         <scene sceneID="R5G-5Z-cMH">
             <objects>
-                <viewController id="9eS-Vl-7H1" customClass="GaiaNodeController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9eS-Vl-7H1" customClass="GaiaNodeController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RDG-76-wmP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -492,7 +493,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="Pia-hr-EBP">
                                 <rect key="frame" x="0.0" y="24" width="375" height="754"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0M5-k4-JaJ" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0M5-k4-JaJ" customClass="RoundedButton" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="15" y="707" width="345" height="44"/>
                                 <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
@@ -510,7 +511,7 @@
                                     <action selector="deleteNode:" destination="9eS-Vl-7H1" eventType="touchUpInside" id="e01-sm-kCt"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQE-Z9-u3v" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQE-Z9-u3v" customClass="RoundedButton" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="15" y="762" width="345" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -533,7 +534,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="QxA-Q6-Otc">
                                 <rect key="frame" x="16" y="112.66666666666669" width="343" height="270"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULO-V6-jwU" userLabel="Company name" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULO-V6-jwU" userLabel="Company name" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="67.333333333333329"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Node Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypg-al-gcj">
@@ -584,7 +585,7 @@
                                             <outlet property="titleLabel" destination="ypg-al-gcj" id="dHR-JX-5Yj"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNt-Z9-mKS" userLabel="Address" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNt-Z9-mKS" userLabel="Address" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="67.333333333333314" width="343" height="67.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host or IP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPp-Pv-ulM">
@@ -635,7 +636,7 @@
                                             <outlet property="titleLabel" destination="qPp-Pv-ulM" id="olu-Rm-KJk"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQg-Mv-lhB" userLabel="Registration" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQg-Mv-lhB" userLabel="Registration" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="135" width="343" height="67.333333333333314"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RPC Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E36-oN-7ZN">
@@ -686,7 +687,7 @@
                                             <outlet property="titleLabel" destination="E36-oN-7ZN" id="GJz-fD-8Qs"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfM-oQ-gO5" userLabel="VAT" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfM-oQ-gO5" userLabel="VAT" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="202.33333333333331" width="343" height="67.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scheme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ld-FG-3Nv">
@@ -742,6 +743,16 @@
                                     <constraint firstAttribute="height" priority="750" constant="270" id="BcV-2W-yQM"/>
                                 </constraints>
                             </stackView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bng-gn-5u3">
+                                <rect key="frame" x="0.0" y="390" width="375" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="JnM-2S-8OR"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="9eS-Vl-7H1" id="Ale-Tf-rZC"/>
+                                    <outlet property="delegate" destination="9eS-Vl-7H1" id="iVd-cf-5zk"/>
+                                </connections>
+                            </pickerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u0r-Lv-cTf" userLabel="Top Bar">
                                 <rect key="frame" x="0.0" y="-6" width="375" height="94"/>
                                 <subviews>
@@ -805,6 +816,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Bng-gn-5u3" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" id="17N-nc-zXc"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="QxA-Q6-Otc" secondAttribute="trailing" constant="16" id="8vt-RP-AX1"/>
                             <constraint firstItem="QxA-Q6-Otc" firstAttribute="top" secondItem="pT9-sF-oWy" secondAttribute="bottom" constant="24" id="Kuh-yl-J2B"/>
                             <constraint firstItem="u0r-Lv-cTf" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" id="NVv-NI-SLa"/>
@@ -815,12 +827,14 @@
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="iQE-Z9-u3v" secondAttribute="trailing" constant="15" id="XnI-4F-Vwq"/>
                             <constraint firstItem="iQE-Z9-u3v" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" constant="15" id="bjt-Bv-qut"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="bottom" secondItem="Pia-hr-EBP" secondAttribute="bottom" id="i06-i0-Zba"/>
+                            <constraint firstItem="Bng-gn-5u3" firstAttribute="top" secondItem="QxA-Q6-Otc" secondAttribute="bottom" constant="7.3333333333333144" id="iK1-0k-I5M"/>
                             <constraint firstItem="iQE-Z9-u3v" firstAttribute="top" secondItem="0M5-k4-JaJ" secondAttribute="bottom" constant="11" id="pSI-wI-Q6k"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="u0r-Lv-cTf" secondAttribute="trailing" id="qYP-aL-WSD"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="top" secondItem="u0r-Lv-cTf" secondAttribute="top" constant="50" id="r65-de-UPY"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="pT9-sF-oWy" secondAttribute="trailing" id="rB8-eF-xbX"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="Pia-hr-EBP" secondAttribute="trailing" id="s4R-ot-n7d"/>
                             <constraint firstItem="pT9-sF-oWy" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" id="v83-f7-5MJ"/>
+                            <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="Bng-gn-5u3" secondAttribute="trailing" id="vAC-nY-rG7"/>
                             <constraint firstItem="iQE-Z9-u3v" firstAttribute="leading" secondItem="0M5-k4-JaJ" secondAttribute="leading" id="vDo-Xr-Zhd"/>
                             <constraint firstItem="QxA-Q6-Otc" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" constant="16" id="y9E-dm-YCH"/>
                             <constraint firstItem="iQE-Z9-u3v" firstAttribute="trailing" secondItem="0M5-k4-JaJ" secondAttribute="trailing" id="zmV-cL-fc7"/>
@@ -836,6 +850,7 @@
                         <outlet property="field2RtextField" destination="CNt-Z9-mKS" id="ePA-2w-UYB"/>
                         <outlet property="field3RtextField" destination="VQg-Mv-lhB" id="1Bm-ng-70u"/>
                         <outlet property="field4RtextField" destination="RfM-oQ-gO5" id="YbD-sp-cqu"/>
+                        <outlet property="pickerView" destination="Bng-gn-5u3" id="rm5-qC-2Ah"/>
                         <outlet property="stackHeightConstraint" destination="BcV-2W-yQM" id="FyT-xO-3wB"/>
                         <outlet property="topBarView" destination="u0r-Lv-cTf" id="nWd-pM-a4s"/>
                         <outlet property="topConstraintOutlet" destination="UMn-5i-83N" id="cMj-1n-zHf"/>
@@ -868,7 +883,7 @@
         <!--Template-->
         <scene sceneID="wen-Q5-ZTn">
             <objects>
-                <viewController title="Template" extendedLayoutIncludesOpaqueBars="YES" id="C66-qx-PyC" customClass="GaiaKeysController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Template" extendedLayoutIncludesOpaqueBars="YES" id="C66-qx-PyC" customClass="GaiaKeysController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xhH-gE-6g7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -902,7 +917,7 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyHeaderCellID" rowHeight="44" id="SEt-zc-9aL" customClass="GaiaKeyHeaderCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyHeaderCellID" rowHeight="44" id="SEt-zc-9aL" customClass="GaiaKeyHeaderCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SEt-zc-9aL" id="Gay-id-weT">
@@ -959,14 +974,14 @@
                                             <outlet property="rightLabel" destination="c4A-Uk-g4Z" id="sTK-o5-bi6"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="v3g-Ar-Cqy" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="v3g-Ar-Cqy" customClass="GaiaKeyCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v3g-Ar-Cqy" id="LHU-WG-roJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-Oy-rap" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-Oy-rap" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="UvC-lT-ZDc">
@@ -1101,7 +1116,7 @@
                                     <outletCollection property="gestureRecognizers" destination="zIx-pd-mf8" appends="YES" id="Ddv-Pe-30k"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ei-aQ-R9N" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ei-aQ-R9N" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1161,7 +1176,7 @@
         <!--Gaia Key Controller-->
         <scene sceneID="Q5O-iO-dxK">
             <objects>
-                <viewController id="JGL-u5-Pdz" customClass="GaiaKeyController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JGL-u5-Pdz" customClass="GaiaKeyController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CRh-zp-6lX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1233,7 +1248,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="lIO-DH-2Hx"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aw0-At-lEB" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aw0-At-lEB" customClass="RoundedButton" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="15" y="714" width="345" height="44"/>
                                 <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
@@ -1318,7 +1333,7 @@
                                     <action selector="showOrHideSeed:" destination="JGL-u5-Pdz" eventType="touchUpInside" id="fBy-6S-wzr"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8c7-MK-oLC" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8c7-MK-oLC" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1417,7 +1432,7 @@
         <!--Wallet-->
         <scene sceneID="dHu-DA-hfV">
             <objects>
-                <viewController title="Wallet" extendedLayoutIncludesOpaqueBars="YES" id="hPr-Gq-sdB" customClass="GaiaWalletController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Wallet" extendedLayoutIncludesOpaqueBars="YES" id="hPr-Gq-sdB" customClass="GaiaWalletController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D7j-AX-RNX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1429,7 +1444,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="rIC-36-QiL"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MV4-cC-N1s" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MV4-cC-N1s" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="729" width="375" height="149"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ok-we-Z3d" userLabel="Separator">
@@ -1439,7 +1454,7 @@
                                             <constraint firstAttribute="height" constant="0.5" id="zse-L2-5u1"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3K6-um-Oz3" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3K6-um-Oz3" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="NYk-Mt-VlG">
@@ -1481,7 +1496,7 @@
                                             <outlet property="titleLabel" destination="ILe-bB-Kqb" id="8Sl-Yc-WF5"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfa-Zh-FQS" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfa-Zh-FQS" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="rq4-7S-1rA">
@@ -1522,7 +1537,7 @@
                                             <outlet property="titleLabel" destination="c1W-we-20j" id="hy4-zd-mbW"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMD-0E-xCO" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMD-0E-xCO" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="cAC-Mg-dqA">
@@ -1533,7 +1548,7 @@
                                                     <constraint firstAttribute="width" constant="24" id="nLc-YW-WyX"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwT-bi-088">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwT-bi-088">
                                                 <rect key="frame" x="4" y="36" width="85.666666666666671" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1563,7 +1578,7 @@
                                             <outlet property="titleLabel" destination="uwT-bi-088" id="grg-Ru-OCu"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZJ-rf-Lf8" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZJ-rf-Lf8" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="sQ0-R3-GLl">
@@ -1634,7 +1649,7 @@
                                     <outlet property="item4" destination="3ZJ-rf-Lf8" id="oLI-f4-MQd"/>
                                 </connections>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VyT-Io-fxp" userLabel="Amount View" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VyT-Io-fxp" userLabel="Amount View" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="15" y="114" width="345" height="137"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx fee: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uOJ-6B-HTT">
@@ -1702,7 +1717,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWa-Fa-glo" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWa-Fa-glo" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="15" y="275" width="345" height="197"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g0e-dl-VEG">
@@ -1745,7 +1760,7 @@
                                             <outlet property="delegate" destination="hPr-Gq-sdB" id="xL0-as-MwT"/>
                                         </connections>
                                     </pickerView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGQ-Do-nRl" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGQ-Do-nRl" customClass="RoundedButton" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="7.6666666666666714" y="152" width="151.66666666666663" height="34"/>
                                         <color key="backgroundColor" red="0.1647058824" green="0.67450980390000004" blue="0.87800002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -1808,14 +1823,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCell" id="S3P-lh-O5M" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCell" id="S3P-lh-O5M" customClass="GaiaKeyCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S3P-lh-O5M" id="eZk-ML-Koh">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLP-k0-kpV" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLP-k0-kpV" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delegation" translatesAutoresizingMaskIntoConstraints="NO" id="uEa-Eq-jZE">
@@ -1914,7 +1929,7 @@
                                         <color key="textColor" red="0.92797461851126761" green="0.91611832449718311" blue="0.90990133506056337" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6a-wq-4ZW" userLabel="History">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6a-wq-4ZW" userLabel="History">
                                         <rect key="frame" x="331" y="57" width="44" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="1x2-S3-eeG"/>
@@ -1947,7 +1962,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="Tjn-Vl-e0O"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuY-SR-GaR" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuY-SR-GaR" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2021,7 +2036,7 @@
         <!--Validators-->
         <scene sceneID="L9G-F0-U10">
             <objects>
-                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="6Ja-jx-Fju" customClass="GaiaValidatorsController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="6Ja-jx-Fju" customClass="GaiaValidatorsController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vXs-42-Di1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2039,14 +2054,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaValidatorCellID" id="cXJ-g2-wDZ" customClass="GaiaValidatorCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaValidatorCellID" id="cXJ-g2-wDZ" customClass="GaiaValidatorCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cXJ-g2-wDZ" id="hG7-d9-dtc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-G6-prq" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-G6-prq" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="104"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="EYg-M3-u5c">
@@ -2172,7 +2187,7 @@
                                     <constraint firstAttribute="height" constant="94" id="cze-sY-Bf6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04a-Ih-g4c" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04a-Ih-g4c" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2180,7 +2195,7 @@
                                     <constraint firstAttribute="width" constant="44" id="ux5-E4-XLD"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hp7-aN-tgY" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hp7-aN-tgY" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="729" width="375" height="149"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhv-IV-8mO" userLabel="Separator">
@@ -2190,7 +2205,7 @@
                                             <constraint firstAttribute="height" constant="0.5" id="VUA-6H-7ac"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujl-NA-YsM" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujl-NA-YsM" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="ibN-cI-3vI">
@@ -2232,7 +2247,7 @@
                                             <outlet property="titleLabel" destination="EAb-OL-ox6" id="4cr-Kn-4df"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bvc-df-N3p" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bvc-df-N3p" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="BfR-6V-p5v">
@@ -2273,7 +2288,7 @@
                                             <outlet property="titleLabel" destination="1y5-8N-Gm7" id="V3V-ME-WCU"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-FD-OIq" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-FD-OIq" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="2Tl-RH-rAs">
@@ -2284,7 +2299,7 @@
                                                     <constraint firstAttribute="height" constant="28" id="im5-1Z-Pq9"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKr-aU-2NE">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKr-aU-2NE">
                                                 <rect key="frame" x="4" y="36" width="85.666666666666671" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2314,7 +2329,7 @@
                                             <outlet property="titleLabel" destination="UKr-aU-2NE" id="Z5J-Kr-E8W"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7V-pu-dO0" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7V-pu-dO0" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="0Ss-Js-faB">
@@ -2419,9 +2434,10 @@
                         <outlet property="toastHolderUnderView" destination="klr-Pk-WGv" id="0sP-V2-eme"/>
                         <outlet property="topNavBarView" destination="fej-b2-DDY" id="1O1-HN-bCs"/>
                         <segue destination="r7J-Vy-fyA" kind="unwind" identifier="UnwindToWalletSegue" animates="NO" unwindAction="unwindToWalletWithSegue:" id="cid-sK-gGC"/>
-                        <segue destination="i83-p6-5lL" kind="presentation" identifier="nextSegue" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="VFE-X1-6qw"/>
+                        <segue destination="i83-p6-5lL" kind="presentation" identifier="nextSegueTerra" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="VFE-X1-6qw"/>
                         <segue destination="r7J-Vy-fyA" kind="unwind" identifier="UnwindToNodes" unwindAction="unwindToNodesWithSegue:" id="13f-tT-gVv"/>
                         <segue destination="bKP-u7-GVw" kind="presentation" identifier="MoreSegueID" modalPresentationStyle="fullScreen" id="M4Y-Wm-Zyi"/>
+                        <segue destination="MNZ-Xr-tPS" kind="presentation" identifier="nextSegue" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="IeV-KJ-EDF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QrH-zo-Dds" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2443,14 +2459,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaOraclesCellID" id="YRc-fz-kcE" customClass="GaiaOracleCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaOraclesCellID" id="YRc-fz-kcE" customClass="GaiaOracleCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YRc-fz-kcE" id="uCz-YN-zRy">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZL-ru-xu7" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZL-ru-xu7" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="64"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="O3V-gS-aUU">
@@ -2564,9 +2580,6 @@
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarAdd"/>
-                                        <connections>
-                                            <segue destination="zmf-Wa-kLi" kind="presentation" identifier="CreateProposalSegueID" modalPresentationStyle="fullScreen" id="PKL-Cf-2ee"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="TerraBlue"/>
@@ -2578,7 +2591,7 @@
                                     <constraint firstAttribute="height" constant="94" id="hRi-cE-NVf"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXA-wZ-jG4" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXA-wZ-jG4" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2586,7 +2599,7 @@
                                     <constraint firstAttribute="width" constant="44" id="vHk-2P-Zfc"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyZ-um-Hmi" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyZ-um-Hmi" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="729" width="375" height="149"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UL7-of-NI7" userLabel="Separator">
@@ -2596,7 +2609,7 @@
                                             <constraint firstAttribute="height" constant="0.5" id="fC9-fu-2rW"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfJ-0L-LuM" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfJ-0L-LuM" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="GwY-u0-pfe">
@@ -2638,7 +2651,7 @@
                                             <outlet property="titleLabel" destination="y1a-bv-eGL" id="fXm-Wx-arq"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zyR-md-wMh" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zyR-md-wMh" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="5N0-4j-auP">
@@ -2679,7 +2692,7 @@
                                             <outlet property="titleLabel" destination="wNH-Aj-3eK" id="E9k-cd-RIs"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSe-L8-jm6" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSe-L8-jm6" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="c1y-em-uu8">
@@ -2690,7 +2703,7 @@
                                                     <constraint firstAttribute="width" constant="24" id="ds1-RJ-mLA"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZB-i9-WEm">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZB-i9-WEm">
                                                 <rect key="frame" x="4" y="36" width="85.666666666666671" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2720,7 +2733,7 @@
                                             <outlet property="titleLabel" destination="pZB-i9-WEm" id="PvM-pG-1B5"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6In-Z5-Wqb" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6In-Z5-Wqb" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="fer-hG-Jd3">
@@ -2829,18 +2842,17 @@
                         <segue destination="0ep-XW-mYa" kind="presentation" identifier="nextSegue" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="zlc-Fm-io9"/>
                         <segue destination="z4T-fA-28I" kind="unwind" identifier="UnwindToWallet" animates="NO" unwindAction="unwindToWalletWithSegue:" id="PmR-lV-W3N"/>
                         <segue destination="z4T-fA-28I" kind="unwind" identifier="UnwindToNodes" unwindAction="unwindToNodesWithSegue:" id="cDt-7S-E9X"/>
-                        <segue destination="WFZ-es-0h2" kind="presentation" identifier="VotesSegueID" modalPresentationStyle="fullScreen" id="CVj-Nm-o20"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A3R-1e-UAy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="z4T-fA-28I" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1733.5999999999999" y="173.64532019704436"/>
+            <point key="canvasLocation" x="1209" y="955"/>
         </scene>
         <!--Settings-->
         <scene sceneID="Zax-GT-cxK">
             <objects>
-                <viewController title="Settings" extendedLayoutIncludesOpaqueBars="YES" id="0ep-XW-mYa" customClass="GaiaSettingsController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Settings" extendedLayoutIncludesOpaqueBars="YES" id="0ep-XW-mYa" customClass="GaiaSettingsController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tqq-aF-I7k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2882,7 +2894,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Yje-IX-wGj" secondAttribute="bottom" constant="9" id="ewy-jx-A0q"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uea-cp-u47" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uea-cp-u47" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2899,7 +2911,7 @@
                                     <action selector="openIpsxUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="a7f-nO-YLt"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQ6-TJ-xfY" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQ6-TJ-xfY" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="729" width="375" height="149"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDe-8r-ccY" userLabel="Separator">
@@ -2909,7 +2921,7 @@
                                             <constraint firstAttribute="height" constant="0.5" id="FMf-11-vpv"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEK-YG-nAm" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEK-YG-nAm" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="LFT-Ql-dIa">
@@ -2951,7 +2963,7 @@
                                             <outlet property="titleLabel" destination="ZOc-Ev-E1y" id="hhZ-uX-V3G"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wup-Jf-VPv" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wup-Jf-VPv" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="wun-lE-tPQ">
@@ -2992,7 +3004,7 @@
                                             <outlet property="titleLabel" destination="W7E-7j-46k" id="lNg-Yz-1nY"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4i3-x5-F5e" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4i3-x5-F5e" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="daW-Hc-sqn">
@@ -3033,7 +3045,7 @@
                                             <outlet property="titleLabel" destination="krg-oR-rkN" id="vmS-ej-4Fk"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1t-0E-v9U" customClass="CustomTabBarItem" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1t-0E-v9U" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="a1k-gQ-eoc">
@@ -3325,7 +3337,7 @@
         <!--Gaia Key Create Controller-->
         <scene sceneID="66n-2B-8Se">
             <objects>
-                <viewController id="3go-4Q-YDw" customClass="GaiaKeyCreateController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3go-4Q-YDw" customClass="GaiaKeyCreateController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0ZU-k0-DRk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3333,7 +3345,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="NOV-o3-1cC">
                                 <rect key="frame" x="0.0" y="24" width="375" height="754"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDQ-5e-aZL" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDQ-5e-aZL" customClass="RoundedButton" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="15" y="704" width="345" height="44"/>
                                 <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
@@ -3354,7 +3366,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="xxD-Cm-jA3">
                                 <rect key="frame" x="16" y="122.66666666666669" width="343" height="160"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IkB-Dc-tCT" userLabel="Company name" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IkB-Dc-tCT" userLabel="Company name" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="80"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BvK-Wi-FyN">
@@ -3405,7 +3417,7 @@
                                             <outlet property="titleLabel" destination="BvK-Wi-FyN" id="aLV-Ww-t2z"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUC-2A-Jsc" userLabel="Address" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUC-2A-Jsc" userLabel="Address" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="79.999999999999986" width="343" height="80.000000000000014"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyJ-Ku-6jE">
@@ -3563,7 +3575,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="db2-KF-qiB"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ui-XM-EQP" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ui-XM-EQP" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -3624,7 +3636,7 @@
         <!--Gaia Proposal Controller-->
         <scene sceneID="9k9-4n-ikM">
             <objects>
-                <viewController id="zmf-Wa-kLi" customClass="GaiaProposalController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zmf-Wa-kLi" customClass="GaiaProposalController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HI9-ry-Yyp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3632,7 +3644,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="0DI-2K-EgM">
                                 <rect key="frame" x="0.0" y="24" width="375" height="754"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2O-4V-uHu" customClass="RoundedButton" customModule="Terra_Money" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2O-4V-uHu" customClass="RoundedButton" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="15" y="704" width="345" height="44"/>
                                 <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
@@ -3653,7 +3665,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ldb-Mj-9Xz">
                                 <rect key="frame" x="16" y="112.66666666666669" width="343" height="140"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTw-95-8X3" userLabel="Company name" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTw-95-8X3" userLabel="Company name" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="70"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03V-yf-sO9">
@@ -3704,7 +3716,7 @@
                                             <outlet property="titleLabel" destination="03V-yf-sO9" id="pSQ-hb-93u"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqF-n1-oMF" userLabel="Address" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqF-n1-oMF" userLabel="Address" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="69.999999999999986" width="343" height="70.000000000000014"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vkc-Sc-wNH">
@@ -3859,7 +3871,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="C2U-ze-Ecv"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qks-Td-rGS" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qks-Td-rGS" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -3920,7 +3932,7 @@
         <!--Validators-->
         <scene sceneID="6hE-8b-Ckc">
             <objects>
-                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="ccf-MA-ojY" customClass="GaiaHistoryController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="ccf-MA-ojY" customClass="GaiaHistoryController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAA-8J-yuI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3938,14 +3950,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaHistoryCellID" id="Uc6-FM-Npu" customClass="GaiaHistoryCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaHistoryCellID" id="Uc6-FM-Npu" customClass="GaiaHistoryCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uc6-FM-Npu" id="uxg-7a-v0J">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pR5-5I-Oa9" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pR5-5I-Oa9" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="104"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" textAlignment="justified" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FTf-XG-A6B">
@@ -4079,7 +4091,7 @@
                                     <constraint firstItem="WRu-76-Zb8" firstAttribute="leading" secondItem="b9m-j9-lem" secondAttribute="leading" id="xEB-vT-ah2"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iit-54-HKe" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iit-54-HKe" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -4126,7 +4138,7 @@
         <!--Validators-->
         <scene sceneID="uYb-GR-ptE">
             <objects>
-                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="bKP-u7-GVw" customClass="GaiaDelegationsController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="bKP-u7-GVw" customClass="GaiaDelegationsController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="znm-0E-Hef">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4144,14 +4156,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="S0r-SO-nWX" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="S0r-SO-nWX" customClass="GaiaKeyCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S0r-SO-nWX" id="j1s-b7-WPd">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="463-ej-pqP" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="463-ej-pqP" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delegation" translatesAutoresizingMaskIntoConstraints="NO" id="vWu-wx-6QC">
@@ -4254,7 +4266,7 @@
                                     <constraint firstAttribute="bottom" secondItem="LOB-Gf-WEE" secondAttribute="bottom" constant="-2" id="sfa-hs-qdX"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aki-ur-xIw" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aki-ur-xIw" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -4301,7 +4313,7 @@
         <!--Validators-->
         <scene sceneID="eZ2-hN-ptf">
             <objects>
-                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="WFZ-es-0h2" customClass="GaiaVotesController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="WFZ-es-0h2" customClass="GaiaVotesController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gMb-NG-nV8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4319,14 +4331,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="9ZM-fa-eF9" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="9ZM-fa-eF9" customClass="GaiaKeyCell" customModule="Cosmos_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9ZM-fa-eF9" id="i93-1g-xM0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXi-le-Xrc" customClass="RoundedView" customModule="Terra_Money" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXi-le-Xrc" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friendship" translatesAutoresizingMaskIntoConstraints="NO" id="AhI-zR-Rvb">
@@ -4430,7 +4442,7 @@
                                     <constraint firstAttribute="bottom" secondItem="NZ5-Nk-Kc4" secondAttribute="bottom" constant="9" id="hmY-HE-PSL"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNe-jO-2ek" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNe-jO-2ek" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -4472,7 +4484,492 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WL3-u4-N8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="2UO-eO-4xe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1734" y="874"/>
+            <point key="canvasLocation" x="2119" y="955"/>
+        </scene>
+        <!--Governance-->
+        <scene sceneID="HFg-0S-mm1">
+            <objects>
+                <viewController title="Governance" extendedLayoutIncludesOpaqueBars="YES" id="MNZ-Xr-tPS" customClass="GaiaGovernanceController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PRi-4Z-ZaG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="180" estimatedRowHeight="-1" sectionHeaderHeight="53" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="tEo-bB-U1A">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaGovernanceCellID" id="RHO-cK-qBx" customClass="GaiaGovernanceCell" customModule="Cosmos_Client" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="180"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RHO-cK-qBx" id="ffW-NG-3a8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZs-aG-uEo" customClass="RoundedView" customModule="Cosmos_Client" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="3" width="345" height="174"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friendship" translatesAutoresizingMaskIntoConstraints="NO" id="8id-AQ-JB7">
+                                                            <rect key="frame" x="5" y="13" width="12" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="22" id="5ai-Si-4Kh"/>
+                                                                <constraint firstAttribute="width" constant="12" id="Kp4-o5-8eC"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1k-s7-Ukx">
+                                                            <rect key="frame" x="25" y="15.666666666666668" width="40" height="17.000000000000004"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="justified" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pea-gc-lEF">
+                                                            <rect key="frame" x="5" y="35.666666666666664" width="335" height="17"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                            <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Yes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5o-hm-Fxk">
+                                                            <rect key="frame" x="5" y="59.666666666666657" width="21.666666666666668" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="No (Veto)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtb-bo-c38">
+                                                            <rect key="frame" x="4.9999999999999964" y="122.66666666666669" width="58.666666666666657" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="rejected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGg-Ob-06l">
+                                                            <rect key="frame" x="287" y="147" width="53" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                            <color key="textColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="No" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LH6-Dt-B1W">
+                                                            <rect key="frame" x="5" y="80.666666666666671" width="17.666666666666668" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Dep: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRT-lI-PSd">
+                                                            <rect key="frame" x="5" y="146.66666666666666" width="45" height="17"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                            <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" ambiguous="YES" text="Abstain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovZ-mE-MCO">
+                                                            <rect key="frame" x="5" y="101.66666666666667" width="46" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rin-rx-cKY">
+                                                            <rect key="frame" x="71.666666666666671" y="122.66666666666669" width="23" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" ambiguous="YES" text="100 No (Veto)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kF5-zI-z6O">
+                                                            <rect key="frame" x="71.666666666666671" y="101.66666666666667" width="84.000000000000014" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" ambiguous="YES" text="100 No (Veto)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxh-eM-o13">
+                                                            <rect key="frame" x="71.666666666666671" y="80.666666666666671" width="84.000000000000014" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="100 No (Veto)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WkQ-CG-RyK">
+                                                            <rect key="frame" x="71.666666666666671" y="59.666666666666657" width="84.000000000000014" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Mxh-eM-o13" secondAttribute="trailing" constant="20" symbolic="YES" id="2tF-pY-BCS"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="A1k-s7-Ukx" secondAttribute="trailing" constant="20" symbolic="YES" id="5HA-ng-icf"/>
+                                                        <constraint firstItem="WkQ-CG-RyK" firstAttribute="centerY" secondItem="M5o-hm-Fxk" secondAttribute="centerY" id="6tt-vV-HrB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="AGg-Ob-06l" secondAttribute="bottom" constant="11" id="85d-0c-MHe"/>
+                                                        <constraint firstItem="A1k-s7-Ukx" firstAttribute="centerY" secondItem="8id-AQ-JB7" secondAttribute="centerY" id="9kH-aD-Waa"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Pea-gc-lEF" secondAttribute="trailing" constant="5" id="DG1-SF-MWS"/>
+                                                        <constraint firstItem="dtb-bo-c38" firstAttribute="top" secondItem="ovZ-mE-MCO" secondAttribute="bottom" constant="5" id="GV1-VY-afH"/>
+                                                        <constraint firstItem="LH6-Dt-B1W" firstAttribute="top" secondItem="M5o-hm-Fxk" secondAttribute="bottom" constant="5" id="J9Y-pM-EQX"/>
+                                                        <constraint firstItem="A1k-s7-Ukx" firstAttribute="leading" secondItem="8id-AQ-JB7" secondAttribute="trailing" constant="8" id="KRZ-ib-WrO"/>
+                                                        <constraint firstItem="WkQ-CG-RyK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="M5o-hm-Fxk" secondAttribute="trailing" constant="8" symbolic="YES" id="Kb2-yE-d7q"/>
+                                                        <constraint firstItem="Mxh-eM-o13" firstAttribute="leading" secondItem="kF5-zI-z6O" secondAttribute="leading" id="Lph-Yf-qjR"/>
+                                                        <constraint firstItem="AGg-Ob-06l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sRT-lI-PSd" secondAttribute="trailing" constant="5" id="PNT-SP-yaC"/>
+                                                        <constraint firstItem="Mxh-eM-o13" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LH6-Dt-B1W" secondAttribute="trailing" constant="8" symbolic="YES" id="Qbr-fs-rdM"/>
+                                                        <constraint firstItem="8id-AQ-JB7" firstAttribute="leading" secondItem="zZs-aG-uEo" secondAttribute="leading" constant="5" id="RMX-27-nEK"/>
+                                                        <constraint firstItem="sRT-lI-PSd" firstAttribute="leading" secondItem="dtb-bo-c38" secondAttribute="leading" id="TS8-3D-cWr"/>
+                                                        <constraint firstItem="ovZ-mE-MCO" firstAttribute="top" secondItem="LH6-Dt-B1W" secondAttribute="bottom" constant="5" id="Tt4-dU-4jA"/>
+                                                        <constraint firstItem="LH6-Dt-B1W" firstAttribute="leading" secondItem="M5o-hm-Fxk" secondAttribute="leading" id="UjC-5V-Te6"/>
+                                                        <constraint firstItem="Mxh-eM-o13" firstAttribute="centerY" secondItem="LH6-Dt-B1W" secondAttribute="centerY" id="UmS-eM-fIR"/>
+                                                        <constraint firstItem="kF5-zI-z6O" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ovZ-mE-MCO" secondAttribute="trailing" constant="8" symbolic="YES" id="ZlC-No-4Cc"/>
+                                                        <constraint firstItem="Rin-rx-cKY" firstAttribute="leading" secondItem="dtb-bo-c38" secondAttribute="trailing" constant="8" id="bDA-xj-2LA"/>
+                                                        <constraint firstItem="kF5-zI-z6O" firstAttribute="centerY" secondItem="ovZ-mE-MCO" secondAttribute="centerY" id="bRl-5r-GMz"/>
+                                                        <constraint firstItem="8id-AQ-JB7" firstAttribute="top" secondItem="zZs-aG-uEo" secondAttribute="top" constant="13" id="brX-14-XbF"/>
+                                                        <constraint firstItem="M5o-hm-Fxk" firstAttribute="top" secondItem="Pea-gc-lEF" secondAttribute="bottom" constant="7" id="cJa-nA-IH6"/>
+                                                        <constraint firstItem="Pea-gc-lEF" firstAttribute="top" secondItem="A1k-s7-Ukx" secondAttribute="bottom" constant="3" id="dmK-1V-o1V"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Rin-rx-cKY" secondAttribute="trailing" constant="20" symbolic="YES" id="eSJ-uK-prq"/>
+                                                        <constraint firstItem="M5o-hm-Fxk" firstAttribute="leading" secondItem="Pea-gc-lEF" secondAttribute="leading" id="er8-BO-9fC"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WkQ-CG-RyK" secondAttribute="trailing" constant="20" symbolic="YES" id="fDa-WY-M5T"/>
+                                                        <constraint firstItem="Pea-gc-lEF" firstAttribute="leading" secondItem="8id-AQ-JB7" secondAttribute="leading" id="i1u-zt-GKj"/>
+                                                        <constraint firstItem="Rin-rx-cKY" firstAttribute="centerY" secondItem="dtb-bo-c38" secondAttribute="centerY" id="nET-li-nUG"/>
+                                                        <constraint firstItem="dtb-bo-c38" firstAttribute="leading" secondItem="ovZ-mE-MCO" secondAttribute="leading" id="ncc-No-pGz"/>
+                                                        <constraint firstItem="kF5-zI-z6O" firstAttribute="leading" secondItem="Rin-rx-cKY" secondAttribute="leading" id="qhv-u5-P1C"/>
+                                                        <constraint firstItem="WkQ-CG-RyK" firstAttribute="leading" secondItem="Mxh-eM-o13" secondAttribute="leading" id="tRR-sy-aaR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="AGg-Ob-06l" secondAttribute="trailing" constant="5" id="tYi-uZ-2NI"/>
+                                                        <constraint firstItem="sRT-lI-PSd" firstAttribute="centerY" secondItem="AGg-Ob-06l" secondAttribute="centerY" id="vNq-a4-Xr6"/>
+                                                        <constraint firstItem="ovZ-mE-MCO" firstAttribute="leading" secondItem="LH6-Dt-B1W" secondAttribute="leading" id="vyh-s5-PVd"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kF5-zI-z6O" secondAttribute="trailing" constant="20" symbolic="YES" id="wOD-Fr-qGb"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="zZs-aG-uEo" firstAttribute="leading" secondItem="ffW-NG-3a8" secondAttribute="leading" constant="15" id="0e7-AZ-NEp"/>
+                                                <constraint firstAttribute="trailing" secondItem="zZs-aG-uEo" secondAttribute="trailing" constant="15" id="6Vk-zn-TAX"/>
+                                                <constraint firstItem="zZs-aG-uEo" firstAttribute="top" secondItem="ffW-NG-3a8" secondAttribute="top" constant="3" id="Ygt-Rr-5X4"/>
+                                                <constraint firstAttribute="bottom" secondItem="zZs-aG-uEo" secondAttribute="bottom" constant="3" id="mDS-49-vf8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="abstainLabel" destination="ovZ-mE-MCO" id="ZqL-eV-5yn"/>
+                                            <outlet property="abstainValueLabel" destination="kF5-zI-z6O" id="A7Q-2g-xaR"/>
+                                            <outlet property="noLabel" destination="LH6-Dt-B1W" id="vxk-tj-z1H"/>
+                                            <outlet property="noVallabel" destination="Mxh-eM-o13" id="BT3-GH-34s"/>
+                                            <outlet property="noVetoLabel" destination="dtb-bo-c38" id="03y-2b-0hO"/>
+                                            <outlet property="noVetoValueLabel" destination="Rin-rx-cKY" id="Vpg-a8-q1M"/>
+                                            <outlet property="proposalTitleLabel" destination="A1k-s7-Ukx" id="8ex-dP-pl6"/>
+                                            <outlet property="statusLabel" destination="AGg-Ob-06l" id="Opd-Lg-WKg"/>
+                                            <outlet property="totalDeposited" destination="sRT-lI-PSd" id="LHx-a8-gez"/>
+                                            <outlet property="typeLabel" destination="Pea-gc-lEF" id="vqf-Wy-imy"/>
+                                            <outlet property="yesLabel" destination="M5o-hm-Fxk" id="9zx-Ux-eg0"/>
+                                            <outlet property="yesValLabel" destination="WkQ-CG-RyK" id="fvU-kq-Q7x"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="MNZ-Xr-tPS" id="aEZ-fK-rB0"/>
+                                    <outlet property="delegate" destination="MNZ-Xr-tPS" id="xIU-Lr-9dx"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sxn-Vf-hjo" userLabel="Toast Holder">
+                                <rect key="frame" x="0.0" y="88" width="375" height="0.6666666666666714"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="i7L-m0-xcW"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcx-ku-Ycq" userLabel="Separator">
+                                <rect key="frame" x="0.0" y="88" width="375" height="0.6666666666666714"/>
+                                <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="0.29825044010000001" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="L1p-GV-tl2"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybu-6J-Jnd" userLabel="Top Bar">
+                                <rect key="frame" x="0.0" y="-6" width="375" height="94"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Governance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mej-Mf-dJ3">
+                                        <rect key="frame" x="139.66666666666666" y="64" width="96" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gi8-Jx-MyS" userLabel="Add">
+                                        <rect key="frame" x="331" y="57" width="44" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="G1P-P2-jnD"/>
+                                            <constraint firstAttribute="width" constant="44" id="Ve9-Fg-4Qb"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="NavbarAdd"/>
+                                        <connections>
+                                            <segue destination="zmf-Wa-kLi" kind="presentation" identifier="CreateProposalSegueID" modalPresentationStyle="fullScreen" id="ybn-vE-EI1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="TerraBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Gi8-Jx-MyS" secondAttribute="trailing" id="0KZ-nK-WQ8"/>
+                                    <constraint firstItem="mej-Mf-dJ3" firstAttribute="centerX" secondItem="ybu-6J-Jnd" secondAttribute="centerX" id="Gsq-3D-YUO"/>
+                                    <constraint firstAttribute="bottom" secondItem="mej-Mf-dJ3" secondAttribute="bottom" constant="9" id="IAG-GN-bS2"/>
+                                    <constraint firstAttribute="height" constant="94" id="n7Y-rK-nJw"/>
+                                    <constraint firstAttribute="bottom" secondItem="Gi8-Jx-MyS" secondAttribute="bottom" id="pn7-gD-3nL"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8AQ-3z-YfY" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
+                                <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
+                                <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="RqJ-WB-dSv"/>
+                                    <constraint firstAttribute="height" constant="44" id="x7H-DW-SFs"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VdK-9M-HG6" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Cosmos_Client" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="729" width="375" height="149"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Rq-8m-EZI" userLabel="Separator">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.66666666666666663"/>
+                                        <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="0.3032570423" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="pFg-CX-0KD"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myA-80-baP" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="R0B-6D-ZcS">
+                                                <rect key="frame" x="35" y="5" width="24" height="28"/>
+                                                <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="bxP-Cd-e92"/>
+                                                    <constraint firstAttribute="height" constant="28" id="oCl-3P-fvo"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lsq-9e-tMe">
+                                                <rect key="frame" x="4" y="36" width="85.666666666666671" height="12"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qeo-sp-2m5">
+                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
+                                                <connections>
+                                                    <action selector="tapAction:" destination="myA-80-baP" eventType="touchUpInside" id="pfN-DY-2RF"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="49" id="5JU-ck-hHQ"/>
+                                            <constraint firstItem="qeo-sp-2m5" firstAttribute="height" secondItem="myA-80-baP" secondAttribute="height" id="5fy-DM-Kfd"/>
+                                            <constraint firstItem="qeo-sp-2m5" firstAttribute="centerY" secondItem="myA-80-baP" secondAttribute="centerY" id="Mq8-1h-Qoq"/>
+                                            <constraint firstAttribute="bottom" secondItem="Lsq-9e-tMe" secondAttribute="bottom" constant="1" id="UVz-MA-jjO"/>
+                                            <constraint firstItem="qeo-sp-2m5" firstAttribute="centerX" secondItem="myA-80-baP" secondAttribute="centerX" id="aUU-HC-iBZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Lsq-9e-tMe" secondAttribute="trailing" constant="4" id="h6m-Ay-Fb9"/>
+                                            <constraint firstItem="R0B-6D-ZcS" firstAttribute="centerX" secondItem="myA-80-baP" secondAttribute="centerX" id="kdO-CM-YtI"/>
+                                            <constraint firstItem="Lsq-9e-tMe" firstAttribute="leading" secondItem="myA-80-baP" secondAttribute="leading" constant="4" id="nYk-oY-tl1"/>
+                                            <constraint firstItem="qeo-sp-2m5" firstAttribute="width" secondItem="myA-80-baP" secondAttribute="width" id="vHl-q3-bac"/>
+                                            <constraint firstItem="R0B-6D-ZcS" firstAttribute="top" secondItem="myA-80-baP" secondAttribute="top" constant="5" id="xTB-vW-fv8"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="image" destination="R0B-6D-ZcS" id="LHE-QR-7gR"/>
+                                            <outlet property="titleLabel" destination="Lsq-9e-tMe" id="YtH-8c-vzx"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdg-l4-i49" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
+                                        <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="1Hv-td-4VJ">
+                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28"/>
+                                                <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="K7M-Qd-Reb"/>
+                                                    <constraint firstAttribute="height" constant="28" id="cg1-WJ-BjE"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validators" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGW-RH-efF">
+                                                <rect key="frame" x="4" y="36" width="86" height="12"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TGa-2H-GxW">
+                                                <rect key="frame" x="0.0" y="0.0" width="94" height="49"/>
+                                                <connections>
+                                                    <action selector="tapAction:" destination="cdg-l4-i49" eventType="touchUpInside" id="LbQ-ZY-3aF"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="1Hv-td-4VJ" firstAttribute="centerX" secondItem="cdg-l4-i49" secondAttribute="centerX" id="2T0-50-Vq6"/>
+                                            <constraint firstItem="TGa-2H-GxW" firstAttribute="height" secondItem="cdg-l4-i49" secondAttribute="height" id="Tf5-TE-jKU"/>
+                                            <constraint firstAttribute="trailing" secondItem="KGW-RH-efF" secondAttribute="trailing" constant="4" id="diO-vn-QuC"/>
+                                            <constraint firstAttribute="bottom" secondItem="KGW-RH-efF" secondAttribute="bottom" constant="1" id="ght-7N-jxk"/>
+                                            <constraint firstItem="TGa-2H-GxW" firstAttribute="width" secondItem="cdg-l4-i49" secondAttribute="width" id="mqh-TN-Hmw"/>
+                                            <constraint firstItem="TGa-2H-GxW" firstAttribute="centerY" secondItem="cdg-l4-i49" secondAttribute="centerY" id="mvC-iL-tZw"/>
+                                            <constraint firstItem="KGW-RH-efF" firstAttribute="leading" secondItem="cdg-l4-i49" secondAttribute="leading" constant="4" id="nr9-ZN-tRh"/>
+                                            <constraint firstItem="TGa-2H-GxW" firstAttribute="centerX" secondItem="cdg-l4-i49" secondAttribute="centerX" id="qGR-Uf-rSb"/>
+                                            <constraint firstItem="1Hv-td-4VJ" firstAttribute="top" secondItem="cdg-l4-i49" secondAttribute="top" constant="5" id="qza-fC-bjE"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="image" destination="1Hv-td-4VJ" id="kJQ-1C-Say"/>
+                                            <outlet property="titleLabel" destination="KGW-RH-efF" id="mMV-se-74U"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5mS-5w-nKu" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
+                                        <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="YJA-PN-bw0">
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
+                                                <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="6JI-tN-JAL"/>
+                                                    <constraint firstAttribute="height" constant="28" id="QAW-CW-3Up"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kB8-bP-a1h">
+                                                <rect key="frame" x="4" y="36" width="85.666666666666671" height="12"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9q-U7-cc6">
+                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
+                                                <connections>
+                                                    <action selector="tapAction:" destination="5mS-5w-nKu" eventType="touchUpInside" id="5Oj-Wv-ROm"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="X9q-U7-cc6" firstAttribute="height" secondItem="5mS-5w-nKu" secondAttribute="height" id="Jfa-PU-9Sb"/>
+                                            <constraint firstItem="X9q-U7-cc6" firstAttribute="centerY" secondItem="5mS-5w-nKu" secondAttribute="centerY" id="KX0-q8-eaT"/>
+                                            <constraint firstItem="X9q-U7-cc6" firstAttribute="centerX" secondItem="5mS-5w-nKu" secondAttribute="centerX" id="P0Z-W9-fG8"/>
+                                            <constraint firstItem="X9q-U7-cc6" firstAttribute="width" secondItem="5mS-5w-nKu" secondAttribute="width" id="TFC-Pc-Sdb"/>
+                                            <constraint firstItem="YJA-PN-bw0" firstAttribute="top" secondItem="5mS-5w-nKu" secondAttribute="top" constant="5" id="VON-VQ-k7x"/>
+                                            <constraint firstItem="kB8-bP-a1h" firstAttribute="leading" secondItem="5mS-5w-nKu" secondAttribute="leading" constant="4" id="Y3l-se-pzg"/>
+                                            <constraint firstItem="YJA-PN-bw0" firstAttribute="centerX" secondItem="5mS-5w-nKu" secondAttribute="centerX" id="dC0-Sr-mU2"/>
+                                            <constraint firstAttribute="bottom" secondItem="kB8-bP-a1h" secondAttribute="bottom" constant="1" id="k0a-CX-TY1"/>
+                                            <constraint firstAttribute="trailing" secondItem="kB8-bP-a1h" secondAttribute="trailing" constant="4" id="nmN-2J-bs4"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="image" destination="YJA-PN-bw0" id="Zle-hk-9kT"/>
+                                            <outlet property="titleLabel" destination="kB8-bP-a1h" id="duA-Da-6Vz"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0T7-J5-o8L" customClass="CustomTabBarItem" customModule="Cosmos_Client" customModuleProvider="target">
+                                        <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="pYF-J9-qTR">
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
+                                                <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="6iC-oH-pTP"/>
+                                                    <constraint firstAttribute="height" constant="28" id="Qaf-Dz-20a"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGe-Cg-vwn">
+                                                <rect key="frame" x="4" y="36" width="85.666666666666671" height="12"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjD-6R-D4j">
+                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
+                                                <connections>
+                                                    <action selector="tapAction:" destination="0T7-J5-o8L" eventType="touchUpInside" id="g32-MA-Pif"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="sjD-6R-D4j" firstAttribute="centerY" secondItem="0T7-J5-o8L" secondAttribute="centerY" id="1iU-Kl-hO7"/>
+                                            <constraint firstItem="sjD-6R-D4j" firstAttribute="width" secondItem="0T7-J5-o8L" secondAttribute="width" id="1iZ-nJ-yR6"/>
+                                            <constraint firstAttribute="bottom" secondItem="QGe-Cg-vwn" secondAttribute="bottom" constant="1" id="BP9-Wk-x1h"/>
+                                            <constraint firstAttribute="trailing" secondItem="QGe-Cg-vwn" secondAttribute="trailing" constant="4" id="JK2-MR-r2w"/>
+                                            <constraint firstItem="QGe-Cg-vwn" firstAttribute="leading" secondItem="0T7-J5-o8L" secondAttribute="leading" constant="4" id="Mne-uh-VHr"/>
+                                            <constraint firstItem="pYF-J9-qTR" firstAttribute="centerX" secondItem="0T7-J5-o8L" secondAttribute="centerX" id="P22-xM-hOp"/>
+                                            <constraint firstItem="pYF-J9-qTR" firstAttribute="top" secondItem="0T7-J5-o8L" secondAttribute="top" constant="5" id="dlL-m3-iOt"/>
+                                            <constraint firstItem="sjD-6R-D4j" firstAttribute="centerX" secondItem="0T7-J5-o8L" secondAttribute="centerX" id="mKl-Tw-6zv"/>
+                                            <constraint firstItem="sjD-6R-D4j" firstAttribute="height" secondItem="0T7-J5-o8L" secondAttribute="height" id="zzh-So-IGD"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="image" destination="pYF-J9-qTR" id="2r2-me-lZw"/>
+                                            <outlet property="titleLabel" destination="QGe-Cg-vwn" id="XTc-yn-XWz"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0T7-J5-o8L" firstAttribute="width" secondItem="5mS-5w-nKu" secondAttribute="width" id="1s1-uv-fV5"/>
+                                    <constraint firstItem="5mS-5w-nKu" firstAttribute="centerY" secondItem="cdg-l4-i49" secondAttribute="centerY" id="1vj-Cn-clt"/>
+                                    <constraint firstItem="myA-80-baP" firstAttribute="width" secondItem="VdK-9M-HG6" secondAttribute="width" multiplier="1:4" id="2cd-RU-KgF"/>
+                                    <constraint firstItem="2Rq-8m-EZI" firstAttribute="leading" secondItem="VdK-9M-HG6" secondAttribute="leading" id="4pL-HK-v02"/>
+                                    <constraint firstItem="myA-80-baP" firstAttribute="leading" secondItem="VdK-9M-HG6" secondAttribute="leading" id="98o-PO-GRh"/>
+                                    <constraint firstItem="0T7-J5-o8L" firstAttribute="height" secondItem="5mS-5w-nKu" secondAttribute="height" id="Aqc-lZ-qdB"/>
+                                    <constraint firstItem="cdg-l4-i49" firstAttribute="centerY" secondItem="myA-80-baP" secondAttribute="centerY" id="BMQ-F3-h1U"/>
+                                    <constraint firstItem="5mS-5w-nKu" firstAttribute="height" secondItem="cdg-l4-i49" secondAttribute="height" id="IHa-go-6iN"/>
+                                    <constraint firstItem="5mS-5w-nKu" firstAttribute="width" secondItem="cdg-l4-i49" secondAttribute="width" id="Kzb-rs-g1n"/>
+                                    <constraint firstItem="5mS-5w-nKu" firstAttribute="leading" secondItem="cdg-l4-i49" secondAttribute="trailing" id="LEu-k4-4u4"/>
+                                    <constraint firstItem="cdg-l4-i49" firstAttribute="leading" secondItem="myA-80-baP" secondAttribute="trailing" id="Mo8-E9-z99"/>
+                                    <constraint firstItem="0T7-J5-o8L" firstAttribute="leading" secondItem="5mS-5w-nKu" secondAttribute="trailing" id="OVZ-nW-5hR"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Rq-8m-EZI" secondAttribute="trailing" id="Ovi-XA-OOd"/>
+                                    <constraint firstItem="2Rq-8m-EZI" firstAttribute="top" secondItem="VdK-9M-HG6" secondAttribute="top" id="PBY-BU-CiQ"/>
+                                    <constraint firstItem="myA-80-baP" firstAttribute="top" secondItem="VdK-9M-HG6" secondAttribute="top" id="dB7-o2-cVi"/>
+                                    <constraint firstItem="0T7-J5-o8L" firstAttribute="centerY" secondItem="5mS-5w-nKu" secondAttribute="centerY" id="gZl-uV-F0X"/>
+                                    <constraint firstAttribute="height" constant="149" id="hZi-zF-IAJ"/>
+                                    <constraint firstItem="cdg-l4-i49" firstAttribute="width" secondItem="myA-80-baP" secondAttribute="width" id="oty-pF-sdh"/>
+                                    <constraint firstItem="cdg-l4-i49" firstAttribute="height" secondItem="myA-80-baP" secondAttribute="height" id="tyb-TT-vzf"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="item1" destination="myA-80-baP" id="6bY-uD-xAk"/>
+                                    <outlet property="item2" destination="cdg-l4-i49" id="5bA-cF-yLm"/>
+                                    <outlet property="item3" destination="5mS-5w-nKu" id="7iZ-iT-n37"/>
+                                    <outlet property="item4" destination="0T7-J5-o8L" id="QA0-ND-cVX"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="uNt-Vw-cUc" firstAttribute="trailing" secondItem="rcx-ku-Ycq" secondAttribute="trailing" id="2Un-m1-npL"/>
+                            <constraint firstItem="uNt-Vw-cUc" firstAttribute="trailing" secondItem="ybu-6J-Jnd" secondAttribute="trailing" id="3EH-Lp-Iat"/>
+                            <constraint firstItem="8AQ-3z-YfY" firstAttribute="centerY" secondItem="uNt-Vw-cUc" secondAttribute="centerY" id="86z-DF-0UJ"/>
+                            <constraint firstItem="tEo-bB-U1A" firstAttribute="leading" secondItem="uNt-Vw-cUc" secondAttribute="leading" id="DOm-sP-B9K"/>
+                            <constraint firstItem="VdK-9M-HG6" firstAttribute="leading" secondItem="uNt-Vw-cUc" secondAttribute="leading" id="FcV-Kf-x1z"/>
+                            <constraint firstItem="Sxn-Vf-hjo" firstAttribute="trailing" secondItem="ybu-6J-Jnd" secondAttribute="trailing" id="Hei-bT-rVk"/>
+                            <constraint firstItem="uNt-Vw-cUc" firstAttribute="trailing" secondItem="tEo-bB-U1A" secondAttribute="trailing" id="IqV-L5-MyZ"/>
+                            <constraint firstItem="Sxn-Vf-hjo" firstAttribute="leading" secondItem="ybu-6J-Jnd" secondAttribute="leading" id="Lht-iJ-7W9"/>
+                            <constraint firstItem="ybu-6J-Jnd" firstAttribute="leading" secondItem="uNt-Vw-cUc" secondAttribute="leading" id="NQW-ex-Cwc"/>
+                            <constraint firstItem="rcx-ku-Ycq" firstAttribute="leading" secondItem="uNt-Vw-cUc" secondAttribute="leading" id="Ogf-UE-azN"/>
+                            <constraint firstItem="uNt-Vw-cUc" firstAttribute="trailing" secondItem="VdK-9M-HG6" secondAttribute="trailing" id="RAR-MM-eK2"/>
+                            <constraint firstItem="VdK-9M-HG6" firstAttribute="top" secondItem="tEo-bB-U1A" secondAttribute="bottom" id="TCh-LW-wFf"/>
+                            <constraint firstItem="Sxn-Vf-hjo" firstAttribute="top" secondItem="ybu-6J-Jnd" secondAttribute="bottom" id="aeG-qf-Q4p"/>
+                            <constraint firstItem="tEo-bB-U1A" firstAttribute="top" secondItem="Sxn-Vf-hjo" secondAttribute="bottom" constant="-0.6666666666666714" id="cWU-GA-wmN"/>
+                            <constraint firstItem="rcx-ku-Ycq" firstAttribute="top" secondItem="ybu-6J-Jnd" secondAttribute="bottom" id="jFF-cZ-b3W"/>
+                            <constraint firstItem="uNt-Vw-cUc" firstAttribute="bottom" secondItem="VdK-9M-HG6" secondAttribute="bottom" constant="-100" id="mSE-8b-zAq"/>
+                            <constraint firstItem="uNt-Vw-cUc" firstAttribute="top" secondItem="ybu-6J-Jnd" secondAttribute="top" constant="50" id="t5M-kd-kgV"/>
+                            <constraint firstItem="8AQ-3z-YfY" firstAttribute="centerX" secondItem="uNt-Vw-cUc" secondAttribute="centerX" id="ydO-iY-T0p"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uNt-Vw-cUc"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="w6C-La-FCn"/>
+                    <connections>
+                        <outlet property="bottomTabbarDownConstraint" destination="mSE-8b-zAq" id="ldL-Lu-iVv"/>
+                        <outlet property="bottomTabbarView" destination="VdK-9M-HG6" id="5cO-zM-0uO"/>
+                        <outlet property="loadingView" destination="8AQ-3z-YfY" id="EBx-Uy-GMu"/>
+                        <outlet property="tableView" destination="tEo-bB-U1A" id="jaR-pL-xKA"/>
+                        <outlet property="toastHolderTopConstraint" destination="aeG-qf-Q4p" id="gxJ-IU-8o6"/>
+                        <outlet property="toastHolderUnderView" destination="Sxn-Vf-hjo" id="UhM-gV-bkO"/>
+                        <outlet property="topNavBarView" destination="ybu-6J-Jnd" id="9f7-sa-cjz"/>
+                        <segue destination="s2u-gH-aLp" kind="unwind" identifier="UnwindToWalletSegue" animates="NO" unwindAction="unwindToWalletWithSegue:" id="Cbx-DH-SgS"/>
+                        <segue destination="s2u-gH-aLp" kind="unwind" identifier="UnwindToValidatorsSegue" animates="NO" unwindAction="unwindToValidatorWithSegue:" id="oG5-F9-EID"/>
+                        <segue destination="s2u-gH-aLp" kind="unwind" identifier="UnwindToWallet" animates="NO" unwindAction="unwindToWalletWithSegue:" id="ynP-59-zyq"/>
+                        <segue destination="s2u-gH-aLp" kind="unwind" identifier="UnwindToNodes" unwindAction="unwindToNodesWithSegue:" id="DwF-Gj-Hlz"/>
+                        <segue destination="WFZ-es-0h2" kind="presentation" identifier="VotesSegueID" modalPresentationStyle="fullScreen" id="J6w-Fw-t2G"/>
+                        <segue destination="0ep-XW-mYa" kind="presentation" identifier="nextSegue" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="aOp-4w-hr6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pSb-qX-qrP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="s2u-gH-aLp" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1734" y="174"/>
         </scene>
     </scenes>
     <resources>
@@ -4499,6 +4996,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zlc-Fm-io9"/>
         <segue reference="rZw-Iy-wVt"/>
         <segue reference="gIV-DK-wR1"/>
     </inferredMetricsTieBreakers>

@@ -39,11 +39,12 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         bottomTabbarView.onTap = { [weak self] index in
+            let segueName = self?.node?.type == .terra ? "nextSegueTerra" : "nextSegue"
             switch index {
             case 0: self?.dismiss(animated: false)
-            case 2: self?.performSegue(withIdentifier: "nextSegue", sender: index)
+            case 2: self?.performSegue(withIdentifier: segueName, sender: index)
             case 3:
-                self?.performSegue(withIdentifier: "nextSegue", sender: index)
+                self?.performSegue(withIdentifier: segueName, sender: index)
                 UIView.setAnimationsEnabled(false)
             default: break
             }
@@ -79,7 +80,8 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         }
         if forwardCounter > 0 {
             if forwardCounter == 1 { UIView.setAnimationsEnabled(true) }
-            self.performSegue(withIdentifier: "nextSegue", sender: forwardCounter + 1)
+            let segueName = node?.type == .terra ? "nextSegueTerra" : "nextSegue"
+            self.performSegue(withIdentifier: segueName, sender: forwardCounter + 1)
             forwardCounter = 0
             return
         }
@@ -143,15 +145,29 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             dest?.validator = validator
         }
         if let index = sender as? Int {
-            let dest = segue.destination as? GaiaOraclesController
-            dest?.node = node
-            dest?.account = account
-            dest?.key = key
-            dest?.keysDelegate = keysDelegate
-            dest?.forwardCounter = index - 2
-            dest?.onUnwind = { [weak self] index in
-                self?.bottomTabbarView.selectIndex(-1)
-                self?.lockLifeCicleDelegates = true
+            if node?.type == .terra {
+                let dest = segue.destination as? GaiaOraclesController
+                dest?.node = node
+                dest?.account = account
+                dest?.key = key
+                dest?.keysDelegate = keysDelegate
+                dest?.forwardCounter = index - 2
+                dest?.onUnwind = { [weak self] index in
+                    self?.bottomTabbarView.selectIndex(-1)
+                    self?.lockLifeCicleDelegates = true
+                }
+            } else {
+                let dest = segue.destination as? GaiaGovernanceController
+                dest?.node = node
+                dest?.account = account
+                dest?.key = key
+                dest?.keysDelegate = keysDelegate
+                dest?.forwardCounter = index - 2
+                dest?.onUnwind = { [weak self] index in
+                    self?.bottomTabbarView.selectIndex(-1)
+                    self?.lockLifeCicleDelegates = true
+                }
+
             }
             forwardCounter = 0
         }
