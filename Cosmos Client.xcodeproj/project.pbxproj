@@ -64,6 +64,7 @@
 		EEBDFBF6237DB9C900079F38 /* TendermintSigner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */; };
 		EEBDFBF7237DB9C900079F38 /* TendermintSigner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EEBDFC2323801E0400079F38 /* GaiaOraclesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */; };
+		EED0718B2380413600B01E25 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED0718A2380413600B01E25 /* CloudKit.framework */; };
 		EEE87A7621F8521B00CA9CDA /* GaiaValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */; };
 		EEE87A7821F860BD00CA9CDA /* GaiaGovernanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE87A7721F860BD00CA9CDA /* GaiaGovernanceCell.swift */; };
 /* End PBXBuildFile section */
@@ -142,6 +143,7 @@
 		EEAFBF6021F4678D001B01EA /* AddressesListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesListController.swift; sourceTree = "<group>"; };
 		EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TendermintSigner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaOraclesController.swift; sourceTree = "<group>"; };
+		EED0718A2380413600B01E25 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaValidatorCell.swift; sourceTree = "<group>"; };
 		EEE87A7721F860BD00CA9CDA /* GaiaGovernanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaGovernanceCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EED0718B2380413600B01E25 /* CloudKit.framework in Frameworks */,
 				8869755C21E9CC1600044EB8 /* CosmosRestApi.framework in Frameworks */,
 				EEBDFBF6237DB9C900079F38 /* TendermintSigner.framework in Frameworks */,
 			);
@@ -162,6 +165,7 @@
 		18E236D3CFC8FD249FA626C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EED0718A2380413600B01E25 /* CloudKit.framework */,
 				EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */,
 			);
 			name = Frameworks;
@@ -594,7 +598,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -649,7 +653,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -672,7 +676,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.terramoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -692,7 +696,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.terramoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
