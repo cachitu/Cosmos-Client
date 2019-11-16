@@ -21,7 +21,7 @@ class PersistableGaiaKeys: PersistCodable {
 class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAlertViewPresentable, GaiaValidatorsCapable {
     
     var toast: ToastAlertView?
-    let keysDelegate = LocalClient()
+    var keysDelegate: LocalClient?
     
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var tableView: UITableView!
@@ -44,24 +44,38 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     @IBAction func swipeAction(_ sender: Any) {
     }
     
-    var node: GaiaNode? = GaiaNode()
+    var node: TDMNode? = TDMNode()
     var dataSource: [GaiaKey] = []
+    var filteredDataSource: [GaiaKey] {
+        return dataSource.filter { $0.type == node?.type.rawValue }
+    }
     var selectedKey: GaiaKey?
     var selectedIndex: Int?
 
+    private func createTheDefauktKey() {
+        
+        let mnemonic = "find cliff book sweet clip dwarf minor boat lamp visual maid reject crazy during hollow vanish sunny salt march kangaroo episode crash anger virtual"
+        
+        if let appleKey = keysDelegate?.recoverKey(from: mnemonic, name: "appleTest1", password: "") {
+            let gaiaKey = GaiaKey(data: appleKey, nodeId: node?.nodeID ?? "")
+            dataSource.append(gaiaKey)
+            PersistableGaiaKeys(keys: dataSource).savetoDisk()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        keysDelegate = LocalClient(networkType: node?.type ?? .cosmos)
         if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
             dataSource = savedKeys.keys
+            if filteredDataSource.count == 0 {
+                createTheDefauktKey()
+            }
         } else {
-            let mnemonic = "find cliff book sweet clip dwarf minor boat lamp visual maid reject crazy during hollow vanish sunny salt march kangaroo episode crash anger virtual"
-            let appleKey = keysDelegate.recoverKey(from: mnemonic, name: "appleTest1", password: "test1234")
-            let gaiaKey = GaiaKey(data: appleKey, nodeId: node?.nodeID ?? "")
-            dataSource = [gaiaKey]
-            PersistableGaiaKeys(keys: dataSource).savetoDisk()
+            createTheDefauktKey()
         }
-
+        
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         noDataView.isHidden = true
         
@@ -77,8 +91,8 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard let validNode = node else { return }
-        retrieveAllKeys(node: validNode, clientDelegate: keysDelegate) { [weak self] gaiaKeys, errorMessage in
+        guard let validNode = node, let delegate = keysDelegate else { return }
+        retrieveAllKeys(node: validNode, clientDelegate: delegate) { [weak self] gaiaKeys, errorMessage in
             guard let keys = gaiaKeys else {
                 //self?.toast?.showToastAlert(errorMessage ?? "Unknown error")
                 self?.dataSource = []
@@ -151,7 +165,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
 extension GaiaKeysController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource.count
+        return filteredDataSource.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -160,7 +174,7 @@ extension GaiaKeysController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCellID", for: indexPath) as! GaiaKeyCell
-        let key = dataSource[indexPath.section]
+        let key = filteredDataSource[indexPath.section]
         cell.onCopy = { [weak self] in
             self?.toast?.showToastAlert("Address copied to clipboard", autoHideAfter: 3, type: .info, dismissable: true)
         }
@@ -182,7 +196,7 @@ extension GaiaKeysController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyHeaderCellID") as? GaiaKeyHeaderCell
-        let key = dataSource[section]
+        let key = filteredDataSource[section]
         cell?.updateCell(sectionIndex: section, key: key)
 
         cell?.onForgetPassTap = { [weak self] section in
@@ -208,7 +222,7 @@ extension GaiaKeysController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let key = dataSource[indexPath.section]
+        let key = filteredDataSource[indexPath.section]
         selectedKey = key
         
         DispatchQueue.main.async {

@@ -63,6 +63,7 @@
 		EEAFBF6421F4678D001B01EA /* AddressesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFBF6021F4678D001B01EA /* AddressesListController.swift */; };
 		EEBDFBF6237DB9C900079F38 /* TendermintSigner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */; };
 		EEBDFBF7237DB9C900079F38 /* TendermintSigner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EEBDFC2323801E0400079F38 /* GaiaOraclesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */; };
 		EEE87A7621F8521B00CA9CDA /* GaiaValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */; };
 		EEE87A7821F860BD00CA9CDA /* GaiaGovernanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE87A7721F860BD00CA9CDA /* GaiaGovernanceCell.swift */; };
 /* End PBXBuildFile section */
@@ -87,7 +88,7 @@
 		8801CF792221921A004781C1 /* GaiaHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaHistoryController.swift; sourceTree = "<group>"; };
 		8801CF7B2221923D004781C1 /* GaiaHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaHistoryCell.swift; sourceTree = "<group>"; };
 		8801CF7D222273D9004781C1 /* GaiaDelegationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaDelegationsController.swift; sourceTree = "<group>"; };
-		88677FF721E9C54A0022A09E /* Terra Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terra Money.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88677FF721E9C54A0022A09E /* Kommet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kommet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88677FFA21E9C54A0022A09E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88677FFF21E9C54A0022A09E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8867800121E9C54D0022A09E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -140,6 +141,7 @@
 		EEAFBF5F21F4678D001B01EA /* AddressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressController.swift; sourceTree = "<group>"; };
 		EEAFBF6021F4678D001B01EA /* AddressesListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesListController.swift; sourceTree = "<group>"; };
 		EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TendermintSigner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaOraclesController.swift; sourceTree = "<group>"; };
 		EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaValidatorCell.swift; sourceTree = "<group>"; };
 		EEE87A7721F860BD00CA9CDA /* GaiaGovernanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaGovernanceCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,7 +181,7 @@
 		88677FF821E9C54A0022A09E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				88677FF721E9C54A0022A09E /* Terra Money.app */,
+				88677FF721E9C54A0022A09E /* Kommet.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -332,6 +334,7 @@
 				8801CF7D222273D9004781C1 /* GaiaDelegationsController.swift */,
 				EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */,
 				EE2D63E321ECF9440002D51D /* GaiaGovernanceController.swift */,
+				EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */,
 				88A3F252224D4C7600BAEEE8 /* GaiaVotesController.swift */,
 				8801CF77221F22EF004781C1 /* GaiaProposalController.swift */,
 				EEE87A7721F860BD00CA9CDA /* GaiaGovernanceCell.swift */,
@@ -369,9 +372,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		88677FF621E9C54A0022A09E /* Terra Money */ = {
+		88677FF621E9C54A0022A09E /* Kommet */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8867800921E9C54D0022A09E /* Build configuration list for PBXNativeTarget "Terra Money" */;
+			buildConfigurationList = 8867800921E9C54D0022A09E /* Build configuration list for PBXNativeTarget "Kommet" */;
 			buildPhases = (
 				88677FF321E9C54A0022A09E /* Sources */,
 				88677FF421E9C54A0022A09E /* Frameworks */,
@@ -382,9 +385,9 @@
 			);
 			dependencies = (
 			);
-			name = "Terra Money";
+			name = Kommet;
 			productName = "Cosmos Client";
-			productReference = 88677FF721E9C54A0022A09E /* Terra Money.app */;
+			productReference = 88677FF721E9C54A0022A09E /* Kommet.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -424,7 +427,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				88677FF621E9C54A0022A09E /* Terra Money */,
+				88677FF621E9C54A0022A09E /* Kommet */,
 			);
 		};
 /* End PBXProject section */
@@ -490,6 +493,7 @@
 				8869756E21EA0DBB00044EB8 /* GaiaNodesController.swift in Sources */,
 				88A3F253224D4C7600BAEEE8 /* GaiaVotesController.swift in Sources */,
 				8869756721E9E50100044EB8 /* Template1Cell.swift in Sources */,
+				EEBDFC2323801E0400079F38 /* GaiaOraclesController.swift in Sources */,
 				8869754D21E9CAD000044EB8 /* RichTextFieldView.swift in Sources */,
 				8869755021E9CAD000044EB8 /* ToastAlertView.swift in Sources */,
 				8869756921E9E5D600044EB8 /* Template1HeaderCell.swift in Sources */,
@@ -707,7 +711,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8867800921E9C54D0022A09E /* Build configuration list for PBXNativeTarget "Terra Money" */ = {
+		8867800921E9C54D0022A09E /* Build configuration list for PBXNativeTarget "Kommet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8867800A21E9C54D0022A09E /* Debug */,

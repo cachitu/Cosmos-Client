@@ -11,9 +11,9 @@ import CosmosRestApi
 
 class PersistableGaiaNodes: PersistCodable {
     
-    let nodes: [GaiaNode]
+    let nodes: [TDMNode]
     
-    init(nodes: [GaiaNode]) {
+    init(nodes: [TDMNode]) {
         self.nodes = nodes
     }
 }
@@ -33,8 +33,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     
     var addressBook: GaiaAddressBook = GaiaAddressBook(items: [])
     
-    fileprivate var nodes: [GaiaNode] =  []
-    fileprivate weak var selectedNode: GaiaNode?
+    fileprivate var nodes: [TDMNode] =  []
+    fileprivate weak var selectedNode: TDMNode?
     fileprivate var selectedIndex: Int = 0
     
     private weak var timer: Timer?
@@ -48,8 +48,11 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             nodes = savedNodes.nodes
             showHint = false
         } else {
-            let defaultNode = GaiaNode(name: "IPSX testnet", scheme: "http", host: "node01.ip.sx", rcpPort: 1337)
-            nodes = [defaultNode]
+            nodes = [
+                TDMNode(name: "Cosmos", type: .cosmos, scheme: "http", host: "node01.ip.sx", rcpPort: 1317),
+                TDMNode(name: "Iris",  type: .iris,scheme: "http", host: "node01.ip.sx", rcpPort: 1327),
+                TDMNode(name: "Terra",  type: .terra,scheme: "http", host: "node01.ip.sx", rcpPort: 1337),
+                TDMNode(name: "Kava",  type: .kava,scheme: "http", host: "node01.ip.sx", rcpPort: 1347)]
             PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
         

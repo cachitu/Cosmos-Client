@@ -11,7 +11,7 @@ import CosmosRestApi
 
 class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
 
-    var node: GaiaNode?
+    var node: TDMNode?
     var key: GaiaKey?
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }

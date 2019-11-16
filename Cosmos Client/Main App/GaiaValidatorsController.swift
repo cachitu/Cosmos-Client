@@ -13,7 +13,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     var toast: ToastAlertView?
     
-    var node: GaiaNode?
+    var node: TDMNode?
     var key: GaiaKey?
     var keysDelegate: LocalClient?
 
@@ -143,7 +143,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             dest?.validator = validator
         }
         if let index = sender as? Int {
-            let dest = segue.destination as? GaiaGovernanceController
+            let dest = segue.destination as? GaiaOraclesController
             dest?.node = node
             dest?.account = account
             dest?.key = key

@@ -11,7 +11,7 @@ import CosmosRestApi
 
 class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, GaiaKeysManagementCapable {
     
-    var node: GaiaNode? = GaiaNode()
+    var node: TDMNode? = TDMNode()
     var keysDelegate: LocalClient?
     
     @IBOutlet weak var field1RtextField: RichTextFieldView!

@@ -18,7 +18,7 @@ class GaiaNodeCell: UITableViewCell {
     @IBOutlet weak var rightLabel: UILabel!
     @IBOutlet weak var roundedView: RoundedView!
 
-    func configure(with node: GaiaNode) {
+    func configure(with node: TDMNode) {
         
         switch node.state {
         case .active: stateView.currentState = .active
@@ -27,8 +27,8 @@ class GaiaNodeCell: UITableViewCell {
         case .unknown: stateView.currentState = .unknown
         }
         self.roundedView.alpha = (stateView.currentState == .active || stateView.currentState == .pending) ? 1 : 0.5
-        leftLabel.text = node.host
-        leftSubLabel.text = "\(node.rcpPort), \(node.tendermintPort)"
-        rightLabel.text = node.network
+        leftLabel.text = "\(node.host):\(node.rcpPort)"
+        leftSubLabel.text = node.network
+        rightLabel.text = node.version
     }
 }

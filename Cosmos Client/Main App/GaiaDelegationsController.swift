@@ -13,7 +13,7 @@ class GaiaDelegationsController: UIViewController, ToastAlertViewPresentable, Ga
 
     var toast: ToastAlertView?
     
-    var node: GaiaNode?
+    var node: TDMNode?
     var key: GaiaKey?
     var account: GaiaAccount?
     var validator: GaiaValidator?

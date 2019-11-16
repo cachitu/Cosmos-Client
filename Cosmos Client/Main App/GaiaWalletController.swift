@@ -11,7 +11,7 @@ import CosmosRestApi
 
 class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKeysManagementCapable {
     
-    var node: GaiaNode?
+    var node: TDMNode?
     var key: GaiaKey?
     var keysDelegate: LocalClient?
     var account: GaiaAccount?

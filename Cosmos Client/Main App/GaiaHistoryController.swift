@@ -13,7 +13,7 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
 
     var toast: ToastAlertView?
     
-    var node: GaiaNode?
+    var node: TDMNode?
     var key: GaiaKey?
     var account: GaiaAccount?
     

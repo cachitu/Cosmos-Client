@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I42-aJ-9pG">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I42-aJ-9pG">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,10 +20,10 @@
                                 <rect key="frame" x="37.666666666666657" y="347" width="300" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="cOA-CN-epA">
-                                        <rect key="frame" x="124" y="0.0" width="52" height="52"/>
+                                        <rect key="frame" x="98" y="0.0" width="104" height="104"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add nodes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4k-Xl-msf">
-                                        <rect key="frame" x="61.666666666666671" y="74" width="176.33333333333331" height="20.333333333333329"/>
+                                        <rect key="frame" x="61.666666666666671" y="125.99999999999999" width="176.33333333333331" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -49,7 +46,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeHeaderCellID" rowHeight="44" id="NTE-JI-IrB" customClass="GaiaNodeHeaderCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NTE-JI-IrB" id="RxT-MU-DGT">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -93,7 +90,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeCellID" id="wnq-OL-Bo1" customClass="GaiaNodeCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99.333333333333343" width="375" height="82"/>
+                                        <rect key="frame" x="0.0" y="99.333332061767578" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wnq-OL-Bo1" id="OUh-fp-I3W">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
@@ -425,7 +422,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarAdd"/>
                                         <connections>
-                                            <segue destination="9eS-Vl-7H1" kind="presentation" identifier="CollectDataSegue" id="gIV-DK-wR1"/>
+                                            <segue destination="9eS-Vl-7H1" kind="presentation" identifier="CollectDataSegue" modalPresentationStyle="fullScreen" id="gIV-DK-wR1"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -476,7 +473,7 @@
                         <outlet property="toastHolderTopConstraint" destination="Fs9-Kz-Cmc" id="B20-48-B7a"/>
                         <outlet property="toastHolderUnderView" destination="JQJ-6W-wFW" id="5s4-O5-cQI"/>
                         <outlet property="topNavBarView" destination="Ej6-Qd-hJq" id="K6P-Yo-xBZ"/>
-                        <segue destination="9eS-Vl-7H1" kind="presentation" identifier="NodeEditSegue" id="rTY-Cf-TXZ"/>
+                        <segue destination="9eS-Vl-7H1" kind="presentation" identifier="NodeEditSegue" modalPresentationStyle="fullScreen" id="rTY-Cf-TXZ"/>
                         <segue destination="C66-qx-PyC" kind="show" identifier="ShowNodeKeysSegue" id="tjd-Ex-TN6"/>
                     </connections>
                 </viewController>
@@ -648,13 +645,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1317" placeholder="Port Number" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="tPb-fX-l8T">
-                                                <rect key="frame" x="0.0" y="23.666666666666657" width="343" height="20"/>
+                                                <rect key="frame" x="0.0" y="23.000000000000028" width="343" height="21"/>
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="orW-E4-TkG" userLabel="Separator">
-                                                <rect key="frame" x="0.0" y="47.666666666666657" width="343" height="1"/>
+                                                <rect key="frame" x="0.0" y="48.000000000000028" width="343" height="1"/>
                                                 <color key="backgroundColor" red="0.80784313730000001" green="0.82745098039999998" blue="0.85500001910000001" alpha="0.30705325700000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="fX4-t7-9KF"/>
@@ -699,13 +696,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="http" placeholder="http or https" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="RF9-zZ-U4q">
-                                                <rect key="frame" x="0.0" y="23.666666666666686" width="343" height="20"/>
+                                                <rect key="frame" x="0.0" y="23.333333333333314" width="343" height="21"/>
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNd-DC-Hvd" userLabel="Separator">
-                                                <rect key="frame" x="0.0" y="46.666666666666686" width="343" height="1"/>
+                                                <rect key="frame" x="0.0" y="47.333333333333314" width="343" height="1"/>
                                                 <color key="backgroundColor" red="0.80784313730000001" green="0.82745098039999998" blue="0.85500001910000001" alpha="0.30705325700000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Vyy-Uv-CLt"/>
@@ -745,28 +742,6 @@
                                     <constraint firstAttribute="height" priority="750" constant="270" id="BcV-2W-yQM"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To access your node unsecured, launch:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gna-A6-I5C">
-                                <rect key="frame" x="16.000000000000014" y="382.66666666666669" width="241.33333333333337" height="14.333333333333314"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Peo-hb-umw">
-                                <rect key="frame" x="329" y="376.33333333333331" width="30" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Copy">
-                                    <color key="titleColor" name="TerraBlue"/>
-                                </state>
-                                <connections>
-                                    <action selector="copyServerCommand:" destination="9eS-Vl-7H1" eventType="touchUpInside" id="5ey-vK-19y"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gaiacli rest-server --laddr=tcp://0.0.0.0:1317 --node tcp://0.0.0.0:26657 --trust-node=true" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXx-GE-4fq">
-                                <rect key="frame" x="16" y="405" width="343" height="31.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1650000066" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u0r-Lv-cTf" userLabel="Top Bar">
                                 <rect key="frame" x="0.0" y="-6" width="375" height="94"/>
                                 <subviews>
@@ -831,31 +806,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="QxA-Q6-Otc" secondAttribute="trailing" constant="16" id="8vt-RP-AX1"/>
-                            <constraint firstItem="gna-A6-I5C" firstAttribute="top" secondItem="QxA-Q6-Otc" secondAttribute="bottom" id="CUC-MC-cX2"/>
-                            <constraint firstItem="gna-A6-I5C" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" constant="16" id="FbW-8r-m1P"/>
-                            <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="Peo-hb-umw" secondAttribute="trailing" constant="16" id="J5U-MT-zVS"/>
                             <constraint firstItem="QxA-Q6-Otc" firstAttribute="top" secondItem="pT9-sF-oWy" secondAttribute="bottom" constant="24" id="Kuh-yl-J2B"/>
                             <constraint firstItem="u0r-Lv-cTf" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" id="NVv-NI-SLa"/>
                             <constraint firstItem="Pia-hr-EBP" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" id="UIO-k8-jUr"/>
                             <constraint firstItem="pT9-sF-oWy" firstAttribute="top" secondItem="u0r-Lv-cTf" secondAttribute="bottom" id="UMn-5i-83N"/>
-                            <constraint firstItem="EXx-GE-4fq" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" constant="16" id="Umv-Dg-fP4"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="bottom" secondItem="iQE-Z9-u3v" secondAttribute="bottom" constant="-28" id="Vd6-HC-Ky0"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="top" secondItem="Pia-hr-EBP" secondAttribute="top" constant="20" id="Wgn-Ns-fxs"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="iQE-Z9-u3v" secondAttribute="trailing" constant="15" id="XnI-4F-Vwq"/>
                             <constraint firstItem="iQE-Z9-u3v" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" constant="15" id="bjt-Bv-qut"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="bottom" secondItem="Pia-hr-EBP" secondAttribute="bottom" id="i06-i0-Zba"/>
-                            <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gna-A6-I5C" secondAttribute="trailing" symbolic="YES" id="iP8-FH-4HV"/>
-                            <constraint firstItem="Peo-hb-umw" firstAttribute="centerY" secondItem="gna-A6-I5C" secondAttribute="centerY" id="l8Z-Sd-mPx"/>
-                            <constraint firstItem="EXx-GE-4fq" firstAttribute="top" secondItem="gna-A6-I5C" secondAttribute="bottom" constant="8" id="oM4-XB-iZg"/>
                             <constraint firstItem="iQE-Z9-u3v" firstAttribute="top" secondItem="0M5-k4-JaJ" secondAttribute="bottom" constant="11" id="pSI-wI-Q6k"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="u0r-Lv-cTf" secondAttribute="trailing" id="qYP-aL-WSD"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="top" secondItem="u0r-Lv-cTf" secondAttribute="top" constant="50" id="r65-de-UPY"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="pT9-sF-oWy" secondAttribute="trailing" id="rB8-eF-xbX"/>
                             <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="Pia-hr-EBP" secondAttribute="trailing" id="s4R-ot-n7d"/>
-                            <constraint firstItem="Peo-hb-umw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gna-A6-I5C" secondAttribute="trailing" constant="8" symbolic="YES" id="uld-uJ-5NF"/>
                             <constraint firstItem="pT9-sF-oWy" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" id="v83-f7-5MJ"/>
                             <constraint firstItem="iQE-Z9-u3v" firstAttribute="leading" secondItem="0M5-k4-JaJ" secondAttribute="leading" id="vDo-Xr-Zhd"/>
-                            <constraint firstItem="wcj-Y7-3kj" firstAttribute="trailing" secondItem="EXx-GE-4fq" secondAttribute="trailing" constant="16" id="xh4-j9-yif"/>
                             <constraint firstItem="QxA-Q6-Otc" firstAttribute="leading" secondItem="wcj-Y7-3kj" secondAttribute="leading" constant="16" id="y9E-dm-YCH"/>
                             <constraint firstItem="iQE-Z9-u3v" firstAttribute="trailing" secondItem="0M5-k4-JaJ" secondAttribute="trailing" id="zmV-cL-fc7"/>
                         </constraints>
@@ -870,7 +836,6 @@
                         <outlet property="field2RtextField" destination="CNt-Z9-mKS" id="ePA-2w-UYB"/>
                         <outlet property="field3RtextField" destination="VQg-Mv-lhB" id="1Bm-ng-70u"/>
                         <outlet property="field4RtextField" destination="RfM-oQ-gO5" id="YbD-sp-cqu"/>
-                        <outlet property="serverInfoLabel" destination="EXx-GE-4fq" id="qND-s5-3wj"/>
                         <outlet property="stackHeightConstraint" destination="BcV-2W-yQM" id="FyT-xO-3wB"/>
                         <outlet property="topBarView" destination="u0r-Lv-cTf" id="nWd-pM-a4s"/>
                         <outlet property="topConstraintOutlet" destination="UMn-5i-83N" id="cMj-1n-zHf"/>
@@ -912,10 +877,10 @@
                                 <rect key="frame" x="37.666666666666657" y="347" width="300" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="Uoi-re-dDl">
-                                        <rect key="frame" x="124" y="0.0" width="52" height="52"/>
+                                        <rect key="frame" x="98" y="0.0" width="104" height="104"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add nodes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fL-mE-6eV">
-                                        <rect key="frame" x="61.666666666666671" y="74" width="176.33333333333331" height="20.333333333333329"/>
+                                        <rect key="frame" x="61.666666666666671" y="125.99999999999999" width="176.33333333333331" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -938,7 +903,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyHeaderCellID" rowHeight="44" id="SEt-zc-9aL" customClass="GaiaKeyHeaderCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SEt-zc-9aL" id="Gay-id-weT">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -995,7 +960,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="v3g-Ar-Cqy" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99.333333333333343" width="375" height="73"/>
+                                        <rect key="frame" x="0.0" y="99.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v3g-Ar-Cqy" id="LHU-WG-roJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
@@ -1178,9 +1143,9 @@
                         <outlet property="toastHolderTopConstraint" destination="PpH-tq-IfK" id="QkK-Wm-mVm"/>
                         <outlet property="toastHolderUnderView" destination="boq-pf-1Hn" id="bmL-U1-Si1"/>
                         <outlet property="topNavBarView" destination="C4o-dK-myJ" id="ix1-57-i8b"/>
-                        <segue destination="JGL-u5-Pdz" kind="presentation" identifier="ShowKeyDetailsSegue" id="IQj-ue-FGK"/>
+                        <segue destination="JGL-u5-Pdz" kind="presentation" identifier="ShowKeyDetailsSegue" modalPresentationStyle="fullScreen" id="IQj-ue-FGK"/>
                         <segue destination="hPr-Gq-sdB" kind="show" identifier="WalletSegueID" id="dqJ-Td-z6e"/>
-                        <segue destination="3go-4Q-YDw" kind="presentation" identifier="CreateKeySegue" id="tnP-2J-pPh"/>
+                        <segue destination="3go-4Q-YDw" kind="presentation" identifier="CreateKeySegue" modalPresentationStyle="fullScreen" id="tnP-2J-pPh"/>
                         <segue destination="p4n-41-3xa" kind="presentation" identifier="ShowAddressBookSegue" id="KyJ-Mr-vI6"/>
                     </connections>
                 </viewController>
@@ -1766,8 +1731,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5eU-zC-9Bw">
-                                        <rect key="frame" x="7.6666666666666714" y="34.333333333333314" width="151.66666666666663" height="30"/>
-                                        <nil key="textColor"/>
+                                        <rect key="frame" x="7.6666666666666714" y="34.333333333333314" width="151.66666666666663" height="34"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" keyboardType="ASCIICapableNumberPad"/>
                                         <connections>
@@ -1775,7 +1739,7 @@
                                         </connections>
                                     </textField>
                                     <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Brt-HF-jHr">
-                                        <rect key="frame" x="7.6666666666666714" y="74" width="151.66666666666663" height="70"/>
+                                        <rect key="frame" x="7.6666666666666714" y="78" width="151.66666666666663" height="66"/>
                                         <connections>
                                             <outlet property="dataSource" destination="hPr-Gq-sdB" id="Vos-mf-RWf"/>
                                             <outlet property="delegate" destination="hPr-Gq-sdB" id="xL0-as-MwT"/>
@@ -1845,7 +1809,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCell" id="S3P-lh-O5M" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="73"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S3P-lh-O5M" id="eZk-ML-Koh">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
@@ -1959,7 +1923,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="history"/>
                                         <connections>
-                                            <segue destination="ccf-MA-ojY" kind="presentation" identifier="HistorySegueID" id="jgc-hA-QKr"/>
+                                            <segue destination="ccf-MA-ojY" kind="presentation" identifier="HistorySegueID" modalPresentationStyle="fullScreen" id="jgc-hA-QKr"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2044,7 +2008,7 @@
                         <outlet property="topConstraintOutlet" destination="e3c-ZC-rzg" id="I5p-u5-Eai"/>
                         <outlet property="topNavBarView" destination="Y3e-4F-cEe" id="mvN-sr-huT"/>
                         <outlet property="txFeeLabel" destination="uOJ-6B-HTT" id="Xc7-gI-ck1"/>
-                        <segue destination="6Ja-jx-Fju" kind="presentation" identifier="nextSegue" animates="NO" modalTransitionStyle="flipHorizontal" id="S1T-W4-Yp2"/>
+                        <segue destination="6Ja-jx-Fju" kind="presentation" identifier="nextSegue" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="S1T-W4-Yp2"/>
                         <segue destination="p4n-41-3xa" kind="presentation" identifier="ShowAddressBookSegue" id="rZw-Iy-wVt"/>
                         <segue destination="B0n-P6-Mj0" kind="unwind" identifier="UnwindToNodes" unwindAction="unwindToNodesWithSegue:" id="YGO-sg-JCQ"/>
                     </connections>
@@ -2076,7 +2040,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaValidatorCellID" id="cXJ-g2-wDZ" customClass="GaiaValidatorCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="110"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cXJ-g2-wDZ" id="hG7-d9-dtc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
@@ -2455,9 +2419,9 @@
                         <outlet property="toastHolderUnderView" destination="klr-Pk-WGv" id="0sP-V2-eme"/>
                         <outlet property="topNavBarView" destination="fej-b2-DDY" id="1O1-HN-bCs"/>
                         <segue destination="r7J-Vy-fyA" kind="unwind" identifier="UnwindToWalletSegue" animates="NO" unwindAction="unwindToWalletWithSegue:" id="cid-sK-gGC"/>
-                        <segue destination="i83-p6-5lL" kind="presentation" identifier="nextSegue" animates="NO" modalTransitionStyle="flipHorizontal" id="VFE-X1-6qw"/>
+                        <segue destination="i83-p6-5lL" kind="presentation" identifier="nextSegue" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="VFE-X1-6qw"/>
                         <segue destination="r7J-Vy-fyA" kind="unwind" identifier="UnwindToNodes" unwindAction="unwindToNodesWithSegue:" id="13f-tT-gVv"/>
-                        <segue destination="bKP-u7-GVw" kind="presentation" identifier="MoreSegueID" id="M4Y-Wm-Zyi"/>
+                        <segue destination="bKP-u7-GVw" kind="presentation" identifier="MoreSegueID" modalPresentationStyle="fullScreen" id="M4Y-Wm-Zyi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QrH-zo-Dds" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2468,7 +2432,7 @@
         <!--Governance-->
         <scene sceneID="4SU-t2-4uC">
             <objects>
-                <viewController title="Governance" extendedLayoutIncludesOpaqueBars="YES" id="i83-p6-5lL" customClass="GaiaGovernanceController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Governance" extendedLayoutIncludesOpaqueBars="YES" id="i83-p6-5lL" customClass="GaiaOraclesController" customModule="Kommet" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jRw-vQ-oH9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2480,7 +2444,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaOraclesCellID" id="YRc-fz-kcE" customClass="GaiaOracleCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YRc-fz-kcE" id="uCz-YN-zRy">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -2601,7 +2565,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarAdd"/>
                                         <connections>
-                                            <segue destination="zmf-Wa-kLi" kind="presentation" identifier="CreateProposalSegueID" id="PKL-Cf-2ee"/>
+                                            <segue destination="zmf-Wa-kLi" kind="presentation" identifier="CreateProposalSegueID" modalPresentationStyle="fullScreen" id="PKL-Cf-2ee"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2862,10 +2826,10 @@
                         <outlet property="topNavBarView" destination="ktO-eO-L79" id="N0I-cP-ny3"/>
                         <segue destination="z4T-fA-28I" kind="unwind" identifier="UnwindToWalletSegue" animates="NO" unwindAction="unwindToWalletWithSegue:" id="F7e-eY-CYH"/>
                         <segue destination="z4T-fA-28I" kind="unwind" identifier="UnwindToValidatorsSegue" animates="NO" unwindAction="unwindToValidatorWithSegue:" id="tSh-5c-Bub"/>
-                        <segue destination="0ep-XW-mYa" kind="presentation" identifier="nextSegue" animates="NO" modalTransitionStyle="flipHorizontal" id="zlc-Fm-io9"/>
+                        <segue destination="0ep-XW-mYa" kind="presentation" identifier="nextSegue" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="zlc-Fm-io9"/>
                         <segue destination="z4T-fA-28I" kind="unwind" identifier="UnwindToWallet" animates="NO" unwindAction="unwindToWalletWithSegue:" id="PmR-lV-W3N"/>
                         <segue destination="z4T-fA-28I" kind="unwind" identifier="UnwindToNodes" unwindAction="unwindToNodesWithSegue:" id="cDt-7S-E9X"/>
-                        <segue destination="WFZ-es-0h2" kind="presentation" identifier="VotesSegueID" id="CVj-Nm-o20"/>
+                        <segue destination="WFZ-es-0h2" kind="presentation" identifier="VotesSegueID" modalPresentationStyle="fullScreen" id="CVj-Nm-o20"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A3R-1e-UAy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2927,10 +2891,10 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ipsxLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Brv-98-9kR">
-                                <rect key="frame" x="172.66666666666666" y="582.66666666666663" width="30" height="30"/>
+                                <rect key="frame" x="-18.666666666666657" y="452.66666666666669" width="412.33333333333326" height="80.000000000000057"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WrN-0c-CpR">
-                                <rect key="frame" x="172.66666666666666" y="582.66666666666663" width="30" height="30"/>
+                                <rect key="frame" x="-18.666666666666657" y="452.66666666666669" width="412.33333333333326" height="80.000000000000057"/>
                                 <connections>
                                     <action selector="openIpsxUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="a7f-nO-YLt"/>
                                 </connections>
@@ -3141,7 +3105,7 @@
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqK-PE-kmt">
-                                <rect key="frame" x="59.666666666666657" y="537.33333333333337" width="255.99999999999997" height="21.333333333333371"/>
+                                <rect key="frame" x="59.666666666666657" y="407.33333333333331" width="255.99999999999997" height="21.333333333333314"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21.5" id="5ux-RH-6SP"/>
                                 </constraints>
@@ -3174,7 +3138,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYT-d5-A7q" userLabel="kytzu link">
-                                <rect key="frame" x="59.666666666666671" y="533" width="136.66666666666663" height="30"/>
+                                <rect key="frame" x="59.666666666666671" y="403" width="136.66666666666663" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3184,7 +3148,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSq-W8-voj" userLabel="syncnode link">
-                                <rect key="frame" x="201.66666666666663" y="533" width="114" height="30"/>
+                                <rect key="frame" x="201.66666666666663" y="403" width="114" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3204,7 +3168,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8em-I2-140"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
@@ -3227,8 +3190,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Transaction memo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bry-hz-MEj">
-                                <rect key="frame" x="16" y="248" width="288" height="30"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="16" y="248" width="288" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 <connections>
@@ -3236,7 +3198,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="399-Qh-Ert">
-                                <rect key="frame" x="312" y="246" width="47" height="34"/>
+                                <rect key="frame" x="312" y="248" width="47" height="34"/>
                                 <state key="normal" title="Apply">
                                     <color key="titleColor" name="TerraBlue"/>
                                 </state>
@@ -3246,7 +3208,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jF8-97-M3F">
-                                <rect key="frame" x="71.666666666666686" y="636.66666666666663" width="232" height="21.333333333333371"/>
+                                <rect key="frame" x="71.666666666666686" y="556.66666666666663" width="232" height="21.333333333333371"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Security audit by ">
                                         <attributes>
@@ -3266,10 +3228,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-bitsentinel" translatesAutoresizingMaskIntoConstraints="NO" id="TcP-zt-fEz">
-                                <rect key="frame" x="179.66666666666666" y="682" width="16" height="16"/>
+                                <rect key="frame" x="-2" y="602" width="379" height="96"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFd-Aj-xUP">
-                                <rect key="frame" x="71.666666666666686" y="636.66666666666663" width="232" height="61.333333333333371"/>
+                                <rect key="frame" x="71.666666666666686" y="556.66666666666663" width="232" height="141.33333333333337"/>
                                 <connections>
                                     <action selector="openBitSentinel:" destination="0ep-XW-mYa" eventType="touchUpInside" id="wOp-dT-F8J"/>
                                     <action selector="openIpsxUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="Hsh-4g-qGa"/>
@@ -3520,7 +3482,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfj-nU-FfM">
-                                        <rect key="frame" x="285.66666666666669" y="7" width="59.333333333333314" height="30"/>
+                                        <rect key="frame" x="275" y="7" width="70" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="tTl-2o-btM"/>
                                         </constraints>
@@ -3815,7 +3777,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-8J-cOI">
-                                        <rect key="frame" x="285.66666666666669" y="7" width="59.333333333333314" height="30"/>
+                                        <rect key="frame" x="275" y="7" width="70" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Swn-jI-NMX"/>
                                         </constraints>
@@ -3977,7 +3939,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaHistoryCellID" id="Uc6-FM-Npu" customClass="GaiaHistoryCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="110"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uc6-FM-Npu" id="uxg-7a-v0J">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
@@ -4183,7 +4145,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="S0r-SO-nWX" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="73"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S0r-SO-nWX" id="j1s-b7-WPd">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
@@ -4358,7 +4320,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="9ZM-fa-eF9" customClass="GaiaKeyCell" customModule="Terra_Money" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="73"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9ZM-fa-eF9" id="i93-1g-xM0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
@@ -4533,7 +4495,7 @@
         <image name="rcheckBoxChecked" width="20" height="20"/>
         <image name="rcheckBoxEmpty" width="20" height="20"/>
         <namedColor name="TerraBlue">
-            <color red="0.17254901960784313" green="0.28235294117647058" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.12549019607843137" green="0.12941176470588237" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

@@ -22,18 +22,16 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var deleteNode: RoundedButton!
-    @IBOutlet weak var moreDetails: RoundedButton?
-    @IBOutlet weak var serverInfoLabel: UILabel!
     
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
     
     var toast: ToastAlertView?
     
-    var collectedData: GaiaNode?
+    var collectedData: TDMNode?
     
     private var fieldsStateDic: [String : Bool] = ["field1" : false, "field2" : false, "field3" : true, "field4" : true]
     
-    var onCollectDataComplete: ((_ data: GaiaNode)->())?
+    var onCollectDataComplete: ((_ data: TDMNode)->())?
     var onDeleteComplete: ((_ index: Int)->())?
     var editMode = false
     var editedNodeIndex: Int?
@@ -44,7 +42,6 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         setupTextViews()
         observreFieldsState()
         deleteNode.isHidden = !editMode
-        moreDetails?.isHidden = !editMode
         
         if editMode {
             prePopulate()
@@ -88,11 +85,6 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         self.dismiss(animated: true)
     }
     
-    @IBAction func copyServerCommand(_ sender: Any) {
-        UIPasteboard.general.string = serverInfoLabel.text
-        toast?.showToastAlert("Copied. Paste this command in a terminal on your node to start the RPC server", type: .info, dismissable: true)
-    }
-    
     private func setupTextViews() {
         field1RtextField.validationRegex    = RichTextFieldView.minOneCharRegex
         field1RtextField.nextResponderField = field2RtextField.contentTextField
@@ -128,7 +120,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     }
     
     private func collectData() {
-        if collectedData == nil { collectedData = GaiaNode() }
+        if collectedData == nil { collectedData = TDMNode() }
         collectedData?.name = field1RtextField.contentTextField?.text ?? ""
         collectedData?.host = field2RtextField.contentTextField?.text ?? ""
         collectedData?.rcpPort = Int(field3RtextField.contentTextField?.text ?? "1317") ?? 1317
