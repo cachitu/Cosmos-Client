@@ -11,7 +11,7 @@ import CosmosRestApi
 
 class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKeysManagementCapable {
     
-    var node: GaiaNode?
+    var node: TDMNode?
     var key: GaiaKey?
     var keysDelegate: LocalClient?
     var account: GaiaAccount?
@@ -156,11 +156,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         self?.loadingView.stopAnimating()
                         
                         if let validResponse = response {
-                            self?.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 5, type: .validatePending, dismissable: false)
+                            self?.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 15, type: .validatePending, dismissable: false)
                         } else if let errMsg = error {
-                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                         } else {
-                            self?.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 15, type: .error, dismissable: true)
                         }
                     }
         }
@@ -238,11 +238,20 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func queryRewards(validDelegations: [GaiaDelegation]) {
         guard let validNode = node else { return }
         for delegation in validDelegations {
-            if account?.gaiaKey.validator == delegation.validatorAddr {
+            if account?.gaiaKey.validator == delegation.validatorAddr || account?.gaiaKey.address == delegation.delegatorAddr {
                 key?.queryValidatorRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
-                    if let rew = rewards, let selfBonded = rew.selfBondRewards?.first?.amount, let selfCommision = rew.valCommission?.first?.amount {
-                        let c1 = selfCommision.split(separator: ".").first ?? "0"
-                        let c2 = selfBonded.split(separator: ".").first ?? "0"
+                    if let rew = rewards {
+                        var selfBonded = rew.selfBondRewards?.first?.amount
+                        var selfCommision = rew.valCommission?.first?.amount
+                        if self?.node?.type == .terra {
+                            selfBonded = rew.selfBondRewards?.filter { $0.denom == "uluna" }.first?.amount
+                            selfCommision = rew.valCommission?.filter { $0.denom == "uluna" }.first?.amount
+                        }
+                        let c1 = selfCommision?.split(separator: ".").first ?? "0"
+                        var c2 = selfBonded?.split(separator: ".").first ?? "0"
+                        if self?.node?.type == .iris, c2.count > 18 {
+                            c2.removeLast(18)
+                        }
                         let int1 = Int(c1) ?? 0
                         let int2 = Int(c2) ?? 0
                         let total = int1 + int2
@@ -303,7 +312,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 } else {
                     self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee)"
                     if let message = errMessage, message.count > 0 {
-                        self?.toast?.showToastAlert(errMessage, autoHideAfter: 5, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(errMessage, autoHideAfter: 15, type: .error, dismissable: true)
                     }
                     self?.amountValueLabel.text = "0.00"
                     self?.amountDenomLabel.text = "-"
@@ -368,7 +377,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             }
                         } else if let errMsg = err {
                             self?.loadingView.stopAnimating()
-                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                         }
                 }
             }
@@ -382,7 +391,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 self?.loadingView.startAnimating()
                 self?.unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: self?.feeAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { (resp, err) in
                     if err == nil {
-                        self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                        self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 15, type: .info, dismissable: true)
                         self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                             self?.loadingView.stopAnimating()
                             if let validDelegations = delegations {
@@ -393,7 +402,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         }
                     } else if let errMsg = err {
                         self?.loadingView.stopAnimating()
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                     }
                 }
             }
@@ -406,7 +415,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             loadingView.startAnimating()
             withdraw(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount, validator: delegation.validatorAddr) { [weak self] resp, err in
                 if err == nil {
-                    self?.toast?.showToastAlert("Withdraw successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("Withdraw successfull", autoHideAfter: 15, type: .info, dismissable: true)
                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                         self?.loadingView.stopAnimating()
                         if let validDelegations = delegations {
@@ -417,7 +426,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     }
                 } else if let errMsg = err {
                     self?.loadingView.stopAnimating()
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                 }
             }
         }
@@ -429,7 +438,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             loadingView.startAnimating()
             withdrawComission(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, err in
                 if err == nil {
-                    self?.toast?.showToastAlert("Comission withdraw successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("Comission withdraw successfull", autoHideAfter: 15, type: .info, dismissable: true)
                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                         self?.loadingView.stopAnimating()
                         if let validDelegations = delegations {
@@ -440,7 +449,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     }
                 } else if let errMsg = err {
                     self?.loadingView.stopAnimating()
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                 }
             }
         }
@@ -503,7 +512,7 @@ extension GaiaWalletController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCellID", for: indexPath) as! GaiaKeyCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCell", for: indexPath) as! GaiaKeyCell
         let delegation = dataSource[indexPath.item]
         let parts = delegation.shares.split(separator: ".")
         let validatorName = node?.knownValidators[delegation.validatorAddr] ?? ""

@@ -14,7 +14,7 @@ class GaiaVotesController: UIViewController, ToastAlertViewPresentable, GaiaKeys
     
     var toast: ToastAlertView?
     
-    var node: GaiaNode?
+    var node: TDMNode?
     var key: GaiaKey?
     var account: GaiaAccount?
     

@@ -11,10 +11,9 @@ import CosmosRestApi
 
 class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
-    var node: GaiaNode? = GaiaNode()
+    var node: TDMNode? = TDMNode()
     var keysDelegate: LocalClient?
     
-    @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
@@ -60,20 +59,20 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = addressLabel.text
-        toast?.showToastAlert("Address copied to clipboard", autoHideAfter: 5, type: .info, dismissable: true)
+        toast?.showToastAlert("Address copied to clipboard", autoHideAfter: 15, type: .info, dismissable: true)
     }
     
     @IBAction func copySeed(_ sender: Any) {
         UIPasteboard.general.string = seedLabel.text
-        toast?.showToastAlert("Seed copied to clipboard", autoHideAfter: 5, type: .info, dismissable: true)
+        toast?.showToastAlert("Seed copied to clipboard", autoHideAfter: 15, type: .info, dismissable: true)
     }
     
     @IBAction func deleteKey(_ sender: Any) {
         guard let validNode = node else { return }
         let keyName = key?.name ?? "this account"
         var alertMessage = "Enter the password for \(keyName) to delete the wallet. The passowrd and seed will be permanentely removed from the keychain."
-        if key?.address == "cosmos104l6kttdmnwh5lytwkgccnc8l9zpjr64y8qcmu" {
-            alertMessage = "This is the Apple Test key, needed for the iOS Appstore review. To delete this address, type: \ntest1234"
+        if key?.name == "appleTest1" {
+            alertMessage = "This is the Apple Test key, needed for the iOS Appstore review. To delete this address, no password is required."
         }
         self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
             self?.loadingView.startAnimating()
@@ -88,15 +87,15 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
                             self?.loadingView.stopAnimating()
                             self?.dismiss(animated: true)
                         } else if let errMessage = errMsg {
-                            self?.toast?.showToastAlert(errMessage, autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMessage, autoHideAfter: 15, type: .error, dismissable: true)
                         } else {
-                            self?.toast?.showToastAlert("Opps, I failed to delete the key.", autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert("Opps, I failed to delete the key.", autoHideAfter: 15, type: .error, dismissable: true)
                         }
                     }
                 } else if let msg = message {
-                    self?.toast?.showToastAlert(msg, autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(msg, autoHideAfter: 15, type: .error, dismissable: true)
                 } else {
-                    self?.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 5, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 15, type: .error, dismissable: true)
                 }
             }
         }
@@ -128,13 +127,11 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     private func prePopulate() {
         nameLabel.text    = key?.name ?? "No name"
         addressLabel.text = key?.address ?? "cosmos..."
-        typeLabel.text    = key?.type ?? "..."
         pubKeyLabel.text  = key?.pubAddress ?? "cosmos..."
+        typeLabel.text    = key?.type ?? ""
         seedLabel.text    = "Tap Show Seed to unhide"
         if let seed = key?.getMnemonicFromKeychain() {
             seedLabel.text = seed
-            //TODO: check if this is safe with a security audit
-            //seedButton.isHidden = false
         }
     }
     

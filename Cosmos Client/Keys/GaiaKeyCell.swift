@@ -11,7 +11,6 @@ import CosmosRestApi
 
 class GaiaKeyCell: UITableViewCell {
 
-    @IBOutlet weak var leftImageView: UIImageView!
     @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var leftSubLabel: UILabel!
     @IBOutlet weak var upRightLabel: UILabel?
@@ -27,9 +26,5 @@ class GaiaKeyCell: UITableViewCell {
         upRightLabel?.text = amount
         leftLabel.text = key.name
         leftSubLabel.text = key.address
-        let imageName = "approved"
-        if let image = UIImage(named: imageName) {
-            leftImageView.image = image
-        }
     }
 }

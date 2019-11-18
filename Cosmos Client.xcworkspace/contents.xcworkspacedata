@@ -8,6 +8,6 @@
       location = "group:../CosmosRestAPI/CosmosRestApi.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:../TendermintSigner/TendermintSigner.xcodeproj">
    </FileRef>
 </Workspace>

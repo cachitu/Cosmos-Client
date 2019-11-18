@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iW5-Xz-g9h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iW5-Xz-g9h">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +14,7 @@
         <!--Address Controller-->
         <scene sceneID="nGS-pG-AKJ">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="jYx-4r-YUa" customClass="AddressController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="jYx-4r-YUa" customClass="AddressController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r0o-cy-M4h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -65,7 +66,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZRe-2w-gCy">
                                 <rect key="frame" x="15" y="156" width="345" height="120"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhR-LU-jU0" userLabel="Wallet name" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhR-LU-jU0" userLabel="Wallet name" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpj-iC-8eg">
@@ -116,7 +117,7 @@
                                             <outlet property="titleLabel" destination="cpj-iC-8eg" id="sfN-Mt-dKc"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PvX-GQ-vJ8" userLabel="ETH Address" customClass="RichTextFieldView" customModule="Cosmos_Client" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PvX-GQ-vJ8" userLabel="ETH Address" customClass="RichTextFieldView" customModule="Terra_Money" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="60" width="345" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gaia Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beo-DB-h3p">
@@ -169,7 +170,7 @@
                                 <rect key="frame" x="15" y="276" width="84" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="   Copy" image="clipboard">
-                                    <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="TerraBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="copyAction:" destination="jYx-4r-YUa" eventType="touchUpInside" id="p66-mq-fcw"/>
@@ -184,8 +185,9 @@
                                             <constraint firstAttribute="height" constant="44" id="Is0-JF-I26"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Save">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <state key="disabled">
                                             <color key="titleColor" red="0.80784313730000001" green="0.82745098039999998" blue="0.85500001910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -197,8 +199,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTA-Pa-HdV" userLabel="Back">
                                         <rect key="frame" x="0.0" y="49" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarBack">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="backAction:" destination="jYx-4r-YUa" eventType="touchUpInside" id="eEx-1C-7oI"/>
@@ -207,11 +210,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TY-S3-kmq">
                                         <rect key="frame" x="137.33333333333334" y="61.666666666666664" width="100.66666666666666" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="8TY-S3-kmq" secondAttribute="bottom" constant="12" id="8dp-t8-yfo"/>
                                     <constraint firstAttribute="trailing" secondItem="ng7-n6-rRs" secondAttribute="trailing" constant="8" id="Dnu-jD-55M"/>
@@ -236,20 +239,20 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La0-Dw-ufx">
-                                <rect key="frame" x="107" y="269" width="116" height="44"/>
+                                <rect key="frame" x="107" y="269" width="116.33333333333331" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="bl6-pq-ioI"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="jMB-z9-hFa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="   Scan QR Code" image="QrCodeSmall">
-                                    <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="TerraBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="qrCodeAction:" destination="jYx-4r-YUa" eventType="touchUpInside" id="spc-Is-Ax9"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xp3-sc-Rhj" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xp3-sc-Rhj" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -319,7 +322,7 @@
         <!--Addresses List Controller-->
         <scene sceneID="6c8-tm-9lp">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="JSj-Y7-K1p" customClass="AddressesListController" customModule="Cosmos_Client" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="JSj-Y7-K1p" customClass="AddressesListController" customModule="Terra_Money" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aW0-Sb-Mrl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -333,8 +336,9 @@
                                             <constraint firstAttribute="height" constant="44" id="0SH-Ec-sFT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Add">
-                                            <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <state key="disabled">
                                             <color key="titleColor" red="0.80784313730000001" green="0.82745098039999998" blue="0.85500001910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -346,6 +350,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOR-01-kK0" userLabel="Back">
                                         <rect key="frame" x="0.0" y="49" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="NavbarClose">
                                             <color key="titleColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65499997139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -356,11 +361,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Addressbook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8R-0x-4TT">
                                         <rect key="frame" x="134.66666666666666" y="61" width="106" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstItem="ZuF-g5-WQr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OvQ-H4-m3v" secondAttribute="leading" constant="20" symbolic="YES" id="ETe-Ul-Mh0"/>
                                     <constraint firstAttribute="bottom" secondItem="ZuF-g5-WQr" secondAttribute="bottom" id="HGE-Ig-Mex"/>
@@ -429,7 +434,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaAddressCellID" id="nzA-TN-jku" customClass="GaiaWalletCell" customModule="Cosmos_Client" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaAddressCellID" id="nzA-TN-jku" customClass="GaiaWalletCell" customModule="Terra_Money" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="88" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nzA-TN-jku" id="5oK-w3-b6e">
@@ -492,7 +497,7 @@
                                     <outlet property="delegate" destination="JSj-Y7-K1p" id="xRR-vM-ZIF"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z9Q-Q6-0gT" customClass="CustomLoadingView" customModule="Cosmos_Client" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z9Q-Q6-0gT" customClass="CustomLoadingView" customModule="Terra_Money" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -571,8 +576,12 @@
         <image name="QrCodeSmall" width="11.333333015441895" height="11.333333015441895"/>
         <image name="RightDisclosure" width="8.6666669845581055" height="16"/>
         <image name="clipboard" width="11.333333015441895" height="11.333333015441895"/>
+        <namedColor name="TerraBlue">
+            <color red="0.17254901960784313" green="0.28235294117647058" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ohf-ng-IeL"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" name="TerraBlue"/>
 </document>

@@ -11,9 +11,9 @@ import CosmosRestApi
 
 class PersistableGaiaNodes: PersistCodable {
     
-    let nodes: [GaiaNode]
+    let nodes: [TDMNode]
     
-    init(nodes: [GaiaNode]) {
+    init(nodes: [TDMNode]) {
         self.nodes = nodes
     }
 }
@@ -33,8 +33,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     
     var addressBook: GaiaAddressBook = GaiaAddressBook(items: [])
     
-    fileprivate var nodes: [GaiaNode] =  []
-    fileprivate weak var selectedNode: GaiaNode?
+    fileprivate var nodes: [TDMNode] =  []
+    fileprivate weak var selectedNode: TDMNode?
     fileprivate var selectedIndex: Int = 0
     
     private weak var timer: Timer?
@@ -48,7 +48,16 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             nodes = savedNodes.nodes
             showHint = false
         } else {
+<<<<<<< HEAD
             nodes = [GaiaNode(name: "IPSX Main Net", scheme: "http", host: "node01.ip.sx")]
+=======
+            nodes = [
+                TDMNode(name: TDMNodeType.cosmos.rawValue, type: .cosmos, scheme: "http", host: "node01.ip.sx", rcpPort: 1317),
+                TDMNode(name: TDMNodeType.iris.rawValue,  type: .iris,scheme: "http", host: "node01.ip.sx", rcpPort: 1327),
+                TDMNode(name: TDMNodeType.terra.rawValue,  type: .terra,scheme: "http", host: "node01.ip.sx", rcpPort: 1337),
+                TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava,scheme: "http", host: "node01.ip.sx", rcpPort: 1347),
+                TDMNode(name: TDMNodeType.cosmosTestnet.rawValue,  type: .cosmosTestnet,scheme: "http", host: "node01.ip.sx", rcpPort: 2317)]
+>>>>>>> kommet
             PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
         
@@ -69,6 +78,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         super.viewDidAppear(animated)
         
         refreshNodes()
+        navigationController?.navigationBar.barStyle = .default
         
         timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
             self?.refreshNodes()
@@ -85,6 +95,10 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         timer?.invalidate()
         toast?.hideToast()
         PersistableGaiaNodes(nodes: nodes).savetoDisk()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -185,7 +199,7 @@ extension GaiaNodesController: UITableViewDelegate {
         if (selectedNode?.state == .active || selectedNode?.state == .pending) {
             self.performSegue(withIdentifier: "ShowNodeKeysSegue", sender: self)
         } else {
-            self.toast?.showToastAlert("The node is not active. Check the host and the ports", autoHideAfter: 5, type: .info, dismissable: true)
+            self.toast?.showToastAlert("The node is not active. Check the host and the ports", autoHideAfter: 15, type: .info, dismissable: true)
         }
     }
 }

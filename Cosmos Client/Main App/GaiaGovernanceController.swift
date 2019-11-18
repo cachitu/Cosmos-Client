@@ -13,7 +13,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     var toast: ToastAlertView?
 
-    var node: GaiaNode?
+    var node: TDMNode?
     var key: GaiaKey?
     var keysDelegate: LocalClient?
 
@@ -142,7 +142,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         }
     }
 
-    func loadData(validNode: GaiaNode) {
+    func loadData(validNode: TDMNode) {
         
         loadingView.startAnimating()
         retrieveAllPropsals(node: validNode) { [weak self] proposals, errMsg in

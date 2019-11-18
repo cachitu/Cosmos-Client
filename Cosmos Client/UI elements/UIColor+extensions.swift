@@ -47,8 +47,12 @@ public extension UIColor {
         return UIColor(red: 42.0 / 255.0, green: 172.0 / 255.0, blue: 224.0 / 255.0, alpha: 1.0)
     }
     
+    @nonobjc class var terraBlue: UIColor {
+        return UIColor(red: 44.0 / 255.0, green: 77.0 / 255.0, blue: 178.0 / 255.0, alpha: 1.0)
+    }
+
     @nonobjc class var darkBlue: UIColor {
-        return UIColor(red: 43.0 / 255.0, green: 131 / 255.0, blue: 167 / 255.0, alpha: 1.0)
+        return UIColor(red: 44.0 / 255.0, green: 72 / 255.0, blue: 167 / 178.0, alpha: 1.0)
     }
     
     @nonobjc class var pendingYellow: UIColor {

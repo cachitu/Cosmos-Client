@@ -8,32 +8,24 @@
 
 import Foundation
 import CosmosRestApi
+import TendermintSigner
+import CryptoKit
+import CommonCrypto
 
 public class LocalClient: KeysClientDelegate {
     
-    var coinType: HDCoin = .cosmos
+    let signer: TendermintClient
+    let type: TDMNodeType
     
-    func test() {
-        //cosmos14kxxegskp8lfuhpwj27hrv9uj8ufjvhzu5ucv5
-        //cosmospub1addwnpepqvcu4mlcjpacdk28xh9e3ex0t5yrw877ylp82gpg8j7y32qf3zdjys07yww
-        //cosmosvaloper14kxxegskp8lfuhpwj27hrv9uj8ufjvhzeqgdq8
-        //cosmosvaloperpub1addwnpepqvcu4mlcjpacdk28xh9e3ex0t5yrw877ylp82gpg8j7y32qf3zdjyevmfpa
-        //century possible car impact mutual grace place bomb drip expand search cube border elite ensure draft immune warrior route steak cram confirm kit sudden
-        
-        let mnemonic = "century possible car impact mutual grace place bomb drip expand search cube border elite ensure draft immune warrior route steak cram confirm kit sudden"
-        //let mnemonic = Mnemonic.create()
-        
-        let seed = Mnemonic.createSeed(mnemonic: mnemonic)
-        let wallet = Wallet(seed: seed, coin: coinType)
-        let account = wallet.generateAccount()
-        print("cosmos14kxxegskp8lfuhpwj27hrv9uj8ufjvhzu5ucv5")
-        print(account.address)
-        print("cosmospub1addwnpepqvcu4mlcjpacdk28xh9e3ex0t5yrw877ylp82gpg8j7y32qf3zdjys07yww")
-        print(account.publicAddress)
-        print("cosmosvaloper14kxxegskp8lfuhpwj27hrv9uj8ufjvhzeqgdq8")
-        print(account.validator)
-        print("cosmosvaloperpub1addwnpepqvcu4mlcjpacdk28xh9e3ex0t5yrw877ylp82gpg8j7y32qf3zdjyevmfpa")
-        print(account.publicValidator)
+    init(networkType: TDMNodeType) {
+        self.type = networkType
+        switch networkType {
+        case .cosmos, .cosmosTestnet:
+            self.signer = TendermintClient(coin: .cosmos)
+        case .iris  : self.signer = TendermintClient(coin: .iris)
+        case .terra : self.signer = TendermintClient(coin: .terra)
+        case .kava  : self.signer = TendermintClient(coin: .kava)
+        }
     }
     
     public func getSavedKeys() -> [GaiaKey] {
@@ -46,18 +38,15 @@ public class LocalClient: KeysClientDelegate {
     }
     
     public func generateMnemonic() -> String {
-        return Mnemonic.create()
+        signer.generateMnemonic()
     }
     
-    public func recoverKey(from mnemonic: String, name: String, password: String) -> Key {
+    public func recoverKey(from mnemonic: String, name: String, password: String) -> TDMKey {
+        let account = signer.recoverKey(from: mnemonic)
         
-        let seed = Mnemonic.createSeed(mnemonic: mnemonic)
-        let wallet = Wallet(seed: seed, coin: coinType)
-        let account = wallet.generateAccount()
-        
-        var key = Key()
+        var key = TDMKey()
         key.name = name
-        key.type = "Local managed"
+        key.type = type
         key.password = password
         key.mnemonic = mnemonic
         key.address = account.address
@@ -67,18 +56,13 @@ public class LocalClient: KeysClientDelegate {
         
         return key
     }
-    
-    public func createKey(with name: String, password: String) -> Key {
-        let mnemonic = Mnemonic.create()
-        return recoverKey(from: mnemonic, name: name, password: password)
-    }
-    
-    public func deleteKey(with name: String, password: String) -> NSError? {
+
+    public func deleteKey(with address: String, password: String) -> NSError? {
         if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
             var keys = savedKeys.keys
             var index = 0
             for gaiaKey in keys {
-                if gaiaKey.name == name, gaiaKey.password == password {
+                if gaiaKey.address == address, gaiaKey.password == password {
                     keys.remove(at: index)
                 }
                 index += 1
@@ -88,7 +72,7 @@ public class LocalClient: KeysClientDelegate {
         return nil
     }
     
-    public func sign(transferData: TransactionTx?, account: GaiaAccount, node: GaiaNode, completion:((RestResult<[TransactionTx]>) -> Void)?) {
+    public func sign(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, completion:((RestResult<[TransactionTx]>) -> Void)?) {
         
         var signable = TxSignable()
         signable.accountNumber = account.accNumber
@@ -113,21 +97,12 @@ public class LocalClient: KeysClientDelegate {
         jsString = jsString.replacingOccurrences(of: "\\", with: "")
 
         let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
-        let seed = Mnemonic.createSeed(mnemonic: account.gaiaKey.mnemonic)
-        let wallet = Wallet(seed: seed, coin: coinType)
-        let hdaccount = wallet.generateAccount()
+        let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
 
         let type = "tendermint/PubKeySecp256k1"
         let value = hdaccount.privateKey.publicKey.getBase64()
-        var hash = ""
+        let hash = signer.signHash(transferData: goodBuffer, hdAccount: hdaccount)
 
-        do {
-            try hash = hdaccount.privateKey.sign(hash: goodBuffer).base64EncodedString()
-        } catch {
-            print("failed")
-        }
-        hash = String(hash.dropLast().dropLast())
-        hash += "=="
         
         let sig = TxValueSignature(
             sig: hash,
@@ -141,23 +116,11 @@ public class LocalClient: KeysClientDelegate {
         if let final = signed {
             completion?(.success([final]))
         }
-        
-        //let signer = Signer()
-        //signer.unsafeSign(transferData: transferData, completion: completion)
     }
 }
 
-public struct TypePrefix {
-    static let MsgSend = "2A2C87FA"
-    static let NewOrderMsg = "CE6DC043"
-    static let CancelOrderMsg = "166E681B"
-    static let StdTx = "F0625DEE"
-    static let PubKeySecp256k1 = "EB5AE987"
-    static let SignatureSecp256k1 = "7FC4A495"
-}
-
 public struct TxSignable: Codable {
-    
+
     public var accountNumber: String?
     public var chainId: String?
     public var fee: TxValueFee?
@@ -166,9 +129,9 @@ public struct TxSignable: Codable {
     public var sequence: String?
 
     public init() {
-        
+
     }
-    
+
     enum CodingKeys : String, CodingKey {
         case accountNumber = "account_number"
         case chainId = "chain_id"
@@ -176,90 +139,5 @@ public struct TxSignable: Codable {
         case memo
         case msgs
         case sequence
-    }
-}
-
-//The only purpose of this unsafe signer is to compare with local signing
-public class Signer: RestNetworking {
-    
-    let connectData: ConnectData
-    
-    public init(scheme: String = "http", host: String = "localhost", port: Int = 1318) {
-        connectData = ConnectData(scheme: scheme, host: host, port: port)
-    }
-    
-    
-    public func unsafeSign(transferData: TransactionTx?, completion:((RestResult<[TransactionTx]>) -> Void)?) {
-        //The pass and key is stored on the remote nodjs service (see the nodejs code below:
-        genericRequest(bodyData: transferData, connData: connectData, path: "/sign", reqMethod: "POST", singleItemResponse: true, timeout: 10, completion: completion)
-    }
-    
-    func jsCodeSample() {
-        /*
-        
-         
-        #sign.sh -->
-        password="..."
-        echo "${password}" | gaiacli tx sign unsigned.json --from=... --chain-id=... > signed.json
-        echo "Done signing"
-        #sign.sh <--
-         
-         
-        #index.js -->
-        var express = require('express');
-        var express = require("express");
-        var bodyParser = require("body-parser");
-        var fs = require('fs');
-        
-        var app = express();
-        app.use(bodyParser.urlencoded({ extended: true }));
-        app.use(bodyParser.json());
-        
-        app.post('/sign', function (req, res) {
-            
-            var json = JSON.stringify(req.body);
-            fs.unlink('unsigned.json', function (err) {
-                fs.unlink('signed.json', function (err) {
-                    fs.writeFile("unsigned.json", json, function (err) {
-                        if (err) throw err;
-                        const
-                        { spawn } = require('child_process'),
-                        sign = spawn('./sign.sh');
-                        
-                        sign.stdout.on('data', data => {
-                        fs.readFile('signed.json', function (err, content) {
-                        if (err) throw err;
-                        console.log('------ Sending signed resonse ------');
-                        var parseJson = JSON.parse(content);
-                        console.log(JSON.stringify(parseJson));
-                        res.send(parseJson);
-                        console.log('------ Done ------');
-                        console.log(' ');
-                        })
-                        });
-                        
-                        sign.stderr.on('data', data => {
-                        console.log(`stderr: ${data}`);
-                        res.send(data);
-                        });
-                        
-                        sign.on('close', code => {
-                        });
-                    });
-                });
-            });
-            
-            console.log('------ Received unsigned resonse ------');
-            console.log(json);
-        })
-        
-        var server = app.listen(1318, function () {
-            var host = server.address().address
-            var port = server.address().port
-            
-            console.log("Listening at http://%s:%s", host, port)
-        })
-        #index.js <--
-        */
     }
 }

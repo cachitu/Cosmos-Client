@@ -11,7 +11,7 @@ import CosmosRestApi
 
 class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, GaiaKeysManagementCapable {
     
-    var node: GaiaNode? = GaiaNode()
+    var node: TDMNode? = TDMNode()
     var keysDelegate: LocalClient?
     
     @IBOutlet weak var field1RtextField: RichTextFieldView!
@@ -84,7 +84,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
         let seedOk = seedTextView.isHidden || seedTextView.text.split(separator: " ").count == 24
 
         guard seedOk else {
-            toast?.showToastAlert("The seed must have 24 words", autoHideAfter: 5, type: .info, dismissable: true)
+            toast?.showToastAlert("The seed must have 24 words", autoHideAfter: 15, type: .info, dismissable: true)
             return
         }
         
@@ -116,9 +116,9 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
 
                     self?.dismiss(animated: true)
                 } else if let errMsg = error {
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .info, dismissable: true)
                 } else {
-                    self?.toast?.showToastAlert("Ooops! I failed!", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("Ooops! I failed!", autoHideAfter: 15, type: .info, dismissable: true)
                 }
             }
         }
