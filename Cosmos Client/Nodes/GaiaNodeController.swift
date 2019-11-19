@@ -185,6 +185,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
 extension GaiaNodeController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if collectedData == nil { collectedData = TDMNode() }
         collectedData?.type = pickerDataSource[row]
     }
 }

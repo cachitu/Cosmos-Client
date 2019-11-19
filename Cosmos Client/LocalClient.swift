@@ -25,6 +25,7 @@ public class LocalClient: KeysClientDelegate {
         case .iris  : self.signer = TendermintClient(coin: .iris)
         case .terra : self.signer = TendermintClient(coin: .terra)
         case .kava  : self.signer = TendermintClient(coin: .kava)
+        case .bitsong  : self.signer = TendermintClient(coin: .bitsong)
         }
     }
     
