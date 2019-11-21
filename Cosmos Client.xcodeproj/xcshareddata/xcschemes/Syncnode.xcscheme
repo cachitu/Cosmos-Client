@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "88677FF621E9C54A0022A09E"
-               BuildableName = "Kommet.app"
-               BlueprintName = "Kommet"
+               BuildableName = "Syncnode.app"
+               BlueprintName = "Syncnode"
                ReferencedContainer = "container:Cosmos Client.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -31,8 +31,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "88677FF621E9C54A0022A09E"
-            BuildableName = "Kommet.app"
-            BlueprintName = "Kommet"
+            BuildableName = "Syncnode.app"
+            BlueprintName = "Syncnode"
             ReferencedContainer = "container:Cosmos Client.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -54,8 +54,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "88677FF621E9C54A0022A09E"
-            BuildableName = "Kommet.app"
-            BlueprintName = "Kommet"
+            BuildableName = "Syncnode.app"
+            BlueprintName = "Syncnode"
             ReferencedContainer = "container:Cosmos Client.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -78,8 +78,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "88677FF621E9C54A0022A09E"
-            BuildableName = "Kommet.app"
-            BlueprintName = "Kommet"
+            BuildableName = "Syncnode.app"
+            BlueprintName = "Syncnode"
             ReferencedContainer = "container:Cosmos Client.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
