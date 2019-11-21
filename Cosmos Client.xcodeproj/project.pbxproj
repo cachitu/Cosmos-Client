@@ -177,7 +177,6 @@
 				88677FF921E9C54A0022A09E /* Cosmos Client */,
 				88677FF821E9C54A0022A09E /* Products */,
 				8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */,
-				D7D216760703FC5B9EEB8321 /* Pods */,
 				18E236D3CFC8FD249FA626C1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -296,13 +295,6 @@
 				8869756821E9E5D600044EB8 /* Template1HeaderCell.swift */,
 			);
 			path = Templates;
-			sourceTree = "<group>";
-		};
-		D7D216760703FC5B9EEB8321 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		EE2D63E921EDC5850002D51D /* Nodes */ = {
