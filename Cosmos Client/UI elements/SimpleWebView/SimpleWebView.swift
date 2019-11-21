@@ -1,6 +1,5 @@
 //
 //  SimpleWebView.swift
-//  IPSX
 //
 //  Created by Calin Chitu on 15/06/2018.
 //  Copyright © 2018 Cristina Virlan. All rights reserved.

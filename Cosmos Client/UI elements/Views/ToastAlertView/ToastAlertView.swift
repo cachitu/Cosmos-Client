@@ -1,6 +1,5 @@
 //
 //  ToastAlertView.swift
-//  IPSX
 //
 //  Created by Calin Chitu on 02/05/2018.
 //

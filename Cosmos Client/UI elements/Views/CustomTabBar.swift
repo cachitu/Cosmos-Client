@@ -1,6 +1,5 @@
 //
 //  CustomTabBar.swift
-//  IPSX
 //
 //  Created by Calin Chitu on 13/12/2018.
 //  Copyright © 2018 Cristina Virlan. All rights reserved.

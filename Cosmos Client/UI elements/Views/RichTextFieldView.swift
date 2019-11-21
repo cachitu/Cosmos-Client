@@ -1,6 +1,5 @@
 //
 //  RichTextFieldView.swift
-//  IPSXSandbox
 //
 //  Created by Calin Chitu on 18/04/2018.
 //  Copyright © 2018 Calin Chitu. All rights reserved.

@@ -103,8 +103,8 @@ class GaiaProposalController: UIViewController, ToastAlertViewPresentable {
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
-        optionMenu.addAction(op1)
-        optionMenu.addAction(op2)
+        //optionMenu.addAction(op1)
+        //optionMenu.addAction(op2)
         optionMenu.addAction(op3)
         optionMenu.addAction(cancelAction)
 

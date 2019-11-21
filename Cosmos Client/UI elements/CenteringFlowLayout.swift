@@ -1,6 +1,5 @@
 //
 //  CenteringFlowLayout.swift
-//  IPSX
 //
 //  Created by Calin Chitu on 18/12/2018.
 //  Copyright © 2018 Cristina Virlan. All rights reserved.

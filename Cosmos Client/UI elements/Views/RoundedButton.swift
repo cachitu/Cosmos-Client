@@ -1,6 +1,5 @@
 //
 //  RoundedButton.swift
-//  IPSX
 //
 //  Created by Cristina Virlan on 17/04/2018.
 //  Copyright © 2018 Cristina Virlan. All rights reserved.

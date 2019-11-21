@@ -77,7 +77,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             accountTitleLabel.text = validKey.name
             addressLabel.text     = validKey.address
         }
-        txFeeLabel.text = "Default Fee: 0"
+        txFeeLabel.text = ""
         sendAmountButton.isEnabled = false
         screenTitleLabel.text = node?.network ?? "Wallet"
         
@@ -240,31 +240,15 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         for delegation in validDelegations {
             if account?.gaiaKey.validator == delegation.validatorAddr || account?.gaiaKey.address == delegation.delegatorAddr {
                 key?.queryValidatorRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
-                    if let rew = rewards {
-                        var selfBonded = rew.selfBondRewards?.first?.amount
-                        var selfCommision = rew.valCommission?.first?.amount
-                        if self?.node?.type == .terra {
-                            selfBonded = rew.selfBondRewards?.filter { $0.denom == "uluna" }.first?.amount
-                            selfCommision = rew.valCommission?.filter { $0.denom == "uluna" }.first?.amount
-                        }
-                        let c1 = selfCommision?.split(separator: ".").first ?? "0"
-                        var c2 = selfBonded?.split(separator: ".").first ?? "0"
-                        if self?.node?.type == .iris, c2.count > 18 {
-                            c2.removeLast(18)
-                        }
-                        let int1 = Int(c1) ?? 0
-                        let int2 = Int(c2) ?? 0
-                        let total = int1 + int2
-                        delegation.availableReward = "\(total)💰"
+                    if let total = rewards {
+                        delegation.availableReward = total > 0 ? "\(total)💰" : ""
                         self?.tableView.reloadData()
                     }
                 }
             } else {
                 key?.queryDelegationRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
-                    if let amount = rewards?.amount {
-                        let c1 = amount.split(separator: ".").first ?? "0"
-                        let int1 = Int(c1) ?? 0
-                        delegation.availableReward = "\(int1)💰"
+                    if let amount = rewards {
+                        delegation.availableReward = amount > 0 ? "\(amount)💰" : ""
                         self?.tableView.reloadData()
                     }
                 }
@@ -308,7 +292,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     self?.amountValueLabel.text = "\(finalVal)"
                     self?.amountDenomLabel.text = asset.denom
                     
-                    self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee) \(validAccount.feeDenom ?? "")"
+                    self?.txFeeLabel.text = validAccount.firendlyAmountAndDenom(for: self?.node?.type ?? .cosmos)
                 } else {
                     self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee)"
                     if let message = errMessage, message.count > 0 {
