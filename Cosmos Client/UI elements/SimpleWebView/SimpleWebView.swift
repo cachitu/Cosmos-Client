@@ -38,9 +38,6 @@ class SimpleWebView: UIViewController, WKNavigationDelegate {
         super.viewDidAppear(animated)
         webView.frame = webViewHolder.bounds
         webViewHolder.addSubview(webView)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            UIApplication.shared.endIgnoringInteractionEvents()
-        }
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {

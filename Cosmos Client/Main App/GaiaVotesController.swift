@@ -22,9 +22,6 @@ class GaiaVotesController: UIViewController, ToastAlertViewPresentable, GaiaKeys
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
-    @IBOutlet weak var bottomTabbarView: CustomTabBar!
-    @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tableView: UITableView!
     
     var forwardCounter = 0
     var onUnwind: ((_ toIndex: Int) -> ())?
@@ -61,15 +58,23 @@ class GaiaVotesController: UIViewController, ToastAlertViewPresentable, GaiaKeys
 
 extension GaiaVotesController: UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaVoteCellID", for: indexPath) as? GaiaVoteCell
+        let delegation = dataSource[indexPath.item]
+        cell?.leftLabel.text    = delegation.option
+        cell?.leftSubLabel.text = delegation.voter
+        return cell ?? UITableViewCell()
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCellID", for: indexPath) as! GaiaKeyCell
-        let delegation = dataSource[indexPath.item]
-        cell.leftLabel.text    = delegation.option
-        cell.leftSubLabel.text = delegation.voter
-        return cell
-    }
+}
+
+class GaiaVoteCell: UITableViewCell {
+
+    @IBOutlet weak var leftLabel: UILabel!
+    @IBOutlet weak var leftSubLabel: UILabel!
 }

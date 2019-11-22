@@ -85,16 +85,16 @@ class GaiaProposalController: UIViewController, ToastAlertViewPresentable {
         collectedData = ProposalData(title: name, description: desc, amount: amount, type: .text)
         
         let optionMenu = UIAlertController(title: "Proposal Type", message: nil, preferredStyle: .actionSheet)
-        let op1 = UIAlertAction(title: "Parameter Change", style: .default) { [weak self] alertAction in
-            self?.collectedData.type = .parameter_change
-            self?.onCollectDataComplete?(self?.collectedData ?? ProposalData())
-            self?.dismiss(animated: true)
-        }
-        let op2 = UIAlertAction(title: "Software Upgrade", style: .default) { [weak self] alertAction in
-            self?.collectedData.type = .software_upgrade
-            self?.onCollectDataComplete?(self?.collectedData ?? ProposalData())
-            self?.dismiss(animated: true)
-        }
+//        let op1 = UIAlertAction(title: "Parameter Change", style: .default) { [weak self] alertAction in
+//            self?.collectedData.type = .parameter_change
+//            self?.onCollectDataComplete?(self?.collectedData ?? ProposalData())
+//            self?.dismiss(animated: true)
+//        }
+//        let op2 = UIAlertAction(title: "Software Upgrade", style: .default) { [weak self] alertAction in
+//            self?.collectedData.type = .software_upgrade
+//            self?.onCollectDataComplete?(self?.collectedData ?? ProposalData())
+//            self?.dismiss(animated: true)
+//        }
         let op3 = UIAlertAction(title: "Text Proposal", style: .default) { [weak self] alertAction in
             self?.collectedData.type = .text
             self?.onCollectDataComplete?(self?.collectedData ?? ProposalData())

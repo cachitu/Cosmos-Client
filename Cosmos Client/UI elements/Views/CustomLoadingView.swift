@@ -24,14 +24,11 @@ class CustomLoadingView: UIView {
     }
     
     @IBInspectable open var singleCircle: Bool = false
-    @IBInspectable open var ignoreInteractionEvents: Bool = false
     
     public func startAnimating() {
         
         DispatchQueue.main.async {
-            
-            if self.ignoreInteractionEvents { UIApplication.shared.beginIgnoringInteractionEvents() }
-            
+                        
             if !self.singleCircle && (self.secondCircle == nil || self.self.thirdCircle == nil) {
                 return
             }
@@ -48,8 +45,6 @@ class CustomLoadingView: UIView {
     public func stopAnimating() {
         
         DispatchQueue.main.async {
-            
-            if self.ignoreInteractionEvents { UIApplication.shared.endIgnoringInteractionEvents() }
             
             if !self.singleCircle && (self.secondCircle == nil || self.self.thirdCircle == nil) {
                 return

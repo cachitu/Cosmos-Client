@@ -19,6 +19,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
 
     var toast: ToastAlertView?
     
+    let refreshInterval: TimeInterval = 10
+    
     @IBOutlet weak var screenTitleLabel: UILabel!
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -134,7 +136,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             loadingView.startAnimating()
             self.loadData()
         }
-        timer = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: true) { [weak self] timer in
             self?.loadData(animated: false, spinner: false)
         }
     }
@@ -158,7 +160,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         if let validResponse = response {
                             self?.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 15, type: .validatePending, dismissable: false)
                         } else if let errMsg = error {
-                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                            if errMsg.contains("connection was lost") {
+                                self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                            } else {
+                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                            }
                         } else {
                             self?.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: 15, type: .error, dismissable: true)
                         }
@@ -296,7 +302,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 } else {
                     self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee)"
                     if let message = errMessage, message.count > 0 {
-                        self?.toast?.showToastAlert(errMessage, autoHideAfter: 15, type: .error, dismissable: true)
+                        if message.contains("connection was lost") {
+                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                        } else {
+                            self?.toast?.showToastAlert(message, autoHideAfter: 15, type: .error, dismissable: true)
+                        }
                     }
                     self?.amountValueLabel.text = "0.00"
                     self?.amountDenomLabel.text = "-"
@@ -361,7 +371,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             }
                         } else if let errMsg = err {
                             self?.loadingView.stopAnimating()
-                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                            if errMsg.contains("connection was lost") {
+                                self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                            } else {
+                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                            }
                         }
                 }
             }
@@ -386,7 +400,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         }
                     } else if let errMsg = err {
                         self?.loadingView.stopAnimating()
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                        if errMsg.contains("connection was lost") {
+                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                        } else {
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                        }
                     }
                 }
             }
@@ -410,7 +428,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     }
                 } else if let errMsg = err {
                     self?.loadingView.stopAnimating()
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                    if errMsg.contains("connection was lost") {
+                        self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                    } else {
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                    }
                 }
             }
         }
@@ -429,11 +451,18 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             self?.dataSource = validDelegations
                             self?.tableView.reloadData()
                             self?.queryRewards(validDelegations: validDelegations)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                self?.handleWithdraw(delegation: delegation)
+                            }
                         }
                     }
                 } else if let errMsg = err {
                     self?.loadingView.stopAnimating()
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                    if errMsg.contains("connection was lost") {
+                        self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                    } else {
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                    }
                 }
             }
         }

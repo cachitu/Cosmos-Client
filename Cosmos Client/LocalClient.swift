@@ -83,6 +83,12 @@ public class LocalClient: KeysClientDelegate {
         signable.msgs = transferData?.value?.msg
         signable.sequence = account.accSequence
         
+        /* iris
+         sigBytes := auth.StdSignBytes(
+             chainID, acc.GetAccountNumber(), acc.GetSequence(),
+             stdTx.Fee, stdTx.GetMsgs(), stdTx.GetMemo(),
+         )
+*/
         var jsonData = Data()
         var jsString = ""
         let encoder = JSONEncoder()
@@ -95,6 +101,7 @@ public class LocalClient: KeysClientDelegate {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
             completion?(.failure(error))
         }
+        print(jsString)
         jsString = jsString.replacingOccurrences(of: "\\", with: "")
 
         let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
@@ -118,9 +125,89 @@ public class LocalClient: KeysClientDelegate {
             completion?(.success([final]))
         }
     }
+    
+        public func signIris(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, completion:((RestResult<[TransactionTx]>) -> Void)?) {
+            
+            var signable = TxSignableIris()
+            signable.accountNumber = account.accNumber
+            signable.chainId = node.network
+            signable.fee = transferData?.value?.fee
+            signable.memo = transferData?.value?.memo
+            signable.msgs = transferData?.value?.msg
+            signable.sequence = account.accSequence
+            
+            /* iris
+             sigBytes := auth.StdSignBytes(
+                 chainID, acc.GetAccountNumber(), acc.GetSequence(),
+                 stdTx.Fee, stdTx.GetMsgs(), stdTx.GetMemo(),
+             )
+             
+             let testStrimg = "{\"chain_id\":\"irishub\",\"account_number\":\"83\",\"sequence\":\"111\",\"fee\":{\"amount\":[{\"amount\":\"400000000000000000\",\"denom\":\"iris-atto\"}],\"gas\":\"20000\"},\"msgs\":[{\"type\":\"irishub/gov/MsgVote\",\"value\":{\"voter\":\"iaa1wtv0kp6ydt03edd8kyr5arr4f3yc52vpp27zl7\",\"proposal_id\":\"5\",\"option\":\"Yes\"}}],\"memo\":\"kytzu's iOS Wallet\"}"
+    */
+            
+            
+            var jsonData = Data()
+            var jsString = ""
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .sortedKeys
+            encoder.dataEncodingStrategy = .base64
+            do {
+                jsonData = try encoder.encode(signable)
+                jsString = String(data: jsonData, encoding: String.Encoding.macOSRoman) ?? ""
+            } catch {
+                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
+                completion?(.failure(error))
+            }
+            jsString = jsString.replacingOccurrences(of: "\\", with: "")
+
+            let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
+            let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
+
+            let type = "tendermint/PubKeySecp256k1"
+            let value = hdaccount.privateKey.publicKey.getBase64()
+            let hash = signer.signHash(transferData: goodBuffer, hdAccount: hdaccount)
+
+            
+            let sig = TxValueSignature(
+                sig: hash,
+                type: type,
+                value: value,
+                accNum: account.accNumber,
+                seq: account.accSequence)
+            var signed = transferData
+            signed?.value?.signatures = [sig]
+
+            if let final = signed {
+                completion?(.success([final]))
+            }
+        }
+
 }
 
 public struct TxSignable: Codable {
+
+    public var chainId: String?
+    public var accountNumber: String?
+    public var sequence: String?
+    public var fee: TxValueFee?
+    public var msgs: [TxValueMsg]?
+    public var memo: String?
+
+    public init() {
+
+    }
+
+    enum CodingKeys : String, CodingKey {
+        case chainId = "chain_id"
+        case accountNumber = "account_number"
+        case sequence
+        case fee
+        case msgs
+        case memo
+    }
+}
+
+public struct TxSignableIris: Codable {
 
     public var accountNumber: String?
     public var chainId: String?

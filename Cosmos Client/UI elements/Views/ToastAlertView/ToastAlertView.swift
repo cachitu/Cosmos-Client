@@ -151,7 +151,6 @@ public class ToastAlertView: UIView {
     
     public func showToastAlert(_ text: String? = "", autoHideAfter: Double = 0.0, type: ToastAlertType = .error, dismissable: Bool = true) {
         DispatchQueue.main.async {
-            if type == .error { UIApplication.shared.endIgnoringInteractionEvents() }
             self.dismissButton.isHidden = !dismissable
             self.updateInfoToastUI(visible: true, alertText: text, type: type)
             if autoHideAfter > 0.0 {
