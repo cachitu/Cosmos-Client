@@ -149,10 +149,14 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             self?.dataSource = []
             if let validProposals = proposals {
                 for proposal in validProposals {
-                    self?.getPropsalDetails(node: validNode, proposal: proposal) { proposal, error in
+                    self?.getPropsalDetails(node: validNode, proposal: proposal) { detailedProposal, error in
                         self?.loadingView.stopAnimating()
-                        if let valid = proposal {
+                        if let valid = detailedProposal {
                             self?.dataSource.append(valid)
+                            self?.dataSource = validProposals.reversed()
+                            self?.tableView.reloadData()
+                        } else {
+                            self?.dataSource.append(proposal)
                             self?.dataSource = validProposals.reversed()
                             self?.tableView.reloadData()
                         }

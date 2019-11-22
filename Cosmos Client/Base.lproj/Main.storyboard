@@ -2433,10 +2433,10 @@
                         <outlet property="toastHolderUnderView" destination="klr-Pk-WGv" id="0sP-V2-eme"/>
                         <outlet property="topNavBarView" destination="fej-b2-DDY" id="1O1-HN-bCs"/>
                         <segue destination="r7J-Vy-fyA" kind="unwind" identifier="UnwindToWalletSegue" animates="NO" unwindAction="unwindToWalletWithSegue:" id="cid-sK-gGC"/>
-                        <segue destination="i83-p6-5lL" kind="presentation" identifier="nextSegueTerra" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="VFE-X1-6qw"/>
                         <segue destination="r7J-Vy-fyA" kind="unwind" identifier="UnwindToNodes" unwindAction="unwindToNodesWithSegue:" id="13f-tT-gVv"/>
                         <segue destination="bKP-u7-GVw" kind="presentation" identifier="MoreSegueID" modalPresentationStyle="fullScreen" id="M4Y-Wm-Zyi"/>
                         <segue destination="MNZ-Xr-tPS" kind="presentation" identifier="nextSegue" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="IeV-KJ-EDF"/>
+                        <segue destination="i83-p6-5lL" kind="presentation" identifier="nextSegueTerra" animates="NO" modalPresentationStyle="fullScreen" id="g9Q-xy-oT8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QrH-zo-Dds" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2447,7 +2447,7 @@
         <!--Governance-->
         <scene sceneID="4SU-t2-4uC">
             <objects>
-                <viewController title="Governance" extendedLayoutIncludesOpaqueBars="YES" id="i83-p6-5lL" customClass="GaiaOraclesController" customModule="Kommet" sceneMemberID="viewController">
+                <viewController title="Governance" extendedLayoutIncludesOpaqueBars="YES" id="i83-p6-5lL" customClass="GaiaOraclesController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jRw-vQ-oH9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2846,7 +2846,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A3R-1e-UAy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="z4T-fA-28I" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1209" y="955"/>
+            <point key="canvasLocation" x="910" y="935"/>
         </scene>
         <!--Settings-->
         <scene sceneID="Zax-GT-cxK">
@@ -3788,7 +3788,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-8J-cOI">
-                                        <rect key="frame" x="285.66666666666669" y="7" width="59.333333333333314" height="30"/>
+                                        <rect key="frame" x="275" y="7" width="70" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Swn-jI-NMX"/>
                                         </constraints>

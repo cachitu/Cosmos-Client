@@ -42,7 +42,8 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             let segueName = self?.node?.type == .terra ? "nextSegueTerra" : "nextSegue"
             switch index {
             case 0: self?.dismiss(animated: false)
-            case 2: self?.performSegue(withIdentifier: segueName, sender: index)
+            case 2:
+                self?.performSegue(withIdentifier: segueName, sender: index)
             case 3:
                 self?.performSegue(withIdentifier: segueName, sender: index)
                 UIView.setAnimationsEnabled(false)
