@@ -112,7 +112,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
             self?.addButton.isEnabled = self?.canContinue() ?? false
         }
         field3RtextField.onFieldStateChange = { [weak self] state in
-            self?.fieldsStateDic["field3"] = state
+            self?.fieldsStateDic["field3"] = true //port is optionalo
             self?.addButton.isEnabled = self?.canContinue() ?? false
         }
         field4RtextField.onFieldStateChange = { [weak self] state in
@@ -129,7 +129,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         if collectedData == nil { collectedData = TDMNode() }
         collectedData?.name = field1RtextField.contentTextField?.text ?? ""
         collectedData?.host = field2RtextField.contentTextField?.text ?? ""
-        collectedData?.rcpPort = Int(field3RtextField.contentTextField?.text ?? "1317") ?? 1317
+        collectedData?.rcpPort = Int(field3RtextField.contentTextField?.text ?? "")
         collectedData?.scheme = field4RtextField.contentTextField?.text ?? "http"
         if let data = collectedData {
             onCollectDataComplete?(data)
@@ -140,7 +140,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         
         field1RtextField.contentTextField?.text = collectedData?.name
         field2RtextField.contentTextField?.text = collectedData?.host
-        field3RtextField.contentTextField?.text = "\(collectedData?.rcpPort ?? 1317)"
+        field3RtextField.contentTextField?.text = collectedData?.rcpPort != nil ? "\(collectedData?.rcpPort ?? 1317)" : ""
         field4RtextField.contentTextField?.text = collectedData?.scheme
         
         self.fieldsStateDic["field1"] = true
