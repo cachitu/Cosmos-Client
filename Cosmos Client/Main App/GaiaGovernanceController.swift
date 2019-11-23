@@ -104,7 +104,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                             self?.loadData(validNode: node)
                         }
                     } else if let errMsg = err {
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                        if errMsg.contains("connection was lost") {
+                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                        } else {
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                        }
                     }
             }
         } else if let validNode = node {
@@ -145,7 +149,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     func loadData(validNode: TDMNode) {
         
         loadingView.startAnimating()
-        retrieveAllPropsals(node: validNode) { [weak self] proposals, errMsg in
+        retrieveAllPropsals(node: validNode) { [weak self] proposals, error in
             self?.dataSource = []
             if let validProposals = proposals {
                 for proposal in validProposals {
@@ -162,8 +166,12 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                         }
                     }
                 }
-            } else if let validErr = errMsg {
-                self?.toast?.showToastAlert(validErr, autoHideAfter: 5, type: .error, dismissable: true)
+            } else if let errMsg = error {
+                if errMsg.contains("connection was lost") {
+                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                } else {
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                }
             } else {
                 self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
             }
@@ -194,7 +202,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                         self?.loadData(validNode: node)
                     }
                 } else if let errMsg = err {
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                    if errMsg.contains("connection was lost") {
+                        self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                    } else {
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                    }
                 }
             }
         }
@@ -220,7 +232,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                             self?.loadData(validNode: node)
                         }
                     } else if let errMsg = err {
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 5, type: .error, dismissable: true)
+                        if errMsg.contains("connection was lost") {
+                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                        } else {
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                        }
                     }
             }
         }

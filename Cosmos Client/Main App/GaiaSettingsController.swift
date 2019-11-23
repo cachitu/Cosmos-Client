@@ -15,7 +15,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     var key: GaiaKey?
     var account: GaiaAccount?
     var feeAmount: String { return node?.defaultTxFee  ?? "0" }
-    var memo: String { return node?.defaultMemo  ?? "IPSX iOS Wallet" }
+    var memo: String { return node?.defaultMemo  ?? "kytzu's iOS Wallet" }
 
     var toast: ToastAlertView?
     

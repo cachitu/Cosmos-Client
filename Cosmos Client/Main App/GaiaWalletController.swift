@@ -244,7 +244,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func queryRewards(validDelegations: [GaiaDelegation]) {
         guard let validNode = node else { return }
         for delegation in validDelegations {
-            key?.queryDelegationRewards(node: validNode, delegator: delegation.delegatorAddr) { [weak self] rewards, err in
+            key?.queryDelegationRewards(node: validNode, validatorAddr: delegation.validatorAddr) { [weak self] rewards, err in
                 if let amount = rewards {
                     if self?.account?.gaiaKey.validator == delegation.validatorAddr {
                         self?.key?.queryValidatorRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in

@@ -129,7 +129,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         self?.toast?.showToastAlert("Tap any validator to redelegate from \(redelagateAddr)", type: .validatePending, dismissable: false)
                     }
                 } else if let validErr = errMsg {
-                    self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
+                    if validErr.contains("connection was lost") {
+                        self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                    } else {
+                        self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
+                    }
                 } else {
                     self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
                 }
@@ -186,7 +190,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         validator.unjail(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, errMsg in
             self?.loadingView.stopAnimating()
             if let msg = errMsg {
-                self?.toast?.showToastAlert(msg, autoHideAfter: 13, type: .error, dismissable: true)
+                if msg.contains("connection was lost") {
+                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                } else {
+                    self?.toast?.showToastAlert(msg, autoHideAfter: 15, type: .error, dismissable: true)
+                }
             } else  {
                 self?.toast?.showToastAlert("Unjail request submited", autoHideAfter: 13, type: .info, dismissable: true)
                 self?.tableView.reloadData()
@@ -217,7 +225,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                                 }
                             } else if let errMsg = err {
                                 self?.loadingView.stopAnimating()
-                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                                if errMsg.contains("connection was lost") {
+                                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                                } else {
+                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                                }
                             }
                     }
                 }
@@ -248,7 +260,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                                 }
                             } else if let errMsg = err {
                                 self?.loadingView.stopAnimating()
-                                self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                                if errMsg.contains("connection was lost") {
+                                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                                } else {
+                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                                }
                             }
                     }
                 }

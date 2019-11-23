@@ -20,10 +20,10 @@
                                 <rect key="frame" x="37.666666666666657" y="347" width="300" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="cOA-CN-epA">
-                                        <rect key="frame" x="124" y="0.0" width="52" height="52"/>
+                                        <rect key="frame" x="98" y="0.0" width="104" height="104"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add nodes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4k-Xl-msf">
-                                        <rect key="frame" x="61.666666666666671" y="74" width="176.33333333333331" height="20.333333333333329"/>
+                                        <rect key="frame" x="61.666666666666671" y="125.99999999999999" width="176.33333333333331" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -891,10 +891,10 @@
                                 <rect key="frame" x="37.666666666666657" y="347" width="300" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="Uoi-re-dDl">
-                                        <rect key="frame" x="124" y="0.0" width="52" height="52"/>
+                                        <rect key="frame" x="98" y="0.0" width="104" height="104"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add nodes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fL-mE-6eV">
-                                        <rect key="frame" x="61.666666666666671" y="74" width="176.33333333333331" height="20.333333333333329"/>
+                                        <rect key="frame" x="61.666666666666671" y="125.99999999999999" width="176.33333333333331" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1499,7 +1499,7 @@
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="rq4-7S-1rA">
-                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="QBP-bS-Azw"/>
@@ -1540,7 +1540,7 @@
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="cAC-Mg-dqA">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="Z04-5T-UE0"/>
@@ -1581,7 +1581,7 @@
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="sQ0-R3-GLl">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="GJd-kD-9Zh"/>
@@ -2250,7 +2250,7 @@
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="BfR-6V-p5v">
-                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="O20-Z6-9nh"/>
@@ -2291,7 +2291,7 @@
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="2Tl-RH-rAs">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="Oao-o9-zP2"/>
@@ -2332,7 +2332,7 @@
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="0Ss-Js-faB">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="GwQ-D7-nsu"/>
@@ -2654,7 +2654,7 @@
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="5N0-4j-auP">
-                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="MYs-W2-dmo"/>
@@ -2695,7 +2695,7 @@
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="c1y-em-uu8">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="PaY-ZU-IyM"/>
@@ -2736,7 +2736,7 @@
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="fer-hG-Jd3">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="GdD-UA-t7M"/>
@@ -2957,7 +2957,7 @@
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="wun-lE-tPQ">
-                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="DYk-dq-GHL"/>
@@ -2998,7 +2998,7 @@
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="daW-Hc-sqn">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="Bhw-ux-eH6"/>
@@ -3039,7 +3039,7 @@
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="a1k-gQ-eoc">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="6Yp-lp-81h"/>
@@ -3107,7 +3107,7 @@
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqK-PE-kmt">
-                                <rect key="frame" x="59.666666666666657" y="548.66666666666663" width="255.99999999999997" height="21.333333333333371"/>
+                                <rect key="frame" x="59.666666666666657" y="501" width="255.99999999999997" height="21.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21.5" id="5ux-RH-6SP"/>
                                 </constraints>
@@ -3140,7 +3140,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYT-d5-A7q" userLabel="kytzu link">
-                                <rect key="frame" x="59.666666666666671" y="544.33333333333337" width="136.66666666666663" height="30"/>
+                                <rect key="frame" x="59.666666666666671" y="496.66666666666669" width="136.66666666666663" height="30.000000000000057"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3150,7 +3150,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSq-W8-voj" userLabel="syncnode link">
-                                <rect key="frame" x="201.66666666666663" y="544.33333333333337" width="114" height="30"/>
+                                <rect key="frame" x="201.66666666666663" y="496.66666666666669" width="114" height="30.000000000000057"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3210,7 +3210,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jF8-97-M3F">
-                                <rect key="frame" x="59.666666666666657" y="604.33333333333337" width="255.99999999999997" height="21.333333333333371"/>
+                                <rect key="frame" x="59.666666666666657" y="556.66666666666663" width="255.99999999999997" height="21.333333333333371"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Security audit by ">
                                         <attributes>
@@ -3230,10 +3230,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-bitsentinel" translatesAutoresizingMaskIntoConstraints="NO" id="TcP-zt-fEz">
-                                <rect key="frame" x="92.666666666666671" y="649.66666666666663" width="189.66666666666663" height="48.333333333333371"/>
+                                <rect key="frame" x="-2" y="602" width="379" height="96"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFd-Aj-xUP">
-                                <rect key="frame" x="59.666666666666657" y="604.33333333333337" width="255.99999999999997" height="93.666666666666629"/>
+                                <rect key="frame" x="59.666666666666657" y="556.66666666666663" width="255.99999999999997" height="141.33333333333337"/>
                                 <connections>
                                     <action selector="openBitSentinel:" destination="0ep-XW-mYa" eventType="touchUpInside" id="wOp-dT-F8J"/>
                                     <action selector="openIpsxUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="Hsh-4g-qGa"/>
@@ -3479,7 +3479,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfj-nU-FfM">
-                                        <rect key="frame" x="285.66666666666669" y="7" width="59.333333333333314" height="30"/>
+                                        <rect key="frame" x="275" y="7" width="70" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="tTl-2o-btM"/>
                                         </constraints>
@@ -3774,7 +3774,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-8J-cOI">
-                                        <rect key="frame" x="285.66666666666669" y="7" width="59.333333333333314" height="30"/>
+                                        <rect key="frame" x="275" y="7" width="70" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Swn-jI-NMX"/>
                                         </constraints>
@@ -4758,7 +4758,7 @@
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="1Hv-td-4VJ">
-                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.999999999999986" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="K7M-Qd-Reb"/>
@@ -4799,7 +4799,7 @@
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="YJA-PN-bw0">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="6JI-tN-JAL"/>
@@ -4840,7 +4840,7 @@
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="pYF-J9-qTR">
-                                                <rect key="frame" x="34.666666666666686" y="5" width="24.000000000000007" height="28.000000000000007"/>
+                                                <rect key="frame" x="34.666666666666686" y="5" width="24" height="28"/>
                                                 <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="6iC-oH-pTP"/>
