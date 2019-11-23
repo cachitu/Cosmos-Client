@@ -90,12 +90,12 @@ extension GaiaDelegationsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCellID", for: indexPath) as! GaiaKeyCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaDelegationCellID", for: indexPath) as? GaiaDelegationCell
         let delegation = dataSource[indexPath.item]
         let parts = delegation.shares.split(separator: ".")
-        cell.leftLabel.text = "\(parts.first ?? "0") shares from"
-        cell.leftSubLabel.text = delegation.delegatorAddr
-        return cell
+        cell?.leftLabel.text = "\(parts.first ?? "0") shares from"
+        cell?.leftSubLabel.text = delegation.delegatorAddr
+        return cell ?? UITableViewCell()
     }
 }
 
@@ -110,5 +110,25 @@ extension GaiaDelegationsController: UITableViewDelegate {
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
         }
+    }
+}
+
+class GaiaDelegationCell: UITableViewCell {
+
+    @IBOutlet weak var leftLabel: UILabel!
+    @IBOutlet weak var leftSubLabel: UILabel!
+    @IBOutlet weak var upRightLabel: UILabel?
+    
+    @IBAction func copyAction(_ sender: Any) {
+        UIPasteboard.general.string = leftSubLabel.text
+        onCopy?()
+    }
+    
+    var onCopy:(() -> ())?
+    
+    func configure(key: GaiaKey, amount: String = "") {
+        upRightLabel?.text = amount
+        leftLabel.text = key.name
+        leftSubLabel.text = key.address
     }
 }

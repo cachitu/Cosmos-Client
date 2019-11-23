@@ -244,16 +244,16 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func queryRewards(validDelegations: [GaiaDelegation]) {
         guard let validNode = node else { return }
         for delegation in validDelegations {
-            if account?.gaiaKey.validator == delegation.validatorAddr || account?.gaiaKey.address == delegation.delegatorAddr {
-                key?.queryValidatorRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
-                    if let total = rewards {
-                        delegation.availableReward = total > 0 ? "\(total)💰" : ""
-                        self?.tableView.reloadData()
-                    }
-                }
-            } else {
-                key?.queryDelegationRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
-                    if let amount = rewards {
+            key?.queryDelegationRewards(node: validNode, delegator: delegation.delegatorAddr) { [weak self] rewards, err in
+                if let amount = rewards {
+                    if self?.account?.gaiaKey.validator == delegation.validatorAddr {
+                        self?.key?.queryValidatorRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
+                            if let total = rewards {
+                                delegation.availableReward = total + amount > 0 ? "\(total + amount)💰" : ""
+                                self?.tableView.reloadData()
+                            }
+                        }
+                    } else {
                         delegation.availableReward = amount > 0 ? "\(amount)💰" : ""
                         self?.tableView.reloadData()
                     }
@@ -451,9 +451,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             self?.dataSource = validDelegations
                             self?.tableView.reloadData()
                             self?.queryRewards(validDelegations: validDelegations)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                self?.handleWithdraw(delegation: delegation)
-                            }
                         }
                     }
                 } else if let errMsg = err {
@@ -576,9 +573,7 @@ extension GaiaWalletController: UITableViewDelegate {
                 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
                 
-                if delegation.validatorAddr != self.account?.gaiaKey.validator {
-                    optionMenu.addAction(withdrawAction)
-                }
+                optionMenu.addAction(withdrawAction)
                 optionMenu.addAction(redelegateAction)
                 optionMenu.addAction(delegateAction)
                 optionMenu.addAction(unboundAction)
