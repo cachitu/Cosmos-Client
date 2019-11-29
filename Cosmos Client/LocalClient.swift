@@ -22,10 +22,11 @@ public class LocalClient: KeysClientDelegate {
         switch networkType {
         case .cosmos, .cosmosTestnet:
             self.signer = TendermintClient(coin: .cosmos)
-        case .iris  : self.signer = TendermintClient(coin: .iris)
-        case .terra : self.signer = TendermintClient(coin: .terra)
-        case .kava  : self.signer = TendermintClient(coin: .kava)
-        case .bitsong  : self.signer = TendermintClient(coin: .bitsong)
+        case .iris      : self.signer = TendermintClient(coin: .iris)
+        case .terra     : self.signer = TendermintClient(coin: .terra)
+        case .terra_118 : self.signer = TendermintClient(coin: .terra_118)
+        case .kava      : self.signer = TendermintClient(coin: .kava)
+        case .bitsong   : self.signer = TendermintClient(coin: .bitsong)
         }
     }
     
@@ -159,13 +160,28 @@ public class LocalClient: KeysClientDelegate {
                 completion?(.failure(error))
             }
             jsString = jsString.replacingOccurrences(of: "\\", with: "")
+            //jsString = jsString.replacingOccurrences(of: "\"Yes\"", with: "0x01")
+            //jsString = jsString.replacingOccurrences(of: "\"83\"", with: "83")
+            //jsString = jsString.replacingOccurrences(of: "\"400000000000000000\"", with: "400000000000000000")
+            //jsString = jsString.replacingOccurrences(of: "\"20000\"", with: "20000")
+            //jsString = jsString.replacingOccurrences(of: "\"5\"", with: "5")
+            //jsString = jsString.replacingOccurrences(of: "\"115\"", with: "115")
 
+            print("sign bytes ---->")
+            print(jsString)
+            print("sign bytes <----")
+            
             let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
             let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
 
             let type = "tendermint/PubKeySecp256k1"
             let value = hdaccount.privateKey.publicKey.getBase64()
             let hash = signer.signHash(transferData: goodBuffer, hdAccount: hdaccount)
+            
+            print("hash ---->")
+            print(hash)
+            print("qZdQdFZqOhJQwMhHeG7gb4+Ie+fdbqECLbQJ12DWnE488OFIoVJ5/R/3wfTjxp0kEpIyhisDmaYijMdYDHkZjw==")
+            print("hask ---->")
 
             
             let sig = TxValueSignature(

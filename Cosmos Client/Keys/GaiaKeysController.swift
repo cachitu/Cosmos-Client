@@ -56,7 +56,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         
         let mnemonic = "find cliff book sweet clip dwarf minor boat lamp visual maid reject crazy during hollow vanish sunny salt march kangaroo episode crash anger virtual"
         
-        if let appleKey = keysDelegate?.recoverKey(from: mnemonic, name: "appleTest1", password: "") {
+        if let appleKey = keysDelegate?.recoverKey(from: mnemonic, name: "appleTest1", password: "test1234") {
             let gaiaKey = GaiaKey(data: appleKey, nodeId: node?.nodeID ?? "")
             dataSource.append(gaiaKey)
             PersistableGaiaKeys(keys: dataSource).savetoDisk()

@@ -72,7 +72,7 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         let keyName = key?.name ?? "this account"
         var alertMessage = "Enter the password for \(keyName) to delete the wallet. The passowrd and seed will be permanentely removed from the keychain."
         if key?.name == "appleTest1" {
-            alertMessage = "This is the Apple Test key, needed for the iOS Appstore review. To delete this address, no password is required."
+            alertMessage = "This is the Apple Test key, needed for the iOS Appstore review. To delete this address, the password is test1234."
         }
         self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
             self?.loadingView.startAnimating()
