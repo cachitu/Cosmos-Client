@@ -58,7 +58,7 @@ public class LocalClient: KeysClientDelegate {
         
         return key
     }
-
+    
     public func deleteKey(with address: String, password: String) -> NSError? {
         if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
             var keys = savedKeys.keys
@@ -84,12 +84,6 @@ public class LocalClient: KeysClientDelegate {
         signable.msgs = transferData?.value?.msg
         signable.sequence = account.accSequence
         
-        /* iris
-         sigBytes := auth.StdSignBytes(
-             chainID, acc.GetAccountNumber(), acc.GetSequence(),
-             stdTx.Fee, stdTx.GetMsgs(), stdTx.GetMemo(),
-         )
-*/
         var jsonData = Data()
         var jsString = ""
         let encoder = JSONEncoder()
@@ -104,14 +98,13 @@ public class LocalClient: KeysClientDelegate {
         }
         print(jsString)
         jsString = jsString.replacingOccurrences(of: "\\", with: "")
-
+        
         let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
         let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
-
+        
         let type = "tendermint/PubKeySecp256k1"
         let value = hdaccount.privateKey.publicKey.getBase64()
         let hash = signer.signHash(transferData: goodBuffer, hdAccount: hdaccount)
-
         
         let sig = TxValueSignature(
             sig: hash,
@@ -121,98 +114,99 @@ public class LocalClient: KeysClientDelegate {
             seq: account.accSequence)
         var signed = transferData
         signed?.value?.signatures = [sig]
-
+        
         if let final = signed {
             completion?(.success([final]))
         }
     }
     
-        public func signIris(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, completion:((RestResult<[TransactionTx]>) -> Void)?) {
-            
-            var signable = TxSignableIris()
-            signable.accountNumber = account.accNumber
-            signable.chainId = node.network
-            signable.fee = transferData?.value?.fee
-            signable.memo = transferData?.value?.memo
-            signable.msgs = transferData?.value?.msg
-            signable.sequence = account.accSequence
-            
-            /* iris
-             sigBytes := auth.StdSignBytes(
-                 chainID, acc.GetAccountNumber(), acc.GetSequence(),
-                 stdTx.Fee, stdTx.GetMsgs(), stdTx.GetMemo(),
-             )
-             
-             let testStrimg = "{\"chain_id\":\"irishub\",\"account_number\":\"83\",\"sequence\":\"111\",\"fee\":{\"amount\":[{\"amount\":\"400000000000000000\",\"denom\":\"iris-atto\"}],\"gas\":\"20000\"},\"msgs\":[{\"type\":\"irishub/gov/MsgVote\",\"value\":{\"voter\":\"iaa1wtv0kp6ydt03edd8kyr5arr4f3yc52vpp27zl7\",\"proposal_id\":\"5\",\"option\":\"Yes\"}}],\"memo\":\"kytzu's iOS Wallet\"}"
-    */
-            
-            
-            var jsonData = Data()
-            var jsString = ""
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .sortedKeys
-            encoder.dataEncodingStrategy = .base64
+    public func testSignIris(account: GaiaAccount) {
+        
+        let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
+        
+        if let filepath = Bundle.main.path(forResource: "test", ofType: "json") {
             do {
-                jsonData = try encoder.encode(signable)
-                jsString = String(data: jsonData, encoding: String.Encoding.macOSRoman) ?? ""
+                let contents = try String(contentsOfFile: filepath)
+                let testBuffer = contents.data(using: .ascii)?.sha256() ?? Data()
+                let testHash = signer.signHashTest(transferData: testBuffer, hdAccount: hdaccount)
+                print(contents)
+                print(testHash)
+                print("should get: FjQqWHxX5S+QhHm6SFp+fc1OxP2od6bTlBIA5RSkuiBGrsRY5EZYJ+Vki6yMRe7lwt6HxcQgzjUz5zPTW3Muaw==")
             } catch {
-                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
-                completion?(.failure(error))
-            }
-            jsString = jsString.replacingOccurrences(of: "\\", with: "")
-            //jsString = jsString.replacingOccurrences(of: "\"Yes\"", with: "0x01")
-            //jsString = jsString.replacingOccurrences(of: "\"83\"", with: "83")
-            //jsString = jsString.replacingOccurrences(of: "\"400000000000000000\"", with: "400000000000000000")
-            //jsString = jsString.replacingOccurrences(of: "\"20000\"", with: "20000")
-            //jsString = jsString.replacingOccurrences(of: "\"5\"", with: "5")
-            //jsString = jsString.replacingOccurrences(of: "\"115\"", with: "115")
-
-            print("sign bytes ---->")
-            print(jsString)
-            print("sign bytes <----")
-            
-            let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
-            let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
-
-            let type = "tendermint/PubKeySecp256k1"
-            let value = hdaccount.privateKey.publicKey.getBase64()
-            let hash = signer.signHash(transferData: goodBuffer, hdAccount: hdaccount)
-            
-            print("hash ---->")
-            print(hash)
-            print("qZdQdFZqOhJQwMhHeG7gb4+Ie+fdbqECLbQJ12DWnE488OFIoVJ5/R/3wfTjxp0kEpIyhisDmaYijMdYDHkZjw==")
-            print("hask ---->")
-
-            
-            let sig = TxValueSignature(
-                sig: hash,
-                type: type,
-                value: value,
-                accNum: account.accNumber,
-                seq: account.accSequence)
-            var signed = transferData
-            signed?.value?.signatures = [sig]
-
-            if let final = signed {
-                completion?(.success([final]))
+                // contents could not be loaded
             }
         }
+    }
+    
+    public func signIris(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, completion:((RestResult<[TransactionTx]>) -> Void)?) {
+        
+        var signable = TxSignableIris()
+        signable.accountNumber = account.accNumber
+        signable.chainId = node.network
+        signable.fee = transferData?.value?.fee
+        signable.memo = transferData?.value?.memo
+        signable.msgs = transferData?.value?.msg
+        signable.sequence = account.accSequence
+        
+        var jsonData = Data()
+        var jsString = ""
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        encoder.dataEncodingStrategy = .base64
+        do {
+            jsonData = try encoder.encode(signable)
+            jsString = String(data: jsonData, encoding: String.Encoding.macOSRoman) ?? ""
+        } catch {
+            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
+            completion?(.failure(error))
+        }
+        jsString = jsString.replacingOccurrences(of: "\\", with: "")
+        
+        print("sign bytes ---->")
+        print(jsString)
+        print("sign bytes <----")
+        
+        let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
+        let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
+        
+        let type = "tendermint/PubKeySecp256k1"
+        let value = hdaccount.privateKey.publicKey.getBase64()
+        let hash = signer.signHash(transferData: goodBuffer, hdAccount: hdaccount)
+        
+        print("hash ---->")
+        print(hash)
+        print("qZdQdFZqOhJQwMhHeG7gb4+Ie+fdbqECLbQJ12DWnE488OFIoVJ5/R/3wfTjxp0kEpIyhisDmaYijMdYDHkZjw==")
+        print("hask ---->")
 
+        let sig = TxValueSignature(
+            sig: hash,
+            type: type,
+            value: value,
+            accNum: account.accNumber,
+            seq: account.accSequence)
+        var signed = transferData
+        signed?.value?.signatures = [sig]
+        
+        if let final = signed {
+            completion?(.success([final]))
+        }
+    }
+    
 }
 
 public struct TxSignable: Codable {
-
+    
     public var chainId: String?
     public var accountNumber: String?
     public var sequence: String?
     public var fee: TxValueFee?
     public var msgs: [TxValueMsg]?
     public var memo: String?
-
+    
     public init() {
-
+        
     }
-
+    
     enum CodingKeys : String, CodingKey {
         case chainId = "chain_id"
         case accountNumber = "account_number"
@@ -224,18 +218,18 @@ public struct TxSignable: Codable {
 }
 
 public struct TxSignableIris: Codable {
-
+    
     public var accountNumber: String?
     public var chainId: String?
     public var fee: TxValueFee?
     public var memo: String?
     public var msgs: [TxValueMsg]?
     public var sequence: String?
-
+    
     public init() {
-
+        
     }
-
+    
     enum CodingKeys : String, CodingKey {
         case accountNumber = "account_number"
         case chainId = "chain_id"

@@ -93,7 +93,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 }
             }
         }
-    }
+     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -284,6 +284,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
 
                 if spinner { self?.loadingView.stopAnimating() }
                 
+                //let cl = LocalClient(networkType: .iris)
+                //cl.testSignIris(account: account!)
+
                 self?.account = account
                 if self?.selectedAsset == nil {
                     self?.selectedAsset = account?.assets.first
