@@ -102,14 +102,20 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
                     
                     if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
                         var list = savedKeys.keys
-                        list.append(validKey)
-                        PersistableGaiaKeys(keys: list).savetoDisk()
+                        let match = savedKeys.keys.filter { $0.identifier == validKey.identifier }
+                        if match.count > 0 {
+                            self?.toast?.showToastAlert("This key exist already", autoHideAfter: 5, type: .error, dismissable: true)
+                            return
+                        } else {
+                            list.append(validKey)
+                            PersistableGaiaKeys(keys: list).savetoDisk()
+                        }
                     }
                     
                     if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook {
                         var addrItems: [GaiaAddressBookItem] = []
                         let item = GaiaAddressBookItem(name: validKey.name, address: validKey.address)
-                        addrItems.append(item)
+                        addrItems.insert(item, at: 0)
                         storedBook.items.mergeElements(newElements: addrItems)
                         storedBook.savetoDisk()
                     }

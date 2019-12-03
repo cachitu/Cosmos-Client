@@ -16,13 +16,16 @@ public class LocalClient: KeysClientDelegate {
     
     let signer: TendermintClient
     let type: TDMNodeType
-    
-    init(networkType: TDMNodeType) {
+    let networkID: String
+
+    init(networkType: TDMNodeType, netID: String) {
+        self.networkID = netID
         self.type = networkType
         switch networkType {
         case .cosmos, .cosmosTestnet:
             self.signer = TendermintClient(coin: .cosmos)
         case .iris      : self.signer = TendermintClient(coin: .iris)
+        case .iris_fuxi : self.signer = TendermintClient(coin: .iris_fuxi)
         case .terra, .terraTestnet     : self.signer = TendermintClient(coin: .terra)
         case .terra_118 : self.signer = TendermintClient(coin: .terra_118)
         case .kava      : self.signer = TendermintClient(coin: .kava)
@@ -59,12 +62,12 @@ public class LocalClient: KeysClientDelegate {
         return key
     }
     
-    public func deleteKey(with address: String, password: String) -> NSError? {
+    public func deleteKey(with name: String, address: String, password: String) -> NSError? {
         if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
             var keys = savedKeys.keys
             var index = 0
             for gaiaKey in keys {
-                if gaiaKey.address == address, gaiaKey.password == password {
+                if gaiaKey.address == address, gaiaKey.password == password, gaiaKey.name == name, gaiaKey.nodeId == networkID {
                     keys.remove(at: index)
                 }
                 index += 1

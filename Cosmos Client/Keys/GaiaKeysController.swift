@@ -66,7 +66,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        keysDelegate = LocalClient(networkType: node?.type ?? .cosmos)
+        keysDelegate = LocalClient(networkType: node?.type ?? .cosmos, netID: node?.nodeID ?? "-1")
         if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
             dataSource = savedKeys.keys
             if filteredDataSource.count == 0 {
