@@ -187,6 +187,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             let nav = segue.destination as? UINavigationController
             let dest = nav?.viewControllers.first as? AddressesListController
             dest?.shouldPop = true
+            dest?.addressPrefix = node?.adddressPrefix ?? ""
+            
             dest?.onSelectAddress = { [weak self] selected in
                 if let validAddress = selected {
                     self?.senderAddress = validAddress.address

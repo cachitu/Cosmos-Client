@@ -23,6 +23,8 @@ class AddressesListController: UIViewController, ToastAlertViewPresentable {
     var singlePressGesture: UITapGestureRecognizer?
     var shouldPop = false
 
+    var addressPrefix: String = ""
+    
     var onSelectAddress: ((_ addressItem: GaiaAddressBookItem?) -> ())?
     var gaiaAddresses: [GaiaAddressBookItem] = []
     private var selectedAddress: GaiaAddressBookItem?
@@ -41,7 +43,7 @@ class AddressesListController: UIViewController, ToastAlertViewPresentable {
         super.viewWillAppear(animated)
         selectedAddress = nil
         if let gaiaAddress = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook {
-            gaiaAddresses = gaiaAddress.items
+            gaiaAddresses = gaiaAddress.items.filter { $0.address.contains(addressPrefix) }
             tableView.reloadData()
         }
     }

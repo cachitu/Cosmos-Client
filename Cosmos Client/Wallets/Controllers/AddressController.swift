@@ -28,7 +28,8 @@ class AddressController: UIViewController, ToastAlertViewPresentable {
     var gaiaAddress: GaiaAddressBookItem?
     var continueBottomDist: CGFloat = 0.0
     var shouldPop = false
-    
+    var addressPrefix: String = ""
+
     var onAddressEdited: ((_ alias: String)->())?
 
     private var fieldsStateDic: [String : Bool] = ["walletName" : true, "gaiaAddress" : false]
