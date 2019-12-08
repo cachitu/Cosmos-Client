@@ -85,7 +85,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         }
         
         if showHint {
-            toast?.showToastAlert("Use IPSX nodes for test purposes only, add your own trusted node for real use.", type: .info, dismissable: true)
+            toast?.showToastAlert("You can use the nodes below or add your own trusted ndes.", type: .info, dismissable: true)
         }
         showHint = false
     }

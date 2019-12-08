@@ -90,7 +90,7 @@
 		8801CF792221921A004781C1 /* GaiaHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaHistoryController.swift; sourceTree = "<group>"; };
 		8801CF7B2221923D004781C1 /* GaiaHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaHistoryCell.swift; sourceTree = "<group>"; };
 		8801CF7D222273D9004781C1 /* GaiaDelegationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaDelegationsController.swift; sourceTree = "<group>"; };
-		88677FF721E9C54A0022A09E /* Syncnode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Syncnode.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		88677FF721E9C54A0022A09E /* T-Stake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "T-Stake.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88677FFA21E9C54A0022A09E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88677FFF21E9C54A0022A09E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8867800121E9C54D0022A09E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		88677FF821E9C54A0022A09E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				88677FF721E9C54A0022A09E /* Syncnode.app */,
+				88677FF721E9C54A0022A09E /* T-Stake.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -386,7 +386,7 @@
 			);
 			name = Syncnode;
 			productName = "Cosmos Client";
-			productReference = 88677FF721E9C54A0022A09E /* Syncnode.app */;
+			productReference = 88677FF721E9C54A0022A09E /* T-Stake.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -665,15 +665,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
-				DEVELOPMENT_TEAM = 2C9D8PUQU5;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SKYG56VM4S;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "ro.syncnode.tendermint-tools";
+				PRODUCT_NAME = "T-Stake";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -685,15 +685,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
-				DEVELOPMENT_TEAM = 2C9D8PUQU5;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SKYG56VM4S;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ipsx.cosmosclient;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "ro.syncnode.tendermint-tools";
+				PRODUCT_NAME = "T-Stake";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

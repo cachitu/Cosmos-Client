@@ -11,7 +11,7 @@
         <!--Nodes-->
         <scene sceneID="CGU-nu-VWF">
             <objects>
-                <viewController title="Nodes" extendedLayoutIncludesOpaqueBars="YES" id="K5f-QS-aKw" customClass="GaiaNodesController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Nodes" extendedLayoutIncludesOpaqueBars="YES" id="K5f-QS-aKw" customClass="GaiaNodesController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kbc-3r-Lkf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +45,7 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeHeaderCellID" rowHeight="44" id="NTE-JI-IrB" customClass="GaiaNodeHeaderCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeHeaderCellID" rowHeight="44" id="NTE-JI-IrB" customClass="GaiaNodeHeaderCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NTE-JI-IrB" id="RxT-MU-DGT">
@@ -53,15 +53,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gaia node" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRw-nb-sRY">
-                                                    <rect key="frame" x="15" y="24" width="65" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <rect key="frame" x="15" y="24" width="72.666666666666671" height="18"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View node" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrC-Nl-fbc">
-                                                    <rect key="frame" x="292.66666666666669" y="24" width="67.333333333333314" height="17"/>
+                                                    <rect key="frame" x="292.66666666666669" y="24.666666666666671" width="67.333333333333314" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="TerraBlue"/>
+                                                    <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtN-Hp-1cp">
@@ -89,14 +89,14 @@
                                             <outlet property="leftlabel" destination="aRw-nb-sRY" id="rOm-6H-WxC"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeCellID" id="wnq-OL-Bo1" customClass="GaiaNodeCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaNodeCellID" id="wnq-OL-Bo1" customClass="GaiaNodeCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.333332061767578" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wnq-OL-Bo1" id="OUh-fp-I3W">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYN-og-Nvl" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYN-og-Nvl" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="IHO-it-09C">
@@ -108,13 +108,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="kytzu.go.ro" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGN-xu-qvN">
-                                                            <rect key="frame" x="35" y="15.666666666666668" width="77" height="17.000000000000004"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                            <rect key="frame" x="35.000000000000007" y="15" width="81.666666666666686" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="26656, 1317" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ub8-Tx-Npn">
-                                                            <rect key="frame" x="35" y="33" width="70" height="15"/>
+                                                            <rect key="frame" x="35" y="33.333333333333336" width="70" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -125,10 +125,10 @@
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHn-CZ-nVS" customClass="CellStateRoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHn-CZ-nVS" customClass="CellStateRoundedView" customModule="T_Stake" customModuleProvider="target">
                                                             <rect key="frame" x="115" y="56" width="115" height="22"/>
                                                             <subviews>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2v-Xp-dkm" userLabel="Canceled View" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2v-Xp-dkm" userLabel="Canceled View" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPr-3w-Fmc">
@@ -149,7 +149,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WUE-QR-PW0" userLabel="Closed View" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WUE-QR-PW0" userLabel="Closed View" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLOSED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qp9-TO-ef0">
@@ -170,7 +170,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mT3-If-DlK" userLabel="Expired View" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mT3-If-DlK" userLabel="Expired View" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXPIRED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRw-Wl-Fvr">
@@ -191,7 +191,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTa-Qm-wkW" userLabel="Consumed View" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTa-Qm-wkW" userLabel="Consumed View" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONSUMED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FcV-Pn-LyW">
@@ -212,7 +212,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zI-MJ-OKD" userLabel="Active View" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zI-MJ-OKD" userLabel="Active View" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                                     <rect key="frame" x="28" y="1" width="58" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5k-0e-iyk" userLabel="ACTIVE">
@@ -233,7 +233,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvi-5E-nam" userLabel="Pending View" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvi-5E-nam" userLabel="Pending View" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                                     <rect key="frame" x="28" y="1" width="58" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SYNCING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ad-KC-ykn" userLabel="Pending">
@@ -254,7 +254,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VNH-AY-wWg" userLabel="Unavailable View" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VNH-AY-wWg" userLabel="Unavailable View" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                                     <rect key="frame" x="14" y="1" width="88" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNAVAILABLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsW-W3-rsm" userLabel="Unavailable">
@@ -275,7 +275,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-YS-rQv" userLabel="Unknown View" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-YS-rQv" userLabel="Unknown View" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                                     <rect key="frame" x="20" y="1" width="75" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNKNOWN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKj-Cv-jyS" userLabel="Unknown">
@@ -433,7 +433,7 @@
                                     <constraint firstAttribute="height" constant="94" id="qmC-Sr-kx6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbh-Pw-PiM" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbh-Pw-PiM" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -484,7 +484,7 @@
         <!--Gaia Node Controller-->
         <scene sceneID="R5G-5Z-cMH">
             <objects>
-                <viewController id="9eS-Vl-7H1" customClass="GaiaNodeController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9eS-Vl-7H1" customClass="GaiaNodeController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RDG-76-wmP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -492,7 +492,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="Pia-hr-EBP">
                                 <rect key="frame" x="0.0" y="24" width="375" height="754"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0M5-k4-JaJ" customClass="RoundedButton" customModule="Syncnode" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0M5-k4-JaJ" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="15" y="707" width="345" height="44"/>
                                 <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
@@ -510,7 +510,7 @@
                                     <action selector="deleteNode:" destination="9eS-Vl-7H1" eventType="touchUpInside" id="e01-sm-kCt"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQE-Z9-u3v" customClass="RoundedButton" customModule="Syncnode" customModuleProvider="target">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQE-Z9-u3v" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="15" y="762" width="345" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -533,7 +533,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="QxA-Q6-Otc">
                                 <rect key="frame" x="16" y="112.66666666666669" width="343" height="270"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULO-V6-jwU" userLabel="Company name" customClass="RichTextFieldView" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULO-V6-jwU" userLabel="Company name" customClass="RichTextFieldView" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="67.333333333333329"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Node Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypg-al-gcj">
@@ -584,7 +584,7 @@
                                             <outlet property="titleLabel" destination="ypg-al-gcj" id="dHR-JX-5Yj"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNt-Z9-mKS" userLabel="Address" customClass="RichTextFieldView" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNt-Z9-mKS" userLabel="Address" customClass="RichTextFieldView" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="67.333333333333314" width="343" height="67.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host or IP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPp-Pv-ulM">
@@ -635,7 +635,7 @@
                                             <outlet property="titleLabel" destination="qPp-Pv-ulM" id="olu-Rm-KJk"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQg-Mv-lhB" userLabel="Registration" customClass="RichTextFieldView" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQg-Mv-lhB" userLabel="Registration" customClass="RichTextFieldView" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="135" width="343" height="67.333333333333314"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RPC Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E36-oN-7ZN">
@@ -686,7 +686,7 @@
                                             <outlet property="titleLabel" destination="E36-oN-7ZN" id="GJz-fD-8Qs"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfM-oQ-gO5" userLabel="VAT" customClass="RichTextFieldView" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RfM-oQ-gO5" userLabel="VAT" customClass="RichTextFieldView" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="202.33333333333331" width="343" height="67.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scheme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ld-FG-3Nv">
@@ -882,7 +882,7 @@
         <!--Template-->
         <scene sceneID="wen-Q5-ZTn">
             <objects>
-                <viewController title="Template" extendedLayoutIncludesOpaqueBars="YES" id="C66-qx-PyC" customClass="GaiaKeysController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Template" extendedLayoutIncludesOpaqueBars="YES" id="C66-qx-PyC" customClass="GaiaKeysController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xhH-gE-6g7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -916,7 +916,7 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyHeaderCellID" rowHeight="44" id="SEt-zc-9aL" customClass="GaiaKeyHeaderCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyHeaderCellID" rowHeight="44" id="SEt-zc-9aL" customClass="GaiaKeyHeaderCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SEt-zc-9aL" id="Gay-id-weT">
@@ -926,7 +926,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Options" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Tf-hR-hVD">
                                                     <rect key="frame" x="15" y="24" width="87.666666666666671" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="TerraBlue"/>
+                                                    <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forget Password" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4A-Uk-g4Z">
@@ -973,14 +973,14 @@
                                             <outlet property="rightLabel" destination="c4A-Uk-g4Z" id="sTK-o5-bi6"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="v3g-Ar-Cqy" customClass="GaiaKeyCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCellID" id="v3g-Ar-Cqy" customClass="GaiaKeyCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v3g-Ar-Cqy" id="LHU-WG-roJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-Oy-rap" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-Oy-rap" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="UvC-lT-ZDc">
@@ -991,13 +991,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="kytzu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTr-kk-JQ7">
-                                                            <rect key="frame" x="35" y="15.666666666666668" width="302" height="17.000000000000004"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                            <rect key="frame" x="35" y="15" width="302" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6jp-91-yCy">
-                                                            <rect key="frame" x="35" y="35.666666666666664" width="302" height="17"/>
+                                                            <rect key="frame" x="35" y="36" width="302" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1115,7 +1115,7 @@
                                     <outletCollection property="gestureRecognizers" destination="zIx-pd-mf8" appends="YES" id="Ddv-Pe-30k"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ei-aQ-R9N" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ei-aQ-R9N" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1175,7 +1175,7 @@
         <!--Gaia Key Controller-->
         <scene sceneID="Q5O-iO-dxK">
             <objects>
-                <viewController id="JGL-u5-Pdz" customClass="GaiaKeyController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JGL-u5-Pdz" customClass="GaiaKeyController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CRh-zp-6lX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1247,7 +1247,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="lIO-DH-2Hx"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aw0-At-lEB" customClass="RoundedButton" customModule="Syncnode" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aw0-At-lEB" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="15" y="714" width="345" height="44"/>
                                 <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
@@ -1332,7 +1332,7 @@
                                     <action selector="showOrHideSeed:" destination="JGL-u5-Pdz" eventType="touchUpInside" id="fBy-6S-wzr"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8c7-MK-oLC" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8c7-MK-oLC" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1431,7 +1431,7 @@
         <!--Wallet-->
         <scene sceneID="dHu-DA-hfV">
             <objects>
-                <viewController title="Wallet" extendedLayoutIncludesOpaqueBars="YES" id="hPr-Gq-sdB" customClass="GaiaWalletController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Wallet" extendedLayoutIncludesOpaqueBars="YES" id="hPr-Gq-sdB" customClass="GaiaWalletController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D7j-AX-RNX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1443,7 +1443,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="rIC-36-QiL"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MV4-cC-N1s" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MV4-cC-N1s" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="729" width="375" height="149"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ok-we-Z3d" userLabel="Separator">
@@ -1453,7 +1453,7 @@
                                             <constraint firstAttribute="height" constant="0.5" id="zse-L2-5u1"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3K6-um-Oz3" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3K6-um-Oz3" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="NYk-Mt-VlG">
@@ -1495,7 +1495,7 @@
                                             <outlet property="titleLabel" destination="ILe-bB-Kqb" id="8Sl-Yc-WF5"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfa-Zh-FQS" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfa-Zh-FQS" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="rq4-7S-1rA">
@@ -1536,7 +1536,7 @@
                                             <outlet property="titleLabel" destination="c1W-we-20j" id="hy4-zd-mbW"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMD-0E-xCO" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMD-0E-xCO" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="cAC-Mg-dqA">
@@ -1577,7 +1577,7 @@
                                             <outlet property="titleLabel" destination="uwT-bi-088" id="grg-Ru-OCu"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZJ-rf-Lf8" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZJ-rf-Lf8" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="sQ0-R3-GLl">
@@ -1648,7 +1648,7 @@
                                     <outlet property="item4" destination="3ZJ-rf-Lf8" id="oLI-f4-MQd"/>
                                 </connections>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VyT-Io-fxp" userLabel="Amount View" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VyT-Io-fxp" userLabel="Amount View" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="15" y="114" width="345" height="137"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx fee: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uOJ-6B-HTT">
@@ -1716,7 +1716,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWa-Fa-glo" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWa-Fa-glo" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="15" y="275" width="345" height="197"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g0e-dl-VEG">
@@ -1759,7 +1759,7 @@
                                             <outlet property="delegate" destination="hPr-Gq-sdB" id="xL0-as-MwT"/>
                                         </connections>
                                     </pickerView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGQ-Do-nRl" customClass="RoundedButton" customModule="Syncnode" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGQ-Do-nRl" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="7.6666666666666714" y="152" width="151.66666666666663" height="34"/>
                                         <color key="backgroundColor" red="0.1647058824" green="0.67450980390000004" blue="0.87800002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -1822,14 +1822,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCell" id="S3P-lh-O5M" customClass="GaiaKeyCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaKeyCell" id="S3P-lh-O5M" customClass="GaiaKeyCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S3P-lh-O5M" id="eZk-ML-Koh">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLP-k0-kpV" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLP-k0-kpV" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delegation" translatesAutoresizingMaskIntoConstraints="NO" id="uEa-Eq-jZE">
@@ -1961,7 +1961,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="Tjn-Vl-e0O"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuY-SR-GaR" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuY-SR-GaR" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2035,7 +2035,7 @@
         <!--Validators-->
         <scene sceneID="L9G-F0-U10">
             <objects>
-                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="6Ja-jx-Fju" customClass="GaiaValidatorsController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="6Ja-jx-Fju" customClass="GaiaValidatorsController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vXs-42-Di1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2053,14 +2053,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaValidatorCellID" id="cXJ-g2-wDZ" customClass="GaiaValidatorCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaValidatorCellID" id="cXJ-g2-wDZ" customClass="GaiaValidatorCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cXJ-g2-wDZ" id="hG7-d9-dtc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-G6-prq" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-G6-prq" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="104"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="EYg-M3-u5c">
@@ -2186,7 +2186,7 @@
                                     <constraint firstAttribute="height" constant="94" id="cze-sY-Bf6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04a-Ih-g4c" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04a-Ih-g4c" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2194,7 +2194,7 @@
                                     <constraint firstAttribute="width" constant="44" id="ux5-E4-XLD"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hp7-aN-tgY" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hp7-aN-tgY" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="729" width="375" height="149"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhv-IV-8mO" userLabel="Separator">
@@ -2204,7 +2204,7 @@
                                             <constraint firstAttribute="height" constant="0.5" id="VUA-6H-7ac"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujl-NA-YsM" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujl-NA-YsM" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="ibN-cI-3vI">
@@ -2246,7 +2246,7 @@
                                             <outlet property="titleLabel" destination="EAb-OL-ox6" id="4cr-Kn-4df"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bvc-df-N3p" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bvc-df-N3p" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="BfR-6V-p5v">
@@ -2287,7 +2287,7 @@
                                             <outlet property="titleLabel" destination="1y5-8N-Gm7" id="V3V-ME-WCU"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-FD-OIq" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-FD-OIq" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="2Tl-RH-rAs">
@@ -2328,7 +2328,7 @@
                                             <outlet property="titleLabel" destination="UKr-aU-2NE" id="Z5J-Kr-E8W"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7V-pu-dO0" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7V-pu-dO0" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="0Ss-Js-faB">
@@ -2447,7 +2447,7 @@
         <!--Governance-->
         <scene sceneID="4SU-t2-4uC">
             <objects>
-                <viewController title="Governance" extendedLayoutIncludesOpaqueBars="YES" id="i83-p6-5lL" customClass="GaiaOraclesController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Governance" extendedLayoutIncludesOpaqueBars="YES" id="i83-p6-5lL" customClass="GaiaOraclesController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jRw-vQ-oH9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2458,14 +2458,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaOraclesCellID" id="YRc-fz-kcE" customClass="GaiaOracleCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaOraclesCellID" id="YRc-fz-kcE" customClass="GaiaOracleCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YRc-fz-kcE" id="uCz-YN-zRy">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZL-ru-xu7" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZL-ru-xu7" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="64"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="O3V-gS-aUU">
@@ -2590,7 +2590,7 @@
                                     <constraint firstAttribute="height" constant="94" id="hRi-cE-NVf"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXA-wZ-jG4" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXA-wZ-jG4" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2598,7 +2598,7 @@
                                     <constraint firstAttribute="width" constant="44" id="vHk-2P-Zfc"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyZ-um-Hmi" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyZ-um-Hmi" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="729" width="375" height="149"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UL7-of-NI7" userLabel="Separator">
@@ -2608,7 +2608,7 @@
                                             <constraint firstAttribute="height" constant="0.5" id="fC9-fu-2rW"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfJ-0L-LuM" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfJ-0L-LuM" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="GwY-u0-pfe">
@@ -2650,7 +2650,7 @@
                                             <outlet property="titleLabel" destination="y1a-bv-eGL" id="fXm-Wx-arq"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zyR-md-wMh" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zyR-md-wMh" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="5N0-4j-auP">
@@ -2691,7 +2691,7 @@
                                             <outlet property="titleLabel" destination="wNH-Aj-3eK" id="E9k-cd-RIs"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSe-L8-jm6" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSe-L8-jm6" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="c1y-em-uu8">
@@ -2732,7 +2732,7 @@
                                             <outlet property="titleLabel" destination="pZB-i9-WEm" id="PvM-pG-1B5"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6In-Z5-Wqb" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6In-Z5-Wqb" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="fer-hG-Jd3">
@@ -2851,7 +2851,7 @@
         <!--Settings-->
         <scene sceneID="Zax-GT-cxK">
             <objects>
-                <viewController title="Settings" extendedLayoutIncludesOpaqueBars="YES" id="0ep-XW-mYa" customClass="GaiaSettingsController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Settings" extendedLayoutIncludesOpaqueBars="YES" id="0ep-XW-mYa" customClass="GaiaSettingsController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tqq-aF-I7k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2893,7 +2893,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Yje-IX-wGj" secondAttribute="bottom" constant="9" id="ewy-jx-A0q"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uea-cp-u47" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uea-cp-u47" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2901,7 +2901,7 @@
                                     <constraint firstAttribute="width" constant="44" id="mNl-2o-0j3"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQ6-TJ-xfY" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQ6-TJ-xfY" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="729" width="375" height="149"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDe-8r-ccY" userLabel="Separator">
@@ -2911,7 +2911,7 @@
                                             <constraint firstAttribute="height" constant="0.5" id="FMf-11-vpv"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEK-YG-nAm" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEK-YG-nAm" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="LFT-Ql-dIa">
@@ -2953,7 +2953,7 @@
                                             <outlet property="titleLabel" destination="ZOc-Ev-E1y" id="hhZ-uX-V3G"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wup-Jf-VPv" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wup-Jf-VPv" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="wun-lE-tPQ">
@@ -2994,7 +2994,7 @@
                                             <outlet property="titleLabel" destination="W7E-7j-46k" id="lNg-Yz-1nY"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4i3-x5-F5e" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4i3-x5-F5e" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="daW-Hc-sqn">
@@ -3035,7 +3035,7 @@
                                             <outlet property="titleLabel" destination="krg-oR-rkN" id="vmS-ej-4Fk"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1t-0E-v9U" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1t-0E-v9U" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="a1k-gQ-eoc">
@@ -3322,7 +3322,7 @@
         <!--Gaia Key Create Controller-->
         <scene sceneID="66n-2B-8Se">
             <objects>
-                <viewController id="3go-4Q-YDw" customClass="GaiaKeyCreateController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3go-4Q-YDw" customClass="GaiaKeyCreateController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0ZU-k0-DRk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3330,7 +3330,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="NOV-o3-1cC">
                                 <rect key="frame" x="0.0" y="24" width="375" height="754"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDQ-5e-aZL" customClass="RoundedButton" customModule="Syncnode" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDQ-5e-aZL" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="15" y="704" width="345" height="44"/>
                                 <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
@@ -3351,7 +3351,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="xxD-Cm-jA3">
                                 <rect key="frame" x="16" y="122.66666666666669" width="343" height="160"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IkB-Dc-tCT" userLabel="Company name" customClass="RichTextFieldView" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IkB-Dc-tCT" userLabel="Company name" customClass="RichTextFieldView" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="80"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BvK-Wi-FyN">
@@ -3402,7 +3402,7 @@
                                             <outlet property="titleLabel" destination="BvK-Wi-FyN" id="aLV-Ww-t2z"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUC-2A-Jsc" userLabel="Address" customClass="RichTextFieldView" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUC-2A-Jsc" userLabel="Address" customClass="RichTextFieldView" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="79.999999999999986" width="343" height="80.000000000000014"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyJ-Ku-6jE">
@@ -3560,7 +3560,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="db2-KF-qiB"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ui-XM-EQP" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ui-XM-EQP" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -3621,7 +3621,7 @@
         <!--Gaia Proposal Controller-->
         <scene sceneID="9k9-4n-ikM">
             <objects>
-                <viewController id="zmf-Wa-kLi" customClass="GaiaProposalController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zmf-Wa-kLi" customClass="GaiaProposalController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HI9-ry-Yyp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3629,7 +3629,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="0DI-2K-EgM">
                                 <rect key="frame" x="0.0" y="24" width="375" height="754"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2O-4V-uHu" customClass="RoundedButton" customModule="Syncnode" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2O-4V-uHu" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="15" y="704" width="345" height="44"/>
                                 <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
@@ -3650,7 +3650,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ldb-Mj-9Xz">
                                 <rect key="frame" x="16" y="112.66666666666669" width="343" height="140"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTw-95-8X3" userLabel="Company name" customClass="RichTextFieldView" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTw-95-8X3" userLabel="Company name" customClass="RichTextFieldView" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="70"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03V-yf-sO9">
@@ -3701,7 +3701,7 @@
                                             <outlet property="titleLabel" destination="03V-yf-sO9" id="pSQ-hb-93u"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqF-n1-oMF" userLabel="Address" customClass="RichTextFieldView" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqF-n1-oMF" userLabel="Address" customClass="RichTextFieldView" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="69.999999999999986" width="343" height="70.000000000000014"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vkc-Sc-wNH">
@@ -3856,7 +3856,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="C2U-ze-Ecv"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qks-Td-rGS" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qks-Td-rGS" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -3917,7 +3917,7 @@
         <!--Validators-->
         <scene sceneID="6hE-8b-Ckc">
             <objects>
-                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="ccf-MA-ojY" customClass="GaiaHistoryController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="ccf-MA-ojY" customClass="GaiaHistoryController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAA-8J-yuI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3935,14 +3935,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaHistoryCellID" id="Uc6-FM-Npu" customClass="GaiaHistoryCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaHistoryCellID" id="Uc6-FM-Npu" customClass="GaiaHistoryCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uc6-FM-Npu" id="uxg-7a-v0J">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pR5-5I-Oa9" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pR5-5I-Oa9" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="104"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" textAlignment="justified" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FTf-XG-A6B">
@@ -4076,7 +4076,7 @@
                                     <constraint firstItem="WRu-76-Zb8" firstAttribute="leading" secondItem="b9m-j9-lem" secondAttribute="leading" id="xEB-vT-ah2"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iit-54-HKe" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iit-54-HKe" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -4123,7 +4123,7 @@
         <!--Validators-->
         <scene sceneID="uYb-GR-ptE">
             <objects>
-                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="bKP-u7-GVw" customClass="GaiaDelegationsController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="bKP-u7-GVw" customClass="GaiaDelegationsController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="znm-0E-Hef">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4141,14 +4141,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaDelegationCellID" id="S0r-SO-nWX" customClass="GaiaDelegationCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaDelegationCellID" id="S0r-SO-nWX" customClass="GaiaDelegationCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S0r-SO-nWX" id="j1s-b7-WPd">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="463-ej-pqP" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="463-ej-pqP" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delegation" translatesAutoresizingMaskIntoConstraints="NO" id="vWu-wx-6QC">
@@ -4250,7 +4250,7 @@
                                     <constraint firstAttribute="bottom" secondItem="LOB-Gf-WEE" secondAttribute="bottom" constant="-2" id="sfa-hs-qdX"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aki-ur-xIw" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aki-ur-xIw" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -4297,7 +4297,7 @@
         <!--Validators-->
         <scene sceneID="eZ2-hN-ptf">
             <objects>
-                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="WFZ-es-0h2" customClass="GaiaVotesController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Validators" extendedLayoutIncludesOpaqueBars="YES" id="WFZ-es-0h2" customClass="GaiaVotesController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gMb-NG-nV8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4315,14 +4315,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaVoteCellID" id="9ZM-fa-eF9" customClass="GaiaVoteCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaVoteCellID" id="9ZM-fa-eF9" customClass="GaiaVoteCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9ZM-fa-eF9" id="i93-1g-xM0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXi-le-Xrc" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXi-le-Xrc" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="67"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friendship" translatesAutoresizingMaskIntoConstraints="NO" id="AhI-zR-Rvb">
@@ -4425,7 +4425,7 @@
                                     <constraint firstAttribute="bottom" secondItem="NZ5-Nk-Kc4" secondAttribute="bottom" constant="9" id="hmY-HE-PSL"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNe-jO-2ek" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNe-jO-2ek" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -4471,7 +4471,7 @@
         <!--Governance-->
         <scene sceneID="HFg-0S-mm1">
             <objects>
-                <viewController title="Governance" extendedLayoutIncludesOpaqueBars="YES" id="MNZ-Xr-tPS" customClass="GaiaGovernanceController" customModule="Syncnode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Governance" extendedLayoutIncludesOpaqueBars="YES" id="MNZ-Xr-tPS" customClass="GaiaGovernanceController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PRi-4Z-ZaG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4482,14 +4482,14 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaGovernanceCellID" id="RHO-cK-qBx" customClass="GaiaGovernanceCell" customModule="Syncnode" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaGovernanceCellID" id="RHO-cK-qBx" customClass="GaiaGovernanceCell" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RHO-cK-qBx" id="ffW-NG-3a8">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZs-aG-uEo" customClass="RoundedView" customModule="Syncnode" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZs-aG-uEo" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="3" width="345" height="174"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friendship" translatesAutoresizingMaskIntoConstraints="NO" id="8id-AQ-JB7">
@@ -4694,7 +4694,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Gi8-Jx-MyS" secondAttribute="bottom" id="pn7-gD-3nL"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8AQ-3z-YfY" customClass="CustomLoadingView" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8AQ-3z-YfY" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="165.66666666666666" y="389" width="44" height="44"/>
                                 <color key="backgroundColor" red="0.81176470590000005" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -4702,7 +4702,7 @@
                                     <constraint firstAttribute="height" constant="44" id="x7H-DW-SFs"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VdK-9M-HG6" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="Syncnode" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VdK-9M-HG6" userLabel="Custom Tabbar" customClass="CustomTabBar" customModule="T_Stake" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="729" width="375" height="149"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Rq-8m-EZI" userLabel="Separator">
@@ -4712,7 +4712,7 @@
                                             <constraint firstAttribute="height" constant="0.5" id="pFg-CX-0KD"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myA-80-baP" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myA-80-baP" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar01" translatesAutoresizingMaskIntoConstraints="NO" id="R0B-6D-ZcS">
@@ -4754,7 +4754,7 @@
                                             <outlet property="titleLabel" destination="Lsq-9e-tMe" id="YtH-8c-vzx"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdg-l4-i49" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdg-l4-i49" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="93.666666666666686" y="0.0" width="94" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar02" translatesAutoresizingMaskIntoConstraints="NO" id="1Hv-td-4VJ">
@@ -4795,7 +4795,7 @@
                                             <outlet property="titleLabel" destination="KGW-RH-efF" id="mMV-se-74U"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5mS-5w-nKu" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5mS-5w-nKu" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="187.66666666666666" y="0.0" width="93.666666666666657" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar03" translatesAutoresizingMaskIntoConstraints="NO" id="YJA-PN-bw0">
@@ -4836,7 +4836,7 @@
                                             <outlet property="titleLabel" destination="kB8-bP-a1h" id="duA-Da-6Vz"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0T7-J5-o8L" customClass="CustomTabBarItem" customModule="Syncnode" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0T7-J5-o8L" customClass="CustomTabBarItem" customModule="T_Stake" customModuleProvider="target">
                                         <rect key="frame" x="281.33333333333331" y="0.0" width="93.666666666666686" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBar04" translatesAutoresizingMaskIntoConstraints="NO" id="pYF-J9-qTR">
@@ -4978,7 +4978,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aOp-4w-hr6"/>
-        <segue reference="rZw-Iy-wVt"/>
+        <segue reference="KyJ-Mr-vI6"/>
         <segue reference="gIV-DK-wR1"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="TerraBlue"/>

@@ -81,6 +81,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         }
         txFeeLabel.text = ""
         sendAmountButton.isEnabled = false
+        sendAmountTextField.isEnabled = node?.isReadOnly != true
+        
         screenTitleLabel.text = node?.network ?? "Wallet"
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
@@ -549,6 +551,11 @@ extension GaiaWalletController: UITableViewDelegate {
         let delegation = dataSource[indexPath.item]
         
         DispatchQueue.main.async {
+            
+            guard self.node?.isReadOnly != true else {
+                self.toast?.showToastAlert("This account is read only", autoHideAfter: 5, type: .info, dismissable: true)
+                return
+            }
             
             if let validDenom = self.node?.stakeDenom {
                 
