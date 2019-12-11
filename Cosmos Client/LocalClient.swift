@@ -178,10 +178,6 @@ public class LocalClient: KeysClientDelegate {
         let value = hdaccount.privateKey.publicKey.getBase64()
         let hash = signer.signHash(transferData: goodBuffer, hdAccount: hdaccount)
         
-        print("hash ---->")
-        print(hash)
-        print("hask ---->")
-
         let sig = TxValueSignature(
             sig: hash,
             type: type,
