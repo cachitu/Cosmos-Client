@@ -148,7 +148,9 @@ public class LocalClient: KeysClientDelegate {
         signable.chainId = node.network
         signable.fee = transferData?.value?.fee
         signable.memo = transferData?.value?.memo
-        signable.msgs = transferData?.value?.msg
+        if let msg = transferData?.value?.msg?.first?.value {
+            signable.msgs = [msg]
+        }
         signable.sequence = account.accSequence
         
         var jsonData = Data()
@@ -178,7 +180,6 @@ public class LocalClient: KeysClientDelegate {
         
         print("hash ---->")
         print(hash)
-        print("qZdQdFZqOhJQwMhHeG7gb4+Ie+fdbqECLbQJ12DWnE488OFIoVJ5/R/3wfTjxp0kEpIyhisDmaYijMdYDHkZjw==")
         print("hask ---->")
 
         let sig = TxValueSignature(
@@ -226,7 +227,7 @@ public struct TxSignableIris: Codable {
     public var chainId: String?
     public var fee: TxValueFee?
     public var memo: String?
-    public var msgs: [TxValueMsg]?
+    public var msgs: [TxMsgVal]?
     public var sequence: String?
     
     public init() {
