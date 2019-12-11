@@ -152,7 +152,7 @@ public class LocalClient: KeysClientDelegate {
             signable.msgs = [msg]
         }
         signable.sequence = account.accSequence
-        
+
         var jsonData = Data()
         var jsString = ""
         let encoder = JSONEncoder()
