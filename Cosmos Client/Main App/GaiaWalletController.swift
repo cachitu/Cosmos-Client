@@ -114,7 +114,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 
                 let amount = self?.sendAmountTextField.text ?? "0"
                 let memo = self?.node?.defaultMemo ?? ""
-                let alert = UIAlertController(title: "Send \(amount) \(denom) to \(addrToSend)", message: "Memo: \(memo)", preferredStyle: UIAlertController.Style.alert)
+                let adjusetdDenom = denom == "iris-atto" ? "iris" : denom
+                let alert = UIAlertController(title: "Send \(amount) \(adjusetdDenom) to \(addrToSend)", message: "Memo: \(memo)", preferredStyle: UIAlertController.Style.alert)
                 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] alertAction in
                     self?.sendAmountTextField.text = ""
@@ -288,9 +289,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
 
                 if spinner { self?.loadingView.stopAnimating() }
                 
-                //let cl = LocalClient(networkType: .iris)
-                //cl.testSignIris(account: account!)
-
                 self?.account = account
                 if self?.selectedAsset == nil {
                     self?.selectedAsset = account?.assets.first

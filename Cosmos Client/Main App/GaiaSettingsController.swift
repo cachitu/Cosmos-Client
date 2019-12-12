@@ -139,6 +139,13 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         memoTextField.text = memo
+        
+        if node?.type == TDMNodeType.iris || node?.type == TDMNodeType.iris_fuxi {
+            feeTextField.isEnabled = false
+            feeTextField.text = "0.4"
+            feeSectionTitleLabel.text = "Current settings: 0.4 iris"
+            feeApplyButton.isHidden = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
