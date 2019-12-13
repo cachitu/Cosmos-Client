@@ -39,7 +39,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         bottomTabbarView.onTap = { [weak self] index in
-            let segueName = (self?.node?.type == .terra || self?.node?.type == .terra_118) ? "nextSegueTerra" : "nextSegue"
+            let segueName = "nextSegue"
             switch index {
             case 0: self?.dismiss(animated: false)
             case 2:
@@ -81,7 +81,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         }
         if forwardCounter > 0 {
             if forwardCounter == 1 { UIView.setAnimationsEnabled(true) }
-            let segueName = (node?.type == .terra || node?.type == .terra_118) ? "nextSegueTerra" : "nextSegue"
+            let segueName = "nextSegue"
             self.performSegue(withIdentifier: segueName, sender: forwardCounter + 1)
             forwardCounter = 0
             return
@@ -150,30 +150,17 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             dest?.validator = validator
         }
         if let index = sender as? Int {
-            if node?.type == .terra || node?.type == .terra_118 {
-                let dest = segue.destination as? GaiaOraclesController
-                dest?.node = node
-                dest?.account = account
-                dest?.key = key
-                dest?.keysDelegate = keysDelegate
-                dest?.forwardCounter = index - 2
-                dest?.onUnwind = { [weak self] index in
-                    self?.bottomTabbarView.selectIndex(-1)
-                    self?.lockLifeCicleDelegates = true
-                }
-            } else {
-                let dest = segue.destination as? GaiaGovernanceController
-                dest?.node = node
-                dest?.account = account
-                dest?.key = key
-                dest?.keysDelegate = keysDelegate
-                dest?.forwardCounter = index - 2
-                dest?.onUnwind = { [weak self] index in
-                    self?.bottomTabbarView.selectIndex(-1)
-                    self?.lockLifeCicleDelegates = true
-                }
-
+            let dest = segue.destination as? GaiaGovernanceController
+            dest?.node = node
+            dest?.account = account
+            dest?.key = key
+            dest?.keysDelegate = keysDelegate
+            dest?.forwardCounter = index - 2
+            dest?.onUnwind = { [weak self] index in
+                self?.bottomTabbarView.selectIndex(-1)
+                self?.lockLifeCicleDelegates = true
             }
+            
             forwardCounter = 0
         }
     }
