@@ -26,6 +26,7 @@ class GaiaValidatorCell: UITableViewCell {
         
         monikerLabel.text = "\(index): " + validator.moniker
         operatorLabel.text = validator.validator
+        jailedLabel.text = validator.jailed ? "Jailed" : ""
         jailedLabel.isHidden = !validator.jailed
         let finalShares = "\(dShares)".split(separator: ".").first ?? "0"
         sharesLabel.text = "\(finalShares) Shares"

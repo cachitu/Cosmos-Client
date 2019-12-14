@@ -22,11 +22,10 @@ public class LocalClient: KeysClientDelegate {
         self.networkID = netID
         self.type = networkType
         switch networkType {
-        case .cosmos, .cosmosTestnet:
-            self.signer = TendermintClient(coin: .cosmos)
+        case .cosmos    : self.signer = TendermintClient(coin: .cosmos)
         case .iris      : self.signer = TendermintClient(coin: .iris)
         case .iris_fuxi : self.signer = TendermintClient(coin: .iris_fuxi)
-        case .terra, .terraTestnet     : self.signer = TendermintClient(coin: .terra)
+        case .terra     : self.signer = TendermintClient(coin: .terra)
         case .terra_118 : self.signer = TendermintClient(coin: .terra_118)
         case .kava      : self.signer = TendermintClient(coin: .kava)
         case .bitsong   : self.signer = TendermintClient(coin: .bitsong)
@@ -123,25 +122,7 @@ public class LocalClient: KeysClientDelegate {
         }
     }
     
-    public func testSignIris(account: GaiaAccount) {
-        
-        let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
-        
-        if let filepath = Bundle.main.path(forResource: "test", ofType: "json") {
-            do {
-                let contents = try String(contentsOfFile: filepath)
-                let testBuffer = contents.data(using: .ascii)?.sha256() ?? Data()
-                let testHash = signer.signHashTest(transferData: testBuffer, hdAccount: hdaccount)
-                print(contents)
-                print(testHash)
-                print("should get: FjQqWHxX5S+QhHm6SFp+fc1OxP2od6bTlBIA5RSkuiBGrsRY5EZYJ+Vki6yMRe7lwt6HxcQgzjUz5zPTW3Muaw==")
-            } catch {
-                // contents could not be loaded
-            }
-        }
-    }
-    
-    public func signIris(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, completion:((RestResult<[TransactionTx]>) -> Void)?) {
+    public func signIris(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, renameShares: Bool, completion:((RestResult<[TransactionTx]>) -> Void)?) {
         
         var signable = TxSignableIris()
         signable.accountNumber = account.accNumber
@@ -166,7 +147,9 @@ public class LocalClient: KeysClientDelegate {
             completion?(.failure(error))
         }
         jsString = jsString.replacingOccurrences(of: "\\", with: "")
-        
+        if renameShares {
+            jsString = jsString.replacingOccurrences(of: "shares_amount", with: "shares")
+        }
         print("sign bytes ---->")
         print(jsString)
         print("sign bytes <----")

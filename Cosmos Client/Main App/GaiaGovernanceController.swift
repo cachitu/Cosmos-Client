@@ -152,27 +152,34 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         retrieveAllPropsals(node: validNode) { [weak self] proposals, error in
             self?.dataSource = []
             if let validProposals = proposals {
-                for proposal in validProposals {
-                    self?.getPropsalDetails(node: validNode, proposal: proposal) { detailedProposal, error in
-                        self?.loadingView.stopAnimating()
-                        if let valid = detailedProposal {
-                            self?.dataSource.append(valid)
-                            self?.dataSource = validProposals.reversed()
-                            self?.tableView.reloadData()
-                        } else {
-                            self?.dataSource.append(proposal)
-                            self?.dataSource = validProposals.reversed()
-                            self?.tableView.reloadData()
+                if validProposals.count > 0 {
+                    for proposal in validProposals {
+                        self?.getPropsalDetails(node: validNode, proposal: proposal) { detailedProposal, error in
+                            self?.loadingView.stopAnimating()
+                            if let valid = detailedProposal {
+                                self?.dataSource.append(valid)
+                                self?.dataSource = validProposals.reversed()
+                                self?.tableView.reloadData()
+                            } else {
+                                self?.dataSource.append(proposal)
+                                self?.dataSource = validProposals.reversed()
+                                self?.tableView.reloadData()
+                            }
                         }
                     }
+                } else {
+                    self?.loadingView.stopAnimating()
+                    self?.toast?.showToastAlert("There are no proposals available", autoHideAfter: 5, type: .info, dismissable: true)
                 }
             } else if let errMsg = error {
+                self?.loadingView.stopAnimating()
                 if errMsg.contains("connection was lost") {
                     self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
                 } else {
                     self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
                 }
             } else {
+                self?.loadingView.stopAnimating()
                 self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
             }
         }

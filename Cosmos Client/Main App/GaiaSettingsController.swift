@@ -142,8 +142,8 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
         
         if node?.type == TDMNodeType.iris || node?.type == TDMNodeType.iris_fuxi {
             feeTextField.isEnabled = false
-            feeTextField.text = "0.4"
-            feeSectionTitleLabel.text = "Current settings: 0.4 iris"
+            feeTextField.text = "0.41"
+            feeSectionTitleLabel.text = "Current settings: 0.41 iris"
             feeApplyButton.isHidden = true
         }
     }
