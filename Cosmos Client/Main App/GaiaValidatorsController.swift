@@ -18,7 +18,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     var keysDelegate: LocalClient?
 
     var account: GaiaAccount?
-    var feeAmount: String { return node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return node?.defaultTxFee  ?? "0" }
 
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -174,7 +174,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         guard let validNode = node, let validKey = key, let keysDelegate = keysDelegate else { return }
         
         loadingView.startAnimating()
-        validator.unjail(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, errMsg in
+        validator.unjail(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount) { [weak self] resp, errMsg in
             self?.loadingView.stopAnimating()
             if let msg = errMsg {
                 if msg.contains("connection was lost") {
@@ -199,7 +199,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         node: validNode,
                         clientDelegate: delegate,
                         key: validKey,
-                        feeAmount: self?.feeAmount ?? "0",
+                        feeAmount: self?.defaultFeeSigAmount ?? "0",
                         fromValidator: redelgateFrom,
                         toValidator: validator.validator,
                         amount: validAmount) { (resp, err) in
@@ -235,7 +235,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         node: validNode,
                         clientDelegate: delegate,
                         key: validKey,
-                        feeAmount: self?.feeAmount ?? "0",
+                        feeAmount: self?.defaultFeeSigAmount ?? "0",
                         toValidator: validator.validator,
                         amount: validAmount,
                         denom: denom ?? "stake") { (resp, err) in

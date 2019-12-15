@@ -18,19 +18,17 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
     var keysDelegate: LocalClient?
 
     var account: GaiaAccount?
-    var feeAmount: String { return node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return node?.defaultTxFee  ?? "0" }
     
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
-    @IBOutlet weak var bottomTabbarView: CustomTabBar!
-    @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     
-    var forwardCounter = 0
-    var onUnwind: ((_ toIndex: Int) -> ())?
-    var lockLifeCicleDelegates = false
+    @IBAction func closeAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     var dataSource: [(denom: String, price: Double, amount: String)] = []
     var offeredDenom: String?  = nil
@@ -39,16 +37,6 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
-        bottomTabbarView.onTap = { [weak self] index in
-            switch index {
-            case 0:
-                self?.onUnwind?(0)
-                self?.performSegue(withIdentifier: "UnwindToWallet", sender: nil)
-            case 1: self?.dismiss(animated: false)
-            case 3: self?.performSegue(withIdentifier: "nextSegue", sender: index)
-            default: break
-            }
-        }
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             self?.node?.getStatus {
@@ -63,30 +51,11 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard !lockLifeCicleDelegates else { return }
-        if forwardCounter > 0 {
-            bottomTabbarView.selectIndex(-1)
-            return
-        }
-        
-        bottomTabbarView.selectIndex(2)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if forwardCounter > 0 {
-            UIView.setAnimationsEnabled(true)
-            self.performSegue(withIdentifier: "nextSegue", sender: 3)
-            forwardCounter = 0
-            return
-        }
-        
-        guard !lockLifeCicleDelegates else {
-            lockLifeCicleDelegates = false
-            return
-        }
-        
+                
         if let validNode = node {
             loadData(validNode: validNode)
         }
@@ -105,24 +74,6 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let index = sender as? Int {
-            
-            let dest = segue.destination as? GaiaSettingsController
-            dest?.forwardCounter = index - 3
-            dest?.node = node
-            dest?.account = account
-            dest?.key = key
-            dest?.onUnwind = { [weak self] index in
-                self?.lockLifeCicleDelegates = true
-                self?.bottomTabbarView.selectIndex(-1)
-                if index == 0 { self?.onUnwind?(index) }
-            }
-            forwardCounter = 0
-        }
-    }
-
     private func loadAccount() {
         
         if let validNode = node, let validKey = key {
@@ -155,14 +106,16 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
                 for active in validActives {
                     dispatchGroup.enter()
                     self?.retrievePrice(node: validNode, active: active) { price, errMsg in
+                        let amount = self?.account?.assets.filter { $0.denom == active }.first?.amount ?? "0"
                         if let validprice = price {
                             let dv = Double(validprice.replacingOccurrences(of: "\"", with: "")) ?? 0
-                            let amount = self?.account?.assets.filter { $0.denom == active }.first?.amount ?? "0"
                             self?.dataSource.append((active, dv, amount))
                         } else if let validErr = errMsg {
-                            self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
+                            //self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
+                            self?.dataSource.append((active, 0, amount))
                         } else {
-                            self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
+                            //self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
+                            self?.dataSource.append((active, 0, amount))
                         }
                         dispatchGroup.leave()
                     }
@@ -183,14 +136,10 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
         }
     }
     
-    @IBAction func unwindToGovernance(segue:UIStoryboardSegue) {
-        bottomTabbarView.selectIndex(2)
-    }
-    
     private func handleSwap(offerDenom: String, askDenom: String) {
         
         print("Should swap to \(askDenom)")
-        showAmountAlert(title: "Type the amount of \(offerDenom) you want to swap to \(askDenom)", message: "", placeholder: "0 \(askDenom)") { amount in
+        showAmountAlert(title: "Type the amount of \(offerDenom) you want to swap to \(askDenom)", message: "", placeholder: "0 \(offerDenom)") { amount in
             if let validAmount = amount, let validNode = self.node, let validKey = self.key, let delegate = self.keysDelegate {
                 self.loadingView.startAnimating()
                 self.swapActives(node: validNode,
@@ -199,7 +148,7 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
                                  offerAmount: validAmount,
                                  offerDenom: offerDenom,
                                  askDenom: askDenom,
-                                 feeAmount: self.feeAmount) { [weak self] resp, err in
+                                 feeAmount: self.defaultFeeSigAmount) { [weak self] resp, err in
                                     self?.loadingView.stopAnimating()
                                     if err == nil {
                                         self?.toast?.showToastAlert("Swap successfull", autoHideAfter: 15, type: .info, dismissable: true)
@@ -207,7 +156,11 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
                                             self?.loadAccount()
                                         }
                                     } else if let errMsg = err {
-                                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                                        if errMsg.contains("connection was lost") {
+                                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                                        } else {
+                                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                                        }
                                     }
                 }
             }
@@ -265,7 +218,7 @@ class GaiaOracleCell: UITableViewCell {
     func configure(proposal: (denom: String, price: Double, amount: String), baseDenom: String) {
         let strAmount = String(format: "%.2f", proposal.price)
         nameLabel.text = proposal.denom
-        priceLabel.text = strAmount
+        priceLabel.text = strAmount == "0.00" ? "?" : strAmount
         amountLabel.text = proposal.amount
         priceTitle.text = "rate / \(baseDenom)"
     }

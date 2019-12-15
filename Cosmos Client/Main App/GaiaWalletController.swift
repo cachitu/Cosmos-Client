@@ -15,7 +15,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     var key: GaiaKey?
     var keysDelegate: LocalClient?
     var account: GaiaAccount?
-    var feeAmount: String { return node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return node?.defaultTxFee  ?? "0" }
 
     var toast: ToastAlertView?
     
@@ -41,6 +41,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     @IBOutlet weak var sendAmountButton: RoundedButton!
     @IBOutlet weak var denomPickerView: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var swapButton: RoundedButton!
     
     @IBOutlet weak var qrTestImageView: UIImageView!
     @IBAction func backAction(_ sender: Any) {
@@ -84,7 +85,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         sendAmountTextField.isEnabled = node?.isReadOnly != true
         
         screenTitleLabel.text = node?.network ?? "Wallet"
-        
+        swapButton.isHidden = !(node?.type == TDMNodeType.terra || node?.type == TDMNodeType.terra_118)
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             self?.clearFields()
             self?.node?.getStatus {
@@ -150,7 +151,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         sendAssets(node: node,
                    clientDelegate: keysDelegate,
                    key: key,
-                   feeAmount: feeAmount,
+                   feeAmount: defaultFeeSigAmount,
                    toAddress: destAddress,
                    amount: sendAmountTextField.text ?? "0",
                    denom: denom) { [weak self] response, error in
@@ -186,6 +187,13 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
+        case  "terraSwapSegue":
+            let dest = segue.destination as? GaiaOraclesController
+            dest?.node = node
+            dest?.account = account
+            dest?.key = key
+            dest?.keysDelegate = keysDelegate
+
         case "ShowAddressBookSegue":
             let nav = segue.destination as? UINavigationController
             let dest = nav?.viewControllers.first as? AddressesListController
@@ -360,7 +368,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     node: validNode,
                     clientDelegate: delegate,
                     key: validKey,
-                    feeAmount: self?.feeAmount ?? "0",
+                    feeAmount: self?.defaultFeeSigAmount ?? "0",
                     toValidator: delegation.validatorAddr,
                     amount: validAmount,
                     denom: denom) { (resp, err) in
@@ -392,7 +400,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         self.showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
             if let validAmount = amount, let validNode = self?.node, let validKey = self?.key, let delegate = self?.keysDelegate {
                 self?.loadingView.startAnimating()
-                self?.unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: self?.feeAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { (resp, err) in
+                self?.unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: self?.defaultFeeSigAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { (resp, err) in
                     if err == nil {
                         self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 15, type: .info, dismissable: true)
                         self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
@@ -420,7 +428,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let validNode = node, let validKey = key, let keysDelegate = keysDelegate {
             loadingView.startAnimating()
-            withdraw(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount, validator: delegation.validatorAddr) { [weak self] resp, err in
+            withdraw(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount, validator: delegation.validatorAddr) { [weak self] resp, err in
                 if err == nil {
                     self?.toast?.showToastAlert("Withdraw successfull", autoHideAfter: 15, type: .info, dismissable: true)
                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
@@ -447,7 +455,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let validNode = node, let validKey = key, let keysDelegate = keysDelegate {
             loadingView.startAnimating()
-            withdrawComission(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: feeAmount) { [weak self] resp, err in
+            withdrawComission(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount) { [weak self] resp, err in
                 if err == nil {
                     self?.toast?.showToastAlert("Comission withdraw successfull", autoHideAfter: 15, type: .info, dismissable: true)
                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in

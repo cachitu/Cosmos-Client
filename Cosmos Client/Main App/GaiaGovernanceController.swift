@@ -18,7 +18,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     var keysDelegate: LocalClient?
 
     var account: GaiaAccount?
-    var feeAmount: String { return node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return node?.defaultTxFee  ?? "0" }
     var selectedProposal: GaiaProposal?
     
     @IBOutlet weak var loadingView: CustomLoadingView!
@@ -96,7 +96,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 node: node,
                 clientDelegate: keysDelegate,
                 key: key,
-                feeAmount: self.feeAmount) { [weak self] response, err in
+                feeAmount: self.defaultFeeSigAmount) { [weak self] response, err in
                     self?.loadingView.stopAnimating()
                     if err == nil {
                         self?.toast?.showToastAlert("Proposal Created", autoHideAfter: 5, type: .info, dismissable: true)
@@ -199,7 +199,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 node: node,
                 clientDelegate: delegate,
                 key: key,
-                feeAmount: self?.feeAmount ?? "0")
+                feeAmount: self?.defaultFeeSigAmount ?? "0")
             {  response, err in
                 self?.loadingView.stopAnimating()
                 if err == nil {
@@ -230,7 +230,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 node: node,
                 clientDelegate: delegate,
                 key: key,
-                feeAmount: self?.feeAmount ?? "0") { response, err in
+                feeAmount: self?.defaultFeeSigAmount ?? "0") { response, err in
                     self?.loadingView.stopAnimating()
                     if err == nil {
                         self?.toast?.showToastAlert("Deposit submited", autoHideAfter: 5, type: .info, dismissable: true)
