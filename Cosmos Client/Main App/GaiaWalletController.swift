@@ -21,6 +21,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     let refreshInterval: TimeInterval = 10
     
+    @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var screenTitleLabel: UILabel!
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -86,6 +87,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         screenTitleLabel.text = node?.network ?? "Wallet"
         swapButton.isHidden = !(node?.type == TDMNodeType.terra || node?.type == TDMNodeType.terra_118)
+        historyButton.isHidden = (node?.type == TDMNodeType.iris || node?.type == TDMNodeType.iris_fuxi)
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             self?.clearFields()
             self?.node?.getStatus {

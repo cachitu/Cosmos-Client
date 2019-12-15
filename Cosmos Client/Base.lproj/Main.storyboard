@@ -1948,7 +1948,7 @@
                                         <color key="textColor" red="0.92797461851126761" green="0.91611832449718311" blue="0.90990133506056337" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6a-wq-4ZW" userLabel="History">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6a-wq-4ZW" userLabel="History">
                                         <rect key="frame" x="331" y="57" width="44" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="1x2-S3-eeG"/>
@@ -2031,6 +2031,7 @@
                         <outlet property="denomPickerView" destination="Brt-HF-jHr" id="s2p-Zd-0nh"/>
                         <outlet property="feeAmountDenomLabel" destination="ogV-Dx-bNt" id="DVc-Mf-dEU"/>
                         <outlet property="feeAmountValueLabel" destination="thC-75-L6X" id="4Pd-vl-xcw"/>
+                        <outlet property="historyButton" destination="T6a-wq-4ZW" id="vcB-wx-rcz"/>
                         <outlet property="loadingView" destination="kuY-SR-GaR" id="FEB-og-5D8"/>
                         <outlet property="qrTestImageView" destination="g0e-dl-VEG" id="JPw-iw-mdJ"/>
                         <outlet property="screenTitleLabel" destination="fVa-kC-V0d" id="Rlw-6P-BLA"/>
