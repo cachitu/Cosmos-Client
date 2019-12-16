@@ -110,7 +110,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                     }
             }
         } else if let validNode = node {
-            loadData(validNode: validNode)
+            loadData(validNode: validNode, showLoader: true)
         }
         timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
             if let validNode = self?.node {
@@ -155,11 +155,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         timer?.invalidate()
     }
     
-    func loadData(validNode: TDMNode) {
+    func loadData(validNode: TDMNode, showLoader: Bool = false) {
         
         let dispatchGroup = DispatchGroup()
 
-        loadingView.startAnimating()
+        if showLoader { loadingView.startAnimating() }
         retrieveAllPropsals(node: validNode) { [weak self] proposals, error in
             var tmpDataSource: [GaiaProposal] = []
             if let validProposals = proposals {
@@ -222,12 +222,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             {  resp, msg in
                 self?.loadingView.stopAnimating()
                 if resp != nil {
-                    self?.toast?.showToastAlert("Vote submitted\n[\(msg ?? "...")]", autoHideAfter: 5, type: .validatePending, dismissable: true)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        self?.loadingView.startAnimating()
-                        self?.loadData(validNode: node)
-                    }
-                } else if let errMsg = msg {
+                    self?.toast?.showToastAlert("Vote submitted\n[\(msg ?? "...")]", autoHideAfter: 5, type: .validatePending, dismissable: true)                } else if let errMsg = msg {
                     if errMsg.contains("connection was lost") {
                         self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
                     } else {
@@ -253,10 +248,6 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                     self?.loadingView.stopAnimating()
                     if resp != nil {
                         self?.toast?.showToastAlert("Deposit submitted\n[\(msg ?? "...")]", autoHideAfter: 5, type: .validatePending, dismissable: true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            self?.loadingView.startAnimating()
-                            self?.loadData(validNode: node)
-                        }
                     } else if let errMsg = msg {
                         if errMsg.contains("connection was lost") {
                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)

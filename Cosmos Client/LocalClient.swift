@@ -93,7 +93,7 @@ public class LocalClient: KeysClientDelegate {
         encoder.dataEncodingStrategy = .base64
         do {
             jsonData = try encoder.encode(signable)
-            jsString = String(data: jsonData, encoding: String.Encoding.macOSRoman) ?? ""
+            jsString = String(data: jsonData, encoding: String.Encoding.utf8) ?? ""
         } catch {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
             completion?(.failure(error))
@@ -101,7 +101,7 @@ public class LocalClient: KeysClientDelegate {
         print(jsString)
         jsString = jsString.replacingOccurrences(of: "\\", with: "")
         
-        let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
+        let goodBuffer = jsString.data(using: .utf8)?.sha256() ?? Data()
         let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
         
         let type = "tendermint/PubKeySecp256k1"
@@ -141,7 +141,7 @@ public class LocalClient: KeysClientDelegate {
         encoder.dataEncodingStrategy = .base64
         do {
             jsonData = try encoder.encode(signable)
-            jsString = String(data: jsonData, encoding: String.Encoding.macOSRoman) ?? ""
+            jsString = String(data: jsonData, encoding: String.Encoding.utf8) ?? ""
         } catch {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
             completion?(.failure(error))
@@ -154,7 +154,7 @@ public class LocalClient: KeysClientDelegate {
         print(jsString)
         print("sign bytes <----")
         
-        let goodBuffer = jsString.data(using: .ascii)?.sha256() ?? Data()
+        let goodBuffer = jsString.data(using: .utf8)?.sha256() ?? Data()
         let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
         
         let type = "tendermint/PubKeySecp256k1"
