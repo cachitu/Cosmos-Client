@@ -157,25 +157,35 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     
     func loadData(validNode: TDMNode) {
         
+        let dispatchGroup = DispatchGroup()
+
         loadingView.startAnimating()
         retrieveAllPropsals(node: validNode) { [weak self] proposals, error in
-            self?.dataSource = []
+            var tmpDataSource: [GaiaProposal] = []
             if let validProposals = proposals {
                 if validProposals.count > 0 {
                     for proposal in validProposals {
+                        dispatchGroup.enter()
                         self?.getPropsalDetails(node: validNode, proposal: proposal) { detailedProposal, error in
-                            self?.loadingView.stopAnimating()
                             if let valid = detailedProposal {
-                                self?.dataSource.append(valid)
-                                self?.dataSource = validProposals.reversed()
-                                self?.tableView.reloadData()
+                                tmpDataSource.append(valid)
+                                //tmpDataSource = validProposals.reversed()
+                                dispatchGroup.leave()
                             } else {
-                                self?.dataSource.append(proposal)
-                                self?.dataSource = validProposals.reversed()
-                                self?.tableView.reloadData()
+                                tmpDataSource.append(proposal)
+                                //tmpDataSource = validProposals.reversed()
+                                dispatchGroup.leave()
                             }
                         }
                     }
+                    
+                    dispatchGroup.notify(queue: .main) {
+                        self?.loadingView.stopAnimating()
+                        self?.dataSource = tmpDataSource.sorted() { $0.proposalId > $1.proposalId }
+                        self?.tableView.reloadData()
+                    }
+
+
                 } else {
                     self?.loadingView.stopAnimating()
                     self?.toast?.showToastAlert("There are no proposals available", autoHideAfter: 5, type: .info, dismissable: true)
