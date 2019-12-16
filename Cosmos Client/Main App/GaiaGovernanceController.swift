@@ -35,7 +35,8 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     
     var dataSource: [GaiaProposal] = []
     var proposeData: ProposalData?
-    
+    private weak var timer: Timer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
@@ -96,14 +97,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 node: node,
                 clientDelegate: keysDelegate,
                 key: key,
-                feeAmount: self.defaultFeeSigAmount) { [weak self] response, err in
+                feeAmount: self.defaultFeeSigAmount) { [weak self] resp, msg in
                     self?.loadingView.stopAnimating()
-                    if err == nil {
-                        self?.toast?.showToastAlert("Proposal Created", autoHideAfter: 5, type: .info, dismissable: true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            self?.loadData(validNode: node)
-                        }
-                    } else if let errMsg = err {
+                    if resp != nil {
+                        self?.toast?.showToastAlert("Proposal Create submitted\n[\(msg ?? "...")]", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                    } else if let errMsg = msg {
                         if errMsg.contains("connection was lost") {
                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
                         } else {
@@ -114,6 +112,12 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         } else if let validNode = node {
             loadData(validNode: validNode)
         }
+        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
+            if let validNode = self?.node {
+                self?.loadData(validNode: validNode)
+            }
+        }
+
         proposeData = nil
     }
     
@@ -146,6 +150,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
+    }
+    
     func loadData(validNode: TDMNode) {
         
         loadingView.startAnimating()
@@ -200,15 +209,15 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 clientDelegate: delegate,
                 key: key,
                 feeAmount: self?.defaultFeeSigAmount ?? "0")
-            {  response, err in
+            {  resp, msg in
                 self?.loadingView.stopAnimating()
-                if err == nil {
-                    self?.toast?.showToastAlert("Vote submited", autoHideAfter: 5, type: .info, dismissable: true)
+                if resp != nil {
+                    self?.toast?.showToastAlert("Vote submitted\n[\(msg ?? "...")]", autoHideAfter: 5, type: .validatePending, dismissable: true)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                         self?.loadingView.startAnimating()
                         self?.loadData(validNode: node)
                     }
-                } else if let errMsg = err {
+                } else if let errMsg = msg {
                     if errMsg.contains("connection was lost") {
                         self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
                     } else {
@@ -230,15 +239,15 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 node: node,
                 clientDelegate: delegate,
                 key: key,
-                feeAmount: self?.defaultFeeSigAmount ?? "0") { response, err in
+                feeAmount: self?.defaultFeeSigAmount ?? "0") { resp, msg in
                     self?.loadingView.stopAnimating()
-                    if err == nil {
-                        self?.toast?.showToastAlert("Deposit submited", autoHideAfter: 5, type: .info, dismissable: true)
+                    if resp != nil {
+                        self?.toast?.showToastAlert("Deposit submitted\n[\(msg ?? "...")]", autoHideAfter: 5, type: .validatePending, dismissable: true)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             self?.loadingView.startAnimating()
                             self?.loadData(validNode: node)
                         }
-                    } else if let errMsg = err {
+                    } else if let errMsg = msg {
                         if errMsg.contains("connection was lost") {
                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
                         } else {

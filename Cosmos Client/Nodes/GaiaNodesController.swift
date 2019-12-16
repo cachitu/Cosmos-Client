@@ -82,7 +82,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         refreshNodes()
         navigationController?.navigationBar.barStyle = .default
         
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
             self?.refreshNodes()
         }
         

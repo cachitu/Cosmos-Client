@@ -19,8 +19,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
 
     var toast: ToastAlertView?
     
-    let refreshInterval: TimeInterval = 10
-    
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var screenTitleLabel: UILabel!
     @IBOutlet weak var loadingView: CustomLoadingView!
@@ -117,8 +115,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 
                 let amount = self?.sendAmountTextField.text ?? "0"
                 let memo = self?.node?.defaultMemo ?? ""
-                let adjusetdDenom = denom == "iris-atto" ? "iris" : denom
-                let alert = UIAlertController(title: "Send \(amount) \(adjusetdDenom) to \(addrToSend)", message: "Memo: \(memo)", preferredStyle: UIAlertController.Style.alert)
+                //let adjusetdDenom = denom == "iris-atto" ? "iris" : denom
+                let alert = UIAlertController(title: "Send \(amount) \(denom) to \(addrToSend)", message: "Memo: \(memo)", preferredStyle: UIAlertController.Style.alert)
                 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] alertAction in
                     self?.sendAmountTextField.text = ""
@@ -129,6 +127,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 
                 let action = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] alertAction in
                     self?.loadingView.startAnimating()
+                    self?.toast?.hideToast()
                     self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
                 }
                 
@@ -140,9 +139,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
 
         } else {
             loadingView.startAnimating()
-            self.loadData()
+            toast?.hideToast()
+            loadData()
         }
-        timer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
             self?.loadData(animated: false, spinner: false)
         }
     }
@@ -156,16 +156,16 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                    feeAmount: defaultFeeSigAmount,
                    toAddress: destAddress,
                    amount: sendAmountTextField.text ?? "0",
-                   denom: denom) { [weak self] response, error in
+                   denom: denom) { [weak self] resp, msg in
                     DispatchQueue.main.async {
                         
                         self?.sendAmountTextField.text = ""
                         self?.sendAmountButton.isEnabled = false
                         self?.loadingView.stopAnimating()
                         
-                        if let validResponse = response {
-                            self?.toast?.showToastAlert("[\(validResponse.hash ?? "...")] submited", autoHideAfter: 15, type: .validatePending, dismissable: false)
-                        } else if let errMsg = error {
+                        if resp != nil {
+                            self?.toast?.showToastAlert("Transfer submitted\n[\(msg ?? "...")] ", autoHideAfter: 15, type: .validatePending, dismissable: false)
+                        } else if let errMsg = msg {
                             if errMsg.contains("connection was lost") {
                                 self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
                             } else {
@@ -195,6 +195,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             dest?.account = account
             dest?.key = key
             dest?.keysDelegate = keysDelegate
+            clearFields()
 
         case "ShowAddressBookSegue":
             let nav = segue.destination as? UINavigationController
@@ -366,6 +367,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         showAmountAlert(title: "Type the amount of \(denom) you want to delegate to:", message: "\(delegation.validatorAddr)\nIt holds\n\(Double(delegation.shares) ?? 0) \(denom) from you.", placeholder: "0 \(denom)") { [weak self] amount in
             if let validAmount = amount, let validNode = self?.node, let validKey = self?.key, let delegate = self?.keysDelegate {
                 self?.loadingView.startAnimating()
+                self?.toast?.hideToast()
                 self?.delegateStake(
                     node: validNode,
                     clientDelegate: delegate,
@@ -373,9 +375,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     feeAmount: self?.defaultFeeSigAmount ?? "0",
                     toValidator: delegation.validatorAddr,
                     amount: validAmount,
-                    denom: denom) { (resp, err) in
-                        if err == nil {
-                            self?.toast?.showToastAlert("Delegation successfull", autoHideAfter: 5, type: .info, dismissable: true)
+                    denom: denom) { resp, msg in
+                        if resp != nil {
+                            self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
                             self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                 self?.loadingView.stopAnimating()
                                 if let validDelegations = delegations {
@@ -384,7 +386,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                                     self?.queryRewards(validDelegations: validDelegations)
                                 }
                             }
-                        } else if let errMsg = err {
+                        } else if let errMsg = msg {
                             self?.loadingView.stopAnimating()
                             if errMsg.contains("connection was lost") {
                                 self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
@@ -402,9 +404,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         self.showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
             if let validAmount = amount, let validNode = self?.node, let validKey = self?.key, let delegate = self?.keysDelegate {
                 self?.loadingView.startAnimating()
-                self?.unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: self?.defaultFeeSigAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { (resp, err) in
-                    if err == nil {
-                        self?.toast?.showToastAlert("Unbonding successfull", autoHideAfter: 15, type: .info, dismissable: true)
+                self?.toast?.hideToast()
+                self?.unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: self?.defaultFeeSigAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { resp, msg in
+                    if resp != nil {
+                        self?.toast?.showToastAlert("Unbonding submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
                         self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                             self?.loadingView.stopAnimating()
                             if let validDelegations = delegations {
@@ -413,7 +416,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                                 self?.queryRewards(validDelegations: validDelegations)
                             }
                         }
-                    } else if let errMsg = err {
+                    } else if let errMsg = msg {
                         self?.loadingView.stopAnimating()
                         if errMsg.contains("connection was lost") {
                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
@@ -430,9 +433,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let validNode = node, let validKey = key, let keysDelegate = keysDelegate {
             loadingView.startAnimating()
-            withdraw(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount, validator: delegation.validatorAddr) { [weak self] resp, err in
-                if err == nil {
-                    self?.toast?.showToastAlert("Withdraw successfull", autoHideAfter: 15, type: .info, dismissable: true)
+            toast?.hideToast()
+            withdraw(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount, validator: delegation.validatorAddr) { [weak self] resp, msg in
+                if resp != nil {
+                    self?.toast?.showToastAlert("Withdraw submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                         self?.loadingView.stopAnimating()
                         if let validDelegations = delegations {
@@ -441,7 +445,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             self?.queryRewards(validDelegations: validDelegations)
                         }
                     }
-                } else if let errMsg = err {
+                } else if let errMsg = msg {
                     self?.loadingView.stopAnimating()
                     if errMsg.contains("connection was lost") {
                         self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
@@ -457,9 +461,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let validNode = node, let validKey = key, let keysDelegate = keysDelegate {
             loadingView.startAnimating()
-            withdrawComission(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount) { [weak self] resp, err in
-                if err == nil {
-                    self?.toast?.showToastAlert("Comission withdraw successfull", autoHideAfter: 15, type: .info, dismissable: true)
+            toast?.hideToast()
+            withdrawComission(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount) { [weak self] resp, msg in
+                if resp != nil {
+                    self?.toast?.showToastAlert("Comission withdraw submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
                     self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                         self?.loadingView.stopAnimating()
                         if let validDelegations = delegations {
@@ -468,7 +473,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             self?.queryRewards(validDelegations: validDelegations)
                         }
                     }
-                } else if let errMsg = err {
+                } else if let errMsg = msg {
                     self?.loadingView.stopAnimating()
                     if errMsg.contains("connection was lost") {
                         self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)

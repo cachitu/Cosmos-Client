@@ -34,6 +34,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
 
     var dataSource: [GaiaValidator] = []
     var redelgateFrom: String?
+    private weak var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,12 +89,17 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         }
         
         loadData()
+        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
+            self?.loadData()
+        }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         redelgateFrom = nil
         toast?.hideToast()
+        timer?.invalidate()
     }
     
     func loadData() {
@@ -123,9 +129,10 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                     } ?? []
                     self?.dataSource.append(contentsOf: active)
                     self?.dataSource.append(contentsOf: jailed)
-
+                    
                     self?.tableView.reloadData()
-                     if let redelagateAddr = self?.redelgateFrom {
+                    if let redelagateAddr = self?.redelgateFrom {
+                        self?.timer?.invalidate()
                         self?.toast?.showToastAlert("Tap any validator to redelegate from \(redelagateAddr)", type: .validatePending, dismissable: false)
                     }
                 } else if let validErr = errMsg {
@@ -202,15 +209,19 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         feeAmount: self?.defaultFeeSigAmount ?? "0",
                         fromValidator: redelgateFrom,
                         toValidator: validator.validator,
-                        amount: validAmount) { (resp, err) in
+                        amount: validAmount) { resp, msg in
                             self?.redelgateFrom = nil
-                            if err == nil {
-                                self?.toast?.showToastAlert("Redelegation successfull", autoHideAfter: 15, type: .info, dismissable: true)
+                            self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
+                                self?.loadData()
+                            }
+
+                            if resp != nil {
+                                self?.toast?.showToastAlert("Redelegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
                                 self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                     self?.loadingView.stopAnimating()
                                     self?.loadData()
                                 }
-                            } else if let errMsg = err {
+                            } else if let errMsg = msg {
                                 self?.loadingView.stopAnimating()
                                 if errMsg.contains("connection was lost") {
                                     self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
@@ -238,14 +249,14 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         feeAmount: self?.defaultFeeSigAmount ?? "0",
                         toValidator: validator.validator,
                         amount: validAmount,
-                        denom: denom ?? "stake") { (resp, err) in
-                            if err == nil {
-                                self?.toast?.showToastAlert("Delegation successfull", autoHideAfter: 15, type: .info, dismissable: true)
+                        denom: denom ?? "stake") { resp, msg in
+                            if resp != nil {
+                                self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
                                 self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                     self?.loadingView.stopAnimating()
                                     self?.loadData()
                                 }
-                            } else if let errMsg = err {
+                            } else if let errMsg = msg {
                                 self?.loadingView.stopAnimating()
                                 if errMsg.contains("connection was lost") {
                                     self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
@@ -283,7 +294,11 @@ extension GaiaValidatorsController: UITableViewDataSource {
         let validator: Bool = account?.isValidator ?? false
         switch (indexPath.section, validator) {
         case (0, true):
-            let matches = dataSource.filter { $0.validator == account?.gaiaKey.validator }
+            let matches = dataSource.filter {
+                let compareTo = account?.gaiaKey.validator ?? ""
+                print($0.validator + " =? " + compareTo)
+                return $0.validator == compareTo
+            }
             let poz = dataSource.firstIndex { $0.validator == account?.gaiaKey.validator }
             let index = poz?.advanced(by: 0) ?? 0
             if let valid = matches.first {
@@ -349,12 +364,12 @@ extension GaiaValidatorsController: UITableViewDelegate {
                 optionMenu.addAction(delegateAction)
                 optionMenu.addAction(cancelAction)
                 
-                if validator.jailed == true {
-                    let unjailAction = UIAlertAction(title: "Unjail", style: .default) { [weak self] alertAction in
-                        self?.handleUnjail(validator: validator)
-                    }
-                    optionMenu.addAction(unjailAction)
-                }
+//                if validator.jailed == true {
+//                    let unjailAction = UIAlertAction(title: "Unjail", style: .default) { [weak self] alertAction in
+//                        self?.handleUnjail(validator: validator)
+//                    }
+//                    optionMenu.addAction(unjailAction)
+//                }
                 
                 self.present(optionMenu, animated: true, completion: nil)
             }

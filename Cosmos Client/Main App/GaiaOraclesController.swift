@@ -60,7 +60,7 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
             loadData(validNode: validNode)
         }
         
-        timer = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
             self?.loadAccount()
         }
     }
@@ -148,14 +148,14 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
                                  offerAmount: validAmount,
                                  offerDenom: offerDenom,
                                  askDenom: askDenom,
-                                 feeAmount: self.defaultFeeSigAmount) { [weak self] resp, err in
+                                 feeAmount: self.defaultFeeSigAmount) { [weak self] resp, msg in
                                     self?.loadingView.stopAnimating()
-                                    if err == nil {
-                                        self?.toast?.showToastAlert("Swap successfull", autoHideAfter: 15, type: .info, dismissable: true)
-                                        self?.timer = Timer.scheduledTimer(withTimeInterval: 7, repeats: true) { [weak self] timer in
+                                    if resp != nil {
+                                        self?.toast?.showToastAlert("Swap submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
+                                        self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
                                             self?.loadAccount()
                                         }
-                                    } else if let errMsg = err {
+                                    } else if let errMsg = msg {
                                         if errMsg.contains("connection was lost") {
                                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
                                         } else {
