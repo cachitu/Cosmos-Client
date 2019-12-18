@@ -7,9 +7,10 @@
 //
 
 import Foundation
-
+import UIKit
 
 enum GaiaConstants {
     static let refreshInterval: TimeInterval = 7
     static let historyPageSize = 900
 }
+

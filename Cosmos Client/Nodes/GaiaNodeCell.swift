@@ -26,6 +26,7 @@ class GaiaNodeCell: UITableViewCell {
         case .unavailable: stateView.currentState = .unavailable
         case .unknown: stateView.currentState = .unknown
         }
+        leftImageView.image = node.nodeLogo
         self.roundedView.alpha = (stateView.currentState == .active || stateView.currentState == .pending) ? 1 : 0.5
         leftLabel.text = "\(node.host)"
         if let port = node.rcpPort {
