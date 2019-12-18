@@ -11,6 +11,5 @@ import Foundation
 
 enum GaiaConstants {
     static let refreshInterval: TimeInterval = 7
-    static let historyPageSize = 30
-
+    static let historyPageSize = 900
 }

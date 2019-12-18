@@ -74,15 +74,16 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
             self.getRemoteCount { [weak self] sent, received in
                 let total = (sent + received)
                 if total != savedHistory.transactions.count {
-                    
-                    let delta    = total - savedHistory.transactions.count
-                    let spages   = (sent + GaiaConstants.historyPageSize - 1) / GaiaConstants.historyPageSize
-                    let rpages   = (received + GaiaConstants.historyPageSize - 1) / GaiaConstants.historyPageSize
-                    let newPages = (delta + GaiaConstants.historyPageSize - 1) / GaiaConstants.historyPageSize
-                    self?.curentSentPage     = (spages - newPages) > 1 ? min(spages, spages - newPages) : 1
-                    self?.curentReceivedPage = (rpages - newPages) > 1 ? min(rpages, rpages - newPages) : 1
-                    self?.dataSource = savedHistory.transactions
-                    self?.loadData(removeDuplicates: true)
+//
+//                    let delta    = total - savedHistory.transactions.count
+//                    let spages   = (sent + GaiaConstants.historyPageSize - 1) / GaiaConstants.historyPageSize
+//                    let rpages   = (received + GaiaConstants.historyPageSize - 1) / GaiaConstants.historyPageSize
+//                    let newPages = (delta + GaiaConstants.historyPageSize - 1) / GaiaConstants.historyPageSize
+//                    self?.curentSentPage     = (spages - newPages) > 1 ? min(spages, spages - newPages) : 1
+//                    self?.curentReceivedPage = (rpages - newPages) > 1 ? min(rpages, rpages - newPages) : 1
+//                    self?.dataSource = savedHistory.transactions
+                    self?.loadingView.startAnimating()
+                    self?.loadData()
                     
                 } else {
 

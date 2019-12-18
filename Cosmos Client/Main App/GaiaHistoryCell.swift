@@ -22,10 +22,11 @@ class GaiaHistoryCell: UITableViewCell {
         heightLabel.text = "Height: \(tx.height)"
         fromLabel.text   = tx.sender
         toLabel.text     = tx.recipient
-        amountLabel.text = tx.amount
+        let symbol = tx.isSender ? "▶ " : "◀ "
+        amountLabel.text = symbol + tx.amount
         hashLabel.text   = tx.hash
-        sentOrReceivedLabel.text = ""//tx.isSender ? "🤑" : "🥶"
-        amountLabel.textColor = tx.isSender ? UIColor.progressGreen : UIColor.darkRed
+        sentOrReceivedLabel.text = tx.gas + " gas"
+        amountLabel.textColor = tx.isSender ? UIColor.darkRed : UIColor.progressGreen
         fromLabel.textColor = ownerAddr == tx.sender   ? UIColor.darkText : UIColor.textGrey
         toLabel.textColor   = ownerAddr == tx.recipient ? UIColor.darkText : UIColor.textGrey
     }
