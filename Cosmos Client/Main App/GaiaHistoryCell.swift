@@ -20,10 +20,13 @@ class GaiaHistoryCell: UITableViewCell {
     
     func configure(tx: GaiaTransaction, ownerAddr: String) {
         heightLabel.text = "Height: \(tx.height)"
-        fromLabel.text   = tx.type
-        toLabel.text     = "Gas used: " + tx.gas
-        amountLabel.text = tx.time
+        fromLabel.text   = tx.sender
+        toLabel.text     = tx.recipient
+        amountLabel.text = tx.amount
         hashLabel.text   = tx.hash
-        sentOrReceivedLabel.text = ""
+        sentOrReceivedLabel.text = ""//tx.isSender ? "🤑" : "🥶"
+        amountLabel.textColor = tx.isSender ? UIColor.progressGreen : UIColor.darkRed
+        fromLabel.textColor = ownerAddr == tx.sender   ? UIColor.darkText : UIColor.textGrey
+        toLabel.textColor   = ownerAddr == tx.recipient ? UIColor.darkText : UIColor.textGrey
     }
 }

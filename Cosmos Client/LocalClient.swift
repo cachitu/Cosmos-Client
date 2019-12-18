@@ -98,7 +98,7 @@ public class LocalClient: KeysClientDelegate {
             let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
             completion?(.failure(error))
         }
-        print(jsString)
+        //print(jsString)
         jsString = jsString.replacingOccurrences(of: "\\", with: "")
         
         let goodBuffer = jsString.data(using: .utf8)?.sha256() ?? Data()
@@ -150,9 +150,7 @@ public class LocalClient: KeysClientDelegate {
         if renameShares {
             jsString = jsString.replacingOccurrences(of: "shares_amount", with: "shares")
         }
-        print("sign bytes ---->")
-        print(jsString)
-        print("sign bytes <----")
+        //print(jsString)
         
         let goodBuffer = jsString.data(using: .utf8)?.sha256() ?? Data()
         let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)

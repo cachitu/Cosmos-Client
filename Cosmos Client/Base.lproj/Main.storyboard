@@ -3876,13 +3876,32 @@
                                             <action selector="closeAction:" destination="ccf-MA-ojY" eventType="touchUpInside" id="5JL-1e-a4h"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2c-WA-1nb">
+                                        <rect key="frame" x="326" y="52" width="41" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Y63-DR-SHK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Clear">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" red="0.80784313730000001" green="0.82745098039999998" blue="0.85500001910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearAction:" destination="ccf-MA-ojY" eventType="touchUpInside" id="ImF-eT-mp0"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="TerraBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="94" id="J5C-nd-Aud"/>
                                     <constraint firstItem="3Yo-re-NIZ" firstAttribute="centerX" secondItem="b9m-j9-lem" secondAttribute="centerX" id="Q2p-bS-IEt"/>
                                     <constraint firstAttribute="bottom" secondItem="WRu-76-Zb8" secondAttribute="bottom" constant="-2" id="QuE-h4-qr6"/>
+                                    <constraint firstAttribute="bottom" secondItem="j2c-WA-1nb" secondAttribute="bottom" constant="-2" id="cIc-uf-E4q"/>
                                     <constraint firstAttribute="bottom" secondItem="3Yo-re-NIZ" secondAttribute="bottom" constant="9" id="dwj-yq-U9j"/>
+                                    <constraint firstAttribute="trailing" secondItem="j2c-WA-1nb" secondAttribute="trailing" constant="8" id="jmp-qK-FEP"/>
                                     <constraint firstItem="WRu-76-Zb8" firstAttribute="leading" secondItem="b9m-j9-lem" secondAttribute="leading" id="xEB-vT-ah2"/>
                                 </constraints>
                             </view>

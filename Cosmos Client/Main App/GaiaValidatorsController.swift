@@ -296,7 +296,6 @@ extension GaiaValidatorsController: UITableViewDataSource {
         case (0, true):
             let matches = dataSource.filter {
                 let compareTo = account?.gaiaKey.validator ?? ""
-                print($0.validator + " =? " + compareTo)
                 return $0.validator == compareTo
             }
             let poz = dataSource.firstIndex { $0.validator == account?.gaiaKey.validator }
