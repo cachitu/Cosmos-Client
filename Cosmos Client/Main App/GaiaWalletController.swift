@@ -48,6 +48,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     }
     
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
+    @IBOutlet weak var coinLogoImageView: UIImageView!
     
     private var selectedAsset: Coin?
     private var senderAddress: String?
@@ -60,6 +61,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         bottomTabbarView.selectIndex(0)
+        coinLogoImageView.image = node?.nodeLogo
         bottomTabbarView.onTap = { [weak self] index in
             switch index {
             case 1:
