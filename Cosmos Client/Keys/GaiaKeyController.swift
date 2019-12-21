@@ -24,7 +24,11 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
+    
+    @IBOutlet weak var pubKeyTitle: UILabel!
     @IBOutlet weak var pubKeyLabel: UILabel!
+    
+    @IBOutlet weak var seedTitle: UILabel!
     @IBOutlet weak var seedLabel: UILabel!
     @IBOutlet weak var seedButton: UIButton!
     @IBOutlet weak var loadingView: CustomLoadingView!
@@ -43,6 +47,14 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: topSeparatorView, holderTopDistanceConstraint: topConstraintOutlet, coveringView: topBarView)
         prePopulate()
+        if key?.watchMode == true {
+            pubKeyTitle.isHidden = true
+            pubKeyLabel.isHidden = true
+            seedTitle.isHidden = true
+            seedLabel.isHidden = true
+            seedButton.isHidden = true
+            showHideSeedButton.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +81,15 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
     @IBAction func deleteKey(_ sender: Any) {
         guard let validNode = node else { return }
+        
+        if key?.watchMode == true {
+            if let index = selectedkeyIndex {
+                onDeleteComplete?(index)
+                dismiss(animated: true)
+                return
+            }
+        }
+        
         let keyName = key?.name ?? "this account"
         var alertMessage = "Enter the password for \(keyName) to delete the wallet. The passowrd and seed will be permanentely removed from the keychain."
         if key?.name == "appleTest1" {

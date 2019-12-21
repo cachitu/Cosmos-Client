@@ -941,13 +941,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Options" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="902-A9-heo">
                                                     <rect key="frame" x="15" y="24" width="87.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="TerraBlue"/>
+                                                    <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forget Password" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8Y-GZ-Fxk">
-                                                    <rect key="frame" x="291" y="24" width="108" height="17"/>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read Only Key" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8Y-GZ-Fxk">
+                                                    <rect key="frame" x="305.5" y="24" width="93.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="TerraBlue"/>
+                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGa-48-7ap" userLabel="Delete Button">
@@ -1064,6 +1064,7 @@
                                             <outlet property="leftImageView" destination="8ia-fn-8Mc" id="04H-Qy-cxv"/>
                                             <outlet property="leftLabel" destination="aSx-32-6Kt" id="tud-aU-izz"/>
                                             <outlet property="leftSubLabel" destination="Oev-XH-dYF" id="zF7-xn-Zzf"/>
+                                            <outlet property="roundedView" destination="ATH-H7-x0s" id="9vZ-Tp-Rqb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1433,8 +1434,10 @@
                         <outlet property="loadingView" destination="sDl-dQ-s8g" id="Tzd-Fw-gDi"/>
                         <outlet property="nameLabel" destination="IeN-Y4-OEJ" id="9II-sU-h8p"/>
                         <outlet property="pubKeyLabel" destination="c7d-iQ-Jwj" id="5WF-qz-iUF"/>
+                        <outlet property="pubKeyTitle" destination="8wN-9X-t7H" id="VWN-oF-cBk"/>
                         <outlet property="seedButton" destination="UNE-id-l6l" id="fUb-bO-G7P"/>
                         <outlet property="seedLabel" destination="MxW-G5-U9T" id="s9O-ht-5cq"/>
+                        <outlet property="seedTitle" destination="guj-wt-An3" id="WXh-C6-ieC"/>
                         <outlet property="showHideSeedButton" destination="sc2-5v-7l8" id="cBZ-KB-wED"/>
                         <outlet property="topBarView" destination="uvE-pc-ohn" id="Xn2-0K-iTT"/>
                         <outlet property="topConstraintOutlet" destination="K6r-vr-OCI" id="g3L-TE-hqT"/>

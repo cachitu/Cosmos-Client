@@ -302,18 +302,20 @@ extension GaiaGovernanceController: UITableViewDelegate {
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
             
-            switch proposal.status {
-            case "Passed"  :
+            let editable =  self.key?.watchMode != true
+            
+            switch (proposal.status, editable) {
+            case ("Passed", true)  :
                 optionMenu.addAction(votesAction)
-            case "Rejected":
+            case ("Rejected", true) :
                 optionMenu.addAction(votesAction)
-            case "DepositPeriod":
+            case ("DepositPeriod", true) :
                 optionMenu.addAction(depositAction)
-            default: //voting
-                optionMenu.addAction(voteAction)
+            default:
+                if editable { optionMenu.addAction(voteAction) }
                 optionMenu.addAction(votesAction)
             }
-            
+
             optionMenu.addAction(detailsAction)
             optionMenu.addAction(cancelAction)
             

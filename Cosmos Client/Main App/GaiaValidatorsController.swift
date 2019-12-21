@@ -318,11 +318,6 @@ extension GaiaValidatorsController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard self.node?.isReadOnly != true else {
-            self.toast?.showToastAlert("This account is read only", autoHideAfter: 5, type: .info, dismissable: true)
-            return
-        }
-
         var validator = dataSource[indexPath.item]
         
         let isValidator: Bool = account?.isValidator ?? false
@@ -360,7 +355,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
                 
                 optionMenu.addAction(detailsAction)
                 optionMenu.addAction(shareAction)
-                optionMenu.addAction(delegateAction)
+                if self.key?.watchMode != true { optionMenu.addAction(delegateAction) }
                 optionMenu.addAction(cancelAction)
                 
 //                if validator.jailed == true {

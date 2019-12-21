@@ -15,6 +15,7 @@ class GaiaKeyCell: UITableViewCell {
     @IBOutlet weak var leftSubLabel: UILabel?
     @IBOutlet weak var upRightLabel: UILabel?
     @IBOutlet weak var leftImageView: UIImageView?
+    @IBOutlet weak var roundedView: RoundedView?
     
     @IBAction func copyAction(_ sender: Any) {
         UIPasteboard.general.string = leftSubLabel?.text
@@ -28,5 +29,6 @@ class GaiaKeyCell: UITableViewCell {
         leftLabel?.text = key.name
         leftSubLabel?.text = key.address
         leftImageView?.image = image
+        roundedView?.backgroundColor = key.watchMode ? UIColor(named: "WatchModeBackground") : .white
     }
 }

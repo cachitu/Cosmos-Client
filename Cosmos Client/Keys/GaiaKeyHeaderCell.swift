@@ -34,6 +34,7 @@ class GaiaKeyHeaderCell: UITableViewCell {
     
     func updateCell(sectionIndex: Int, key: GaiaKey) {
         section = sectionIndex
+        rightLabel.isHidden = !key.watchMode
         rightButton.isEnabled = true
         leftButton.isEnabled  = rightButton.isEnabled
     }

@@ -42,6 +42,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var swapButton: RoundedButton!
     
+    @IBOutlet weak var amoutRoundedView: RoundedView?
+    @IBOutlet weak var currencyPickerRoundedView: RoundedView!
+    
     @IBOutlet weak var qrTestImageView: UIImageView!
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -83,8 +86,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         }
         txFeeLabel.text = ""
         sendAmountButton.isEnabled = false
-        sendAmountTextField.isEnabled = node?.isReadOnly != true
+        sendAmountTextField.isEnabled = key?.watchMode != true
         
+        amoutRoundedView?.backgroundColor = key?.watchMode == true ? UIColor(named: "WatchModeBackground") : .white
+        currencyPickerRoundedView?.backgroundColor = key?.watchMode == true ? UIColor(named: "WatchModeBackground") : .white
+
         screenTitleLabel.text = node?.network ?? "Wallet"
         swapButton.isHidden = !(node?.type == TDMNodeType.terra || node?.type == TDMNodeType.terra_118)
         historyButton.isHidden = (node?.type == TDMNodeType.iris || node?.type == TDMNodeType.iris_fuxi)
@@ -567,7 +573,7 @@ extension GaiaWalletController: UITableViewDelegate {
         
         DispatchQueue.main.async {
             
-            guard self.node?.isReadOnly != true else {
+            guard self.key?.watchMode != true else {
                 self.toast?.showToastAlert("This account is read only", autoHideAfter: 5, type: .info, dismissable: true)
                 return
             }

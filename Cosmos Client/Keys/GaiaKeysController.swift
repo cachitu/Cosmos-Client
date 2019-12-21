@@ -34,7 +34,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBAction func addAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "CreateKeySegue", sender: nil)
+        showCreateOptions()
     }
 
     @IBAction func backAction(_ sender: Any) {
@@ -127,6 +127,48 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         }
     }
     
+    func showCreateOptions() {
+        
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let create = UIAlertAction(title: "Create or Recover", style: .default) { [weak self] alertAction in
+            self?.performSegue(withIdentifier: "CreateKeySegue", sender: nil)
+        }
+        
+        let watch = UIAlertAction(title: "Watch Only", style: .default) { [weak self] alertAction in
+            self?.performSegue(withIdentifier: "ShowAddressBookSegue", sender: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        optionMenu.addAction(create)
+        optionMenu.addAction(watch)
+        optionMenu.addAction(cancelAction)
+        
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    func createWatchKey(name: String, address: String) {
+        
+        let matches = dataSource.filter() { $0.name == name && $0.address == address && $0.watchMode == true }
+        if let _ = matches.first {
+            toast?.showToastAlert("This key is already added to your watch list.", autoHideAfter: 5, type: .error, dismissable: true)
+            return
+        }
+        
+        let gaiaKey = GaiaKey(
+            name: name,
+            address: address,
+            valAddress: nil,
+            nodeType: node?.type ?? .cosmos, nodeId: node?.nodeID ?? "")
+        
+        DispatchQueue.main.async {
+            self.dataSource.insert(gaiaKey, at: 0)
+            self.tableView.reloadData()
+            PersistableGaiaKeys(keys: self.dataSource).savetoDisk()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowKeyDetailsSegue" {
             let dest = segue.destination as? GaiaKeyController
@@ -136,6 +178,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             dest?.selectedkeyIndex = selectedIndex
             dest?.onDeleteComplete = { [weak self] index in
                 self?.dataSource.remove(at: index)
+                PersistableGaiaKeys(keys: self?.dataSource ?? []).savetoDisk()
                 self?.tableView.reloadData()
             }
         }
@@ -154,8 +197,12 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             let nav = segue.destination as? UINavigationController
             let dest = nav?.viewControllers.first as? AddressesListController
             dest?.shouldPop = true
+            dest?.addressPrefix = node?.adddressPrefix ?? ""
+            
             dest?.onSelectAddress = { [weak self] selected in
-                self?.tableView.reloadData()
+                if let validAddress = selected {
+                    self?.createWatchKey(name: validAddress.name, address: validAddress.address)
+                }
             }
         }
     }
