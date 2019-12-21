@@ -169,11 +169,9 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                         self?.getPropsalDetails(node: validNode, proposal: proposal) { detailedProposal, error in
                             if let valid = detailedProposal {
                                 tmpDataSource.append(valid)
-                                //tmpDataSource = validProposals.reversed()
                                 dispatchGroup.leave()
                             } else {
                                 tmpDataSource.append(proposal)
-                                //tmpDataSource = validProposals.reversed()
                                 dispatchGroup.leave()
                             }
                         }
@@ -269,7 +267,7 @@ extension GaiaGovernanceController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaGovernanceCellID", for: indexPath) as! GaiaGovernanceCell
         let proposal = dataSource[indexPath.item]
-        cell.configure(proposal: proposal, voter: account)
+        cell.configure(proposal: proposal, voter: account, image: node?.nodeLogoWhite)
         return cell
     }
     

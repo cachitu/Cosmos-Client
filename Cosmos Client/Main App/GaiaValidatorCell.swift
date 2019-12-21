@@ -17,8 +17,9 @@ class GaiaValidatorCell: UITableViewCell {
     @IBOutlet weak var sharesLabel: UILabel!
     @IBOutlet weak var delegationsLabel: UILabel!
     @IBOutlet weak var rateLabel: UILabel!
-    
-    func configure(account: GaiaAccount?, validator: GaiaValidator, index: Int) {
+    @IBOutlet weak var leftImageView: UIImageView?
+
+    func configure(account: GaiaAccount?, validator: GaiaValidator, index: Int, image: UIImage?) {
         
         let dShares = Double(validator.shares) ?? 0
         let dTokens = Double(validator.tokens) ?? 0
@@ -38,6 +39,7 @@ class GaiaValidatorCell: UITableViewCell {
         if account?.gaiaKey.validator == validator.validator {
             monikerLabel.textColor = .darkBlue
         }
+        leftImageView?.image = image
     }
     
 }

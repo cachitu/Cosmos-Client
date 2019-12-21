@@ -277,7 +277,7 @@ extension GaiaValidatorsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let validator: Bool = account?.isValidator ?? false
         switch (section, validator) {
-        case (0, true): return 1
+        case (0, true): return dataSource.count > 0 ? 1 : 0
         case (0, false): return dataSource.count
         case (1, true): return dataSource.count
         default: return dataSource.count
@@ -301,11 +301,11 @@ extension GaiaValidatorsController: UITableViewDataSource {
             let poz = dataSource.firstIndex { $0.validator == account?.gaiaKey.validator }
             let index = poz?.advanced(by: 0) ?? 0
             if let valid = matches.first {
-                cell.configure(account: account, validator: valid, index: index + 1)
+                cell.configure(account: account, validator: valid, index: index + 1, image: node?.nodeLogoWhite)
             }
         case (0, false), (1, true):
             let validator = dataSource[indexPath.item]
-            cell.configure(account: account, validator: validator, index: indexPath.item + 1)
+            cell.configure(account: account, validator: validator, index: indexPath.item + 1, image: node?.nodeLogoWhite)
         default: break
         }
 

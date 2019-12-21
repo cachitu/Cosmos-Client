@@ -178,7 +178,7 @@ extension GaiaKeysController: UITableViewDataSource {
         cell.onCopy = { [weak self] in
             self?.toast?.showToastAlert("Address copied to clipboard", autoHideAfter: 3, type: .info, dismissable: true)
         }
-        cell.configure(key: key)
+        cell.configure(key: key, image: node?.nodeLogo)
         return cell
     }
     

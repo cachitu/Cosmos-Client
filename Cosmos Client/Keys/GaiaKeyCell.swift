@@ -11,20 +11,22 @@ import CosmosRestApi
 
 class GaiaKeyCell: UITableViewCell {
 
-    @IBOutlet weak var leftLabel: UILabel!
-    @IBOutlet weak var leftSubLabel: UILabel!
+    @IBOutlet weak var leftLabel: UILabel?
+    @IBOutlet weak var leftSubLabel: UILabel?
     @IBOutlet weak var upRightLabel: UILabel?
+    @IBOutlet weak var leftImageView: UIImageView?
     
     @IBAction func copyAction(_ sender: Any) {
-        UIPasteboard.general.string = leftSubLabel.text
+        UIPasteboard.general.string = leftSubLabel?.text
         onCopy?()
     }
     
     var onCopy:(() -> ())?
     
-    func configure(key: GaiaKey, amount: String = "") {
+    func configure(key: GaiaKey, amount: String = "", image: UIImage?) {
         upRightLabel?.text = amount
-        leftLabel.text = key.name
-        leftSubLabel.text = key.address
+        leftLabel?.text = key.name
+        leftSubLabel?.text = key.address
+        leftImageView?.image = image
     }
 }

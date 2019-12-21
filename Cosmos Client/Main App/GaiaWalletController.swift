@@ -61,7 +61,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         bottomTabbarView.selectIndex(0)
-        coinLogoImageView.image = node?.nodeLogo
+        coinLogoImageView.image = node?.nodeLogoWhite
         bottomTabbarView.onTap = { [weak self] index in
             switch index {
             case 1:
@@ -548,12 +548,12 @@ extension GaiaWalletController: UITableViewDataSource {
         let delegation = dataSource[indexPath.item]
         let parts = delegation.shares.split(separator: ".")
         let validatorName = node?.knownValidators[delegation.validatorAddr] ?? ""
-        cell.leftLabel.text = "\(parts.first ?? "0") shares to " + validatorName
-        cell.leftSubLabel.text = delegation.validatorAddr
-        cell.leftLabel.textColor = .darktext
+        cell.leftLabel?.text = "\(parts.first ?? "0") shares to " + validatorName
+        cell.leftSubLabel?.text = delegation.validatorAddr
+        cell.leftLabel?.textColor = .darktext
         cell.upRightLabel?.text = delegation.availableReward
         if account?.gaiaKey.validator == delegation.validatorAddr {
-            cell.leftLabel.textColor = .darkBlue
+            cell.leftLabel?.textColor = .darkBlue
             account?.isValidator = true
         }
         return cell

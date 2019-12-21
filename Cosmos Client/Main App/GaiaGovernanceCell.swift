@@ -22,16 +22,19 @@ class GaiaGovernanceCell: UITableViewCell {
     @IBOutlet weak var noVallabel: UILabel!
     @IBOutlet weak var abstainValueLabel: UILabel!
     @IBOutlet weak var noVetoValueLabel: UILabel!
+    @IBOutlet weak var leftImageVie: UIImageView?
     
     @IBOutlet weak var totalDeposited: UILabel!
     
-    func configure(proposal: GaiaProposal, voter: GaiaAccount?) {
+    func configure(proposal: GaiaProposal, voter: GaiaAccount?, image: UIImage?) {
         
         let dYes = Double(proposal.yes) ?? 0
         let dNo  = Double(proposal.no) ?? 0
         let dAbs = Double(proposal.abstain) ?? 0
         let dNoV = Double(proposal.noWithVeto) ?? 0
 
+        leftImageVie?.image = image
+        
         typeLabel.text = proposal.type
         proposalTitleLabel.text = proposal.title
         switch proposal.status {

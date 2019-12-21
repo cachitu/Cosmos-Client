@@ -34,8 +34,6 @@ class GaiaKeyHeaderCell: UITableViewCell {
     
     func updateCell(sectionIndex: Int, key: GaiaKey) {
         section = sectionIndex
-        rightLabel.textColor  = UIColor.darkBlue
-        leftLabel.textColor   = rightLabel.textColor
         rightButton.isEnabled = true
         leftButton.isEnabled  = rightButton.isEnabled
     }
