@@ -28,10 +28,7 @@ class GaiaNodeCell: UITableViewCell {
         }
         leftImageView.image = node.nodeLogo
         self.roundedView.alpha = (stateView.currentState == .active || stateView.currentState == .pending) ? 1 : 0.5
-        leftLabel.text = "\(node.host)"
-        if let port = node.rcpPort {
-            leftLabel.text = "\(node.host):\(port)"
-        }
+        leftLabel.text = node.name
         leftSubLabel.text = node.network
         rightLabel.text = node.version
     }

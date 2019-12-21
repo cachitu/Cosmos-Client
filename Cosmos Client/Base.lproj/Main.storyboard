@@ -269,8 +269,8 @@
                                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos..." textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hoe-fd-1h7">
-                                        <rect key="frame" x="8" y="112" width="329" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos..." textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hoe-fd-1h7">
+                                        <rect key="frame" x="34" y="112" width="303" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -293,9 +293,17 @@
                                             <segue destination="i83-p6-5lL" kind="presentation" identifier="terraSwapSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="Qj2-Fd-4bB"/>
                                         </connections>
                                     </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="atom" translatesAutoresizingMaskIntoConstraints="NO" id="JgV-fK-Zms">
+                                        <rect key="frame" x="8" y="110" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="D0n-hC-IVR"/>
+                                            <constraint firstAttribute="height" constant="20" id="ywH-ij-fFx"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="JgV-fK-Zms" firstAttribute="leading" secondItem="VyT-Io-fxp" secondAttribute="leading" constant="8" id="0IQ-qi-jyf"/>
                                     <constraint firstAttribute="height" constant="137" id="3Yr-0S-7Qb"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ogV-Dx-bNt" secondAttribute="trailing" constant="20" symbolic="YES" id="3g4-3u-B1j"/>
                                     <constraint firstItem="cW9-ld-pBA" firstAttribute="leading" secondItem="ZTo-sJ-2Sh" secondAttribute="trailing" constant="7.6666666666666572" id="3id-vi-o2i"/>
@@ -313,8 +321,9 @@
                                     <constraint firstAttribute="bottom" secondItem="Hoe-fd-1h7" secondAttribute="bottom" constant="9" id="jLk-HP-QdY"/>
                                     <constraint firstItem="uOJ-6B-HTT" firstAttribute="top" secondItem="VyT-Io-fxp" secondAttribute="top" constant="8" id="jQq-XL-RmX"/>
                                     <constraint firstItem="ogV-Dx-bNt" firstAttribute="leading" secondItem="cW9-ld-pBA" secondAttribute="leading" id="mJG-8j-tsS"/>
-                                    <constraint firstItem="Hoe-fd-1h7" firstAttribute="leading" secondItem="VyT-Io-fxp" secondAttribute="leading" constant="8" id="sLF-UY-oD0"/>
+                                    <constraint firstItem="Hoe-fd-1h7" firstAttribute="leading" secondItem="VyT-Io-fxp" secondAttribute="leading" constant="34" id="sLF-UY-oD0"/>
                                     <constraint firstItem="uOJ-6B-HTT" firstAttribute="leading" secondItem="VyT-Io-fxp" secondAttribute="leading" constant="8" id="shI-Ud-zJD"/>
+                                    <constraint firstAttribute="bottom" secondItem="JgV-fK-Zms" secondAttribute="bottom" constant="7" id="uUl-SL-ARq"/>
                                     <constraint firstItem="thC-75-L6X" firstAttribute="trailing" secondItem="ZTo-sJ-2Sh" secondAttribute="trailing" id="zMA-7m-2M0"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -352,13 +361,6 @@
                                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="atom" translatesAutoresizingMaskIntoConstraints="NO" id="JgV-fK-Zms">
-                                        <rect key="frame" x="53" y="6.3333333333333144" width="20" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="fH5-LU-Xod"/>
-                                            <constraint firstAttribute="width" constant="20" id="iSu-7V-tjb"/>
-                                        </constraints>
-                                    </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5eU-zC-9Bw">
                                         <rect key="frame" x="7.6666666666666714" y="34.333333333333314" width="151.66666666666663" height="34"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -398,7 +400,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="JgV-fK-Zms" firstAttribute="centerY" secondItem="iGC-cf-gXD" secondAttribute="centerY" id="1io-Hm-w38"/>
                                     <constraint firstItem="KGQ-Do-nRl" firstAttribute="width" secondItem="g0e-dl-VEG" secondAttribute="width" id="3Sl-tf-MSj"/>
                                     <constraint firstItem="KGQ-Do-nRl" firstAttribute="top" secondItem="Brt-HF-jHr" secondAttribute="bottom" constant="8" id="6Zp-jU-cH6"/>
                                     <constraint firstItem="g0e-dl-VEG" firstAttribute="height" secondItem="MWa-Fa-glo" secondAttribute="height" multiplier="1:1.3" id="8Bo-OP-b3x"/>
@@ -414,7 +415,6 @@
                                     <constraint firstItem="5eU-zC-9Bw" firstAttribute="leading" secondItem="KGQ-Do-nRl" secondAttribute="leading" id="Zcr-HJ-RpE"/>
                                     <constraint firstItem="Qsr-9K-3Wg" firstAttribute="trailing" secondItem="g0e-dl-VEG" secondAttribute="trailing" id="aEf-lQ-pUO"/>
                                     <constraint firstItem="iGC-cf-gXD" firstAttribute="leading" secondItem="5eU-zC-9Bw" secondAttribute="leading" id="bM7-Ve-tgh"/>
-                                    <constraint firstItem="JgV-fK-Zms" firstAttribute="leading" secondItem="iGC-cf-gXD" secondAttribute="trailing" constant="7.3333333333333286" id="bTh-ek-CII"/>
                                     <constraint firstAttribute="width" secondItem="MWa-Fa-glo" secondAttribute="height" multiplier="345:197" id="dia-la-pPP"/>
                                     <constraint firstItem="5eU-zC-9Bw" firstAttribute="top" secondItem="g0e-dl-VEG" secondAttribute="top" id="eZT-aM-0k9"/>
                                     <constraint firstItem="Qsr-9K-3Wg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iGC-cf-gXD" secondAttribute="trailing" constant="8" symbolic="YES" id="fSM-Ag-Lh8"/>
