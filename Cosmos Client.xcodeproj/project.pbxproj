@@ -34,8 +34,6 @@
 		8869755121E9CAD000044EB8 /* ToastAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8869753E21E9CACF00044EB8 /* ToastAlertView.xib */; };
 		8869755321E9CB6700044EB8 /* UIColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869755221E9CB6700044EB8 /* UIColor+extensions.swift */; };
 		8869755521E9CBAE00044EB8 /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869755421E9CBAE00044EB8 /* UIView+extensions.swift */; };
-		8869755C21E9CC1600044EB8 /* CosmosRestApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */; };
-		8869755D21E9CC1600044EB8 /* CosmosRestApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8869756121E9DD3900044EB8 /* Templates.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8869756021E9DD3900044EB8 /* Templates.storyboard */; };
 		8869756321E9DDE600044EB8 /* TemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756221E9DDE600044EB8 /* TemplateController.swift */; };
 		8869756521E9DE8500044EB8 /* CellStateRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756421E9DE8500044EB8 /* CellStateRoundedView.swift */; };
@@ -50,6 +48,10 @@
 		8869757921EB05C700044EB8 /* GaiaKeyHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */; };
 		88A3F253224D4C7600BAEEE8 /* GaiaVotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A3F252224D4C7600BAEEE8 /* GaiaVotesController.swift */; };
 		88A8B7E722464236004F0B82 /* LocalClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8B7E622464236004F0B82 /* LocalClient.swift */; };
+		8DCEE53E23B1040500CC162E /* CosmosRestApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCEE53D23B1040500CC162E /* CosmosRestApi.framework */; };
+		8DCEE53F23B1040500CC162E /* CosmosRestApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCEE53D23B1040500CC162E /* CosmosRestApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8DCEE54223B1040900CC162E /* TendermintSigner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCEE54123B1040900CC162E /* TendermintSigner.framework */; };
+		8DCEE54323B1040900CC162E /* TendermintSigner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCEE54123B1040900CC162E /* TendermintSigner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EE2D63DE21ECEF690002D51D /* GaiaKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */; };
 		EE2D63E021ECF6AF0002D51D /* GaiaWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */; };
 		EE2D63E221ECF7770002D51D /* GaiaValidatorsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E121ECF7760002D51D /* GaiaValidatorsController.swift */; };
@@ -63,8 +65,6 @@
 		EEAFBF6221F4678D001B01EA /* Addressbook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAFBF5C21F4678D001B01EA /* Addressbook.storyboard */; };
 		EEAFBF6321F4678D001B01EA /* AddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFBF5F21F4678D001B01EA /* AddressController.swift */; };
 		EEAFBF6421F4678D001B01EA /* AddressesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFBF6021F4678D001B01EA /* AddressesListController.swift */; };
-		EEBDFBF6237DB9C900079F38 /* TendermintSigner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */; };
-		EEBDFBF7237DB9C900079F38 /* TendermintSigner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EEBDFC2323801E0400079F38 /* GaiaOraclesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */; };
 		EED0718B2380413600B01E25 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED0718A2380413600B01E25 /* CloudKit.framework */; };
 		EEE87A7621F8521B00CA9CDA /* GaiaValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */; };
@@ -72,14 +72,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8869755921E9CBE300044EB8 /* Embed Frameworks */ = {
+		8DCEE54023B1040500CC162E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				EEBDFBF7237DB9C900079F38 /* TendermintSigner.framework in Embed Frameworks */,
-				8869755D21E9CC1600044EB8 /* CosmosRestApi.framework in Embed Frameworks */,
+				8DCEE54323B1040900CC162E /* TendermintSigner.framework in Embed Frameworks */,
+				8DCEE53F23B1040500CC162E /* CosmosRestApi.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +132,8 @@
 		8869757821EB05C700044EB8 /* GaiaKeyHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyHeaderCell.swift; sourceTree = "<group>"; };
 		88A3F252224D4C7600BAEEE8 /* GaiaVotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaVotesController.swift; sourceTree = "<group>"; };
 		88A8B7E622464236004F0B82 /* LocalClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalClient.swift; sourceTree = "<group>"; };
+		8DCEE53D23B1040500CC162E /* CosmosRestApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CosmosRestApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DCEE54123B1040900CC162E /* TendermintSigner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TendermintSigner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2D63DD21ECEF690002D51D /* GaiaKeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyController.swift; sourceTree = "<group>"; };
 		EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaWalletController.swift; sourceTree = "<group>"; };
 		EE2D63E121ECF7760002D51D /* GaiaValidatorsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaValidatorsController.swift; sourceTree = "<group>"; };
@@ -158,8 +160,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EED0718B2380413600B01E25 /* CloudKit.framework in Frameworks */,
-				8869755C21E9CC1600044EB8 /* CosmosRestApi.framework in Frameworks */,
-				EEBDFBF6237DB9C900079F38 /* TendermintSigner.framework in Frameworks */,
+				8DCEE53E23B1040500CC162E /* CosmosRestApi.framework in Frameworks */,
+				8DCEE54223B1040900CC162E /* TendermintSigner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +171,8 @@
 		18E236D3CFC8FD249FA626C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8DCEE54123B1040900CC162E /* TendermintSigner.framework */,
+				8DCEE53D23B1040500CC162E /* CosmosRestApi.framework */,
 				EED0718A2380413600B01E25 /* CloudKit.framework */,
 				EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */,
 			);
@@ -381,7 +385,7 @@
 				88677FF321E9C54A0022A09E /* Sources */,
 				88677FF421E9C54A0022A09E /* Frameworks */,
 				88677FF521E9C54A0022A09E /* Resources */,
-				8869755921E9CBE300044EB8 /* Embed Frameworks */,
+				8DCEE54023B1040500CC162E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
