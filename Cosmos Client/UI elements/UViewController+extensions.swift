@@ -98,7 +98,7 @@ public extension UIViewController {
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
-        let action = UIAlertAction(title: "Submit", style: .default) { alertAction in
+        let action = UIAlertAction(title: "Confirm", style: .destructive) { alertAction in
             let textField = alert.textFields![0] as UITextField
             completion(textField.text ?? "")
         }

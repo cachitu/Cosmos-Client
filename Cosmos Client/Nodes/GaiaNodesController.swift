@@ -50,7 +50,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
-        
+        addButton.layer.cornerRadius = addButton.frame.size.height / 2
         if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
             nodes = savedNodes.nodes
             showHint = false

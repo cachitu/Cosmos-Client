@@ -61,21 +61,6 @@ public class LocalClient: KeysClientDelegate {
         return key
     }
     
-    public func deleteKey(with name: String, address: String, password: String) -> NSError? {
-        if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
-            var keys = savedKeys.keys
-            var index = 0
-            for gaiaKey in keys {
-                if gaiaKey.address == address, gaiaKey.password == password, gaiaKey.name == name, gaiaKey.nodeId == networkID {
-                    keys.remove(at: index)
-                }
-                index += 1
-            }
-            PersistableGaiaKeys(keys: keys).savetoDisk()
-        }
-        return nil
-    }
-    
     public func sign(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, completion:((RestResult<[TransactionTx]>) -> Void)?) {
         
         var signable = TxSignable()

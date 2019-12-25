@@ -16,6 +16,7 @@ class GaiaKeyCell: UITableViewCell {
     @IBOutlet weak var upRightLabel: UILabel?
     @IBOutlet weak var leftImageView: UIImageView?
     @IBOutlet weak var roundedView: RoundedView?
+    @IBOutlet weak var stateView: CellStateRoundedView!
     
     @IBAction func copyAction(_ sender: Any) {
         UIPasteboard.general.string = leftSubLabel?.text
@@ -25,6 +26,7 @@ class GaiaKeyCell: UITableViewCell {
     var onCopy:(() -> ())?
     
     func configure(key: GaiaKey, amount: String = "", image: UIImage?) {
+        stateView.currentState = key.watchMode ? .consumed : .active
         upRightLabel?.text = amount
         leftLabel?.text = key.name
         leftSubLabel?.text = key.address

@@ -80,46 +80,6 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     }
     
     @IBAction func deleteKey(_ sender: Any) {
-        guard let validNode = node else { return }
-        
-        if key?.watchMode == true {
-            if let index = selectedkeyIndex {
-                onDeleteComplete?(index)
-                dismiss(animated: true)
-                return
-            }
-        }
-        
-        let keyName = key?.name ?? "this account"
-        var alertMessage = "Enter the password for \(keyName) to delete the wallet. The passowrd and seed will be permanentely removed from the keychain."
-        if key?.name == "appleTest1" {
-            alertMessage = "This is the Apple Test key, needed for the iOS Appstore review. To delete this address, the password is test1234."
-        }
-        self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
-            self?.loadingView.startAnimating()
-            self?.key?.unlockKey(node: validNode, password: pass) { [weak self] success, message in
-                self?.loadingView.stopAnimating()
-                if success == true, let delegate = self?.keysDelegate {
-                    self?.key?.deleteKey(node: validNode, clientDelegate: delegate, password: self?.key?.getPassFromKeychain() ?? "") { [weak self] success, errMsg in
-                        if success {
-                            if let index = self?.selectedkeyIndex {
-                                self?.onDeleteComplete?(index)
-                            }
-                            self?.loadingView.stopAnimating()
-                            self?.dismiss(animated: true)
-                        } else if let errMessage = errMsg {
-                            self?.toast?.showToastAlert(errMessage, autoHideAfter: 15, type: .error, dismissable: true)
-                        } else {
-                            self?.toast?.showToastAlert("Opps, I failed to delete the key.", autoHideAfter: 15, type: .error, dismissable: true)
-                        }
-                    }
-                } else if let msg = message {
-                    self?.toast?.showToastAlert(msg, autoHideAfter: 15, type: .error, dismissable: true)
-                } else {
-                    self?.toast?.showToastAlert("Opps, I failed.", autoHideAfter: 15, type: .error, dismissable: true)
-                }
-            }
-        }
     }
     
     @IBAction func showOrHideSeed(_ sender: UIButton) {

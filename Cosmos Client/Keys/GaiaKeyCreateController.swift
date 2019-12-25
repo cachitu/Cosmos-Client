@@ -20,7 +20,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var deleteNode: RoundedButton!
+    @IBOutlet weak var createKey: UIButton!
     @IBOutlet weak var loadingView: CustomLoadingView!
     
     @IBOutlet weak var stackTopConstraint: NSLayoutConstraint!
@@ -60,7 +60,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        self.deleteNode.isEnabled = self.canContinue()
+        self.createKey.isEnabled = self.canContinue()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,21 +81,21 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
             return
         }
         
-        let seedOk = seedTextView.isHidden || seedTextView.text.split(separator: " ").count == 24
+        let mnemonicOk = seedTextView.isHidden || seedTextView.text.split(separator: " ").count == 24
 
-        guard seedOk else {
+        guard mnemonicOk else {
             toast?.showToastAlert("The seed must have 24 words", autoHideAfter: 15, type: .info, dismissable: true)
             return
         }
         
-        var seed: String? = nil
+        var mnemonic: String? = nil
         if seedTextView.isHidden == false, let text = seedTextView.text {
             let words = text.components(separatedBy: " ")
             if words.count == 24 {
-                seed = text }
+                mnemonic = text }
         }
         self.loadingView.startAnimating()
-        self.createKey(node: validNode, clientDelegate: keysDelegate, name: name, pass: pass, seed: seed) { [weak self] key, error in
+        self.createKey(node: validNode, clientDelegate: keysDelegate, name: name, pass: pass, mnemonic: mnemonic) { [weak self] key, error in
             DispatchQueue.main.async {
                 self?.loadingView.stopAnimating()
                 if let validKey = key {
@@ -121,7 +121,20 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
                         storedBook.savetoDisk()
                     }
 
-                    self?.dismiss(animated: true)
+                    if mnemonic == nil {
+                        let alert = UIAlertController(title: "Make sure you write down your mnemonic in a safe place", message: validKey.mnemonic, preferredStyle: UIAlertController.Style.alert)
+                        
+                        let action = UIAlertAction(title: "Done", style: .destructive) { [weak self] alertAction in
+                            self?.dismiss(animated: true)
+                        }
+                        
+                        alert.addAction(action)
+                        
+                        self?.present(alert, animated:true, completion: nil)
+                    } else {
+                        self?.dismiss(animated: true)
+                    }
+
                 } else if let errMsg = error {
                     self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .info, dismissable: true)
                 } else {
@@ -148,14 +161,14 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
      }
     
     private func observreFieldsState() {
-        self.deleteNode.isEnabled = false
+        self.createKey.isEnabled = false
         field1RtextField.onFieldStateChange = { [weak self] state in
             self?.fieldsStateDic["field1"] = state
-            self?.deleteNode.isEnabled = self?.canContinue() ?? false
+            self?.createKey.isEnabled = self?.canContinue() ?? false
         }
         field2RtextField.onFieldStateChange = { [weak self] state in
             self?.fieldsStateDic["field2"] = state
-            self?.deleteNode.isEnabled = self?.canContinue() ?? false
+            self?.createKey.isEnabled = self?.canContinue() ?? false
         }
     }
     
@@ -172,7 +185,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
     
     private func updateUI() {
         
-        self.deleteNode.isEnabled = self.canContinue()
+        self.createKey.isEnabled = self.canContinue()
     }
     
     @objc
