@@ -63,6 +63,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     func loadData() {
         
         if let validNode = AppContext.shared.node {
+            
+            if AppContext.shared.lastSubmitedHash() != nil {
+                toast?.showToastAlert("Waiting for the last submited hash to complete, please wait before submiting a new transaction", autoHideAfter: GaiaConstants.refreshInterval, type: .validatePending, dismissable: true)
+            }
+            
             loadingView.startAnimating()
             retrieveAllValidators(node: validNode) { [weak self] validators, errMsg in
                 self?.loadingView.stopAnimating()

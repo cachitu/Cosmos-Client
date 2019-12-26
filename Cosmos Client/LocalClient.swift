@@ -14,6 +14,7 @@ import CommonCrypto
 
 public class LocalClient: KeysClientDelegate {
     
+    
     let signer: TendermintClient
     let type: TDMNodeType
     let networkID: String
@@ -32,6 +33,10 @@ public class LocalClient: KeysClientDelegate {
         }
     }
     
+    public func storeHash(_ hash: String) {
+        AppContext.shared.addHash(hash)
+    }
+
     public func generateMnemonic() -> String {
         signer.generateMnemonic()
     }

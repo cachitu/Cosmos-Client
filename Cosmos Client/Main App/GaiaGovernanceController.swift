@@ -109,6 +109,10 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     
     func loadData(validNode: TDMNode, showLoader: Bool = false) {
         
+        if AppContext.shared.lastSubmitedHash() != nil {
+            toast?.showToastAlert("Waiting for the last submited hash to complete, please wait before submiting a new transaction", autoHideAfter: GaiaConstants.refreshInterval, type: .validatePending, dismissable: true)
+        }
+
         let dispatchGroup = DispatchGroup()
 
         if showLoader { loadingView.startAnimating() }

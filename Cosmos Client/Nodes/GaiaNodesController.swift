@@ -86,6 +86,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        toast?.hideToast()
         if shouldReloadData {
             tableView.reloadData()
             shouldReloadData = false
@@ -111,7 +112,6 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer?.invalidate()
-        toast?.hideToast()
         PersistableGaiaNodes(nodes: nodes).savetoDisk()
     }
     

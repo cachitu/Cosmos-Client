@@ -87,6 +87,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         if senderAddress == nil {
@@ -148,7 +149,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         lockClearFields = false
     }
     
-
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        toast?.hideToast()
+    }
+    
     private func sendAssetsTo(destAddress: String, denom: String) {
         
         guard let node = AppContext.shared.node, let key = AppContext.shared.key, let keysDelegate = AppContext.shared.keysDelegate else { return }
@@ -221,6 +226,12 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     var lockClearFields = false
     @IBAction func sendAction(_ sender: Any) {
+        
+        if let hash = AppContext.shared.lastSubmitedHash() {
+            self.toast?.showToastAlert("Waiting to complete for hash \(hash)", autoHideAfter: 3, type: .validatePending, dismissable: true)
+            return
+        }
+
         lockClearFields = true
         self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: self)
     }
@@ -256,6 +267,29 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         }
         
         if let validNode = AppContext.shared.node, let validKey = AppContext.shared.key {
+            
+            if let hash = AppContext.shared.lastSubmitedHash() {
+                timer?.invalidate()
+                validKey.getHash(node: validNode, gaiaKey: validKey, hash: hash) { [weak self] resp, msg in
+                    DispatchQueue.main.async {
+                        if spinner { self?.loadingView.stopAnimating() }
+                        if msg == nil {
+                            self?.toast?.showToastAlert("The last submited hash completed now", autoHideAfter: GaiaConstants.refreshInterval, type: .success, dismissable: true)
+                            AppContext.shared.removeLastSubmitedHash()
+                            self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
+                                self?.loadData(animated: false, spinner: true)
+                            }
+                        } else {
+                            self?.toast?.showToastAlert("Waiting for the last submited hash to complete, please wait before submiting a new transaction", autoHideAfter: GaiaConstants.refreshInterval, type: .validatePending, dismissable: true)
+                            self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval / 2.0, repeats: true) { [weak self] timer in
+                                self?.loadData(animated: false, spinner: true)
+                            }
+                        }
+                    }
+                }
+                return
+            }
+            
             validKey.getGaiaAccount(node: validNode, gaiaKey: validKey) { [weak self] account, errMessage in
                 
                 validKey.getDelegations(node: validNode) { [weak self] delegations, error in
@@ -346,14 +380,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     denom: denom) { resp, msg in
                         if resp != nil {
                             self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
-                            AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                                self?.loadingView.stopAnimating()
-                                if let validDelegations = delegations {
-                                    self?.dataSource = validDelegations
-                                    self?.tableView.reloadData()
-                                    self?.queryRewards(validDelegations: validDelegations)
-                                }
-                            }
+                            self?.loadData()
                         } else if let errMsg = msg {
                             self?.loadingView.stopAnimating()
                             if errMsg.contains("connection was lost") {
@@ -376,14 +403,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 self?.unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: self?.defaultFeeSigAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { resp, msg in
                     if resp != nil {
                         self?.toast?.showToastAlert("Unbonding submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
-                        AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                            self?.loadingView.stopAnimating()
-                            if let validDelegations = delegations {
-                                self?.dataSource = validDelegations
-                                self?.tableView.reloadData()
-                                self?.queryRewards(validDelegations: validDelegations)
-                            }
-                        }
+                        self?.loadData()
                     } else if let errMsg = msg {
                         self?.loadingView.stopAnimating()
                         if errMsg.contains("connection was lost") {
@@ -405,14 +425,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             withdraw(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount, validator: delegation.validatorAddr) { [weak self] resp, msg in
                 if resp != nil {
                     self?.toast?.showToastAlert("Withdraw submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
-                    AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                        self?.loadingView.stopAnimating()
-                        if let validDelegations = delegations {
-                            self?.dataSource = validDelegations
-                            self?.tableView.reloadData()
-                            self?.queryRewards(validDelegations: validDelegations)
-                        }
-                    }
+                    self?.loadData()
                 } else if let errMsg = msg {
                     self?.loadingView.stopAnimating()
                     if errMsg.contains("connection was lost") {
@@ -433,14 +446,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             withdrawComission(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount) { [weak self] resp, msg in
                 if resp != nil {
                     self?.toast?.showToastAlert("Comission withdraw submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
-                    AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                        self?.loadingView.stopAnimating()
-                        if let validDelegations = delegations {
-                            self?.dataSource = validDelegations
-                            self?.tableView.reloadData()
-                            self?.queryRewards(validDelegations: validDelegations)
-                        }
-                    }
+                    self?.loadData()
                 } else if let errMsg = msg {
                     self?.loadingView.stopAnimating()
                     if errMsg.contains("connection was lost") {
@@ -538,6 +544,10 @@ extension GaiaWalletController: UITableViewDelegate {
                 return
             }
             
+            if let _ = AppContext.shared.lastSubmitedHash() {
+                return
+            }
+
             if let validDenom = AppContext.shared.node?.stakeDenom {
                 
                 let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
