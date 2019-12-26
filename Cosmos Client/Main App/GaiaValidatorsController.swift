@@ -13,48 +13,24 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     var toast: ToastAlertView?
     
-    var node: TDMNode?
-    var key: GaiaKey?
-    var keysDelegate: LocalClient?
-
-    var account: GaiaAccount?
-    var defaultFeeSigAmount: String { return node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return AppContext.shared.node?.defaultTxFee  ?? "0" }
 
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
-    @IBOutlet weak var bottomTabbarView: CustomTabBar!
-    @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     
-    var forwardCounter = 0
-    var onUnwind: ((_ toIndex: Int) -> ())?
-    var lockLifeCicleDelegates = false
-
     var dataSource: [GaiaValidator] = []
-    var redelgateFrom: String?
     private weak var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
-        bottomTabbarView.onTap = { [weak self] index in
-            let segueName = "nextSegue"
-            switch index {
-            case 0: self?.dismiss(animated: false)
-            case 2:
-                self?.performSegue(withIdentifier: segueName, sender: index)
-            case 3:
-                self?.performSegue(withIdentifier: segueName, sender: index)
-                UIView.setAnimationsEnabled(false)
-            default: break
-            }
-        }
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
-            self?.node?.getStatus {
-                if self?.node?.state == .unknown {
+            AppContext.shared.node?.getStatus {
+                if AppContext.shared.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
                 } else {
                     self?.loadData()
@@ -65,28 +41,10 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard !lockLifeCicleDelegates else { return }
-        if forwardCounter > 0 {
-            bottomTabbarView.selectIndex(-1)
-            return
-        }
-        
-        bottomTabbarView.selectIndex(1)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard !lockLifeCicleDelegates else {
-            lockLifeCicleDelegates = false
-            return
-        }
-        if forwardCounter > 0 {
-            if forwardCounter == 1 { UIView.setAnimationsEnabled(true) }
-            let segueName = "nextSegue"
-            self.performSegue(withIdentifier: segueName, sender: forwardCounter + 1)
-            forwardCounter = 0
-            return
-        }
         
         loadData()
         timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
@@ -97,14 +55,14 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        redelgateFrom = nil
+        AppContext.shared.redelgateFrom = nil
         toast?.hideToast()
         timer?.invalidate()
     }
     
     func loadData() {
         
-        if let validNode = node {
+        if let validNode = AppContext.shared.node {
             loadingView.startAnimating()
             retrieveAllValidators(node: validNode) { [weak self] validators, errMsg in
                 self?.loadingView.stopAnimating()
@@ -131,7 +89,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                     self?.dataSource.append(contentsOf: jailed)
                     
                     self?.tableView.reloadData()
-                    if let redelagateAddr = self?.redelgateFrom {
+                    if let redelagateAddr = AppContext.shared.redelgateFrom {
                         self?.timer?.invalidate()
                         self?.toast?.showToastAlert("Tap any validator to redelegate from \(redelagateAddr)", type: .validatePending, dismissable: false)
                     }
@@ -151,34 +109,16 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MoreSegueID", let validator = sender as? GaiaValidator {
             let dest = segue.destination as? GaiaDelegationsController
-            dest?.node = node
-            dest?.account = account
-            dest?.key = key
             dest?.validator = validator
-        }
-        if let index = sender as? Int {
-            let dest = segue.destination as? GaiaGovernanceController
-            dest?.node = node
-            dest?.account = account
-            dest?.key = key
-            dest?.keysDelegate = keysDelegate
-            dest?.forwardCounter = index - 2
-            dest?.onUnwind = { [weak self] index in
-                self?.bottomTabbarView.selectIndex(-1)
-                self?.lockLifeCicleDelegates = true
-            }
-            
-            forwardCounter = 0
         }
     }
 
     @IBAction func unwindToValidator(segue:UIStoryboardSegue) {
-        bottomTabbarView.selectIndex(1)
     }
     
     private func handleUnjail(validator: GaiaValidator) {
         
-        guard let validNode = node, let validKey = key, let keysDelegate = keysDelegate else { return }
+        guard let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let keysDelegate = AppContext.shared.keysDelegate else { return }
         
         loadingView.startAnimating()
         validator.unjail(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount) { [weak self] resp, errMsg in
@@ -198,9 +138,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     private func handleRedelegate(redelgateFrom: String, validator: GaiaValidator) {
         print("redelegate from \(redelgateFrom) to \(validator.validator)")
-        node?.getStakingInfo() { [weak self] denom in
+        AppContext.shared.node?.getStakingInfo() { [weak self] denom in
             self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to redelegate to:", message: "\(validator.validator)\nfrom\n\(redelgateFrom)", placeholder: "0 \(denom ?? "stake")") { amount in
-                if let validAmount = amount, let validNode = self?.node, let validKey = self?.key, let delegate = self?.keysDelegate {
+                if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
                     self?.loadingView.startAnimating()
                     self?.redelegateStake(
                         node: validNode,
@@ -210,14 +150,14 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         fromValidator: redelgateFrom,
                         toValidator: validator.validator,
                         amount: validAmount) { resp, msg in
-                            self?.redelgateFrom = nil
+                            AppContext.shared.redelgateFrom = nil
                             self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
                                 self?.loadData()
                             }
 
                             if resp != nil {
                                 self?.toast?.showToastAlert("Redelegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
-                                self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                                AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                     self?.loadingView.stopAnimating()
                                     self?.loadData()
                                 }
@@ -238,9 +178,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     private func handleDelegate(to validator: GaiaValidator) {
         
         print("Should delegate to \(validator.validator)")
-        node?.getStakingInfo() { [weak self] denom in
+        AppContext.shared.node?.getStakingInfo() { [weak self] denom in
             self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to delegate to:", message: "\(validator.validator)", placeholder: "0 \(denom ?? "stake")") { amount in
-                if let validAmount = amount, let validNode = self?.node, let validKey = self?.key, let delegate = self?.keysDelegate {
+                if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
                     self?.loadingView.startAnimating()
                     self?.delegateStake (
                         node: validNode,
@@ -252,7 +192,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         denom: denom ?? "stake") { resp, msg in
                             if resp != nil {
                                 self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
-                                self?.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                                AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                     self?.loadingView.stopAnimating()
                                     self?.loadData()
                                 }
@@ -275,7 +215,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
 extension GaiaValidatorsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let validator: Bool = account?.isValidator ?? false
+        let validator: Bool = AppContext.shared.account?.isValidator ?? false
         switch (section, validator) {
         case (0, true): return dataSource.count > 0 ? 1 : 0
         case (0, false): return dataSource.count
@@ -285,27 +225,27 @@ extension GaiaValidatorsController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let validator: Bool = account?.isValidator ?? false
+        let validator: Bool = AppContext.shared.account?.isValidator ?? false
         return validator ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaValidatorCellID", for: indexPath) as! GaiaValidatorCell
-        let validator: Bool = account?.isValidator ?? false
+        let validator: Bool = AppContext.shared.account?.isValidator ?? false
         switch (indexPath.section, validator) {
         case (0, true):
             let matches = dataSource.filter {
-                let compareTo = account?.gaiaKey.validator ?? ""
+                let compareTo = AppContext.shared.account?.gaiaKey.validator ?? ""
                 return $0.validator == compareTo
             }
-            let poz = dataSource.firstIndex { $0.validator == account?.gaiaKey.validator }
+            let poz = dataSource.firstIndex { $0.validator == AppContext.shared.account?.gaiaKey.validator }
             let index = poz?.advanced(by: 0) ?? 0
             if let valid = matches.first {
-                cell.configure(account: account, validator: valid, index: index + 1, image: node?.nodeLogoWhite)
+                cell.configure(account: AppContext.shared.account, validator: valid, index: index + 1, image: AppContext.shared.node?.nodeLogoWhite)
             }
         case (0, false), (1, true):
             let validator = dataSource[indexPath.item]
-            cell.configure(account: account, validator: validator, index: indexPath.item + 1, image: node?.nodeLogoWhite)
+            cell.configure(account: AppContext.shared.account, validator: validator, index: indexPath.item + 1, image: AppContext.shared.node?.nodeLogoWhite)
         default: break
         }
 
@@ -320,10 +260,10 @@ extension GaiaValidatorsController: UITableViewDelegate {
         
         var validator = dataSource[indexPath.item]
         
-        let isValidator: Bool = account?.isValidator ?? false
+        let isValidator: Bool = AppContext.shared.account?.isValidator ?? false
         switch (indexPath.section, isValidator) {
         case (0, true):
-            let matches = dataSource.filter { $0.validator == account?.gaiaKey.validator }
+            let matches = dataSource.filter { $0.validator == AppContext.shared.account?.gaiaKey.validator }
             if let match = matches.first {
                 validator = match
             }
@@ -331,7 +271,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
         }
 
         DispatchQueue.main.async {
-            if let redelagateAddr = self.redelgateFrom {
+            if let redelagateAddr = AppContext.shared.redelgateFrom {
                 
                 self.handleRedelegate(redelgateFrom: redelagateAddr, validator: validator)
             } else {
@@ -355,7 +295,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
                 
                 optionMenu.addAction(detailsAction)
                 optionMenu.addAction(shareAction)
-                if self.key?.watchMode != true { optionMenu.addAction(delegateAction) }
+                if AppContext.shared.key?.watchMode != true { optionMenu.addAction(delegateAction) }
                 optionMenu.addAction(cancelAction)
                 
 //                if validator.jailed == true {

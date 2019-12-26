@@ -11,11 +11,8 @@ import CosmosRestApi
 
 class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
 
-    var node: TDMNode?
-    var key: GaiaKey?
-    var account: GaiaAccount?
-    var defaultFeeSigAmount: String { return node?.defaultTxFee  ?? "0" }
-    var memo: String { return node?.defaultMemo  ?? "Syncnode's iOS Wallet 🙀" }
+    var defaultFeeSigAmount: String { return AppContext.shared.node?.defaultTxFee  ?? "0" }
+    var memo: String { return AppContext.shared.node?.defaultMemo  ?? "Syncnode's iOS Wallet 🙀" }
 
     var toast: ToastAlertView?
     
@@ -23,8 +20,6 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
-    @IBOutlet weak var bottomTabbarView: CustomTabBar!
-    @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var feeSectionTitleLabel: UILabel!
     @IBOutlet weak var feeTextField: UITextField!
@@ -32,20 +27,17 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var feeApplyButton: UIButton!
     
     
-    var forwardCounter = 0
-    var onUnwind: ((_ toIndex: Int) -> ())?
-
     @IBAction func applyMemo(_ sender: Any) {
         let memo = memoTextField.text ?? ""
-        let nodeName = node?.network ?? ""
+        let nodeName = AppContext.shared.node?.network ?? ""
         view.endEditing(true)
         toast?.showToastAlert("Memo set for node \(nodeName): \(memo)", autoHideAfter: 5, type: .info, dismissable: true)
-        node?.defaultMemo = memo
+        AppContext.shared.node?.defaultMemo = memo
         peristNodes()
     }
     
     @IBAction func applyFee(_ sender: Any) {
-        let nodeName = node?.network ?? ""
+        let nodeName = AppContext.shared.node?.network ?? ""
         view.endEditing(true)
         if feeTextField.text == "" { feeTextField.text = "0" }
         if var value = feeTextField.text, let intVal = Int(value) {
@@ -59,7 +51,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
                 self.present(alert, animated: true, completion: nil)
             }
             toast?.showToastAlert("Fee set for node \(nodeName): \(intVal)", autoHideAfter: 5, type: .info, dismissable: true)
-            node?.defaultTxFee = "\(intVal)"
+            AppContext.shared.node?.defaultTxFee = "\(intVal)"
             updateFeeLabel()
             peristNodes()
         }
@@ -86,7 +78,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     }
     
     private func peristNodes() {
-        if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = node {
+        if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = AppContext.shared.node {
             for savedNode in savedNodes.nodes {
                 if savedNode.network == validNode.network {
                     savedNode.defaultTxFee = validNode.defaultTxFee
@@ -100,24 +92,11 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
-        bottomTabbarView.selectIndex(3)
-        bottomTabbarView.onTap = { [weak self] index in
-            switch index {
-            case 0:
-                self?.onUnwind?(0)
-                self?.performSegue(withIdentifier: "UnwindToWallet", sender: nil)
-            case 1:
-                self?.onUnwind?(1)
-                self?.performSegue(withIdentifier: "UnwindToValidators", sender: nil)
-            case 2: self?.dismiss(animated: false)
-            default: break
-            }
-        }
         updateFeeLabel()
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
-            self?.node?.getStatus {
-                if self?.node?.state == .unknown {
+            AppContext.shared.node?.getStatus {
+                if AppContext.shared.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
                 }
             }
@@ -126,8 +105,8 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     
     func updateFeeLabel() {
         var feeText = "Current settings: 0"
-        if let amount = node?.defaultTxFee {
-            let denom = account?.feeDenom ?? ""
+        if let amount = AppContext.shared.node?.defaultTxFee {
+            let denom = AppContext.shared.account?.feeDenom ?? ""
             feeText = "Current settings: \(amount) \(denom)"
             if Double(amount) ?? 0 > 0.0 {
                 feeTextField.text = amount
@@ -140,7 +119,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
         super.viewWillAppear(animated)
         memoTextField.text = memo
         
-        if node?.type == TDMNodeType.iris || node?.type == TDMNodeType.iris_fuxi {
+        if AppContext.shared.node?.type == TDMNodeType.iris || AppContext.shared.node?.type == TDMNodeType.iris_fuxi {
             feeTextField.isEnabled = false
             feeTextField.text = "0.41"
             feeSectionTitleLabel.text = "Current settings: 0.41 iris"
@@ -156,7 +135,6 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     }
     
     @IBAction func unwindToTarnsactions(segue:UIStoryboardSegue) {
-        bottomTabbarView.selectIndex(3)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -146,10 +146,6 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
                 PersistableGaiaNodes(nodes: weakSelf.nodes).savetoDisk()
             }
         }
-        if segue.identifier == "ShowNodeKeysSegue", let selected = selectedNode {
-            let dest = segue.destination as? GaiaKeysController
-            dest?.node = selected
-        }
     }
     
     private func refreshNodes() {
@@ -234,6 +230,7 @@ extension GaiaNodesController: UITableViewDelegate {
                 self.performSegue(withIdentifier: "NodeEditSegue", sender: self)
             } else {
                 if (self.selectedNode?.state == .active || self.selectedNode?.state == .pending) {
+                    AppContext.shared.node = self.selectedNode
                     self.performSegue(withIdentifier: "ShowNodeKeysSegue", sender: self)
                 } else {
                     self.toast?.showToastAlert("The node is not active. Check the host and the ports", autoHideAfter: 15, type: .info, dismissable: true)

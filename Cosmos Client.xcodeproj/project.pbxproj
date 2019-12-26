@@ -25,8 +25,6 @@
 		8869754521E9CAD000044EB8 /* SimpleWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869752F21E9CACF00044EB8 /* SimpleWebView.swift */; };
 		8869754621E9CAD000044EB8 /* SimpleWebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8869753021E9CACF00044EB8 /* SimpleWebView.storyboard */; };
 		8869754721E9CAD000044EB8 /* CustomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753221E9CACF00044EB8 /* CustomLoadingView.swift */; };
-		8869754821E9CAD000044EB8 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753321E9CACF00044EB8 /* CustomTabBar.swift */; };
-		8869754921E9CAD000044EB8 /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753421E9CACF00044EB8 /* CustomTabBarItem.swift */; };
 		8869754D21E9CAD000044EB8 /* RichTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753921E9CACF00044EB8 /* RichTextFieldView.swift */; };
 		8869754E21E9CAD000044EB8 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753A21E9CACF00044EB8 /* RoundedButton.swift */; };
 		8869754F21E9CAD000044EB8 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869753B21E9CACF00044EB8 /* RoundedView.swift */; };
@@ -36,12 +34,7 @@
 		8869755521E9CBAE00044EB8 /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869755421E9CBAE00044EB8 /* UIView+extensions.swift */; };
 		8869755C21E9CC1600044EB8 /* CosmosRestApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */; };
 		8869755D21E9CC1600044EB8 /* CosmosRestApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8869756121E9DD3900044EB8 /* Templates.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8869756021E9DD3900044EB8 /* Templates.storyboard */; };
-		8869756321E9DDE600044EB8 /* TemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756221E9DDE600044EB8 /* TemplateController.swift */; };
 		8869756521E9DE8500044EB8 /* CellStateRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756421E9DE8500044EB8 /* CellStateRoundedView.swift */; };
-		8869756721E9E50100044EB8 /* Template1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756621E9E50100044EB8 /* Template1Cell.swift */; };
-		8869756921E9E5D600044EB8 /* Template1HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756821E9E5D600044EB8 /* Template1HeaderCell.swift */; };
-		8869756C21E9F61F00044EB8 /* TemplateCollectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756B21E9F61F00044EB8 /* TemplateCollectController.swift */; };
 		8869756E21EA0DBB00044EB8 /* GaiaNodesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756D21EA0DBB00044EB8 /* GaiaNodesController.swift */; };
 		8869757021EA105300044EB8 /* GaiaNodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869756F21EA105300044EB8 /* GaiaNodeController.swift */; };
 		8869757221EA173000044EB8 /* GaiaNodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8869757121EA173000044EB8 /* GaiaNodeCell.swift */; };
@@ -58,6 +51,7 @@
 		EE2D63E821EDAB270002D51D /* UViewController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */; };
 		EE2D63ED21EDCFD30002D51D /* GaiaKeyCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */; };
 		EE2D643C21F306800002D51D /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D643B21F306800002D51D /* UIImage+Extensions.swift */; };
+		EEA8AA4623B4A1500079C6E3 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8AA4523B4A1500079C6E3 /* AppContext.swift */; };
 		EEAE3E6923A7824700A336FA /* GaiaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAE3E6823A7824700A336FA /* GaiaConstants.swift */; };
 		EEAE3E6B23AA8DEA00A336FA /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAE3E6A23AA8DEA00A336FA /* Onboarding.storyboard */; };
 		EEAFBF6221F4678D001B01EA /* Addressbook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAFBF5C21F4678D001B01EA /* Addressbook.storyboard */; };
@@ -107,8 +101,6 @@
 		8869752F21E9CACF00044EB8 /* SimpleWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleWebView.swift; sourceTree = "<group>"; };
 		8869753021E9CACF00044EB8 /* SimpleWebView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SimpleWebView.storyboard; sourceTree = "<group>"; };
 		8869753221E9CACF00044EB8 /* CustomLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoadingView.swift; sourceTree = "<group>"; };
-		8869753321E9CACF00044EB8 /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		8869753421E9CACF00044EB8 /* CustomTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarItem.swift; sourceTree = "<group>"; };
 		8869753921E9CACF00044EB8 /* RichTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextFieldView.swift; sourceTree = "<group>"; };
 		8869753A21E9CACF00044EB8 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		8869753B21E9CACF00044EB8 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
@@ -117,12 +109,7 @@
 		8869755221E9CB6700044EB8 /* UIColor+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extensions.swift"; sourceTree = "<group>"; };
 		8869755421E9CBAE00044EB8 /* UIView+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
 		8869755B21E9CC1600044EB8 /* CosmosRestApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CosmosRestApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8869756021E9DD3900044EB8 /* Templates.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Templates.storyboard; sourceTree = "<group>"; };
-		8869756221E9DDE600044EB8 /* TemplateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateController.swift; sourceTree = "<group>"; };
 		8869756421E9DE8500044EB8 /* CellStateRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellStateRoundedView.swift; sourceTree = "<group>"; };
-		8869756621E9E50100044EB8 /* Template1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template1Cell.swift; sourceTree = "<group>"; };
-		8869756821E9E5D600044EB8 /* Template1HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template1HeaderCell.swift; sourceTree = "<group>"; };
-		8869756B21E9F61F00044EB8 /* TemplateCollectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCollectController.swift; sourceTree = "<group>"; };
 		8869756D21EA0DBB00044EB8 /* GaiaNodesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaNodesController.swift; sourceTree = "<group>"; };
 		8869756F21EA105300044EB8 /* GaiaNodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaNodeController.swift; sourceTree = "<group>"; };
 		8869757121EA173000044EB8 /* GaiaNodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaNodeCell.swift; sourceTree = "<group>"; };
@@ -140,6 +127,7 @@
 		EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UViewController+extensions.swift"; sourceTree = "<group>"; };
 		EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyCreateController.swift; sourceTree = "<group>"; };
 		EE2D643B21F306800002D51D /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		EEA8AA4523B4A1500079C6E3 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		EEAE3E6823A7824700A336FA /* GaiaConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaConstants.swift; sourceTree = "<group>"; };
 		EEAE3E6A23AA8DEA00A336FA /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		EEAFBF5D21F4678D001B01EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Addressbook.storyboard; sourceTree = "<group>"; };
@@ -197,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				88677FFA21E9C54A0022A09E /* AppDelegate.swift */,
+				EEA8AA4523B4A1500079C6E3 /* AppContext.swift */,
 				88A8B7E622464236004F0B82 /* LocalClient.swift */,
 				8869757521EA64EB00044EB8 /* Cosmos Client.entitlements */,
 				EE2D63E921EDC5850002D51D /* Nodes */,
@@ -216,7 +205,6 @@
 		8869752321E9CACF00044EB8 /* UI elements */ = {
 			isa = PBXGroup;
 			children = (
-				8869756A21E9F1C100044EB8 /* Templates */,
 				8869752421E9CACF00044EB8 /* Background Particles */,
 				8869752C21E9CACF00044EB8 /* SimpleWebView */,
 				8869755421E9CBAE00044EB8 /* UIView+extensions.swift */,
@@ -271,8 +259,6 @@
 			children = (
 				8869756421E9DE8500044EB8 /* CellStateRoundedView.swift */,
 				8869753221E9CACF00044EB8 /* CustomLoadingView.swift */,
-				8869753321E9CACF00044EB8 /* CustomTabBar.swift */,
-				8869753421E9CACF00044EB8 /* CustomTabBarItem.swift */,
 				8869753921E9CACF00044EB8 /* RichTextFieldView.swift */,
 				8869753A21E9CACF00044EB8 /* RoundedButton.swift */,
 				8869753B21E9CACF00044EB8 /* RoundedView.swift */,
@@ -288,18 +274,6 @@
 				8869753E21E9CACF00044EB8 /* ToastAlertView.xib */,
 			);
 			path = ToastAlertView;
-			sourceTree = "<group>";
-		};
-		8869756A21E9F1C100044EB8 /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-				8869756021E9DD3900044EB8 /* Templates.storyboard */,
-				8869756221E9DDE600044EB8 /* TemplateController.swift */,
-				8869756B21E9F61F00044EB8 /* TemplateCollectController.swift */,
-				8869756621E9E50100044EB8 /* Template1Cell.swift */,
-				8869756821E9E5D600044EB8 /* Template1HeaderCell.swift */,
-			);
-			path = Templates;
 			sourceTree = "<group>";
 		};
 		EE2D63E921EDC5850002D51D /* Nodes */ = {
@@ -451,7 +425,6 @@
 				EEAFBF6221F4678D001B01EA /* Addressbook.storyboard in Resources */,
 				8867800021E9C54A0022A09E /* Main.storyboard in Resources */,
 				EEAE3E6B23AA8DEA00A336FA /* Onboarding.storyboard in Resources */,
-				8869756121E9DD3900044EB8 /* Templates.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,12 +445,11 @@
 				8801CF78221F22EF004781C1 /* GaiaProposalController.swift in Sources */,
 				8869754521E9CAD000044EB8 /* SimpleWebView.swift in Sources */,
 				EEAFBF6321F4678D001B01EA /* AddressController.swift in Sources */,
-				8869756321E9DDE600044EB8 /* TemplateController.swift in Sources */,
 				88A8B7E722464236004F0B82 /* LocalClient.swift in Sources */,
-				8869754921E9CAD000044EB8 /* CustomTabBarItem.swift in Sources */,
 				8869757921EB05C700044EB8 /* GaiaKeyHeaderCell.swift in Sources */,
 				8869754321E9CAD000044EB8 /* CenteringFlowLayout.swift in Sources */,
 				8869754721E9CAD000044EB8 /* CustomLoadingView.swift in Sources */,
+				EEA8AA4623B4A1500079C6E3 /* AppContext.swift in Sources */,
 				EEE87A7621F8521B00CA9CDA /* GaiaValidatorCell.swift in Sources */,
 				8869757721EB05B100044EB8 /* GaiaKeyCell.swift in Sources */,
 				8801CF7A2221921A004781C1 /* GaiaHistoryController.swift in Sources */,
@@ -487,7 +459,6 @@
 				EE2D643C21F306800002D51D /* UIImage+Extensions.swift in Sources */,
 				EE2D63E021ECF6AF0002D51D /* GaiaWalletController.swift in Sources */,
 				8801CF7E222273D9004781C1 /* GaiaDelegationsController.swift in Sources */,
-				8869756C21E9F61F00044EB8 /* TemplateCollectController.swift in Sources */,
 				8869756521E9DE8500044EB8 /* CellStateRoundedView.swift in Sources */,
 				8869755321E9CB6700044EB8 /* UIColor+extensions.swift in Sources */,
 				8869754E21E9CAD000044EB8 /* RoundedButton.swift in Sources */,
@@ -495,16 +466,13 @@
 				EE2D63E421ECF9440002D51D /* GaiaGovernanceController.swift in Sources */,
 				8869756E21EA0DBB00044EB8 /* GaiaNodesController.swift in Sources */,
 				88A3F253224D4C7600BAEEE8 /* GaiaVotesController.swift in Sources */,
-				8869756721E9E50100044EB8 /* Template1Cell.swift in Sources */,
 				EEBDFC2323801E0400079F38 /* GaiaOraclesController.swift in Sources */,
 				8869754D21E9CAD000044EB8 /* RichTextFieldView.swift in Sources */,
 				8869755021E9CAD000044EB8 /* ToastAlertView.swift in Sources */,
-				8869756921E9E5D600044EB8 /* Template1HeaderCell.swift in Sources */,
 				EE2D63E821EDAB270002D51D /* UViewController+extensions.swift in Sources */,
 				EEAFBF6421F4678D001B01EA /* AddressesListController.swift in Sources */,
 				8869757221EA173000044EB8 /* GaiaNodeCell.swift in Sources */,
 				EEAE3E6923A7824700A336FA /* GaiaConstants.swift in Sources */,
-				8869754821E9CAD000044EB8 /* CustomTabBar.swift in Sources */,
 				88677FFB21E9C54A0022A09E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

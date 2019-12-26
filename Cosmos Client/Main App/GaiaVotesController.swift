@@ -14,18 +14,10 @@ class GaiaVotesController: UIViewController, ToastAlertViewPresentable, GaiaKeys
     
     var toast: ToastAlertView?
     
-    var node: TDMNode?
-    var key: GaiaKey?
-    var account: GaiaAccount?
-    
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
-    
-    var forwardCounter = 0
-    var onUnwind: ((_ toIndex: Int) -> ())?
-    var lockLifeCicleDelegates = false
     
     var dataSource: [ProposalVote] = []
     
@@ -34,8 +26,8 @@ class GaiaVotesController: UIViewController, ToastAlertViewPresentable, GaiaKeys
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
-            self?.node?.getStatus {
-                if self?.node?.state == .unknown {
+            AppContext.shared.node?.getStatus {
+                if AppContext.shared.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
                 }
             }

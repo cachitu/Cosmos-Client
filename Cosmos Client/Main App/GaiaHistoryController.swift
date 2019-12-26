@@ -22,13 +22,9 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
 
     var toast: ToastAlertView?
     
-    var node: TDMNode?
-    var key: GaiaKey?
-    var account: GaiaAccount?
-    
     var storeUID: String {
-        let addr = key?.address ?? ""
-        let nodeID = node?.nodeID ?? ""
+        let addr = AppContext.shared.key?.address ?? ""
+        let nodeID = AppContext.shared.node?.nodeID ?? ""
         return "_" + nodeID + "-" + addr
     }
     
@@ -55,8 +51,8 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
-            self?.node?.getStatus {
-                if self?.node?.state == .unknown {
+            AppContext.shared.node?.getStatus {
+                if AppContext.shared.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
                 }
             }
@@ -105,9 +101,9 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
         var sentItems = 0
         var receivedItems = 0
         loadingView.startAnimating()
-        key?.getSentTransactions(node: node!, page: 1, limit: 1) { [weak self] txs, total, err in
+        AppContext.shared.key?.getSentTransactions(node: AppContext.shared.node!, page: 1, limit: 1) { txs, total, err in
             sentItems = Int(total ?? "0") ?? 0
-            self?.key?.getReceivedTransactions(node: (self?.node)!, page: 1, limit: 1) { txs, total, err in
+            AppContext.shared.key?.getReceivedTransactions(node: AppContext.shared.node!, page: 1, limit: 1) { txs, total, err in
                 receivedItems = Int(total ?? "0") ?? 0
                 completion(sentItems, receivedItems)
             }
@@ -118,7 +114,7 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
     func loadData(removeDuplicates: Bool = false) {
         print("get sent page \(curentSentPage)")
         //toast?.showToastAlert("Getting sent items page \(curentSentPage) 🐱", autoHideAfter: 3, type: .validatePending, dismissable: true)
-        key?.getSentTransactions(node: node!, page: curentSentPage, limit: GaiaConstants.historyPageSize) { [weak self] txs, total, err in
+        AppContext.shared.key?.getSentTransactions(node: AppContext.shared.node!, page: curentSentPage, limit: GaiaConstants.historyPageSize) { [weak self] txs, total, err in
             if let transactions = txs, let page = self?.curentSentPage {
                 self?.dataSource.append(contentsOf: transactions)
                 let items = page * GaiaConstants.historyPageSize
@@ -141,7 +137,7 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
     func getReceivedTx(removeDuplicates: Bool = false) {
         print("get received page \(curentReceivedPage)")
         //toast?.showToastAlert("Getting received items page \(curentReceivedPage) 🐱", autoHideAfter: 3, type: .validatePending, dismissable: true)
-        key?.getReceivedTransactions(node: node!, page: curentReceivedPage, limit: GaiaConstants.historyPageSize) { [weak self] txs, total, err in
+        AppContext.shared.key?.getReceivedTransactions(node: AppContext.shared.node!, page: curentReceivedPage, limit: GaiaConstants.historyPageSize) { [weak self] txs, total, err in
             if let transactions = txs, let page = self?.curentReceivedPage {
                 self?.dataSource.append(contentsOf: transactions)
                 let items = page * GaiaConstants.historyPageSize
@@ -185,7 +181,7 @@ extension GaiaHistoryController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaHistoryCellID", for: indexPath) as! GaiaHistoryCell
         let transaction = dataSource[indexPath.item]
-        cell.configure(tx: transaction, ownerAddr: key?.address ?? "")
+        cell.configure(tx: transaction, ownerAddr: AppContext.shared.key?.address ?? "")
         return cell
     }
     

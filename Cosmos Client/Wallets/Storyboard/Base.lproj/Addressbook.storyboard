@@ -258,7 +258,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="KUD-pU-Kal" firstAttribute="height" secondItem="VcK-Af-JEh" secondAttribute="height" id="0Su-OZ-iv7"/>
                             <constraint firstItem="Mmt-lK-1sd" firstAttribute="top" secondItem="pSE-cg-4Dr" secondAttribute="bottom" id="3ei-fg-bNM"/>
@@ -503,7 +503,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="Z9Q-Q6-0gT" firstAttribute="centerY" secondItem="7B7-C1-WKZ" secondAttribute="centerY" id="50v-Ra-BGB"/>
                             <constraint firstItem="7B7-C1-WKZ" firstAttribute="trailing" secondItem="Qby-RM-c0l" secondAttribute="trailing" id="9zJ-aB-o0a"/>
@@ -573,6 +573,9 @@
         <image name="QrCodeSmall" width="11.333333015441895" height="11.333333015441895"/>
         <image name="RightDisclosure" width="8.6666669845581055" height="16"/>
         <image name="clipboard" width="11.333333015441895" height="11.333333015441895"/>
+        <namedColor name="ContentBackground">
+            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="TerraBlue">
             <color red="0.12549019607843137" green="0.12941176470588237" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

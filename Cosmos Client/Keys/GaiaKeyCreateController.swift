@@ -11,9 +11,6 @@ import CosmosRestApi
 
 class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, GaiaKeysManagementCapable {
     
-    var node: TDMNode? = TDMNode()
-    var keysDelegate: LocalClient?
-    
     @IBOutlet weak var field1RtextField: RichTextFieldView!
     @IBOutlet weak var field2RtextField: RichTextFieldView!
     @IBOutlet weak var stackHeightConstraint: NSLayoutConstraint!
@@ -77,7 +74,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
     }
     
     @IBAction func createKey(_ sender: Any) {
-        guard let validNode = node, let name = field1RtextField.contentTextField?.text, let pass = field2RtextField.contentTextField?.text, let keysDelegate = keysDelegate else {
+        guard let validNode = AppContext.shared.node, let name = field1RtextField.contentTextField?.text, let pass = field2RtextField.contentTextField?.text, let keysDelegate = AppContext.shared.keysDelegate else {
             return
         }
         

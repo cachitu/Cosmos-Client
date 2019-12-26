@@ -11,9 +11,6 @@ import CosmosRestApi
 
 class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
-    var node: TDMNode? = TDMNode()
-    var keysDelegate: LocalClient?
-    
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
@@ -35,7 +32,6 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var showHideSeedButton: UIButton!
     
     var toast: ToastAlertView?
-    var key: GaiaKey?
     
     private var fieldsStateDic: [String : Bool] = ["field1" : false, "field2" : false, "field3" : true, "field4" : true]
     
@@ -47,7 +43,7 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         super.viewDidLoad()
         toast = createToastAlert(creatorView: view, holderUnderView: topSeparatorView, holderTopDistanceConstraint: topConstraintOutlet, coveringView: topBarView)
         prePopulate()
-        if key?.watchMode == true {
+        if AppContext.shared.key?.watchMode == true {
             pubKeyTitle.isHidden = true
             pubKeyLabel.isHidden = true
             seedTitle.isHidden = true
@@ -86,10 +82,10 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
         sender.isSelected = !sender.isSelected
         seedLabel.text = "..."
         if sender.isSelected {
-            let alertMessage = "Enter the password for \(key?.name ?? "this key") to display the seed."
+            let alertMessage = "Enter the password for \(AppContext.shared.key?.name ?? "this key") to display the seed."
             self.showPasswordAlert(title: nil, message: alertMessage, placeholder: "Minimum 8 characters") { [weak self] pass in
-                if pass == self?.key?.password {
-                    self?.seedLabel.text = sender.isSelected ? self?.key?.mnemonic ?? "Unavailable" : "Tap Show Seed to unhide"
+                if pass == AppContext.shared.key?.password {
+                    self?.seedLabel.text = sender.isSelected ? AppContext.shared.key?.mnemonic ?? "Unavailable" : "Tap Show Seed to unhide"
                 } else {
                     sender.isSelected = false
                     self?.seedLabel.text = "Wrong password"
@@ -106,12 +102,12 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     }
     
     private func prePopulate() {
-        nameLabel.text    = key?.name ?? "No name"
-        addressLabel.text = key?.address ?? "cosmos..."
-        pubKeyLabel.text  = key?.pubAddress ?? "cosmos..."
-        typeLabel.text    = key?.type ?? ""
+        nameLabel.text    = AppContext.shared.key?.name ?? "No name"
+        addressLabel.text = AppContext.shared.key?.address ?? "cosmos..."
+        pubKeyLabel.text  = AppContext.shared.key?.pubAddress ?? "cosmos..."
+        typeLabel.text    = AppContext.shared.key?.type ?? ""
         seedLabel.text    = "Tap Show Seed to unhide"
-        if let seed = key?.getMnemonicFromKeychain() {
+        if let seed = AppContext.shared.key?.getMnemonicFromKeychain() {
             seedLabel.text = seed
         }
     }

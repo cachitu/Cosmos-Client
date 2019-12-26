@@ -13,22 +13,13 @@ class GaiaDelegationsController: UIViewController, ToastAlertViewPresentable, Ga
 
     var toast: ToastAlertView?
     
-    var node: TDMNode?
-    var key: GaiaKey?
-    var account: GaiaAccount?
     var validator: GaiaValidator?
     
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
-    @IBOutlet weak var bottomTabbarView: CustomTabBar!
-    @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
-    
-    var forwardCounter = 0
-    var onUnwind: ((_ toIndex: Int) -> ())?
-    var lockLifeCicleDelegates = false
     
     var dataSource: [GaiaDelegation] = []
     
@@ -37,8 +28,8 @@ class GaiaDelegationsController: UIViewController, ToastAlertViewPresentable, Ga
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
-            self?.node?.getStatus {
-                if self?.node?.state == .unknown {
+            AppContext.shared.node?.getStatus {
+                if AppContext.shared.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
                 } else {
                     self?.loadData()
@@ -60,7 +51,7 @@ class GaiaDelegationsController: UIViewController, ToastAlertViewPresentable, Ga
     func loadData() {
         self.loadingView.startAnimating()
         
-        if let validNode = node, let validValidator = validator {
+        if let validNode = AppContext.shared.node, let validValidator = validator {
             validValidator.getValidatorDelegations(node: validNode) { [weak self] delegations, error in
                 self?.loadingView.stopAnimating()
                 if let validDelegations = delegations {

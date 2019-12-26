@@ -13,25 +13,15 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     var toast: ToastAlertView?
 
-    var node: TDMNode?
-    var key: GaiaKey?
-    var keysDelegate: LocalClient?
-
-    var account: GaiaAccount?
-    var defaultFeeSigAmount: String { return node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return AppContext.shared.node?.defaultTxFee  ?? "0" }
     var selectedProposal: GaiaProposal?
     
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topNavBarView: UIView!
-    @IBOutlet weak var bottomTabbarView: CustomTabBar!
-    @IBOutlet weak var bottomTabbarDownConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
-    
-    var forwardCounter = 0
-    var onUnwind: ((_ toIndex: Int) -> ())?
-    var lockLifeCicleDelegates = false
+    @IBOutlet weak var addButton: UIButton!
     
     var dataSource: [GaiaProposal] = []
     var proposeData: ProposalData?
@@ -39,23 +29,15 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addButton.layer.cornerRadius = addButton.frame.size.height / 2
+        addButton.isHidden = AppContext.shared.key?.watchMode == true
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
-        bottomTabbarView.onTap = { [weak self] index in
-            switch index {
-            case 0:
-                self?.onUnwind?(0)
-                self?.performSegue(withIdentifier: "UnwindToWallet", sender: nil)
-            case 1: self?.dismiss(animated: false)
-            case 3: self?.performSegue(withIdentifier: "nextSegue", sender: index)
-            default: break
-            }
-        }
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
-            self?.node?.getStatus {
-                if self?.node?.state == .unknown {
+            AppContext.shared.node?.getStatus {
+                if AppContext.shared.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
-                } else if let validNode = self?.node {
+                } else if let validNode = AppContext.shared.node {
                     self?.loadData(validNode: validNode)
                 }
             }
@@ -64,29 +46,12 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard !lockLifeCicleDelegates else { return }
-        if forwardCounter > 0 {
-            bottomTabbarView.selectIndex(-1)
-            return
-        }
-        
-        bottomTabbarView.selectIndex(2)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard !lockLifeCicleDelegates else {
-            lockLifeCicleDelegates = false
-            return
-        }
-        if forwardCounter > 0 {
-            UIView.setAnimationsEnabled(true)
-            self.performSegue(withIdentifier: "nextSegue", sender: 3)
-            forwardCounter = 0
-            return
-        }
         
-        if let data = proposeData, let node = node, let key = key, let keysDelegate = keysDelegate {
+        if let data = proposeData, let node = AppContext.shared.node, let key = AppContext.shared.key, let keysDelegate = AppContext.shared.keysDelegate {
             self.loadingView.startAnimating()
             self.toast?.showToastAlert("Proposal create request submited", autoHideAfter: 3, type: .validatePending, dismissable: true)
             self.propose(
@@ -109,11 +74,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                         }
                     }
             }
-        } else if let validNode = node {
+        } else if let validNode = AppContext.shared.node {
             loadData(validNode: validNode, showLoader: true)
         }
         timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
-            if let validNode = self?.node {
+            if let validNode = AppContext.shared.node {
                 self?.loadData(validNode: validNode)
             }
         }
@@ -134,19 +99,6 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             dest.onCollectDataComplete = { [weak self] data in
                 self?.proposeData = data
             }
-        } else if let index = sender as? Int {
-            
-            let dest = segue.destination as? GaiaSettingsController
-            dest?.forwardCounter = index - 3
-            dest?.node = node
-            dest?.account = account
-            dest?.key = key
-            dest?.onUnwind = { [weak self] index in
-                self?.lockLifeCicleDelegates = true
-                self?.bottomTabbarView.selectIndex(-1)
-                if index == 0 { self?.onUnwind?(index) }
-            }
-            forwardCounter = 0
         }
     }
 
@@ -203,12 +155,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     }
     
     @IBAction func unwindToGovernance(segue:UIStoryboardSegue) {
-        bottomTabbarView.selectIndex(2)
     }
 
     func handleVoting(proposal: GaiaProposal) {
         self.showVotingAlert(title: proposal.title, message: proposal.description) { [weak self] vote in
-            guard let vote = vote, let node = self?.node, let key = self?.key, let delegate = self?.keysDelegate  else { return }
+            guard let vote = vote, let node = AppContext.shared.node, let key = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate  else { return }
             self?.loadingView.startAnimating()
             self?.vote(
                 for: proposal.proposalId,
@@ -232,9 +183,9 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     }
     
     func handleDeposit(proposal: GaiaProposal) {
-        let denom = node?.stakeDenom ?? "stake"
+        let denom = AppContext.shared.node?.stakeDenom ?? "stake"
         showAmountAlert(title: "Type the amount of \(denom) you want to deposit to proposal with id \(proposal.proposalId)", message: nil, placeholder: "0 \(denom)") { [weak self] amount in
-            guard let node = self?.node, let key = self?.key, let delegate = self?.keysDelegate  else { return }
+            guard let node = AppContext.shared.node, let key = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate  else { return }
             self?.loadingView.startAnimating()
             self?.depositToProposal(
                 proposalId: proposal.proposalId,
@@ -267,7 +218,7 @@ extension GaiaGovernanceController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaGovernanceCellID", for: indexPath) as! GaiaGovernanceCell
         let proposal = dataSource[indexPath.item]
-        cell.configure(proposal: proposal, voter: account, image: node?.nodeLogoWhite)
+        cell.configure(proposal: proposal, voter: AppContext.shared.account, image: AppContext.shared.node?.nodeLogoWhite)
         return cell
     }
     
@@ -302,7 +253,7 @@ extension GaiaGovernanceController: UITableViewDelegate {
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
             
-            let editable =  self.key?.watchMode != true
+            let editable =  AppContext.shared.key?.watchMode != true
             
             switch (proposal.status, editable) {
             case ("Passed", true)  :
