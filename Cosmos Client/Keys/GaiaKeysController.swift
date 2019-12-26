@@ -51,7 +51,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     
     var dataSource: [GaiaKey] = []
     var filteredDataSource: [GaiaKey] {
-        return dataSource.filter { $0.type == AppContext.shared.node?.type.rawValue }
+        return dataSource.filter { $0.type == AppContext.shared.node?.type.rawValue && $0.nodeId == AppContext.shared.node?.nodeID }
     }
     var selectedKey: GaiaKey?
     var selectedIndex: Int?
@@ -68,7 +68,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             let gaiaKey = GaiaKey(data: appleKey, nodeId: AppContext.shared.node?.nodeID ?? "")
             dataSource.append(gaiaKey)
             AppContext.shared.node?.appleKeyCreated = true
-            if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = AppContext.shared.node {
+            if let savedNodes = PersistableGaiaNodes.loadFromDisk(withUID: AppContext.shared.node?.nodeID ?? "") as? PersistableGaiaNodes, let validNode = AppContext.shared.node {
                 for savedNode in savedNodes.nodes {
                     if savedNode.network == validNode.network {
                         savedNode.appleKeyCreated = true
@@ -77,7 +77,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
                 PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
             }
 
-            PersistableGaiaKeys(keys: dataSource).savetoDisk()
+            PersistableGaiaKeys(keys: dataSource).savetoDisk(withUID: AppContext.shared.node?.nodeID ?? "")
         }
     }
     
@@ -86,14 +86,6 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         
         addButton.layer.cornerRadius = addButton.frame.size.height / 2
         AppContext.shared.keysDelegate = LocalClient(networkType: AppContext.shared.node?.type ?? .cosmos, netID: AppContext.shared.node?.nodeID ?? "-1")
-        if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
-            dataSource = savedKeys.keys
-            if filteredDataSource.count == 0 {
-                createTheDefauktKey()
-            }
-        } else {
-            createTheDefauktKey()
-        }
         
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         noDataView.isHidden = filteredDataSource.count > 0
@@ -108,41 +100,39 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let savedKeys = PersistableGaiaKeys.loadFromDisk(withUID: AppContext.shared.node?.nodeID ?? "") as? PersistableGaiaKeys {
+            dataSource = savedKeys.keys.filter { $0.nodeId == AppContext.shared.node?.nodeID }
+            tableView.reloadData()
+            if filteredDataSource.count == 0 {
+                createTheDefauktKey()
+            }
+        } else {
+            createTheDefauktKey()
+        }
+        noDataView.isHidden = filteredDataSource.count > 0
+        editButton.isHidden = filteredDataSource.count == 0
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard let validNode = AppContext.shared.node, let delegate = AppContext.shared.keysDelegate else { return }
-        retrieveAllKeys(node: validNode, clientDelegate: delegate) { [weak self] gaiaKeys, errorMessage in
-            guard let keys = gaiaKeys else {
-                //self?.toast?.showToastAlert(errorMessage ?? "Unknown error")
-                self?.dataSource = []
-                self?.tableView?.reloadData()
-                AppContext.shared.node?.getStakingInfo() { denom in }
-                return
-            }
-            
-            self?.dataSource = keys
-            self?.noDataView.isHidden = self?.filteredDataSource.count ?? 0 > 0
-            self?.editButton.isHidden = self?.filteredDataSource.count ?? 0 == 0
-
-            self?.tableView?.reloadData()
-            AppContext.shared.node?.getStakingInfo() { denom in }
-        }
-        
-        loadingView.startAnimating()
-        retrieveAllValidators(node: validNode) { [weak self] validators, errMsg in
-            self?.loadingView.stopAnimating()
-            if let validValidators = validators {
-                for validator in validValidators {
-                    validNode.knownValidators[validator.validator] = validator.moniker
-                }
-                if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
-                    for savedNode in savedNodes.nodes {
-                        if savedNode.network == validNode.network {
-                            savedNode.knownValidators = validNode.knownValidators
-                        }
+        guard let validNode = AppContext.shared.node else { return }
+        AppContext.shared.node?.getStakingInfo() { [weak self] denom in
+            self?.retrieveAllValidators(node: validNode) { validators, errMsg in
+                if let validValidators = validators {
+                    for validator in validValidators {
+                        validNode.knownValidators[validator.validator] = validator.moniker
                     }
-                    PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
+                    if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
+                        for savedNode in savedNodes.nodes {
+                            if savedNode.network == validNode.network {
+                                savedNode.knownValidators = validNode.knownValidators
+                            }
+                        }
+                        PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
+                    }
                 }
             }
         }
@@ -171,7 +161,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     
     func createWatchKey(name: String, address: String) {
         
-        let matches = dataSource.filter() { $0.name == name && $0.address == address && $0.watchMode == true }
+        let matches = dataSource.filter() { $0.name == name && $0.address == address && $0.watchMode == true && $0.nodeId == AppContext.shared.node?.nodeID }
         if let _ = matches.first {
             toast?.showToastAlert("This key is already added to your watch list.", autoHideAfter: 5, type: .error, dismissable: true)
             return
@@ -186,7 +176,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         DispatchQueue.main.async {
             self.dataSource.insert(gaiaKey, at: 0)
             self.tableView.reloadData()
-            PersistableGaiaKeys(keys: self.dataSource).savetoDisk()
+            PersistableGaiaKeys(keys: self.dataSource).savetoDisk(withUID: AppContext.shared.node?.nodeID ?? "")
         }
     }
     
@@ -237,7 +227,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         let _ = key.forgetPassFromKeychain()
         let _ = key.forgetMnemonicFromKeychain()
         self.dataSource.remove(at: index)
-        PersistableGaiaKeys(keys: self.dataSource).savetoDisk()
+        PersistableGaiaKeys(keys: self.dataSource).savetoDisk(withUID: AppContext.shared.node?.nodeID ?? "")
         tableView.reloadData()
         toast?.showToastAlert("\(key.name) successfully deleted", autoHideAfter: 3, type: .info, dismissable: true)
 
@@ -273,11 +263,11 @@ extension GaiaKeysController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
+        return editButton.isSelected ? .delete : .none
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return editButton.isSelected
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -315,7 +305,7 @@ extension GaiaKeysController: UITableViewDataSource {
             let dindex = dataSource.firstIndex(where: { $0 == dkey } ) {
             dataSource.remove(at: sindex)
             dataSource.insert(skey, at: dindex)
-            PersistableGaiaKeys(keys: dataSource).savetoDisk()
+            PersistableGaiaKeys(keys: dataSource).savetoDisk(withUID: AppContext.shared.node?.nodeID ?? "")
             tableView.reloadData()
         }
     }

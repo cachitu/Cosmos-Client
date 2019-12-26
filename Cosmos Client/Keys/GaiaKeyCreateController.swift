@@ -97,7 +97,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
                 self?.loadingView.stopAnimating()
                 if let validKey = key {
                     
-                    if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
+                    if let savedKeys = PersistableGaiaKeys.loadFromDisk(withUID: AppContext.shared.node?.nodeID ?? "") as? PersistableGaiaKeys {
                         var list = savedKeys.keys
                         let match = savedKeys.keys.filter { $0.identifier == validKey.identifier }
                         if match.count > 0 {
@@ -105,7 +105,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
                             return
                         } else {
                             list.insert(validKey, at: 0)
-                            PersistableGaiaKeys(keys: list).savetoDisk()
+                            PersistableGaiaKeys(keys: list).savetoDisk(withUID: AppContext.shared.node?.nodeID ?? "")
                         }
                     }
                     

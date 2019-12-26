@@ -24,7 +24,7 @@ class GaiaProposalController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var submitButton: RoundedButton!
+    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var loadingView: CustomLoadingView!
     
     @IBOutlet weak var stackTopConstraint: NSLayoutConstraint!

@@ -186,6 +186,7 @@
 			children = (
 				88677FFA21E9C54A0022A09E /* AppDelegate.swift */,
 				EEA8AA4523B4A1500079C6E3 /* AppContext.swift */,
+				EEAE3E6823A7824700A336FA /* GaiaConstants.swift */,
 				88A8B7E622464236004F0B82 /* LocalClient.swift */,
 				8869757521EA64EB00044EB8 /* Cosmos Client.entitlements */,
 				EE2D63E921EDC5850002D51D /* Nodes */,
@@ -302,7 +303,6 @@
 		EE2D63EB21EDC5A70002D51D /* Main App */ = {
 			isa = PBXGroup;
 			children = (
-				EEAE3E6823A7824700A336FA /* GaiaConstants.swift */,
 				EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */,
 				8801CF792221921A004781C1 /* GaiaHistoryController.swift */,
 				8801CF7B2221923D004781C1 /* GaiaHistoryCell.swift */,
@@ -637,7 +637,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = SKYG56VM4S;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -657,7 +657,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = SKYG56VM4S;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

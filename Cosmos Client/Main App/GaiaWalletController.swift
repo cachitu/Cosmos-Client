@@ -502,7 +502,7 @@ extension GaiaWalletController: UITextFieldDelegate {
 extension GaiaWalletController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 11
+        return 6
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -561,7 +561,7 @@ extension GaiaWalletController: UITableViewDelegate {
                 
                 let redelegateAction = UIAlertAction(title: "Redelegate", style: .default) { [weak self] alertAction in
                     AppContext.shared.redelgateFrom = delegation.validatorAddr
-                    self?.performSegue(withIdentifier: "nextSegue", sender: 1)
+                    self?.tabBarController?.selectedIndex = 1
                 }
                 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

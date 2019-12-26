@@ -71,7 +71,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         }
         
         noDataView.isHidden = nodes.count > 0
-        
+        editButton.isHidden = nodes.count == 0
+
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             self?.refreshNodes()
         }
@@ -153,6 +154,8 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         weak var weakSelf = self
         if let validNodes = weakSelf?.nodes, validNodes.count > 0 {
             noDataView.isHidden = true
+            editButton.isHidden = false
+
             loadingView.startAnimating()
             for node in validNodes {
                 node.getStatus {
@@ -163,6 +166,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
                 }
             }
         } else {
+            editButton.isHidden = true
             noDataView.isHidden = false
         }
     }
@@ -187,16 +191,19 @@ extension GaiaNodesController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
+        return editButton.isSelected ? .delete : .none
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return editButton.isSelected
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             nodes.remove(at: indexPath.item)
+            noDataView.isHidden   = nodes.count > 0
+            editButton.isSelected = nodes.count > 0
+            editButton.isHidden = nodes.count == 0
         }
         tableView.reloadData()
         PersistableGaiaNodes(nodes: nodes).savetoDisk()

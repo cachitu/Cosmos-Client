@@ -32,15 +32,6 @@ public class LocalClient: KeysClientDelegate {
         }
     }
     
-    public func getSavedKeys() -> [GaiaKey] {
-        
-        if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
-            return savedKeys.keys
-        } else {
-            return []
-        }
-    }
-    
     public func generateMnemonic() -> String {
         signer.generateMnemonic()
     }
