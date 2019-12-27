@@ -64,7 +64,18 @@ public extension UIViewController {
 
     func showProposalDetailsAlert(title: String?, message: String?) {
         
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .left
+        let messageText = NSAttributedString(
+            string: message ?? "",
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.foregroundColor : UIColor.terraBlue
+            ]
+        )
+
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.actionSheet)
+        alert.setValue(messageText, forKey: "attributedMessage")
         let cancelAction = UIAlertAction(title: "Close", style: .cancel)
         alert.addAction(cancelAction)
         self.present(alert, animated:true, completion: nil)

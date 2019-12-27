@@ -47,6 +47,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
     @IBOutlet weak var coinLogoImageView: UIImageView!
     
+    @IBOutlet weak var logsButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var logsButton: RoundedButton!
+    @IBAction func logsAction(_ sender: UIButton) {
+    }
+    
     private var selectedAsset: Coin?
     private var senderAddress: String?
     private weak var timer: Timer?
@@ -92,6 +97,18 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         if senderAddress == nil {
              clearFields()
+        }
+        
+        AppContext.shared.onHashPolingPending = {
+            self.logsButton.backgroundColor = UIColor.pendingYellow
+        }
+        AppContext.shared.onHashPolingDone = {
+            self.logsButton.backgroundColor = UIColor.terraBlue
+        }
+        if let hash = AppContext.shared.lastSubmitedHash() {
+            AppContext.shared.startHashPoling(hash: hash)
+        } else {
+            self.logsButton.backgroundColor = UIColor.terraBlue
         }
     }
     
@@ -172,6 +189,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         
                         if resp != nil {
                             self?.toast?.showToastAlert("Transfer submitted\n[\(msg ?? "...")] ", autoHideAfter: 15, type: .validatePending, dismissable: false)
+                            if let hash = AppContext.shared.lastSubmitedHash() {
+                                AppContext.shared.startHashPoling(hash: hash)
+                            }
                         } else if let errMsg = msg {
                             if errMsg.contains("connection was lost") {
                                 self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
@@ -227,11 +247,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     var lockClearFields = false
     @IBAction func sendAction(_ sender: Any) {
         
-        if let hash = AppContext.shared.lastSubmitedHash() {
-            self.toast?.showToastAlert("Waiting to complete for hash \(hash)", autoHideAfter: 3, type: .validatePending, dismissable: true)
-            return
-        }
-
         lockClearFields = true
         self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: self)
     }
@@ -259,6 +274,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
     private func loadData(animated: Bool = true, spinner: Bool = true) {
         
+        if let hash = AppContext.shared.lastSubmitedHash() {
+            AppContext.shared.startHashPoling(hash: hash)
+        }
+        
         if animated {
             self.amountValueLabel.labelTransition(0.55)
             self.amountDenomLabel.labelTransition(0.35)
@@ -267,28 +286,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         }
         
         if let validNode = AppContext.shared.node, let validKey = AppContext.shared.key {
-            
-            if let hash = AppContext.shared.lastSubmitedHash() {
-                timer?.invalidate()
-                validKey.getHash(node: validNode, gaiaKey: validKey, hash: hash) { [weak self] resp, msg in
-                    DispatchQueue.main.async {
-                        if spinner { self?.loadingView.stopAnimating() }
-                        if msg == nil {
-                            self?.toast?.showToastAlert("The last submited hash completed now", autoHideAfter: GaiaConstants.refreshInterval, type: .success, dismissable: true)
-                            AppContext.shared.removeLastSubmitedHash()
-                            self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
-                                self?.loadData(animated: false, spinner: true)
-                            }
-                        } else {
-                            self?.toast?.showToastAlert("Waiting for the last submited hash to complete, please wait before submiting a new transaction", autoHideAfter: GaiaConstants.refreshInterval, type: .validatePending, dismissable: true)
-                            self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval / 2.0, repeats: true) { [weak self] timer in
-                                self?.loadData(animated: false, spinner: true)
-                            }
-                        }
-                    }
-                }
-                return
-            }
             
             validKey.getGaiaAccount(node: validNode, gaiaKey: validKey) { [weak self] account, errMessage in
                 
@@ -544,10 +541,6 @@ extension GaiaWalletController: UITableViewDelegate {
                 return
             }
             
-            if let _ = AppContext.shared.lastSubmitedHash() {
-                return
-            }
-
             if let validDenom = AppContext.shared.node?.stakeDenom {
                 
                 let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

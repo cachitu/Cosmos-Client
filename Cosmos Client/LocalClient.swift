@@ -33,7 +33,7 @@ public class LocalClient: KeysClientDelegate {
         }
     }
     
-    public func storeHash(_ hash: String) {
+    public func storeHash(_ hash: PersitsableHash) {
         AppContext.shared.addHash(hash)
     }
 

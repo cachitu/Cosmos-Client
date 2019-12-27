@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46A4D0A423B647E200CC55F4 /* GaiaHashesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A4D0A323B647E200CC55F4 /* GaiaHashesController.swift */; };
 		8801CF78221F22EF004781C1 /* GaiaProposalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801CF77221F22EF004781C1 /* GaiaProposalController.swift */; };
 		8801CF7A2221921A004781C1 /* GaiaHistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801CF792221921A004781C1 /* GaiaHistoryController.swift */; };
 		8801CF7C2221923D004781C1 /* GaiaHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8801CF7B2221923D004781C1 /* GaiaHistoryCell.swift */; };
@@ -81,6 +82,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		46A4D0A323B647E200CC55F4 /* GaiaHashesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaHashesController.swift; sourceTree = "<group>"; };
 		8801CF77221F22EF004781C1 /* GaiaProposalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaProposalController.swift; sourceTree = "<group>"; };
 		8801CF792221921A004781C1 /* GaiaHistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaHistoryController.swift; sourceTree = "<group>"; };
 		8801CF7B2221923D004781C1 /* GaiaHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaHistoryCell.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				8801CF7D222273D9004781C1 /* GaiaDelegationsController.swift */,
 				EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */,
 				EE2D63E321ECF9440002D51D /* GaiaGovernanceController.swift */,
+				46A4D0A323B647E200CC55F4 /* GaiaHashesController.swift */,
 				EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */,
 				88A3F252224D4C7600BAEEE8 /* GaiaVotesController.swift */,
 				8801CF77221F22EF004781C1 /* GaiaProposalController.swift */,
@@ -474,6 +477,7 @@
 				8869757221EA173000044EB8 /* GaiaNodeCell.swift in Sources */,
 				EEAE3E6923A7824700A336FA /* GaiaConstants.swift in Sources */,
 				88677FFB21E9C54A0022A09E /* AppDelegate.swift in Sources */,
+				46A4D0A423B647E200CC55F4 /* GaiaHashesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

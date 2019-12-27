@@ -21,6 +21,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     @IBOutlet weak var topNavBarView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var logsButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var logsButton: RoundedButton!
+    @IBAction func logsAction(_ sender: UIButton) {
+    }
+
     var dataSource: [GaiaValidator] = []
     private weak var timer: Timer?
 
@@ -41,6 +46,18 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        AppContext.shared.onHashPolingPending = {
+            self.logsButton.backgroundColor = UIColor.pendingYellow
+        }
+        AppContext.shared.onHashPolingDone = {
+            self.logsButton.backgroundColor = UIColor.terraBlue
+        }
+        
+        if let hash = AppContext.shared.lastSubmitedHash() {
+            AppContext.shared.startHashPoling(hash: hash)
+        } else {
+            self.logsButton.backgroundColor = UIColor.terraBlue
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,10 +81,10 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         
         if let validNode = AppContext.shared.node {
             
-            if AppContext.shared.lastSubmitedHash() != nil {
-                toast?.showToastAlert("Waiting for the last submited hash to complete, please wait before submiting a new transaction", autoHideAfter: GaiaConstants.refreshInterval, type: .validatePending, dismissable: true)
+            if let hash = AppContext.shared.lastSubmitedHash() {
+                AppContext.shared.startHashPoling(hash: hash)
             }
-            
+
             loadingView.startAnimating()
             retrieveAllValidators(node: validNode) { [weak self] validators, errMsg in
                 self?.loadingView.stopAnimating()
@@ -135,6 +152,10 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                     self?.toast?.showToastAlert(msg, autoHideAfter: 15, type: .error, dismissable: true)
                 }
             } else  {
+                if let hash = AppContext.shared.lastSubmitedHash() {
+                    AppContext.shared.startHashPoling(hash: hash)
+                }
+
                 self?.toast?.showToastAlert("Unjail request submited", autoHideAfter: 13, type: .info, dismissable: true)
                 self?.tableView.reloadData()
             }
@@ -162,6 +183,10 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
 
                             if resp != nil {
                                 self?.toast?.showToastAlert("Redelegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
+                                if let hash = AppContext.shared.lastSubmitedHash() {
+                                    AppContext.shared.startHashPoling(hash: hash)
+                                }
+
                                 AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                     self?.loadingView.stopAnimating()
                                     self?.loadData()
@@ -196,6 +221,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         amount: validAmount,
                         denom: denom ?? "stake") { resp, msg in
                             if resp != nil {
+                                if let hash = AppContext.shared.lastSubmitedHash() {
+                                    AppContext.shared.startHashPoling(hash: hash)
+                                }
                                 self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
                                 AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                     self?.loadingView.stopAnimating()
