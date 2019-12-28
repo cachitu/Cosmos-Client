@@ -11,7 +11,7 @@ class CustomLoadingView: UIView {
     
     var circleColor = UIColor.darkRed.cgColor
     var secondCircleColor = UIColor.disabledGrey.cgColor
-    var thirdCircleColor  = UIColor.DefaultBackground.cgColor
+    var thirdCircleColor  = UIColor.defaultBackground.cgColor
     
     var lineWidth: CGFloat { return frame.size.width / 15 }
     private var secondCircle: CAShapeLayer!

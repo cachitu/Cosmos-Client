@@ -51,12 +51,12 @@ class RichTextFieldView: UIView {
         
         let chars = contentTextField?.text?.count ?? 0
         onFieldStateChange?(isValid)
-        
+        separatorView?.isHidden = true
         invalidContentLabel?.isHidden  = isValid || chars == 0
-        titleLabel?.textColor          = isValid || chars == 0 ? .warmGrey : .inputError
-        separatorView?.backgroundColor = chars == 0 ? .silverAlpha : isValid ? .DefaultBackground : .inputError
-        leftIconImageView?.tintColor   = separatorView?.backgroundColor
-        contentTextField?.textColor    = isValid || chars == 0 ? .darktext : .inputError
+        titleLabel?.textColor          = isValid || chars == 0 ? .darkGrayText : .darkRed
+        separatorView?.backgroundColor = .clear //chars == 0 ? .silverAlpha : isValid ? .defaultBackground : .darkRed
+        leftIconImageView?.tintColor   = .darkGrayText
+        contentTextField?.textColor    = isValid || chars == 0 ? .darkGrayText : .darkRed
     }
     
     private func isMatchingOtherField() -> Bool {

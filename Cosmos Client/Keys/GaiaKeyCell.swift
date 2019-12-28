@@ -35,6 +35,36 @@ class GaiaKeyCell: UITableViewCell {
         leftLabel?.text = key.name
         leftSubLabel?.text = key.address
         if !reuseMode { leftImageView?.image = image }
-        roundedView?.backgroundColor = key.watchMode ? UIColor(named: "WatchModeBackground") : .white
+        roundedView?.alpha = key.watchMode ? 0.8 : 1.0
+    }
+}
+
+class GaiaSharesCell: UITableViewCell {
+
+    @IBOutlet weak var leftLabel: UILabel?
+    @IBOutlet weak var leftSubLabel: UILabel?
+    @IBOutlet weak var upRightLabel: UILabel?
+    @IBOutlet weak var leftImageView: UIImageView?
+    @IBOutlet weak var roundedView: RoundedView?
+    @IBOutlet weak var stateView: CellStateRoundedView!
+    @IBOutlet weak var copyButton: UIButton?
+    
+    @IBAction func copyAction(_ sender: Any) {
+        UIPasteboard.general.string = leftSubLabel?.text
+        onCopy?()
+    }
+    
+    var onCopy:(() -> ())?
+    
+    func configure(key: GaiaKey?, delegation: GaiaDelegation, validatorName: String) {
+        
+        let parts = delegation.shares.split(separator: ".")
+
+        leftLabel?.text = "\(parts.first ?? "0") shares to " + validatorName
+        leftSubLabel?.text = delegation.validatorAddr
+        leftLabel?.textColor = .darkGrayText
+        upRightLabel?.text = delegation.availableReward
+        roundedView?.alpha = key?.watchMode == true ? 0.8 : 1.0
+
     }
 }

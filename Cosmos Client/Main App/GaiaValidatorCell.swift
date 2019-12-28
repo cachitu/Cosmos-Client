@@ -35,9 +35,9 @@ class GaiaValidatorCell: UITableViewCell {
         delegationsLabel.text = "\(finalTokens) Tokens"
         rateLabel.text = "\(dRate) rate"
         
-        monikerLabel.textColor = .darktext
+        monikerLabel.textColor = .darkGrayText
         if account?.gaiaKey.validator == validator.validator {
-            monikerLabel.textColor = .darkBlue
+            monikerLabel.textColor = .pendingYellow
         }
         leftImageView?.image = image
     }

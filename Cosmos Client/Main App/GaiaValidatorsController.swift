@@ -54,7 +54,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             }
         }
         AppContext.shared.onHashPolingDone = {
-            self.logsButton.backgroundColor = UIColor.DefaultBackground
+            self.logsButton.backgroundColor = UIColor.darkRed
             self.logsButtonBottomConstraint.constant = -50
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()
@@ -64,7 +64,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         if let hash = AppContext.shared.lastSubmitedHash() {
             AppContext.shared.startHashPoling(hash: hash)
         } else {
-            self.logsButton.backgroundColor = UIColor.DefaultBackground
+            self.logsButton.backgroundColor = UIColor.darkRed
             self.logsButtonBottomConstraint.constant = -50
         }
     }

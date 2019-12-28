@@ -72,8 +72,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         sendAmountButton.isEnabled = false
         sendAmountTextField.isEnabled = AppContext.shared.key?.watchMode != true
         
-        amoutRoundedView?.backgroundColor = AppContext.shared.key?.watchMode == true ? UIColor(named: "WatchModeBackground") : .white
-        currencyPickerRoundedView?.backgroundColor = AppContext.shared.key?.watchMode == true ? UIColor(named: "WatchModeBackground") : .white
+        amoutRoundedView?.alpha = AppContext.shared.key?.watchMode == true ? 0.8 : 1.0
+        currencyPickerRoundedView?.alpha = amoutRoundedView?.alpha ?? 1.0
 
         screenTitleLabel.text = AppContext.shared.node?.network ?? "Wallet"
         swapButton.isHidden = !(AppContext.shared.node?.type == TDMNodeType.terra || AppContext.shared.node?.type == TDMNodeType.terra_118)
@@ -106,12 +106,12 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 self.logsButton.backgroundColor = UIColor.pendingYellow
             }
             AppContext.shared.onHashPolingDone = {
-                self.logsButton.backgroundColor = UIColor.DefaultBackground
+                self.logsButton.backgroundColor = UIColor.darkRed
             }
             if let hash = AppContext.shared.lastSubmitedHash() {
                 AppContext.shared.startHashPoling(hash: hash)
             } else {
-                self.logsButton.backgroundColor = UIColor.DefaultBackground
+                self.logsButton.backgroundColor = UIColor.darkRed
             }
         }
     }
@@ -464,6 +464,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
 extension GaiaWalletController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard AppContext.shared.account?.assets.count ?? 0 > row else { return }
+
         self.selectedAsset = AppContext.shared.account?.assets[row]
         self.amountValueLabel.text = self.selectedAsset?.amount
         self.amountDenomLabel.text = self.selectedAsset?.denom
@@ -484,9 +486,14 @@ extension GaiaWalletController: UIPickerViewDataSource {
         return AppContext.shared.account?.assets.count ?? 0
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return AppContext.shared.account?.assets[row].denom
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let string = AppContext.shared.account?.assets[row].denom ?? ""
+        return NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGrayText])
     }
+    
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return AppContext.shared.account?.assets[row].denom
+//    }
 }
 
 extension GaiaWalletController: UITextFieldDelegate {
@@ -517,16 +524,14 @@ extension GaiaWalletController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCell", for: indexPath) as! GaiaKeyCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaSharesCellID", for: indexPath) as! GaiaSharesCell
         let delegation = dataSource[indexPath.item]
-        let parts = delegation.shares.split(separator: ".")
         let validatorName = AppContext.shared.node?.knownValidators[delegation.validatorAddr] ?? ""
-        cell.leftLabel?.text = "\(parts.first ?? "0") shares to " + validatorName
-        cell.leftSubLabel?.text = delegation.validatorAddr
-        cell.leftLabel?.textColor = .darktext
-        cell.upRightLabel?.text = delegation.availableReward
+        
+        cell.configure(key: AppContext.shared.key, delegation: delegation, validatorName: validatorName)
+        
         if AppContext.shared.account?.gaiaKey.validator == delegation.validatorAddr {
-            cell.leftLabel?.textColor = .darkBlue
+            cell.leftLabel?.textColor = .pendingYellow
             AppContext.shared.account?.isValidator = true
         }
         return cell

@@ -193,7 +193,11 @@ extension GaiaNodeController: UIPickerViewDataSource {
         return pickerDataSource.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerDataSource[row].rawValue
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        return NSAttributedString(string: pickerDataSource[row].rawValue, attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGrayText])
     }
+
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return pickerDataSource[row].rawValue
+//    }
 }

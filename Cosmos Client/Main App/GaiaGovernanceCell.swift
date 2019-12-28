@@ -60,10 +60,10 @@ class GaiaGovernanceCell: UITableViewCell {
         abstainValueLabel.text = "" + finalAbs
         noVetoValueLabel.text  = "" + finalNoV
 
-        yesLabel.textColor = .darkText
-        noLabel.textColor = .darkText
-        abstainLabel.textColor = .darkText
-        noVetoLabel.textColor = .darkText
+        yesLabel.textColor = .darkGrayText
+        noLabel.textColor = .darkGrayText
+        abstainLabel.textColor = .darkGrayText
+        noVetoLabel.textColor = .darkGrayText
         if let voterAddr = voter?.address {
             let matches = proposal.votes.filter { $0.voter == voterAddr }
             if let first = matches.first {
