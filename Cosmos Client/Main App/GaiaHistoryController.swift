@@ -87,7 +87,7 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
                         self?.loadingView.stopAnimating()
                         self?.dataSource = savedHistory.transactions
                         self?.tableView.reloadData()
-                        self?.toast?.showToastAlert("You have \(total) transactions in history 🐱", autoHideAfter: 3, type: .validatePending, dismissable: true)
+                        self?.toast?.showToastAlert("You have \(total) transactions in history 🐱", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                     }
                 }
             }
@@ -113,7 +113,7 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
 
     func loadData(removeDuplicates: Bool = false) {
         print("get sent page \(curentSentPage)")
-        //toast?.showToastAlert("Getting sent items page \(curentSentPage) 🐱", autoHideAfter: 3, type: .validatePending, dismissable: true)
+        //toast?.showToastAlert("Getting sent items page \(curentSentPage) 🐱", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
         AppContext.shared.key?.getSentTransactions(node: AppContext.shared.node!, page: curentSentPage, limit: GaiaConstants.historyPageSize) { [weak self] txs, total, err in
             if let transactions = txs, let page = self?.curentSentPage {
                 self?.dataSource.append(contentsOf: transactions)
@@ -126,17 +126,17 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
                 }
             } else if let validErr = err {
                 self?.loadingView.stopAnimating()
-                self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
+                self?.toast?.showToastAlert(validErr, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
             } else {
                 self?.loadingView.stopAnimating()
-                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
+                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
             }
         }
     }
 
     func getReceivedTx(removeDuplicates: Bool = false) {
         print("get received page \(curentReceivedPage)")
-        //toast?.showToastAlert("Getting received items page \(curentReceivedPage) 🐱", autoHideAfter: 3, type: .validatePending, dismissable: true)
+        //toast?.showToastAlert("Getting received items page \(curentReceivedPage) 🐱", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
         AppContext.shared.key?.getReceivedTransactions(node: AppContext.shared.node!, page: curentReceivedPage, limit: GaiaConstants.historyPageSize) { [weak self] txs, total, err in
             if let transactions = txs, let page = self?.curentReceivedPage {
                 self?.dataSource.append(contentsOf: transactions)
@@ -154,14 +154,14 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
                     }
                     self?.loadingView.stopAnimating()
                     self?.tableView.reloadData()
-                    self?.toast?.showToastAlert("You have \(self?.dataSource.count ?? 0) transactions in history 🐱", autoHideAfter: 3, type: .validatePending, dismissable: true)
+                    self?.toast?.showToastAlert("You have \(self?.dataSource.count ?? 0) transactions in history 🐱", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                 }
             } else if let validErr = err {
                 self?.loadingView.stopAnimating()
-                self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
+                self?.toast?.showToastAlert(validErr, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
             } else {
                 self?.loadingView.stopAnimating()
-                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
+                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
             }
         }
     }

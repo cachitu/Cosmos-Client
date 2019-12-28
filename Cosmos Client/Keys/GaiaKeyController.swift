@@ -67,12 +67,12 @@ class GaiaKeyController: UIViewController, ToastAlertViewPresentable {
     
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = addressLabel.text
-        toast?.showToastAlert("Address copied to clipboard", autoHideAfter: 15, type: .info, dismissable: true)
+        toast?.showToastAlert("Address copied to clipboard", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
     }
     
     @IBAction func copySeed(_ sender: Any) {
         UIPasteboard.general.string = seedLabel.text
-        toast?.showToastAlert("Seed copied to clipboard", autoHideAfter: 15, type: .info, dismissable: true)
+        toast?.showToastAlert("Seed copied to clipboard", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
     }
     
     @IBAction func deleteKey(_ sender: Any) {

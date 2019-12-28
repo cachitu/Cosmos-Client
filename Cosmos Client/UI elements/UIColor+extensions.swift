@@ -27,7 +27,7 @@ public extension UIColor {
     }
     
     static var progressGreen: UIColor {
-        return UIColor(red: 0.0 / 255.0, green: 193.0 / 255.0, blue: 64.0 / 255.0, alpha: 1.0)
+        return UIColor(named: "ProgressGreen") ?? UIColor(red: 0.0 / 255.0, green: 193.0 / 255.0, blue: 64.0 / 255.0, alpha: 1.0)
     }
     
     static var progressGray: UIColor {
@@ -35,7 +35,7 @@ public extension UIColor {
     }
     
     @nonobjc class var silver: UIColor {
-        return UIColor(red: 206.0 / 255.0, green: 212.0 / 255.0, blue: 218.0 / 255.0, alpha: 1.0)
+        return UIColor(named: "Silver") ?? UIColor(red: 206.0 / 255.0, green: 212.0 / 255.0, blue: 218.0 / 255.0, alpha: 1.0)
     }
     
     @nonobjc class var silverAlpha: UIColor {
@@ -46,8 +46,8 @@ public extension UIColor {
         return UIColor(red: 42.0 / 255.0, green: 172.0 / 255.0, blue: 224.0 / 255.0, alpha: 1.0)
     }
     
-    @nonobjc class var terraBlue: UIColor {
-        return UIColor(named: "TerraBlue") ?? UIColor(red: 44.0 / 255.0, green: 77.0 / 255.0, blue: 178.0 / 255.0, alpha: 1.0)
+    @nonobjc class var DefaultBackground: UIColor {
+        return UIColor(named: "DefaultBackground") ?? UIColor(red: 44.0 / 255.0, green: 77.0 / 255.0, blue: 178.0 / 255.0, alpha: 1.0)
     }
 
     @nonobjc class var darkBlue: UIColor {

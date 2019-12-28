@@ -117,7 +117,7 @@ extension GaiaHashesController: UITableViewDelegate {
 
                     print(valid.rawLog)
                 } else {
-                    self?.toast?.showToastAlert("The hash has not been found yet, try again in a few seconds.", autoHideAfter: 3, type: .validatePending, dismissable: true)
+                    self?.toast?.showToastAlert("The hash has not been found yet, try again in a few seconds.", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                 }
             }
         }

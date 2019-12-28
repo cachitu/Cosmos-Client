@@ -11,7 +11,7 @@ import UIKit
 class RoundedButton: UIButton {
     
     var isBordered: Bool?
-    @IBInspectable open var activeColor: UIColor = .terraBlue {
+    @IBInspectable open var activeColor: UIColor = .DefaultBackground {
         didSet {
             backgroundColor = activeColor
         }

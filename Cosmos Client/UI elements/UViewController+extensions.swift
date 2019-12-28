@@ -70,7 +70,8 @@ public extension UIViewController {
             string: message ?? "",
             attributes: [
                 NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                NSAttributedString.Key.foregroundColor : UIColor.terraBlue
+                NSAttributedString.Key.foregroundColor : UIColor.darkText,
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13)
             ]
         )
 

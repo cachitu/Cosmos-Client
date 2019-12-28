@@ -54,14 +54,23 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         
         AppContext.shared.onHashPolingPending = {
             self.logsButton.backgroundColor = UIColor.pendingYellow
+            self.logsButtonBottomConstraint.constant = 4
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
         }
         AppContext.shared.onHashPolingDone = {
-            self.logsButton.backgroundColor = UIColor.terraBlue
+            self.logsButton.backgroundColor = UIColor.DefaultBackground
+            self.logsButtonBottomConstraint.constant = -50
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
         }
         if let hash = AppContext.shared.lastSubmitedHash() {
             AppContext.shared.startHashPoling(hash: hash)
         } else {
-            self.logsButton.backgroundColor = UIColor.terraBlue
+            self.logsButton.backgroundColor = UIColor.DefaultBackground
+            self.logsButtonBottomConstraint.constant = -50
         }
     }
 
@@ -70,7 +79,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         
         if let data = proposeData, let node = AppContext.shared.node, let key = AppContext.shared.key, let keysDelegate = AppContext.shared.keysDelegate {
             self.loadingView.startAnimating()
-            self.toast?.showToastAlert("Proposal create request submited", autoHideAfter: 3, type: .validatePending, dismissable: true)
+            self.toast?.showToastAlert("Proposal create request submited", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
             self.propose(
                 deposit: data.amount,
                 title: data.title,
@@ -82,12 +91,12 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 feeAmount: self.defaultFeeSigAmount) { [weak self] resp, msg in
                     self?.loadingView.stopAnimating()
                     if resp != nil {
-                        self?.toast?.showToastAlert("Proposal Create submitted\n[\(msg ?? "...")]", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                        self?.toast?.showToastAlert("Proposal Create submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                     } else if let errMsg = msg {
                         if errMsg.contains("connection was lost") {
-                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                         } else {
-                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                         }
                     }
             }
@@ -159,18 +168,18 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
                 } else {
                     self?.loadingView.stopAnimating()
-                    self?.toast?.showToastAlert("There are no proposals available", autoHideAfter: 5, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("There are no proposals available", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
                 }
             } else if let errMsg = error {
                 self?.loadingView.stopAnimating()
                 if errMsg.contains("connection was lost") {
-                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                 } else {
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                 }
             } else {
                 self?.loadingView.stopAnimating()
-                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 5, type: .error, dismissable: true)
+                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
             }
         }
     }
@@ -192,15 +201,15 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             {  resp, msg in
                 self?.loadingView.stopAnimating()
                 if resp != nil {
-                    self?.toast?.showToastAlert("Vote submitted\n[\(msg ?? "...")]", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                    self?.toast?.showToastAlert("Vote submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                     if let hash = AppContext.shared.lastSubmitedHash() {
                         AppContext.shared.startHashPoling(hash: hash)
                     }
                 } else if let errMsg = msg {
                     if errMsg.contains("connection was lost") {
-                        self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                        self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                     } else {
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                     }
                 }
             }
@@ -221,15 +230,15 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                 feeAmount: self?.defaultFeeSigAmount ?? "0") { resp, msg in
                     self?.loadingView.stopAnimating()
                     if resp != nil {
-                        self?.toast?.showToastAlert("Deposit submitted\n[\(msg ?? "...")]", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                        self?.toast?.showToastAlert("Deposit submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                         if let hash = AppContext.shared.lastSubmitedHash() {
                             AppContext.shared.startHashPoling(hash: hash)
                         }
                     } else if let errMsg = msg {
                         if errMsg.contains("connection was lost") {
-                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                         } else {
-                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                         }
                     }
             }

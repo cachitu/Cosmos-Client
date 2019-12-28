@@ -48,15 +48,24 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         super.viewWillAppear(animated)
         AppContext.shared.onHashPolingPending = {
             self.logsButton.backgroundColor = UIColor.pendingYellow
+            self.logsButtonBottomConstraint.constant = 4
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
         }
         AppContext.shared.onHashPolingDone = {
-            self.logsButton.backgroundColor = UIColor.terraBlue
+            self.logsButton.backgroundColor = UIColor.DefaultBackground
+            self.logsButtonBottomConstraint.constant = -50
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
         }
         
         if let hash = AppContext.shared.lastSubmitedHash() {
             AppContext.shared.startHashPoling(hash: hash)
         } else {
-            self.logsButton.backgroundColor = UIColor.terraBlue
+            self.logsButton.backgroundColor = UIColor.DefaultBackground
+            self.logsButtonBottomConstraint.constant = -50
         }
     }
     
@@ -117,12 +126,12 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                     }
                 } else if let validErr = errMsg {
                     if validErr.contains("connection was lost") {
-                        self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                        self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                     } else {
-                        self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(validErr, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                     }
                 } else {
-                    self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                 }
             }
         }
@@ -147,16 +156,16 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             self?.loadingView.stopAnimating()
             if let msg = errMsg {
                 if msg.contains("connection was lost") {
-                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                 } else {
-                    self?.toast?.showToastAlert(msg, autoHideAfter: 15, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(msg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                 }
             } else  {
                 if let hash = AppContext.shared.lastSubmitedHash() {
                     AppContext.shared.startHashPoling(hash: hash)
                 }
 
-                self?.toast?.showToastAlert("Unjail request submited", autoHideAfter: 13, type: .info, dismissable: true)
+                self?.toast?.showToastAlert("Unjail request submited", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
                 self?.tableView.reloadData()
             }
         }
@@ -182,7 +191,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                             }
 
                             if resp != nil {
-                                self?.toast?.showToastAlert("Redelegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
+                                self?.toast?.showToastAlert("Redelegation submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                                 if let hash = AppContext.shared.lastSubmitedHash() {
                                     AppContext.shared.startHashPoling(hash: hash)
                                 }
@@ -194,9 +203,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                             } else if let errMsg = msg {
                                 self?.loadingView.stopAnimating()
                                 if errMsg.contains("connection was lost") {
-                                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                                 } else {
-                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                                 }
                             }
                     }
@@ -224,7 +233,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                                 if let hash = AppContext.shared.lastSubmitedHash() {
                                     AppContext.shared.startHashPoling(hash: hash)
                                 }
-                                self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
+                                self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                                 AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                     self?.loadingView.stopAnimating()
                                     self?.loadData()
@@ -232,9 +241,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                             } else if let errMsg = msg {
                                 self?.loadingView.stopAnimating()
                                 if errMsg.contains("connection was lost") {
-                                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                                 } else {
-                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                                 }
                             }
                     }

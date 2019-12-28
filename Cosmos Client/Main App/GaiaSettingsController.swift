@@ -31,7 +31,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
         let memo = memoTextField.text ?? ""
         let nodeName = AppContext.shared.node?.network ?? ""
         view.endEditing(true)
-        toast?.showToastAlert("Memo set for node \(nodeName): \(memo)", autoHideAfter: 5, type: .info, dismissable: true)
+        toast?.showToastAlert("Memo set for node \(nodeName): \(memo)", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
         AppContext.shared.node?.defaultMemo = memo
         peristNodes()
     }
@@ -50,7 +50,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
                 alert.addAction(cancelAction)
                 self.present(alert, animated: true, completion: nil)
             }
-            toast?.showToastAlert("Fee set for node \(nodeName): \(intVal)", autoHideAfter: 5, type: .info, dismissable: true)
+            toast?.showToastAlert("Fee set for node \(nodeName): \(intVal)", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
             AppContext.shared.node?.defaultTxFee = "\(intVal)"
             updateFeeLabel()
             peristNodes()

@@ -145,7 +145,7 @@ class AddressController: UIViewController, ToastAlertViewPresentable {
     @IBAction func copyAction(_ sender: Any) {
         if let address = ethAddresRichTextField.contentTextField?.text {
             UIPasteboard.general.string = address
-            toast?.showToastAlert("Address Copied", autoHideAfter: 5, type: .info, dismissable: true)
+            toast?.showToastAlert("Address Copied", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
         }
     }
     

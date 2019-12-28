@@ -54,7 +54,7 @@ class RichTextFieldView: UIView {
         
         invalidContentLabel?.isHidden  = isValid || chars == 0
         titleLabel?.textColor          = isValid || chars == 0 ? .warmGrey : .inputError
-        separatorView?.backgroundColor = chars == 0 ? .silverAlpha : isValid ? .terraBlue : .inputError
+        separatorView?.backgroundColor = chars == 0 ? .silverAlpha : isValid ? .DefaultBackground : .inputError
         leftIconImageView?.tintColor   = separatorView?.backgroundColor
         contentTextField?.textColor    = isValid || chars == 0 ? .darktext : .inputError
     }

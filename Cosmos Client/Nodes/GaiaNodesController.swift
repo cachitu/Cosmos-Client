@@ -62,7 +62,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
                 TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347),
                 TDMNode(name: TDMNodeType.terra.rawValue + " (Old HD)",  type: .terra_118,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337),
                 TDMNode(name: "Iris Nyancat Testnet",  type: .iris_fuxi,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 2337),
-                TDMNode(name: "Cosmos testnet",  type: .cosmos,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 2317),
+                TDMNode(name: "Cosmos testnet",  type: .cosmos,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1317),
                 TDMNode(name: "Terra testnet",  type: .terra,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 2327),
                 TDMNode(name: TDMNodeType.bitsong.rawValue,  type: .bitsong,scheme: "http", host: "lcd.testnet-2.bitsong.network", rcpPort: nil),
                 TDMNode(name: "Iris Fuxy Testnet",  type: .iris_fuxi,scheme: "https", host: "lcd.testnet.irisnet.org", rcpPort: nil)]
@@ -240,7 +240,7 @@ extension GaiaNodesController: UITableViewDelegate {
                     AppContext.shared.node = self.selectedNode
                     self.performSegue(withIdentifier: "ShowNodeKeysSegue", sender: self)
                 } else {
-                    self.toast?.showToastAlert("The node is not active. Check the host and the ports", autoHideAfter: 15, type: .info, dismissable: true)
+                    self.toast?.showToastAlert("The node is not active. Check the host and the ports", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
                 }
             }
         }

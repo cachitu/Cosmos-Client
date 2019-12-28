@@ -105,19 +105,19 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
                             let dv = Double(validprice.replacingOccurrences(of: "\"", with: "")) ?? 0
                             self?.dataSource.append((active, dv, amount))
                         } else if let _ = errMsg {
-                            //self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
+                            //self?.toast?.showToastAlert(validErr, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                             self?.dataSource.append((active, 0, amount))
                         } else {
-                            //self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
+                            //self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                             self?.dataSource.append((active, 0, amount))
                         }
                         dispatchGroup.leave()
                     }
                 }
             } else if let validErr = errMsg {
-                self?.toast?.showToastAlert(validErr, autoHideAfter: 15, type: .error, dismissable: true)
+                self?.toast?.showToastAlert(validErr, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
             } else {
-                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: 15, type: .error, dismissable: true)
+                self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
             }
             dispatchGroup.leave()
         }
@@ -145,15 +145,15 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
                                  feeAmount: self.defaultFeeSigAmount) { [weak self] resp, msg in
                                     self?.loadingView.stopAnimating()
                                     if resp != nil {
-                                        self?.toast?.showToastAlert("Swap submitted\n[\(msg ?? "...")]", autoHideAfter: 15, type: .validatePending, dismissable: true)
+                                        self?.toast?.showToastAlert("Swap submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                                         self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
                                             self?.loadAccount()
                                         }
                                     } else if let errMsg = msg {
                                         if errMsg.contains("connection was lost") {
-                                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: 5, type: .validatePending, dismissable: true)
+                                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                                         } else {
-                                            self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .error, dismissable: true)
+                                            self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                                         }
                                     }
                 }

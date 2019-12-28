@@ -81,7 +81,7 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
         let mnemonicOk = seedTextView.isHidden || seedTextView.text.split(separator: " ").count == 24
 
         guard mnemonicOk else {
-            toast?.showToastAlert("The seed must have 24 words", autoHideAfter: 15, type: .info, dismissable: true)
+            toast?.showToastAlert("The seed must have 24 words", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
             return
         }
         
@@ -97,15 +97,15 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
                 self?.loadingView.stopAnimating()
                 if let validKey = key {
                     
-                    if let savedKeys = PersistableGaiaKeys.loadFromDisk(withUID: AppContext.shared.node?.nodeID ?? "") as? PersistableGaiaKeys {
+                    if let savedKeys = PersistableGaiaKeys.loadFromDisk() as? PersistableGaiaKeys {
                         var list = savedKeys.keys
                         let match = savedKeys.keys.filter { $0.identifier == validKey.identifier }
                         if match.count > 0 {
-                            self?.toast?.showToastAlert("This key exist already", autoHideAfter: 5, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert("This key exist already", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                             return
                         } else {
                             list.insert(validKey, at: 0)
-                            PersistableGaiaKeys(keys: list).savetoDisk(withUID: AppContext.shared.node?.nodeID ?? "")
+                            PersistableGaiaKeys(keys: list).savetoDisk()
                         }
                     }
                     
@@ -133,9 +133,9 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
                     }
 
                 } else if let errMsg = error {
-                    self?.toast?.showToastAlert(errMsg, autoHideAfter: 15, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
                 } else {
-                    self?.toast?.showToastAlert("Ooops! I failed!", autoHideAfter: 15, type: .info, dismissable: true)
+                    self?.toast?.showToastAlert("Ooops! I failed!", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
                 }
             }
         }
