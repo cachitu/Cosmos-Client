@@ -324,7 +324,11 @@ extension GaiaKeysController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GaiaKeyCellID", for: indexPath) as! GaiaKeyCell
         let key = filteredDataSource[indexPath.item]
         cell.onCopy = { [weak self] in
-            self?.toast?.showToastAlert("Address copied to clipboard", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
+            if self?.reusePickerMode == true {
+                self?.createKey(key: key)
+            } else {
+                self?.toast?.showToastAlert("Address copied to clipboard", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
+            }
         }
         cell.configure(key: key, image: AppContext.shared.node?.nodeLogo, reuseMode: reusePickerMode)
         return cell
