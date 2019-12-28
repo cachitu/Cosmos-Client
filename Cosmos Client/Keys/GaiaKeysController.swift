@@ -97,7 +97,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         AppContext.shared.keysDelegate = LocalClient(networkType: AppContext.shared.node?.type ?? .cosmos, netID: AppContext.shared.node?.nodeID ?? "-1")
         
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
-        noDataView.isHidden = filteredDataSource.count > 0
+        noDataView.isHidden = filteredDataSource.count > 0  || reusePickerMode
         editButton.isHidden = !noDataView.isHidden || reusePickerMode
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
@@ -120,8 +120,8 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         } else {
             createTheDefauktKey()
         }
-        noDataView.isHidden = filteredDataSource.count > 0
-        editButton.isHidden = filteredDataSource.count == 0
+        noDataView.isHidden = filteredDataSource.count > 0  || reusePickerMode
+        editButton.isHidden = filteredDataSource.count == 0  || reusePickerMode
     }
     
     override func viewDidAppear(_ animated: Bool) {

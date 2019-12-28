@@ -65,6 +65,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
                 TDMNode(name: "Cosmos testnet",  type: .cosmos,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1317),
                 TDMNode(name: "Terra testnet",  type: .terra,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 2327),
                 TDMNode(name: TDMNodeType.bitsong.rawValue,  type: .bitsong,scheme: "http", host: "lcd.testnet-2.bitsong.network", rcpPort: nil),
+                TDMNode(name: TDMNodeType.emoney.rawValue,  type: .emoney,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1327),
                 TDMNode(name: "Iris Fuxy Testnet",  type: .iris_fuxi,scheme: "https", host: "lcd.testnet.irisnet.org", rcpPort: nil)]
             
             PersistableGaiaNodes(nodes: nodes).savetoDisk()
