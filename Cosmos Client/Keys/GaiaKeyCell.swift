@@ -35,7 +35,7 @@ class GaiaKeyCell: UITableViewCell {
         leftLabel?.text = key.name
         leftSubLabel?.text = key.address
         if !reuseMode { leftImageView?.image = image }
-        roundedView?.alpha = key.watchMode ? 0.8 : 1.0
+        roundedView?.backgroundColor = !key.watchMode ? .cellBackgroundColor : .cellBackgroundColorAlpha
     }
 }
 
@@ -64,7 +64,7 @@ class GaiaSharesCell: UITableViewCell {
         leftSubLabel?.text = delegation.validatorAddr
         leftLabel?.textColor = .darkGrayText
         upRightLabel?.text = delegation.availableReward
-        roundedView?.alpha = key?.watchMode == true ? 0.8 : 1.0
+        roundedView?.backgroundColor = key?.watchMode == true ? .cellBackgroundColorAlpha : .cellBackgroundColor
 
     }
 }

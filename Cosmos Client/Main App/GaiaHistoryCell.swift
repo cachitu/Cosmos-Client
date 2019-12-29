@@ -26,7 +26,7 @@ class GaiaHistoryCell: UITableViewCell {
         amountLabel.text = symbol + tx.amount
         hashLabel.text   = tx.hash
         sentOrReceivedLabel.text = tx.gas + " gas"
-        amountLabel.textColor = tx.isSender ? UIColor.darkRed : UIColor.progressGreen
+        amountLabel.textColor = tx.isSender ? UIColor.pendingYellow : UIColor.progressGreen
         //fromLabel.textColor = ownerAddr == tx.sender   ? UIColor.darkText : UIColor.textGrey
         //toLabel.textColor   = ownerAddr == tx.recipient ? UIColor.darkText : UIColor.textGrey
     }

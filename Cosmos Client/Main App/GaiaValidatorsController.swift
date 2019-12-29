@@ -48,7 +48,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         super.viewWillAppear(animated)
         AppContext.shared.onHashPolingPending = {
             self.logsButton.backgroundColor = UIColor.pendingYellow
-            self.logsButtonBottomConstraint.constant = 4
+            self.logsButtonBottomConstraint.constant = 8
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()
             }

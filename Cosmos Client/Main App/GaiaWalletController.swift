@@ -72,8 +72,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         sendAmountButton.isEnabled = false
         sendAmountTextField.isEnabled = AppContext.shared.key?.watchMode != true
         
-        amoutRoundedView?.alpha = AppContext.shared.key?.watchMode == true ? 0.8 : 1.0
-        currencyPickerRoundedView?.alpha = amoutRoundedView?.alpha ?? 1.0
+        amoutRoundedView?.backgroundColor = AppContext.shared.key?.watchMode == true ? .cellBackgroundColorAlpha : .cellBackgroundColor
+        currencyPickerRoundedView?.backgroundColor = amoutRoundedView?.backgroundColor
 
         screenTitleLabel.text = AppContext.shared.node?.network ?? "Wallet"
         swapButton.isHidden = !(AppContext.shared.node?.type == TDMNodeType.terra || AppContext.shared.node?.type == TDMNodeType.terra_118)

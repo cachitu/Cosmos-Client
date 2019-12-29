@@ -218,10 +218,10 @@ class GaiaOracleCell: UITableViewCell {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
-        roundedView.backgroundColor = selected ? UIColor(named: "TerraBlueAlpha") : .white
+        roundedView.backgroundColor = selected ? .cellBackgroundColorAlpha : .cellBackgroundColor
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        roundedView.backgroundColor = highlighted ? UIColor(named: "TerraBlueAlpha") : .white
+        roundedView.backgroundColor = highlighted ? .cellBackgroundColorAlpha : .cellBackgroundColor
     }
 }

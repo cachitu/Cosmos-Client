@@ -27,8 +27,8 @@ class GaiaNodeCell: UITableViewCell {
         case .unknown: stateView.currentState = .unknown
         }
         leftImageView.image = node.nodeLogo
-        roundedView.alpha = (stateView.currentState == .active || stateView.currentState == .pending) ? 1 : 0.8
-        roundedView.backgroundColor = .cellBackgroundColor
+        roundedView.backgroundColor = (stateView.currentState == .active || stateView.currentState == .pending) ? .cellBackgroundColor : .cellBackgroundColorAlpha
+        //roundedView.backgroundColor = .cellBackgroundColor
         leftLabel.text = node.name
         leftSubLabel.text = node.network
         rightLabel.text = node.version

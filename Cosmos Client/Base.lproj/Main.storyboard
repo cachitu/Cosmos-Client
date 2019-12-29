@@ -420,7 +420,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8MF-Sm-1lo" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
-                                <rect key="frame" x="122.66666666666669" y="692" width="130" height="33"/>
+                                <rect key="frame" x="122.66666666666669" y="688" width="130" height="33"/>
                                 <color key="backgroundColor" name="DarkRed"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="FK1-Yv-Ly5"/>
@@ -444,7 +444,7 @@
                         <constraints>
                             <constraint firstItem="U7V-RG-r8h" firstAttribute="trailing" secondItem="VyT-Io-fxp" secondAttribute="trailing" id="2g2-uw-cJa"/>
                             <constraint firstItem="v4H-ve-jpe" firstAttribute="trailing" secondItem="Y3e-4F-cEe" secondAttribute="trailing" id="4jg-y3-5mT"/>
-                            <constraint firstItem="v4H-ve-jpe" firstAttribute="bottom" secondItem="8MF-Sm-1lo" secondAttribute="bottom" constant="4" id="5QY-92-fK8"/>
+                            <constraint firstItem="v4H-ve-jpe" firstAttribute="bottom" secondItem="8MF-Sm-1lo" secondAttribute="bottom" constant="8" id="5QY-92-fK8"/>
                             <constraint firstItem="kuY-SR-GaR" firstAttribute="centerX" secondItem="v4H-ve-jpe" secondAttribute="centerX" id="8h4-0k-y6i"/>
                             <constraint firstItem="8MF-Sm-1lo" firstAttribute="centerX" secondItem="v4H-ve-jpe" secondAttribute="centerX" id="CgP-QA-QHd"/>
                             <constraint firstItem="v4H-ve-jpe" firstAttribute="top" secondItem="Y3e-4F-cEe" secondAttribute="top" constant="50" id="D0v-5D-4w7"/>
@@ -679,7 +679,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MFa-J3-fME" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
-                                <rect key="frame" x="122.66666666666669" y="692" width="130" height="33"/>
+                                <rect key="frame" x="122.66666666666669" y="688" width="130" height="33"/>
                                 <color key="backgroundColor" name="DarkRed"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="1nu-jc-aw8"/>
@@ -710,7 +710,7 @@
                             <constraint firstItem="nQy-14-xEn" firstAttribute="top" secondItem="klr-Pk-WGv" secondAttribute="bottom" id="McF-P3-5bO"/>
                             <constraint firstItem="04a-Ih-g4c" firstAttribute="centerY" secondItem="6Zm-RK-25d" secondAttribute="centerY" id="MkM-c9-Rzb"/>
                             <constraint firstItem="nQy-14-xEn" firstAttribute="leading" secondItem="6Zm-RK-25d" secondAttribute="leading" id="OVo-iN-p1A"/>
-                            <constraint firstItem="6Zm-RK-25d" firstAttribute="bottom" secondItem="MFa-J3-fME" secondAttribute="bottom" constant="4" id="VGc-hg-eeO"/>
+                            <constraint firstItem="6Zm-RK-25d" firstAttribute="bottom" secondItem="MFa-J3-fME" secondAttribute="bottom" constant="8" id="VGc-hg-eeO"/>
                             <constraint firstItem="klr-Pk-WGv" firstAttribute="top" secondItem="fej-b2-DDY" secondAttribute="bottom" id="dBr-Ar-ikm"/>
                             <constraint firstItem="6Zm-RK-25d" firstAttribute="bottom" secondItem="nQy-14-xEn" secondAttribute="bottom" id="dJx-v7-3G7"/>
                             <constraint firstItem="6Zm-RK-25d" firstAttribute="trailing" secondItem="nQy-14-xEn" secondAttribute="trailing" id="eWT-5h-phc"/>
@@ -2071,7 +2071,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="justified" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pea-gc-lEF">
                                                             <rect key="frame" x="5" y="35.666666666666664" width="33.333333333333336" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                            <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Yes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5o-hm-Fxk">
@@ -2125,7 +2125,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Dep: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sRT-lI-PSd">
                                                             <rect key="frame" x="5" y="146" width="44.333333333333336" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                            <color key="textColor" red="0.16862745100000001" green="0.51372549020000002" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="251" text="rejected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGg-Ob-06l">
@@ -2258,7 +2258,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3C-2O-NpY" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
-                                <rect key="frame" x="122.66666666666669" y="692" width="130" height="33"/>
+                                <rect key="frame" x="122.66666666666669" y="688" width="130" height="33"/>
                                 <color key="backgroundColor" name="DarkRed"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="5Fa-K8-lzP"/>
@@ -2296,7 +2296,7 @@
                             <constraint firstItem="Sxn-Vf-hjo" firstAttribute="top" secondItem="ybu-6J-Jnd" secondAttribute="bottom" id="aeG-qf-Q4p"/>
                             <constraint firstItem="tEo-bB-U1A" firstAttribute="top" secondItem="Sxn-Vf-hjo" secondAttribute="bottom" id="cWU-GA-wmN"/>
                             <constraint firstItem="rcx-ku-Ycq" firstAttribute="top" secondItem="ybu-6J-Jnd" secondAttribute="bottom" id="jFF-cZ-b3W"/>
-                            <constraint firstItem="uNt-Vw-cUc" firstAttribute="bottom" secondItem="A3C-2O-NpY" secondAttribute="bottom" constant="4" id="oqk-8r-iwR"/>
+                            <constraint firstItem="uNt-Vw-cUc" firstAttribute="bottom" secondItem="A3C-2O-NpY" secondAttribute="bottom" constant="8" id="oqk-8r-iwR"/>
                             <constraint firstItem="uNt-Vw-cUc" firstAttribute="top" secondItem="ybu-6J-Jnd" secondAttribute="top" constant="50" id="t5M-kd-kgV"/>
                             <constraint firstItem="8AQ-3z-YfY" firstAttribute="centerX" secondItem="uNt-Vw-cUc" secondAttribute="centerX" id="ydO-iY-T0p"/>
                         </constraints>
@@ -2529,20 +2529,20 @@
             <color red="0.81176470588235294" green="0.054901960784313725" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DefaultBackground">
-            <color red="0.12549019607843137" green="0.12941176470588237" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.17254901960784313" green="0.17254901960784313" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="LigthText">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="LigtherGrayText">
-            <color red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Silver">
             <color red="0.80784313725490198" green="0.83137254901960789" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5t3-G3-Clc"/>
+        <segue reference="jaK-Ex-JiS"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="DefaultBackground"/>
 </document>
