@@ -39,23 +39,77 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     @IBOutlet weak var amoutRoundedView: RoundedView?
     @IBOutlet weak var currencyPickerRoundedView: RoundedView!
     
-    @IBOutlet weak var qrTestImageView: UIImageView!
-    @IBAction func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
     @IBOutlet weak var coinLogoImageView: UIImageView!
     
     @IBOutlet weak var logsButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var logsButton: RoundedButton!
+    
+    @IBOutlet weak var qrVisualBackground: UIVisualEffectView!
+    @IBOutlet weak var qrTestImageView: UIImageView!
+    @IBOutlet weak var qrShareButton: UIButton!
+    @IBOutlet weak var qrCloseButton: UIButton!
+    @IBOutlet weak var qrImageBottomCenterYConstraint: NSLayoutConstraint!
+    
+    @IBAction func qrCloseAction(_ sender: UIButton) {
+        updateQR(visible: false)
+    }
+    
+    @IBAction func qrShowAction(_ sender: UIButton) {
+        updateQR(visible: true)
+    }
+    
+    func updateQR(visible: Bool) {
+        let alpha: CGFloat = visible ? 1.0 : 0.0
+        qrTestImageView.alpha = 1
+        qrImageBottomCenterYConstraint.constant = visible ? 0 : 1000
+        UIView.animate(withDuration: 0.5,
+                       delay: 0.0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 2,
+                       options: [.curveEaseInOut],
+                       animations: { [weak self] in
+                        self?.qrVisualBackground.alpha = alpha
+                        self?.qrShareButton.alpha = alpha
+                        self?.qrCloseButton.alpha = alpha
+                        self?.view.layoutIfNeeded()
+        }) { [weak self] success in
+            self?.qrTestImageView.alpha = alpha
+        }
+    }
+
+    
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func logsAction(_ sender: UIButton) {
     }
     
+    @IBAction func shareAddress(_ sender: Any) {
+        
+        let text = AppContext.shared.key?.address ?? ""
+        let textShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func sendAction(_ sender: Any) {
+        
+        lockClearFields = true
+        self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: self)
+    }
+    
+    @IBAction func unwindToWallet(segue:UIStoryboardSegue) {
+    }
+    
+
     private var selectedAsset: Coin?
     private var senderAddress: String?
     private weak var timer: Timer?
 
+    var lockClearFields = false
     var dataSource: [GaiaDelegation] = []
     
     override func viewDidLoad() {
@@ -235,26 +289,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         feeAmountValueLabel.text = ""
         feeAmountDenomLabel.text = ""
     }
-    
-    @IBAction func shareAddress(_ sender: Any) {
         
-        let text = AppContext.shared.key?.address ?? ""
-        let textShare = [ text ]
-        let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        self.present(activityViewController, animated: true, completion: nil)
-    }
-    
-    @IBAction func unwindToWallet(segue:UIStoryboardSegue) {
-    }
-    
-    var lockClearFields = false
-    @IBAction func sendAction(_ sender: Any) {
-        
-        lockClearFields = true
-        self.performSegue(withIdentifier: "ShowAddressBookSegue", sender: self)
-    }
-    
     private func queryRewards(validDelegations: [GaiaDelegation]) {
         guard let validNode = AppContext.shared.node else { return }
         for delegation in validDelegations {
