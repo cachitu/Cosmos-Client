@@ -142,6 +142,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 }
             }
         }
+        
+        denomPickerView.layer.borderColor = UIColor(white: 0.5, alpha: 0.2).cgColor
+        denomPickerView.layer.borderWidth = 1
+        denomPickerView.layer.cornerRadius = 5
      }
     
     override func viewWillAppear(_ animated: Bool) {
