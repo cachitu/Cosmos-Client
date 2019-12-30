@@ -54,6 +54,10 @@ struct AppContext {
         PersistableHashes(hashes: data).savetoDisk(withUID: peristHashesUID)
     }
     
+    mutating func clearHashes() {
+        PersistableHashes(hashes: []).savetoDisk(withUID: peristHashesUID)
+    }
+
     func lastSubmitedHash() -> PersitsableHash? {
         return pendingHashes[peristHashesUID]
     }

@@ -334,6 +334,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 
                 validKey.getDelegations(node: validNode) { [weak self] delegations, error in
                     if let validDelegations = delegations {
+                        let matches = validDelegations.filter { $0.validatorAddr == AppContext.shared.account?.gaiaKey.validator }
+                        if matches.count > 0 { AppContext.shared.account?.isValidator = true }
+
                         self?.dataSource = validDelegations
                         self?.tableView.reloadData()
                         self?.queryRewards(validDelegations: validDelegations)
@@ -571,7 +574,6 @@ extension GaiaWalletController: UITableViewDataSource {
         
         if AppContext.shared.account?.gaiaKey.validator == delegation.validatorAddr {
             cell.leftLabel?.textColor = .pendingYellow
-            AppContext.shared.account?.isValidator = true
         }
         return cell
     }

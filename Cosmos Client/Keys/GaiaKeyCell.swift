@@ -65,6 +65,5 @@ class GaiaSharesCell: UITableViewCell {
         leftLabel?.textColor = .darkGrayText
         upRightLabel?.text = delegation.availableReward
         roundedView?.backgroundColor = key?.watchMode == true ? .cellBackgroundColorAlpha : .cellBackgroundColor
-
     }
 }

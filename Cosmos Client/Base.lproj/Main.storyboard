@@ -190,6 +190,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5eU-zC-9Bw">
                                         <rect key="frame" x="8" y="8" width="158.66666666666666" height="34"/>
                                         <color key="backgroundColor" name="CellBackgroundColor"/>
+                                        <color key="tintColor" name="DarkGrayText"/>
                                         <color key="textColor" name="DarkGrayText"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" keyboardType="ASCIICapableNumberPad"/>
@@ -1076,6 +1077,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Egx-AK-Z65">
                                 <rect key="frame" x="16" y="178.33333333333334" width="288" height="30"/>
                                 <color key="backgroundColor" name="CellBackgroundColor"/>
+                                <color key="tintColor" name="DarkGrayText"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8em-I2-140"/>
                                 </constraints>
@@ -1104,6 +1106,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Transaction memo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bry-hz-MEj">
                                 <rect key="frame" x="16" y="248" width="288" height="34"/>
                                 <color key="backgroundColor" name="CellBackgroundColor"/>
+                                <color key="tintColor" name="DarkGrayText"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -1238,6 +1241,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a name here" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3br-GX-Fgs">
                                                 <rect key="frame" x="0.0" y="24.999999999999986" width="343" height="20"/>
+                                                <color key="tintColor" name="DarkGrayText"/>
                                                 <color key="textColor" name="DarkGrayText"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -1289,6 +1293,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Staking amount" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="frf-ih-Fd6">
                                                 <rect key="frame" x="0.0" y="25" width="343" height="20"/>
+                                                <color key="tintColor" name="DarkGrayText"/>
                                                 <color key="textColor" name="DarkGrayText"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -1384,6 +1389,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Cz-We-pRN">
                                 <rect key="frame" x="15" y="277.66666666666669" width="345" height="85"/>
                                 <color key="backgroundColor" name="CellBackgroundColor"/>
+                                <color key="tintColor" name="DarkGrayText"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="XKT-rs-TEb"/>
                                 </constraints>
@@ -2496,13 +2502,32 @@
                                             <action selector="closeAction:" destination="6P1-Zi-a06" eventType="touchUpInside" id="mm6-uk-v8n"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qbm-Dr-lJg">
+                                        <rect key="frame" x="326" y="52.666666666666657" width="41" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="g44-j2-bX5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="tintColor" name="LigthText"/>
+                                        <state key="normal" title="Clear">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" name="Silver"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearAction:" destination="6P1-Zi-a06" eventType="touchUpInside" id="26X-K3-ba4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="DefaultBackground"/>
                                 <constraints>
                                     <constraint firstItem="6TY-yz-Gu8" firstAttribute="leading" secondItem="UhE-Pu-pAw" secondAttribute="leading" id="620-ug-TxD"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qbm-Dr-lJg" secondAttribute="trailing" constant="8" id="AQU-jq-dDO"/>
                                     <constraint firstAttribute="height" constant="94" id="DPX-eR-Mce"/>
                                     <constraint firstItem="ovX-Th-bfm" firstAttribute="centerX" secondItem="UhE-Pu-pAw" secondAttribute="centerX" id="Kdr-CB-lFA"/>
                                     <constraint firstAttribute="bottom" secondItem="6TY-yz-Gu8" secondAttribute="bottom" constant="-2" id="PIL-nc-Pl0"/>
+                                    <constraint firstItem="Qbm-Dr-lJg" firstAttribute="centerY" secondItem="ovX-Th-bfm" secondAttribute="centerY" id="gzE-1c-Hyc"/>
                                     <constraint firstAttribute="bottom" secondItem="ovX-Th-bfm" secondAttribute="bottom" constant="9" id="qQu-S4-t4V"/>
                                 </constraints>
                             </view>

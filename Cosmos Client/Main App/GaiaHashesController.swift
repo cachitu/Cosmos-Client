@@ -21,6 +21,13 @@ class GaiaHashesController: UIViewController, ToastAlertViewPresentable, GaiaVal
     @IBOutlet weak var topNavBarView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func clearAction(_ sender: UIButton) {
+        AppContext.shared.clearHashes()
+        dataSource = AppContext.shared.hashes
+        tableView.reloadData()
+        self.dismiss(animated: true)
+    }
+    
     var dataSource: [PersitsableHash] = AppContext.shared.hashes
     
     override func viewDidLoad() {

@@ -35,10 +35,10 @@ class RichTextFieldView: UIView {
         didSet {
             contentTextField?.delegate = self
             contentTextField?.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
-            if let placeholder = contentTextField?.placeholder {
-                contentTextField?.attributedPlaceholder = NSAttributedString(string:placeholder,
-                                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.silver])
-            }
+//            if let placeholder = contentTextField?.placeholder {
+//                contentTextField?.attributedPlaceholder = NSAttributedString(string:placeholder,
+//                                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.silver])
+//            }
          }
     }
     
