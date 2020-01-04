@@ -130,7 +130,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         currencyPickerRoundedView?.backgroundColor = amoutRoundedView?.backgroundColor
 
         screenTitleLabel.text = AppContext.shared.node?.network ?? "Wallet"
-        swapButton.isHidden = !(AppContext.shared.node?.type == TDMNodeType.terra || AppContext.shared.node?.type == TDMNodeType.terra_118)
+        swapButton.isHidden = !(AppContext.shared.node?.type == TDMNodeType.terra || AppContext.shared.node?.type == TDMNodeType.terra_118) || AppContext.shared.key?.watchMode == true
         historyButton.isHidden = (AppContext.shared.node?.type == TDMNodeType.iris || AppContext.shared.node?.type == TDMNodeType.iris_fuxi)
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             self?.clearFields()

@@ -67,11 +67,6 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
         UIApplication.shared.open(url)
     }
     
-    @IBAction func openIpsxUrl(_ sender: Any) {
-        guard let url = URL(string: "https://ip.sx") else { return }
-        UIApplication.shared.open(url)
-    }
-    
     @IBAction func openBitSentinel(_ sender: Any) {
         guard let url = URL(string: "https://bit-sentinel.com/") else { return }
         UIApplication.shared.open(url)

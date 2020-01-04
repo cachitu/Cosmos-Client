@@ -47,6 +47,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppContext.shared.onHashPolingPending = {
+            guard AppContext.shared.key?.watchMode == false else {
+                return
+            }
             self.logsButton.backgroundColor = UIColor.pendingYellow
             self.logsButtonBottomConstraint.constant = 8
             UIView.animate(withDuration: 0.2) {

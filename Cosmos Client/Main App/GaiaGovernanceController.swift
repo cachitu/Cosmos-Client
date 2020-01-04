@@ -53,6 +53,9 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         super.viewWillAppear(animated)
         
         AppContext.shared.onHashPolingPending = {
+            guard AppContext.shared.key?.watchMode == false else {
+                return
+            }
             self.logsButton.backgroundColor = UIColor.pendingYellow
             self.logsButtonBottomConstraint.constant = 8
             UIView.animate(withDuration: 0.2) {

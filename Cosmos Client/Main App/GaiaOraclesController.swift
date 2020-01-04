@@ -36,7 +36,7 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             AppContext.shared.node?.getStatus {
                 if AppContext.shared.node?.state == .unknown {
-                    self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
+                    self?.dismiss(animated: true, completion: nil)
                 } else if let validNode = AppContext.shared.node {
                     self?.loadData(validNode: validNode)
                 }
