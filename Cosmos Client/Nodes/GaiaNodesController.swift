@@ -54,19 +54,22 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
             nodes = savedNodes.nodes
             showHint = false
+            for node in nodes {
+                node.state = .pending
+            }
         } else {
             nodes = [
-                TDMNode(name: TDMNodeType.cosmos.rawValue, type: .cosmos, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1317),
-                TDMNode(name: TDMNodeType.iris.rawValue,  type: .iris,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1327),
-                TDMNode(name: TDMNodeType.terra.rawValue,  type: .terra,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337),
-                TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347),
-                TDMNode(name: TDMNodeType.terra.rawValue + " (Old HD)",  type: .terra_118,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337),
-                TDMNode(name: "Iris Nyancat Testnet",  type: .iris_fuxi,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1337),
-                TDMNode(name: "Cosmos testnet",  type: .cosmos,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1317),
-                TDMNode(name: "Terra testnet",  type: .terra,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1347),
-                TDMNode(name: TDMNodeType.bitsong.rawValue,  type: .bitsong,scheme: "http", host: "lcd.testnet-2.bitsong.network", rcpPort: nil),
-                TDMNode(name: TDMNodeType.emoney.rawValue,  type: .emoney,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1327),
-                TDMNode(name: "Iris Fuxy Testnet",  type: .iris_fuxi,scheme: "https", host: "lcd.testnet.irisnet.org", rcpPort: nil)]
+                TDMNode(name: TDMNodeType.cosmos.rawValue, type: .cosmos, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1317, secured: true),
+                TDMNode(name: TDMNodeType.iris.rawValue,  type: .iris,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1327, secured: true),
+                TDMNode(name: TDMNodeType.terra.rawValue,  type: .terra,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
+                TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347, secured: true),
+                TDMNode(name: TDMNodeType.terra.rawValue + " (Old HD)",  type: .terra_118,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
+                TDMNode(name: "Iris Nyancat Testnet",  type: .iris_fuxi,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1337, secured: false),
+                TDMNode(name: "Cosmos testnet",  type: .cosmos,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1317, secured: false),
+                TDMNode(name: "Terra testnet",  type: .terra,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1347, secured: false),
+                TDMNode(name: TDMNodeType.bitsong.rawValue,  type: .bitsong,scheme: "http", host: "lcd.testnet-2.bitsong.network", rcpPort: nil, secured: false),
+                TDMNode(name: TDMNodeType.emoney.rawValue,  type: .emoney,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1327, secured: false),
+                TDMNode(name: "Iris Fuxy Testnet",  type: .iris_fuxi,scheme: "https", host: "lcd.testnet.irisnet.org", rcpPort: nil, secured: false)]
             
             PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
@@ -100,7 +103,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         refreshNodes()
         navigationController?.navigationBar.barStyle = .default
         
-        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval * 2, repeats: true) { [weak self] timer in
             self?.refreshNodes()
         }
         
@@ -124,7 +127,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         if segue.identifier == "NodeEditSegue" {
             let dest = segue.destination as? GaiaNodeController
             dest?.editMode = true
-            dest?.collectedData = self.selectedNode
+            dest?.curentNode = self.selectedNode
             dest?.editedNodeIndex = self.selectedIndex
             dest?.onCollectDataComplete = { [weak self] data in
                 guard let weakSelf = self else { return }
@@ -158,17 +161,38 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             editButton.isHidden = false
 
             loadingView.startAnimating()
-            for node in validNodes {
-                node.getStatus {
-                    node.getNodeInfo {
-                        weakSelf?.loadingView.stopAnimating()
-                        weakSelf?.tableView.reloadData()
-                    }
-                }
+            editButton.isEnabled = false
+            addButton.isEnabled = false
+            getStatusFor(nodes: validNodes) {
+                weakSelf?.editButton.isEnabled = true
+                weakSelf?.addButton.isEnabled = true
+                weakSelf?.loadingView.stopAnimating()
+                weakSelf?.tableView.reloadData()
             }
         } else {
             editButton.isHidden = true
             noDataView.isHidden = false
+        }
+    }
+    
+    private func getStatusFor(nodes: [TDMNode], completion: (() -> ())?) {
+        
+        guard nodes.count > 0 else {
+            DispatchQueue.main.async {
+                completion?()
+            }
+            return
+        }
+        
+        if let node = nodes.first {
+            node.getStatus {
+                node.getNodeInfo {  [weak self] in
+                    var vnodes = nodes
+                    vnodes.remove(at: 0)
+                    self?.tableView.reloadData()
+                    self?.getStatusFor(nodes: vnodes, completion: completion)
+                }
+            }
         }
     }
 }

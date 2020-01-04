@@ -46,18 +46,17 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.logsButton.backgroundColor = UIColor.pendingYellow
         AppContext.shared.onHashPolingPending = {
             guard AppContext.shared.key?.watchMode == false else {
                 return
             }
-            self.logsButton.backgroundColor = UIColor.pendingYellow
             self.logsButtonBottomConstraint.constant = 8
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()
             }
         }
         AppContext.shared.onHashPolingDone = {
-            self.logsButton.backgroundColor = UIColor.darkRed
             self.logsButtonBottomConstraint.constant = -50
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()
@@ -67,7 +66,6 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         if let hash = AppContext.shared.lastSubmitedHash() {
             AppContext.shared.startHashPoling(hash: hash)
         } else {
-            self.logsButton.backgroundColor = UIColor.darkRed
             self.logsButtonBottomConstraint.constant = -50
         }
     }
@@ -174,82 +172,115 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         }
     }
     
+    
     private func handleRedelegate(redelgateFrom: String, validator: GaiaValidator) {
-        print("redelegate from \(redelgateFrom) to \(validator.validator)")
+        
         AppContext.shared.node?.getStakingInfo() { [weak self] denom in
             self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to redelegate to:", message: "\(validator.validator)\nfrom\n\(redelgateFrom)", placeholder: "0 \(denom ?? "stake")") { amount in
-                if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
-                    self?.loadingView.startAnimating()
-                    self?.redelegateStake(
-                        node: validNode,
-                        clientDelegate: delegate,
-                        key: validKey,
-                        feeAmount: self?.defaultFeeSigAmount ?? "0",
-                        fromValidator: redelgateFrom,
-                        toValidator: validator.validator,
-                        amount: validAmount) { resp, msg in
-                            AppContext.shared.redelgateFrom = nil
-                            self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
-                                self?.loadData()
-                            }
-
-                            if resp != nil {
-                                self?.toast?.showToastAlert("Redelegation submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
-                                if let hash = AppContext.shared.lastSubmitedHash() {
-                                    AppContext.shared.startHashPoling(hash: hash)
-                                }
-
-                                AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                                    self?.loadingView.stopAnimating()
-                                    self?.loadData()
-                                }
-                            } else if let errMsg = msg {
-                                self?.loadingView.stopAnimating()
-                                if errMsg.contains("connection was lost") {
-                                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
-                                } else {
-                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
-                                }
-                            }
+                if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
+                    tabBar.onSecurityCheck = { [weak self] succes in
+                        if succes {
+                            self?.broadcastRedelegate(redelgateFrom: redelgateFrom, validator: validator, amount: amount)
+                        } else {
+                            self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                        }
                     }
+                    tabBar.promptForPin()
+                } else {
+                    self?.broadcastRedelegate(redelgateFrom: redelgateFrom, validator: validator, amount: amount)
                 }
+            }
+        }
+    }
+
+    private func broadcastRedelegate(redelgateFrom: String, validator: GaiaValidator, amount: String?) {
+        
+        if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
+            loadingView.startAnimating()
+            redelegateStake(
+                node: validNode,
+                clientDelegate: delegate,
+                key: validKey,
+                feeAmount: defaultFeeSigAmount,
+                fromValidator: redelgateFrom,
+                toValidator: validator.validator,
+                amount: validAmount) { [weak self] resp, msg in
+                    AppContext.shared.redelgateFrom = nil
+                    self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
+                        self?.loadData()
+                    }
+                    
+                    if resp != nil {
+                        self?.toast?.showToastAlert("Redelegation submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
+                        if let hash = AppContext.shared.lastSubmitedHash() {
+                            AppContext.shared.startHashPoling(hash: hash)
+                        }
+                        
+                        AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                            self?.loadingView.stopAnimating()
+                            self?.loadData()
+                        }
+                    } else if let errMsg = msg {
+                        self?.loadingView.stopAnimating()
+                        if errMsg.contains("connection was lost") {
+                            self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
+                        } else {
+                            self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                        }
+                    }
             }
         }
     }
     
     private func handleDelegate(to validator: GaiaValidator) {
-        
-        print("Should delegate to \(validator.validator)")
         AppContext.shared.node?.getStakingInfo() { [weak self] denom in
             self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to delegate to:", message: "\(validator.validator)", placeholder: "0 \(denom ?? "stake")") { amount in
-                if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
-                    self?.loadingView.startAnimating()
-                    self?.delegateStake (
-                        node: validNode,
-                        clientDelegate: delegate,
-                        key: validKey,
-                        feeAmount: self?.defaultFeeSigAmount ?? "0",
-                        toValidator: validator.validator,
-                        amount: validAmount,
-                        denom: denom ?? "stake") { resp, msg in
-                            if resp != nil {
-                                if let hash = AppContext.shared.lastSubmitedHash() {
-                                    AppContext.shared.startHashPoling(hash: hash)
-                                }
-                                self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
-                                AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
-                                    self?.loadingView.stopAnimating()
-                                    self?.loadData()
-                                }
-                            } else if let errMsg = msg {
-                                self?.loadingView.stopAnimating()
-                                if errMsg.contains("connection was lost") {
-                                    self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
-                                } else {
-                                    self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
-                                }
-                            }
+                if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
+                    tabBar.onSecurityCheck = { [weak self] succes in
+                        if succes {
+                            self?.broadcastDelegate(to: validator, amount: amount)
+                        } else {
+                            self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                        }
                     }
+                    tabBar.promptForPin()
+                } else {
+                    self?.broadcastDelegate(to: validator, amount: amount)
+                }
+            }
+        }
+    }
+    
+    private func broadcastDelegate(to validator: GaiaValidator, amount: String?) {
+        
+        AppContext.shared.node?.getStakingInfo() { [weak self] denom in
+            if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
+                self?.loadingView.startAnimating()
+                self?.delegateStake (
+                    node: validNode,
+                    clientDelegate: delegate,
+                    key: validKey,
+                    feeAmount: self?.defaultFeeSigAmount ?? "0",
+                    toValidator: validator.validator,
+                    amount: validAmount,
+                    denom: denom ?? "stake") { resp, msg in
+                        if resp != nil {
+                            if let hash = AppContext.shared.lastSubmitedHash() {
+                                AppContext.shared.startHashPoling(hash: hash)
+                            }
+                            self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
+                            AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
+                                self?.loadingView.stopAnimating()
+                                self?.loadData()
+                            }
+                        } else if let errMsg = msg {
+                            self?.loadingView.stopAnimating()
+                            if errMsg.contains("connection was lost") {
+                                self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
+                            } else {
+                                self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                            }
+                        }
                 }
             }
         }
@@ -333,6 +364,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
                     self?.present(activityViewController, animated: true, completion: nil)
                 }
                 let delegateAction = UIAlertAction(title: "Delegate", style: .default) { [weak self] alertAction in
+                    
                     self?.handleDelegate(to: validator)
                 }
                 

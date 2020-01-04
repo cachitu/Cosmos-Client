@@ -194,9 +194,25 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 }
                 
                 let action = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] alertAction in
-                    self?.loadingView.startAnimating()
-                    self?.toast?.hideToast()
-                    self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
+                    if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
+                        tabBar.onSecurityCheck = { [weak self] succes in
+                            if succes {
+                                self?.loadingView.startAnimating()
+                                self?.toast?.hideToast()
+                                self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
+                            } else {
+                                self?.sendAmountTextField.text = ""
+                                self?.sendAmountButton.isEnabled = false
+                                self?.senderAddress = nil
+                                self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                            }
+                        }
+                        tabBar.promptForPin()
+                    } else {
+                        self?.loadingView.startAnimating()
+                        self?.toast?.hideToast()
+                        self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
+                    }
                 }
                 
                 alert.addAction(cancelAction)
@@ -408,44 +424,38 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     }
     
     private func handleDelegate(delegation: GaiaDelegation, denom: String) {
-        
         showAmountAlert(title: "Type the amount of \(denom) you want to delegate to:", message: "\(delegation.validatorAddr)\nIt holds\n\(Double(delegation.shares) ?? 0) \(denom) from you.", placeholder: "0 \(denom)") { [weak self] amount in
-            if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
-                self?.loadingView.startAnimating()
-                self?.toast?.hideToast()
-                self?.delegateStake(
-                    node: validNode,
-                    clientDelegate: delegate,
-                    key: validKey,
-                    feeAmount: self?.defaultFeeSigAmount ?? "0",
-                    toValidator: delegation.validatorAddr,
-                    amount: validAmount,
-                    denom: denom) { resp, msg in
-                        if resp != nil {
-                            self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
-                            self?.loadData()
-                        } else if let errMsg = msg {
-                            self?.loadingView.stopAnimating()
-                            if errMsg.contains("connection was lost") {
-                                self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
-                            } else {
-                                self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
-                            }
-                        }
+            
+            if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
+                tabBar.onSecurityCheck = { [weak self] succes in
+                    if succes {
+                        self?.broadcastDelegate(delegation: delegation, denom: denom, amount: amount)
+                    } else {
+                        self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                    }
                 }
+                tabBar.promptForPin()
+            } else {
+                self?.broadcastDelegate(delegation: delegation, denom: denom, amount: amount)
             }
         }
     }
     
-    private func handleUnbound(delegation: GaiaDelegation, denom: String) {
+    private func broadcastDelegate(delegation: GaiaDelegation, denom: String, amount: String?) {
         
-        self.showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
-            if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
-                self?.loadingView.startAnimating()
-                self?.toast?.hideToast()
-                self?.unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: self?.defaultFeeSigAmount ?? "0", fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { resp, msg in
+        if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
+            loadingView.startAnimating()
+            toast?.hideToast()
+            delegateStake(
+                node: validNode,
+                clientDelegate: delegate,
+                key: validKey,
+                feeAmount: defaultFeeSigAmount,
+                toValidator: delegation.validatorAddr,
+                amount: validAmount,
+                denom: denom) { [weak self] resp, msg in
                     if resp != nil {
-                        self?.toast?.showToastAlert("Unbonding submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
+                        self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                         self?.loadData()
                     } else if let errMsg = msg {
                         self?.loadingView.stopAnimating()
@@ -455,12 +465,64 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                         }
                     }
+            }
+        }
+    }
+    
+    private func handleUnbound(delegation: GaiaDelegation, denom: String) {
+        self.showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
+            if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
+                tabBar.onSecurityCheck = { [weak self] succes in
+                    if succes {
+                        self?.broadcastUnbound(delegation: delegation, denom: denom, amount: amount)
+                    } else {
+                        self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                    }
+                }
+                tabBar.promptForPin()
+            } else {
+                self?.broadcastUnbound(delegation: delegation, denom: denom, amount: amount)
+            }
+        }
+    }
+    
+    private func broadcastUnbound(delegation: GaiaDelegation, denom: String, amount: String?) {
+        
+        if let validAmount = amount, let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let delegate = AppContext.shared.keysDelegate {
+            loadingView.startAnimating()
+            toast?.hideToast()
+            unbondStake(node: validNode, clientDelegate: delegate, key: validKey, feeAmount: defaultFeeSigAmount, fromValidator: delegation.validatorAddr, amount: validAmount, denom: denom) { [weak self] resp, msg in
+                if resp != nil {
+                    self?.toast?.showToastAlert("Unbonding submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
+                    self?.loadData()
+                } else if let errMsg = msg {
+                    self?.loadingView.stopAnimating()
+                    if errMsg.contains("connection was lost") {
+                        self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
+                    } else {
+                        self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                    }
                 }
             }
         }
     }
     
     private func handleWithdraw(delegation: GaiaDelegation) {
+        if AppContext.shared.node?.secured == true, let tabBar = tabBarController as? GaiaTabBarController {
+            tabBar.onSecurityCheck = { [weak self] succes in
+                if succes {
+                    self?.broadcastWithdraw(delegation: delegation)
+                } else {
+                    self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                }
+            }
+            tabBar.promptForPin()
+        } else {
+            broadcastWithdraw(delegation: delegation)
+        }
+    }
+    
+    private func broadcastWithdraw(delegation: GaiaDelegation) {
         
         if let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let keysDelegate = AppContext.shared.keysDelegate {
             loadingView.startAnimating()
@@ -482,6 +544,21 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     }
     
     private func handleWithdrawComission(delegation: GaiaDelegation) {
+        if AppContext.shared.node?.secured == true, let tabBar = tabBarController as? GaiaTabBarController {
+            tabBar.onSecurityCheck = { [weak self] succes in
+                if succes {
+                    self?.broadcastWithdrawComission(delegation: delegation)
+                } else {
+                    self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                }
+            }
+            tabBar.promptForPin()
+        } else {
+            broadcastWithdrawComission(delegation: delegation)
+        }
+    }
+    
+    private func broadcastWithdrawComission(delegation: GaiaDelegation) {
         
         if let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let keysDelegate = AppContext.shared.keysDelegate {
             loadingView.startAnimating()
@@ -532,10 +609,6 @@ extension GaiaWalletController: UIPickerViewDataSource {
         let string = AppContext.shared.account?.assets[row].denom ?? ""
         return NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGrayText])
     }
-    
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return AppContext.shared.account?.assets[row].denom
-//    }
 }
 
 extension GaiaWalletController: UITextFieldDelegate {
@@ -591,42 +664,46 @@ extension GaiaWalletController: UITableViewDelegate {
                 return
             }
             
-            if let validDenom = AppContext.shared.node?.stakeDenom {
-                
-                let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                
-                if delegation.validatorAddr == AppContext.shared.account?.gaiaKey.validator {
-                    let withdrawCommissionAction = UIAlertAction(title: "Withdraw commissions", style: .default) { [weak self] alertAction in
-                        self?.handleWithdrawComission(delegation: delegation)
-                    }
-                    optionMenu.addAction(withdrawCommissionAction)
+            self.tapAction(delegation: delegation)
+        }
+    }
+    
+    private func tapAction(delegation: GaiaDelegation) {
+        if let validDenom = AppContext.shared.node?.stakeDenom {
+            
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            if delegation.validatorAddr == AppContext.shared.account?.gaiaKey.validator {
+                let withdrawCommissionAction = UIAlertAction(title: "Withdraw commissions", style: .default) { [weak self] alertAction in
+                    self?.handleWithdrawComission(delegation: delegation)
                 }
-                let withdrawAction = UIAlertAction(title: "Withdraw rewards", style: .default) { [weak self] alertAction in
-                    self?.handleWithdraw(delegation: delegation)
-                }
-                let delegateAction = UIAlertAction(title: "Delegate", style: .default) { [weak self] alertAction in
-                    self?.handleDelegate(delegation: delegation, denom: validDenom)
-                }
-                
-                let unboundAction = UIAlertAction(title: "Unbond", style: .default) { [weak self] alertAction in
-                    self?.handleUnbound(delegation: delegation, denom: validDenom)
-                }
-                
-                let redelegateAction = UIAlertAction(title: "Redelegate", style: .default) { [weak self] alertAction in
-                    AppContext.shared.redelgateFrom = delegation.validatorAddr
-                    self?.tabBarController?.selectedIndex = 1
-                }
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-                
-                optionMenu.addAction(withdrawAction)
-                optionMenu.addAction(redelegateAction)
-                optionMenu.addAction(delegateAction)
-                optionMenu.addAction(unboundAction)
-                optionMenu.addAction(cancelAction)
-                
-                self.present(optionMenu, animated: true, completion: nil)
+                optionMenu.addAction(withdrawCommissionAction)
             }
+            let withdrawAction = UIAlertAction(title: "Withdraw rewards", style: .default) { [weak self] alertAction in
+                self?.handleWithdraw(delegation: delegation)
+            }
+            let delegateAction = UIAlertAction(title: "Delegate", style: .default) { [weak self] alertAction in
+                self?.handleDelegate(delegation: delegation, denom: validDenom)
+            }
+            
+            let unboundAction = UIAlertAction(title: "Unbond", style: .default) { [weak self] alertAction in
+                self?.handleUnbound(delegation: delegation, denom: validDenom)
+            }
+            
+            let redelegateAction = UIAlertAction(title: "Redelegate", style: .default) { [weak self] alertAction in
+                AppContext.shared.redelgateFrom = delegation.validatorAddr
+                self?.tabBarController?.selectedIndex = 1
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            
+            optionMenu.addAction(withdrawAction)
+            optionMenu.addAction(redelegateAction)
+            optionMenu.addAction(delegateAction)
+            optionMenu.addAction(unboundAction)
+            optionMenu.addAction(cancelAction)
+            
+            self.present(optionMenu, animated: true, completion: nil)
         }
     }
 }

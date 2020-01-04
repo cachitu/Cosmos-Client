@@ -1,0 +1,189 @@
+//
+//  GaiaSecurityController.swift
+//  Syncnode
+//
+//  Created by Calin Chitu on 04/01/2020.
+//  Copyright © 2020 Calin Chitu. All rights reserved.
+//
+
+import UIKit
+
+
+class GaiaSecurityController: UIViewController {
+
+    enum CollectMode {
+        case validate
+        case collectPhase1
+        case collectPhase2
+    }
+
+    var collectMode: CollectMode = .validate
+    var expectedPin: String? = AppContext.shared.node?.getPinFromKeychain()
+    var onValidate: ((_ success: Bool) -> ())?
+    var onCollect: ((_ success: Bool) -> ())?
+
+    @IBOutlet weak var starsStackView: UIStackView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var pinStateLabel: UILabel!
+    
+    @IBOutlet weak var star1: UIButton!
+    @IBOutlet weak var star2: UIButton!
+    @IBOutlet weak var star3: UIButton!
+    @IBOutlet weak var star4: UIButton!
+    
+    @IBAction func closeAction(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func digitAction(_ sender: RoundedButton) {
+        if digits.count >= 4 {
+            return
+        }
+        digits.append(sender.titleLabel?.text ?? "")
+    }
+    
+    @IBAction func backAction(_ sender: RoundedButton) {
+        guard  digits.count > 0 else {
+            return
+        }
+        digits.removeLast()
+    }
+    
+    @IBAction func clearAction(_ sender: RoundedButton) {
+        clearState()
+    }
+    
+    private var digits: [String] = [] {
+        didSet {
+            updateStars(value: digits.count)
+            handleState()
+        }
+    }
+    
+    private var retryCount = 0
+    private var firstPin: String = ""
+    private var secondPin: String = ""
+
+    private func clearState() {
+        digits = []
+        firstPin = ""
+        secondPin = ""
+        pinStateLabel.text = collectMode == .validate ? "Type your pin" : "Create your pin"
+        if collectMode == .collectPhase2 {
+            collectMode = .collectPhase1
+        }
+    }
+    
+    private func handleState() {
+        if digits.count == 4 {
+            switch collectMode {
+            case .validate:
+                firstPin = digits.joined()
+                if firstPin == expectedPin {
+                    onValidate?(true)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    retryCount += 1
+                    if retryCount < 3 {
+                        Animations.requireUserAtention(on: starsStackView)
+                        clearState()
+                    } else {
+                        onValidate?(false)
+                        dismiss(animated: true, completion: nil)
+                    }
+                }
+            case .collectPhase1:
+                firstPin = digits.joined()
+                digits = []
+                secondPin = ""
+                updateStars(value: 0)
+                pinStateLabel.text = "Enter your pin again"
+                collectMode = .collectPhase2
+            case .collectPhase2:
+                collectMode = .collectPhase1
+                secondPin = digits.joined()
+                if firstPin == secondPin {
+                    onCollect?(true)
+                    persistPin(pin: secondPin)
+                    dismiss(animated: true, completion: nil)
+                } else {
+                    retryCount += 1
+                    if retryCount < 3 {
+                        Animations.requireUserAtention(on: starsStackView)
+                        clearState()
+                    } else {
+                        onCollect?(false)
+                        dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func updateStars(value: Int, failed: Bool = false) {
+        switch value {
+        case 0:
+            star1.isSelected = false
+            star2.isSelected = false
+            star3.isSelected = false
+            star4.isSelected = false
+        case 1:
+            star1.isSelected = true
+            star2.isSelected = false
+            star3.isSelected = false
+            star4.isSelected = false
+        case 2:
+            star1.isSelected = true
+            star2.isSelected = true
+            star3.isSelected = false
+            star4.isSelected = false
+        case 3:
+            star1.isSelected = true
+            star2.isSelected = true
+            star3.isSelected = true
+            star4.isSelected = false
+        case 4:
+            star1.isSelected = true
+            star2.isSelected = true
+            star3.isSelected = true
+            star4.isSelected = true
+        default: break
+        }
+    }
+    
+    private var retypeDigits: [String] = []
+    
+    private func persistPin(pin: String) {
+        if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = AppContext.shared.node {
+            for savedNode in savedNodes.nodes {
+                if savedNode.uniqueID == validNode.uniqueID {
+                    savedNode.savePinToKeychain(pin: pin)
+                }
+            }
+            PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        closeButton.isHidden = collectMode == .validate
+        updateStars(value: 0)
+        if AppContext.shared.node?.getPinFromKeychain() == nil {
+            collectMode = .collectPhase1
+        }
+        pinStateLabel.text = collectMode == .validate ? "Type your pin" : "Create your pin"
+    }
+}
+
+class Animations {
+    static func requireUserAtention(on onView: UIView) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: onView.center.x - 10, y: onView.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: onView.center.x + 10, y: onView.center.y))
+        onView.layer.add(animation, forKey: "position")
+    }
+}

@@ -24,12 +24,20 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var topSeparatorView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var secureSwitch: UISwitch!
+    
+    @IBAction func secureSwitchAction(_ sender: UISwitch) {
+        curentNode?.secured = sender.isOn
+        if !sender.isOn {
+            AppContext.shared.node?.deletePinFromKeychain()
+        }
+    }
     
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
     
     var toast: ToastAlertView?
     
-    var collectedData: TDMNode?
+    var curentNode: TDMNode?
     
     private var fieldsStateDic: [String : Bool] = ["field1" : false, "field2" : false, "field3" : true, "field4" : true]
     
@@ -49,9 +57,11 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         observreFieldsState()
         addButton.isHidden = editMode
         titleLabel.text = editMode ? "Edit Node" : "Add Node"
-        if editMode {
-            prePopulate()
+        if editMode { prePopulate() }
+        if curentNode == nil {
+            curentNode = TDMNode(secured: false)
         }
+
         toast = createToastAlert(creatorView: view, holderUnderView: topSeparatorView, holderTopDistanceConstraint: topConstraintOutlet, coveringView: topBarView)
     }
     
@@ -119,29 +129,29 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     }
     
     private func collectData() {
-        if collectedData == nil { collectedData = TDMNode() }
-        collectedData?.name = field1RtextField.contentTextField?.text ?? ""
-        collectedData?.host = field2RtextField.contentTextField?.text ?? ""
-        collectedData?.rcpPort = Int(field3RtextField.contentTextField?.text ?? "")
-        collectedData?.scheme = field4RtextField.contentTextField?.text ?? "http"
-        if let data = collectedData {
+        curentNode?.name = field1RtextField.contentTextField?.text ?? ""
+        curentNode?.host = field2RtextField.contentTextField?.text ?? ""
+        curentNode?.rcpPort = Int(field3RtextField.contentTextField?.text ?? "")
+        curentNode?.scheme = field4RtextField.contentTextField?.text ?? "http"
+        if let data = curentNode {
             onCollectDataComplete?(data)
         }
     }
     
     private func prePopulate() {
         
-        field1RtextField.contentTextField?.text = collectedData?.name
-        field2RtextField.contentTextField?.text = collectedData?.host
-        field3RtextField.contentTextField?.text = collectedData?.rcpPort != nil ? "\(collectedData?.rcpPort ?? 1317)" : ""
-        field4RtextField.contentTextField?.text = collectedData?.scheme
+        secureSwitch.isOn = curentNode?.secured == true
+        field1RtextField.contentTextField?.text = curentNode?.name
+        field2RtextField.contentTextField?.text = curentNode?.host
+        field3RtextField.contentTextField?.text = curentNode?.rcpPort != nil ? "\(curentNode?.rcpPort ?? 1317)" : ""
+        field4RtextField.contentTextField?.text = curentNode?.scheme
         
         self.fieldsStateDic["field1"] = true
         self.fieldsStateDic["field2"] = true
         self.fieldsStateDic["field3"] = true
         self.fieldsStateDic["field4"] = true
         
-        if let type = collectedData?.type, let index = pickerDataSource.firstIndex(of: type) {
+        if let type = curentNode?.type, let index = pickerDataSource.firstIndex(of: type) {
             pickerView.selectRow(index, inComponent: 0, animated: false)
         }
     }
@@ -178,8 +188,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
 extension GaiaNodeController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if collectedData == nil { collectedData = TDMNode() }
-        collectedData?.type = pickerDataSource[row]
+        curentNode?.type = pickerDataSource[row]
     }
 }
 

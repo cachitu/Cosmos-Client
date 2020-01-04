@@ -16,10 +16,10 @@
             </objects>
             <point key="canvasLocation" x="693" y="443"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Gaia Tab Bar Controller-->
         <scene sceneID="WjR-GE-ZhQ">
             <objects>
-                <tabBarController id="ZcB-As-1TX" sceneMemberID="viewController">
+                <tabBarController id="ZcB-As-1TX" customClass="GaiaTabBarController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Izw-uH-qTm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -33,11 +33,361 @@
                         <segue destination="6Ja-jx-Fju" kind="relationship" relationship="viewControllers" id="gpO-gT-osL"/>
                         <segue destination="MNZ-Xr-tPS" kind="relationship" relationship="viewControllers" id="5cu-2P-lab"/>
                         <segue destination="0ep-XW-mYa" kind="relationship" relationship="viewControllers" id="CxC-KN-eWB"/>
+                        <segue destination="YDA-Cc-vq1" kind="presentation" identifier="ShowSecuritySegue" id="xFE-Bg-MM9"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rpF-Df-p0U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1702" y="-687"/>
+        </scene>
+        <!--Gaia Security Controller-->
+        <scene sceneID="V5S-y3-h8K">
+            <objects>
+                <viewController id="YDA-Cc-vq1" customClass="GaiaSecurityController" customModule="T_Stake" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h0D-y3-UXO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSX-ac-gLk" userLabel="Close">
+                                <rect key="frame" x="8" y="8" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Gd8-QB-cOY"/>
+                                    <constraint firstAttribute="height" constant="44" id="uct-eo-V3o"/>
+                                </constraints>
+                                <color key="tintColor" name="DarkGrayText"/>
+                                <state key="normal" image="NavbarClose">
+                                    <color key="titleColor" name="DefaultBackground"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="lur-Sd-x2a"/>
+                                    <action selector="closeButtonAction:" destination="zmf-Wa-kLi" eventType="touchUpInside" id="DpH-7T-SiU"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7jJ-5g-cR5">
+                                <rect key="frame" x="60" y="127" width="255" height="22"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuK-Sm-b5W">
+                                        <rect key="frame" x="0.0" y="0.0" width="63.666666666666664" height="22"/>
+                                        <color key="tintColor" name="DarkGrayText"/>
+                                        <state key="normal" image="star" catalog="system">
+                                            <color key="titleColor" name="DarkGrayText"/>
+                                        </state>
+                                        <state key="selected" image="star.fill" catalog="system"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                <color key="value" name="CellBackgroundColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ClB-kG-e1P">
+                                        <rect key="frame" x="63.666666666666671" y="0.0" width="64" height="22"/>
+                                        <color key="tintColor" name="DarkGrayText"/>
+                                        <state key="normal" image="star" catalog="system">
+                                            <color key="titleColor" name="DarkGrayText"/>
+                                        </state>
+                                        <state key="selected" image="star.fill" catalog="system"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                <color key="value" name="CellBackgroundColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlT-Al-1fb">
+                                        <rect key="frame" x="127.66666666666667" y="0.0" width="63.666666666666671" height="22"/>
+                                        <color key="tintColor" name="DarkGrayText"/>
+                                        <state key="normal" image="star" catalog="system">
+                                            <color key="titleColor" name="DarkGrayText"/>
+                                        </state>
+                                        <state key="selected" image="star.fill" catalog="system"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                <color key="value" name="CellBackgroundColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wb-Q9-RB0">
+                                        <rect key="frame" x="191.33333333333334" y="0.0" width="63.666666666666657" height="22"/>
+                                        <color key="tintColor" name="DarkGrayText"/>
+                                        <state key="normal" image="star" catalog="system">
+                                            <color key="titleColor" name="DarkGrayText"/>
+                                        </state>
+                                        <state key="selected" image="star.fill" catalog="system"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                <color key="value" name="CellBackgroundColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type your pin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8J-Vh-bjy">
+                                <rect key="frame" x="138.66666666666666" y="165" width="98" height="19.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" name="LigtherGrayText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="UKN-Gj-XTI">
+                                <rect key="frame" x="60" y="360" width="255" height="340"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zpW-C6-bi7">
+                                        <rect key="frame" x="0.0" y="0.0" width="255" height="70"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koS-7s-CGV" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="71.666666666666671" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="1">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="lDG-bk-gui"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VE3-Ub-Gcd" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="91.666666666666657" y="0.0" width="71.666666666666657" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="2">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="HAg-6R-jUx"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tJ-zx-klg" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="183.33333333333334" y="0.0" width="71.666666666666657" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="3">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="eyo-rw-KKz"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Qyt-47-aKd">
+                                        <rect key="frame" x="0.0" y="90" width="255" height="70"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFF-3e-GeB" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="71.666666666666671" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="4">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="DrY-vg-ZRH"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kua-TW-LvD" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="91.666666666666657" y="0.0" width="71.666666666666657" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="5">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="X9s-lT-PNs"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amP-DI-KtV" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="183.33333333333334" y="0.0" width="71.666666666666657" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="6">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="E22-dF-w5S"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="663-n8-Hlr">
+                                        <rect key="frame" x="0.0" y="180" width="255" height="70"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6as-TN-cAR" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="71.666666666666671" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="7">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="Zz1-c3-4gc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mct-DH-aYq" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="91.666666666666657" y="0.0" width="71.666666666666657" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="8">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="Fmc-zq-hqi"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-Ka-PgX" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="183.33333333333334" y="0.0" width="71.666666666666657" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="9">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="DiT-Nz-HIC"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qGm-oy-Elc">
+                                        <rect key="frame" x="0.0" y="270" width="255" height="70"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zM9-Y1-RVn" userLabel="C" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="71.666666666666671" height="70"/>
+                                                <color key="tintColor" name="DarkGrayText"/>
+                                                <state key="normal" image="clear" catalog="system">
+                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="clearAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="LXu-02-WGc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rf0-0h-SJp" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="91.666666666666657" y="0.0" width="71.666666666666657" height="70"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <state key="normal" title="0">
+                                                    <color key="titleColor" name="DarkGrayText"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" name="CellBackgroundColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="digitAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="QIS-AF-kMs"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBD-ZS-Iem" userLabel="B" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
+                                                <rect key="frame" x="183.33333333333334" y="0.0" width="71.666666666666657" height="70"/>
+                                                <color key="tintColor" name="DarkGrayText"/>
+                                                <state key="normal" image="delete.left" catalog="system">
+                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="backAction:" destination="YDA-Cc-vq1" eventType="touchUpInside" id="jeC-ou-Vu5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="UKN-Gj-XTI" secondAttribute="height" multiplier="3:4" id="2pd-xk-jhF"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pO4-Kp-DuX">
+                                <rect key="frame" x="154.33333333333334" y="20" width="66.666666666666657" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" name="DarkGrayText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="ContentBackground"/>
+                        <constraints>
+                            <constraint firstItem="J8J-Vh-bjy" firstAttribute="centerX" secondItem="7jJ-5g-cR5" secondAttribute="centerX" id="3nH-Yc-xpV"/>
+                            <constraint firstItem="wSX-ac-gLk" firstAttribute="leading" secondItem="XpJ-QQ-9Gk" secondAttribute="leading" constant="8" id="5cg-Zm-cdP"/>
+                            <constraint firstItem="J8J-Vh-bjy" firstAttribute="top" secondItem="7jJ-5g-cR5" secondAttribute="bottom" constant="16" id="8zZ-7b-7Ab"/>
+                            <constraint firstItem="pO4-Kp-DuX" firstAttribute="centerY" secondItem="wSX-ac-gLk" secondAttribute="centerY" id="HTa-DD-iIu"/>
+                            <constraint firstItem="XpJ-QQ-9Gk" firstAttribute="bottom" secondItem="UKN-Gj-XTI" secondAttribute="bottom" constant="24" id="Igo-mS-hZ8"/>
+                            <constraint firstItem="wSX-ac-gLk" firstAttribute="top" secondItem="XpJ-QQ-9Gk" secondAttribute="top" constant="8" id="OVD-Vi-gNv"/>
+                            <constraint firstItem="UKN-Gj-XTI" firstAttribute="leading" secondItem="XpJ-QQ-9Gk" secondAttribute="leading" constant="60" id="UU9-y3-8gK"/>
+                            <constraint firstItem="pO4-Kp-DuX" firstAttribute="centerX" secondItem="XpJ-QQ-9Gk" secondAttribute="centerX" id="Vt8-Xq-T3D"/>
+                            <constraint firstItem="7jJ-5g-cR5" firstAttribute="top" secondItem="pO4-Kp-DuX" secondAttribute="bottom" constant="86.666666666666671" id="ju5-iW-9IQ"/>
+                            <constraint firstItem="7jJ-5g-cR5" firstAttribute="trailing" secondItem="UKN-Gj-XTI" secondAttribute="trailing" id="uiA-LZ-NxP"/>
+                            <constraint firstItem="7jJ-5g-cR5" firstAttribute="leading" secondItem="UKN-Gj-XTI" secondAttribute="leading" id="wn5-Tf-nvK"/>
+                            <constraint firstItem="XpJ-QQ-9Gk" firstAttribute="trailing" secondItem="UKN-Gj-XTI" secondAttribute="trailing" constant="60" id="zuB-gC-7cC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XpJ-QQ-9Gk"/>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="wSX-ac-gLk" id="NS0-Gd-CMQ"/>
+                        <outlet property="pinStateLabel" destination="J8J-Vh-bjy" id="zQZ-AI-OWj"/>
+                        <outlet property="star1" destination="VuK-Sm-b5W" id="MaE-BI-Wvy"/>
+                        <outlet property="star2" destination="ClB-kG-e1P" id="l0O-bR-R3i"/>
+                        <outlet property="star3" destination="AlT-Al-1fb" id="yJb-o1-xUw"/>
+                        <outlet property="star4" destination="9wb-Q9-RB0" id="vhq-uh-xhW"/>
+                        <outlet property="starsStackView" destination="7jJ-5g-cR5" id="rKo-VN-Egw"/>
+                        <outlet property="titleLabel" destination="pO4-Kp-DuX" id="WVT-Lz-FX4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5nl-T0-WWv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2524" y="-685.71428571428578"/>
         </scene>
         <!--Wallet-->
         <scene sceneID="dHu-DA-hfV">
@@ -162,7 +512,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Kytzu" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a17-Qg-QqJ">
-                                        <rect key="frame" x="296.33333333333331" y="8.3333333333333286" width="40.666666666666686" height="18"/>
+                                        <rect key="frame" x="296" y="8.3333333333333286" width="41" height="18"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <color key="textColor" name="LigtherGrayText"/>
                                         <nil key="highlightedColor"/>
@@ -380,7 +730,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCf-DG-6BD">
-                                        <rect key="frame" x="162.66666666666666" y="65.333333333333343" width="50" height="20.333333333333329"/>
+                                        <rect key="frame" x="162.66666666666666" y="65.666666666666657" width="50" height="20"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" name="LigthText"/>
                                         <nil key="highlightedColor"/>
@@ -838,13 +1188,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.0" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02C-AU-gyA">
-                                                            <rect key="frame" x="315.33333333333331" y="37" width="21.666666666666686" height="17"/>
+                                                            <rect key="frame" x="315" y="37" width="22" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.0" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdK-jH-F63">
-                                                            <rect key="frame" x="25" y="37" width="21.666666666666671" height="17"/>
+                                                            <rect key="frame" x="25" y="37" width="22" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
@@ -1040,13 +1390,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Current settings: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFA-jj-FXj">
-                                <rect key="frame" x="16" y="151.66666666666666" width="343" height="17"/>
+                                <rect key="frame" x="16" y="150.66666666666666" width="343" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Egx-AK-Z65">
-                                <rect key="frame" x="16" y="173.66666666666666" width="288" height="30"/>
+                                <rect key="frame" x="16" y="172.66666666666666" width="292" height="30"/>
                                 <color key="backgroundColor" name="CellBackgroundColor"/>
                                 <color key="tintColor" name="DarkGrayText"/>
                                 <constraints>
@@ -1060,13 +1410,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Default memo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aJ-E3-X0x">
-                                <rect key="frame" x="16" y="211.66666666666666" width="94.666666666666671" height="17"/>
+                                <rect key="frame" x="16" y="210.66666666666666" width="94.666666666666671" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Transaction memo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bry-hz-MEj">
-                                <rect key="frame" x="16" y="233.66666666666666" width="288" height="33.999999999999972"/>
+                                <rect key="frame" x="16" y="232.66666666666666" width="292" height="33.999999999999972"/>
                                 <color key="backgroundColor" name="CellBackgroundColor"/>
                                 <color key="tintColor" name="DarkGrayText"/>
                                 <color key="textColor" name="DarkGrayText"/>
@@ -1076,8 +1426,19 @@
                                     <outlet property="delegate" destination="0ep-XW-mYa" id="J0x-fv-4hg"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zdw-Hg-ciZ">
+                                <rect key="frame" x="16" y="274" width="106" height="32"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="Node Security">
+                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="nodeSecurityAction:" destination="0ep-XW-mYa" eventType="touchUpInside" id="6SK-fz-TMb"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qks-9A-cwS">
-                                <rect key="frame" x="312" y="171.66666666666666" width="47" height="34"/>
+                                <rect key="frame" x="316" y="171.66666666666666" width="43" height="32"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="Apply">
                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1086,7 +1447,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="399-Qh-Ert">
-                                <rect key="frame" x="312" y="233.66666666666666" width="47" height="33.999999999999972"/>
+                                <rect key="frame" x="316" y="233.66666666666666" width="43" height="31.999999999999972"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="Apply">
                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -1099,35 +1461,35 @@
                                 <rect key="frame" x="16" y="579" width="343" height="130"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSq-W8-voj" userLabel="syncnode link">
-                                        <rect key="frame" x="8" y="11" width="163" height="33"/>
+                                        <rect key="frame" x="8" y="13" width="158" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <state key="normal" title="Created by syncnode">
-                                            <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="openSyncnodeUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="eaL-Ui-izM"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYT-d5-A7q" userLabel="kytzu link">
-                                        <rect key="frame" x="8" y="48" width="151" height="33"/>
+                                        <rect key="frame" x="8" y="49" width="147" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <state key="normal" title="Developed by kytzu">
-                                            <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="openKytzuUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="kQr-nn-txE"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security audit by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jF8-97-M3F">
-                                        <rect key="frame" x="8" y="95.333333333333371" width="128.66666666666666" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="8.0000000000000071" y="95.666666666666629" width="125.66666666666669" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bs_logo" translatesAutoresizingMaskIntoConstraints="NO" id="TcP-zt-fEz">
-                                        <rect key="frame" x="144.66666666666666" y="91" width="201.99999999999997" height="29.333333333333329"/>
+                                        <rect key="frame" x="141.66666666666666" y="91" width="201.99999999999997" height="29.333333333333329"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29.333333333333343" id="U0f-4c-EQN"/>
@@ -1165,12 +1527,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Disabled" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qiv-kj-1DM">
+                                <rect key="frame" x="130" y="282.33333333333331" width="56.666666666666657" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" name="DarkGrayText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="9i2-F6-jHN" secondAttribute="trailing" constant="16" id="4NZ-hx-5Wf"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="bottom" secondItem="Wyl-Wn-gD6" secondAttribute="bottom" constant="20" id="56t-iL-HJX"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="zBV-Xg-Hrh" secondAttribute="trailing" id="A64-Sr-yS9"/>
+                            <constraint firstItem="Zdw-Hg-ciZ" firstAttribute="top" secondItem="Bry-hz-MEj" secondAttribute="bottom" constant="7.3333333333333712" id="DbH-Mr-WeU"/>
                             <constraint firstItem="qks-9A-cwS" firstAttribute="top" secondItem="9i2-F6-jHN" secondAttribute="bottom" constant="35" id="EKA-W7-ea9"/>
                             <constraint firstItem="9i2-F6-jHN" firstAttribute="leading" secondItem="Nt5-pB-f9S" secondAttribute="leading" constant="16" id="FB0-6F-hbC"/>
                             <constraint firstItem="Wyl-Wn-gD6" firstAttribute="leading" secondItem="Nt5-pB-f9S" secondAttribute="leading" constant="16" id="J1C-pT-9Dt"/>
@@ -1183,12 +1552,15 @@
                             <constraint firstItem="Bry-hz-MEj" firstAttribute="trailing" secondItem="Egx-AK-Z65" secondAttribute="trailing" id="Rae-4G-0Id"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="top" secondItem="EIY-z3-0J8" secondAttribute="top" constant="50" id="Ty5-pO-HFq"/>
                             <constraint firstItem="Bry-hz-MEj" firstAttribute="leading" secondItem="Egx-AK-Z65" secondAttribute="leading" id="Ulg-Ci-V2V"/>
+                            <constraint firstItem="Qiv-kj-1DM" firstAttribute="firstBaseline" secondItem="Zdw-Hg-ciZ" secondAttribute="firstBaseline" id="ZuH-id-f64"/>
                             <constraint firstItem="qks-9A-cwS" firstAttribute="trailing" secondItem="9i2-F6-jHN" secondAttribute="trailing" id="a1A-kR-XTl"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="EIY-z3-0J8" secondAttribute="trailing" id="abt-sa-Asg"/>
+                            <constraint firstItem="Zdw-Hg-ciZ" firstAttribute="leading" secondItem="Bry-hz-MEj" secondAttribute="leading" id="bpB-Yi-bEi"/>
                             <constraint firstItem="Egx-AK-Z65" firstAttribute="top" secondItem="gFA-jj-FXj" secondAttribute="bottom" constant="5" id="bq4-Cz-sCe"/>
                             <constraint firstItem="6Il-nI-y7M" firstAttribute="leading" secondItem="EIY-z3-0J8" secondAttribute="leading" id="cDF-1u-NW6"/>
                             <constraint firstItem="qks-9A-cwS" firstAttribute="leading" secondItem="Egx-AK-Z65" secondAttribute="trailing" constant="8" id="dKu-rb-ECv"/>
                             <constraint firstItem="gFA-jj-FXj" firstAttribute="leading" secondItem="Egx-AK-Z65" secondAttribute="leading" id="etE-JQ-JHj"/>
+                            <constraint firstItem="Qiv-kj-1DM" firstAttribute="leading" secondItem="Zdw-Hg-ciZ" secondAttribute="trailing" constant="8" id="eyI-nJ-6ID"/>
                             <constraint firstItem="zBV-Xg-Hrh" firstAttribute="top" secondItem="EIY-z3-0J8" secondAttribute="bottom" id="fIB-nC-AZX"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="399-Qh-Ert" secondAttribute="trailing" constant="16" id="fLG-Ff-GWW"/>
                             <constraint firstItem="Egx-AK-Z65" firstAttribute="leading" secondItem="9i2-F6-jHN" secondAttribute="leading" id="gQf-iq-a65"/>
@@ -1213,6 +1585,7 @@
                         <outlet property="feeTextField" destination="Egx-AK-Z65" id="70e-hE-J30"/>
                         <outlet property="loadingView" destination="uea-cp-u47" id="rVP-Jz-J0t"/>
                         <outlet property="memoTextField" destination="Bry-hz-MEj" id="qmY-Vn-gs8"/>
+                        <outlet property="nodeSecurityStateLabel" destination="Qiv-kj-1DM" id="yQc-60-Fcz"/>
                         <outlet property="toastHolderTopConstraint" destination="vnx-gK-6Az" id="vJA-JB-bXY"/>
                         <outlet property="toastHolderUnderView" destination="6Il-nI-y7M" id="LjU-DT-wfq"/>
                         <outlet property="topNavBarView" destination="EIY-z3-0J8" id="tLv-SM-WOa"/>
@@ -1367,11 +1740,11 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-8J-cOI">
-                                        <rect key="frame" x="275" y="7" width="70" height="30"/>
+                                        <rect key="frame" x="269" y="7" width="76" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Swn-jI-NMX"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <color key="tintColor" name="DarkGrayText"/>
                                         <state key="normal" title="   Paste" image="clipboard">
                                             <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1575,19 +1948,19 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" text="hashghgshagshags ahgahsgahg hjshajhhajh gshdgshdgsh" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaI-uZ-pMr">
-                                                            <rect key="frame" x="5" y="64.666666666666671" width="335" height="14.666666666666671"/>
+                                                            <rect key="frame" x="5" y="64.666666666666671" width="335" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="height" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCA-cz-Vll">
-                                                            <rect key="frame" x="5" y="81.333333333333329" width="36" height="14.333333333333329"/>
+                                                            <rect key="frame" x="5" y="81.666666666666671" width="36" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="0 gas" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CEn-Bd-5Qv">
-                                                            <rect key="frame" x="305.33333333333331" y="47" width="34.666666666666686" height="16"/>
+                                                            <rect key="frame" x="305" y="47" width="35" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                             <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
@@ -2137,7 +2510,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="justified" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pea-gc-lEF">
-                                                            <rect key="frame" x="5" y="35.666666666666664" width="33.333333333333336" height="17"/>
+                                                            <rect key="frame" x="5" y="35.666666666666664" width="33.666666666666664" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
@@ -2191,7 +2564,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Dep: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sRT-lI-PSd">
-                                                            <rect key="frame" x="5" y="146" width="44.333333333333336" height="17"/>
+                                                            <rect key="frame" x="5" y="146" width="44.666666666666664" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
@@ -2598,11 +2971,15 @@
         <image name="atom" width="80" height="80"/>
         <image name="atom-2" width="80" height="80"/>
         <image name="bs_logo" width="101" height="29.333333969116211"/>
+        <image name="clear" catalog="system" width="64" height="56"/>
         <image name="clipboard" width="11.333333015441895" height="11.333333015441895"/>
         <image name="delegation" width="30" height="38"/>
+        <image name="delete.left" catalog="system" width="64" height="52"/>
         <image name="friendship" width="34.333332061767578" height="31.333333969116211"/>
         <image name="history" width="20.333333969116211" height="18.333333969116211"/>
         <image name="rcheckBoxChecked" width="20" height="20"/>
+        <image name="star" catalog="system" width="64" height="58"/>
+        <image name="star.fill" catalog="system" width="64" height="58"/>
         <namedColor name="CellBackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

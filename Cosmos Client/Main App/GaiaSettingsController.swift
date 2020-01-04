@@ -27,6 +27,11 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var feeApplyButton: UIButton!
     
     
+    @IBOutlet weak var nodeSecurityStateLabel: UILabel!
+    @IBAction func nodeSecurityAction(_ sender: UIButton) {
+        toast?.showToastAlert("Edit your node (from the Nodes screen) to enable or disable the pin for \(AppContext.shared.node?.name ?? "this node.")", type: .info, dismissable: true)
+    }
+    
     @IBAction func applyMemo(_ sender: Any) {
         let memo = memoTextField.text ?? ""
         let nodeName = AppContext.shared.node?.network ?? ""
@@ -98,22 +103,10 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
         }
     }
     
-    func updateFeeLabel() {
-        var feeText = "Current settings: 0"
-        if let amount = AppContext.shared.node?.defaultTxFee {
-            let denom = AppContext.shared.account?.feeDenom ?? ""
-            feeText = "Current settings: \(amount) \(denom)"
-            if Double(amount) ?? 0 > 0.0 {
-                feeTextField.text = amount
-            }
-        }
-        feeSectionTitleLabel.text = feeText
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         memoTextField.text = memo
-        
+        nodeSecurityStateLabel.text = AppContext.shared.node?.secured == true ? "Pin" : "Disabled"
         if AppContext.shared.node?.type == TDMNodeType.iris || AppContext.shared.node?.type == TDMNodeType.iris_fuxi {
             feeTextField.isEnabled = false
             feeTextField.text = "0.41"
@@ -124,6 +117,18 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    func updateFeeLabel() {
+        var feeText = "Current settings: 0"
+        if let amount = AppContext.shared.node?.defaultTxFee {
+            let denom = AppContext.shared.account?.feeDenom ?? ""
+            feeText = "Current settings: \(amount) \(denom)"
+            if Double(amount) ?? 0 > 0.0 {
+                feeTextField.text = amount
+            }
+        }
+        feeSectionTitleLabel.text = feeText
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
