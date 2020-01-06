@@ -54,4 +54,8 @@ class GaiaTabBarController: UITabBarController {
     func promptForPin() {
         performSegue(withIdentifier: "ShowSecuritySegue", sender: self)
     }
+    
+    func promptForAmount() {
+        performSegue(withIdentifier: "ShowCollectAmountSegue", sender: self)
+    }
 }

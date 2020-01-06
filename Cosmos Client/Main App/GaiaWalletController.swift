@@ -425,6 +425,12 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     }
     
     private func handleDelegate(delegation: GaiaDelegation, denom: String) {
+        
+//        if let tabBar = tabBarController as? GaiaTabBarController {
+//            tabBar.promptForAmount()
+//            return
+//        }
+        
         showAmountAlert(title: "Type the amount of \(denom) you want to delegate to:", message: "\(delegation.validatorAddr)\nIt holds\n\(Double(delegation.shares) ?? 0) \(denom) from you.", placeholder: "0 \(denom)") { [weak self] amount in
             
             if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {

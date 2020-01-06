@@ -83,16 +83,18 @@ class GaiaSecurityController: UIViewController {
             case .validate:
                 firstPin = digits.joined()
                 if firstPin == expectedPin {
-                    onValidate?(true)
-                    self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true) {
+                        self.onValidate?(true)
+                    }
                 } else {
                     retryCount += 1
                     if retryCount < 3 {
                         Animations.requireUserAtention(on: starsStackView)
                         clearState()
                     } else {
-                        onValidate?(false)
-                        dismiss(animated: true, completion: nil)
+                        dismiss(animated: true) {
+                            self.onValidate?(false)
+                        }
                     }
                 }
             case .collectPhase1:
@@ -123,35 +125,11 @@ class GaiaSecurityController: UIViewController {
         }
     }
     
-    private func updateStars(value: Int, failed: Bool = false) {
-        switch value {
-        case 0:
-            star1.isSelected = false
-            star2.isSelected = false
-            star3.isSelected = false
-            star4.isSelected = false
-        case 1:
-            star1.isSelected = true
-            star2.isSelected = false
-            star3.isSelected = false
-            star4.isSelected = false
-        case 2:
-            star1.isSelected = true
-            star2.isSelected = true
-            star3.isSelected = false
-            star4.isSelected = false
-        case 3:
-            star1.isSelected = true
-            star2.isSelected = true
-            star3.isSelected = true
-            star4.isSelected = false
-        case 4:
-            star1.isSelected = true
-            star2.isSelected = true
-            star3.isSelected = true
-            star4.isSelected = true
-        default: break
-        }
+    private func updateStars(value: Int) {
+        star1.isSelected = value > 0
+        star2.isSelected = value > 1
+        star3.isSelected = value > 2
+        star4.isSelected = value > 3
     }
     
     private var retypeDigits: [String] = []
@@ -169,6 +147,7 @@ class GaiaSecurityController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        isModalInPresentation = true
         closeButton.isHidden = collectMode == .validate
         updateStars(value: 0)
         if AppContext.shared.node?.getPinFromKeychain() == nil {
