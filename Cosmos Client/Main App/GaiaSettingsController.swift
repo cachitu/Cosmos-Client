@@ -8,6 +8,7 @@
 
 import UIKit
 import CosmosRestApi
+import LocalAuthentication
 
 class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
 
@@ -15,6 +16,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     var memo: String { return AppContext.shared.node?.defaultMemo  ?? "Syncnode's iOS Wallet 🙀" }
 
     var toast: ToastAlertView?
+    var context = LAContext()
     
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -26,8 +28,45 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var memoTextField: UITextField!
     @IBOutlet weak var feeApplyButton: UIButton!
     
+    @IBOutlet weak var useBioAuthLabel: UILabel!
+    @IBOutlet weak var useBioAuthSwitch: UISwitch!
+    @IBAction func bioAuthSwithcAction(_ sender: UISwitch) {
+        if sender.isOn {
+            context = LAContext()
+            context.localizedCancelTitle = "Cancel"
+            
+            var error: NSError?
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                
+                let reason = "Log in to your account"
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason ) { [weak self] success, error in
+                    DispatchQueue.main.async { [weak self] in
+                        if success {
+                            
+                            UserDefaults.standard.set(true, forKey: GaiaConstants.bioAuthDefautsKey)
+                            self?.toast?.showToastAlert("Bio Auth is now enabled for this device. All PIN screens will attempth to use the biometric sensor first.", type: .info, dismissable: true)
+                            
+                        } else {
+                            sender.isOn = false
+                            UserDefaults.standard.set(false, forKey: GaiaConstants.bioAuthDefautsKey)
+                            self?.toast?.showToastAlert(error?.localizedDescription ?? "Failed to authenticate", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
+                        }
+                        UserDefaults.standard.synchronize()
+                    }
+                }
+            } else {
+                sender.isOn = false
+                UserDefaults.standard.set(false, forKey: GaiaConstants.bioAuthDefautsKey)
+                UserDefaults.standard.synchronize()
+                toast?.showToastAlert(error?.localizedDescription ?? "Can't evaluate policy", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
+            }
+        } else {
+            UserDefaults.standard.set(false, forKey: GaiaConstants.bioAuthDefautsKey)
+            UserDefaults.standard.synchronize()
+        }
+    }
     
-    @IBOutlet weak var nodeSecurityStateLabel: UILabel!
+    @IBOutlet weak var nodeSecurityStateLabel: UILabel?
     @IBAction func nodeSecurityAction(_ sender: UIButton) {
         toast?.showToastAlert("Edit your node (from the Nodes screen) to enable or disable the pin for \(AppContext.shared.node?.name ?? "this node.")", type: .info, dismissable: true)
     }
@@ -91,6 +130,13 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        useBioAuthSwitch.isOn = UserDefaults.standard.bool(forKey: GaiaConstants.bioAuthDefautsKey)
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            useBioAuthSwitch.isEnabled = true
+        } else {
+            useBioAuthSwitch.isOn = false
+            useBioAuthSwitch.isEnabled = false
+        }
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         updateFeeLabel()
         
@@ -106,7 +152,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         memoTextField.text = memo
-        nodeSecurityStateLabel.text = AppContext.shared.node?.secured == true ? "Pin" : "Disabled"
+        nodeSecurityStateLabel?.text = AppContext.shared.node?.secured == true ? "Pin" : "Disabled"
         if AppContext.shared.node?.type == TDMNodeType.iris || AppContext.shared.node?.type == TDMNodeType.iris_fuxi {
             feeTextField.isEnabled = false
             feeTextField.text = "0.41"

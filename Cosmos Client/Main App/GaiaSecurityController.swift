@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import LocalAuthentication
 
 class GaiaSecurityController: UIViewController {
 
@@ -16,6 +16,8 @@ class GaiaSecurityController: UIViewController {
         case collectPhase1
         case collectPhase2
     }
+    
+    var context = LAContext()
 
     var collectMode: CollectMode = .validate
     var expectedPin: String? = AppContext.shared.node?.getPinFromKeychain()
@@ -172,7 +174,27 @@ class GaiaSecurityController: UIViewController {
         if AppContext.shared.node?.getPinFromKeychain() == nil {
             collectMode = .collectPhase1
         }
+        titleLabel.text = collectMode == .validate ? "Unlock" : "Create"
         pinStateLabel.text = collectMode == .validate ? "Type your pin" : "Create your pin"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        var error: NSError?
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error), UserDefaults.standard.bool(forKey: GaiaConstants.bioAuthDefautsKey), collectMode == .validate {
+            
+            let reason = "Validate"
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason ) { [weak self] success, error in
+                DispatchQueue.main.async { [weak self] in
+                    if success {
+                        self?.updateStars(value: 4)
+                        self?.onValidate?(true)
+                        self?.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -17,7 +17,8 @@ class GaiaNodeCell: UITableViewCell {
     @IBOutlet weak var leftSubLabel: UILabel!
     @IBOutlet weak var rightLabel: UILabel!
     @IBOutlet weak var roundedView: RoundedView!
-
+    @IBOutlet weak var securedNodeImage: UIImageView!
+    
     func configure(with node: TDMNode) {
         
         switch node.state {
@@ -26,6 +27,7 @@ class GaiaNodeCell: UITableViewCell {
         case .unavailable: stateView.currentState = .unavailable
         case .unknown: stateView.currentState = .unknown
         }
+        securedNodeImage.isHidden = !node.secured
         leftImageView.image = node.nodeLogo
         roundedView.backgroundColor = (stateView.currentState == .active || stateView.currentState == .pending) ? .cellBackgroundColor : .cellBackgroundColorAlpha
         //roundedView.backgroundColor = .cellBackgroundColor

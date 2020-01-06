@@ -46,6 +46,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to scan QR codes for Cosmos addresses</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Use Bio Auth to unlock a node or to sign transactions, when the node is marked as secured.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

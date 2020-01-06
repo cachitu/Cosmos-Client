@@ -306,6 +306,13 @@
                                                                 <outlet property="unknownView" destination="Bfa-OG-uWy" id="XoR-zo-N0F"/>
                                                             </connections>
                                                         </view>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Dy7-Rm-9dm">
+                                                            <rect key="frame" x="323" y="33.333333333333336" width="14" height="18.333333333333336"/>
+                                                            <color key="tintColor" name="LigtherGrayText"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="14" id="kvu-ni-kKH"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" name="CellBackgroundColor"/>
                                                     <constraints>
@@ -316,8 +323,10 @@
                                                         <constraint firstItem="9ba-8s-1iZ" firstAttribute="top" secondItem="7IX-PJ-NL0" secondAttribute="bottom" constant="0.3333333333333286" id="Tid-ik-KON"/>
                                                         <constraint firstItem="X7J-7J-QKU" firstAttribute="centerX" secondItem="eMp-Su-iKW" secondAttribute="centerX" id="Txp-Qh-P9V"/>
                                                         <constraint firstItem="1NZ-Bx-1gu" firstAttribute="leading" secondItem="eMp-Su-iKW" secondAttribute="leading" constant="8" id="VBj-cJ-X0v"/>
+                                                        <constraint firstItem="Dy7-Rm-9dm" firstAttribute="centerY" secondItem="9ba-8s-1iZ" secondAttribute="centerY" id="YHo-vv-CCW"/>
                                                         <constraint firstAttribute="bottom" secondItem="X7J-7J-QKU" secondAttribute="bottom" constant="-11" id="d2h-gY-og7"/>
                                                         <constraint firstItem="vjk-fb-HmH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7IX-PJ-NL0" secondAttribute="trailing" constant="5" id="db0-ug-ORd"/>
+                                                        <constraint firstItem="Dy7-Rm-9dm" firstAttribute="trailing" secondItem="vjk-fb-HmH" secondAttribute="trailing" id="iHh-kR-bS1"/>
                                                         <constraint firstItem="1NZ-Bx-1gu" firstAttribute="centerY" secondItem="eMp-Su-iKW" secondAttribute="centerY" id="leV-MT-aTS"/>
                                                         <constraint firstItem="9ba-8s-1iZ" firstAttribute="leading" secondItem="7IX-PJ-NL0" secondAttribute="leading" id="s8W-dC-Exy"/>
                                                         <constraint firstAttribute="trailing" secondItem="vjk-fb-HmH" secondAttribute="trailing" constant="8" id="uXf-fr-8yc"/>
@@ -345,6 +354,7 @@
                                             <outlet property="leftSubLabel" destination="9ba-8s-1iZ" id="KyP-Lx-PM9"/>
                                             <outlet property="rightLabel" destination="vjk-fb-HmH" id="Cu1-XL-wXt"/>
                                             <outlet property="roundedView" destination="eMp-Su-iKW" id="NX3-aj-Fyz"/>
+                                            <outlet property="securedNodeImage" destination="Dy7-Rm-9dm" id="Sma-Zy-DHa"/>
                                             <outlet property="stateView" destination="X7J-7J-QKU" id="Lqd-uJ-3rJ"/>
                                         </connections>
                                     </tableViewCell>
@@ -463,7 +473,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nSL-0Y-sp3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1697.1014492753625" y="173.4375"/>
+            <point key="canvasLocation" x="-1698.4000000000001" y="172.90640394088672"/>
         </scene>
         <!--Gaia Node Controller-->
         <scene sceneID="XYF-3h-11F">
@@ -2394,6 +2404,7 @@
         <image name="circle" catalog="system" width="64" height="60"/>
         <image name="clipboard" width="11.333333015441895" height="11.333333015441895"/>
         <image name="keyIcon" width="29" height="29.333333969116211"/>
+        <image name="lock" catalog="system" width="64" height="64"/>
         <image name="rcheckBoxChecked" width="20" height="20"/>
         <namedColor name="CellBackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -179,6 +179,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to redelegate to:", message: "\(validator.validator)\nfrom\n\(redelgateFrom)", placeholder: "0 \(denom ?? "stake")") { amount in
                 if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
                     tabBar.onSecurityCheck = { [weak self] succes in
+                        tabBar.onSecurityCheck = nil
                         if succes {
                             self?.broadcastRedelegate(redelgateFrom: redelgateFrom, validator: validator, amount: amount)
                         } else {
@@ -237,6 +238,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to delegate to:", message: "\(validator.validator)", placeholder: "0 \(denom ?? "stake")") { amount in
                 if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
                     tabBar.onSecurityCheck = { [weak self] succes in
+                        tabBar.onSecurityCheck = nil
                         if succes {
                             self?.broadcastDelegate(to: validator, amount: amount)
                         } else {

@@ -81,6 +81,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         if let data = proposeData {
             if AppContext.shared.node?.secured == true, let tabBar = tabBarController as? GaiaTabBarController {
                 tabBar.onSecurityCheck = { [weak self] succes in
+                    tabBar.onSecurityCheck = nil
                     if succes {
                         self?.createProposal(data: data)
                     } else {
@@ -210,6 +211,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             
             if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
                 tabBar.onSecurityCheck = { [weak self] succes in
+                    tabBar.onSecurityCheck = nil
                     if succes {
                         self?.broadcastVoting(proposal: proposal, voteStr: voteStr)
                     } else {
@@ -257,6 +259,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             
             if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
                 tabBar.onSecurityCheck = { [weak self] succes in
+                    tabBar.onSecurityCheck = nil
                     if succes {
                         self?.broadcastDeposit(proposal: proposal, amount: amount ?? "")
                     } else {

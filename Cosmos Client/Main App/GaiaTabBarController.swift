@@ -12,17 +12,16 @@ class GaiaTabBarController: UITabBarController {
 
     var onSecurityCheck: ((_ success: Bool) -> ())?
     private var shouldShouwSecurity = false
-    private var shouldPopNav = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        shouldShouwSecurity = AppContext.shared.node?.secured == true && AppContext.shared.node?.getPinFromKeychain() == nil
+        shouldShouwSecurity = AppContext.shared.node?.secured == true
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             
             if AppContext.shared.node?.secured == true {
-                self?.shouldPopNav = true
-                if (self?.isViewLoaded == true && self?.view.window != nil){
+                if (self?.isViewLoaded == true && self?.view.window != nil) {
                     self?.performSegue(withIdentifier: "ShowSecuritySegue", sender: self)
                 } else {
                     self?.shouldShouwSecurity = true
@@ -43,7 +42,7 @@ class GaiaTabBarController: UITabBarController {
         if let dest = segue.destination as? GaiaSecurityController {
             dest.onValidate = { [weak self] success in
                 self?.onSecurityCheck?(success)
-                if !success, self?.shouldPopNav == true {
+                if !success {
                     self?.navigationController?.popViewController(animated: true)
                 }
             }
@@ -53,7 +52,6 @@ class GaiaTabBarController: UITabBarController {
     }
     
     func promptForPin() {
-        shouldPopNav = false
         performSegue(withIdentifier: "ShowSecuritySegue", sender: self)
     }
 }

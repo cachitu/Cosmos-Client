@@ -103,7 +103,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         refreshNodes()
         navigationController?.navigationBar.barStyle = .default
         
-        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval * 2, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval * 3, repeats: true) { [weak self] timer in
             self?.refreshNodes()
         }
         
@@ -160,13 +160,15 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             noDataView.isHidden = true
             editButton.isHidden = false
 
-            loadingView.startAnimating()
-            editButton.isEnabled = false
-            addButton.isEnabled = false
+//            loadingView.startAnimating()
+//            editButton.isEnabled = false
+//            addButton.isEnabled = false
+//            editButton.alpha = 0.2
             getStatusFor(nodes: validNodes) {
-                weakSelf?.editButton.isEnabled = true
-                weakSelf?.addButton.isEnabled = true
-                weakSelf?.loadingView.stopAnimating()
+//                weakSelf?.editButton.alpha = 1.0
+//                weakSelf?.editButton.isEnabled = true
+//                weakSelf?.addButton.isEnabled = true
+//                weakSelf?.loadingView.stopAnimating()
                 weakSelf?.tableView.reloadData()
             }
         } else {

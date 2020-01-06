@@ -69,10 +69,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuK-Sm-b5W">
                                         <rect key="frame" x="0.0" y="0.0" width="63.666666666666664" height="22"/>
                                         <color key="tintColor" name="DarkGrayText"/>
-                                        <state key="normal" image="star" catalog="system">
+                                        <state key="normal" image="circle" catalog="system">
                                             <color key="titleColor" name="DarkGrayText"/>
                                         </state>
-                                        <state key="selected" image="star.fill" catalog="system"/>
+                                        <state key="selected" image="circle.fill" catalog="system"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
                                                 <color key="value" name="CellBackgroundColor"/>
@@ -83,10 +83,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ClB-kG-e1P">
                                         <rect key="frame" x="63.666666666666671" y="0.0" width="64" height="22"/>
                                         <color key="tintColor" name="DarkGrayText"/>
-                                        <state key="normal" image="star" catalog="system">
+                                        <state key="normal" image="circle" catalog="system">
                                             <color key="titleColor" name="DarkGrayText"/>
                                         </state>
-                                        <state key="selected" image="star.fill" catalog="system"/>
+                                        <state key="selected" image="circle.fill" catalog="system"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
                                                 <color key="value" name="CellBackgroundColor"/>
@@ -97,10 +97,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlT-Al-1fb">
                                         <rect key="frame" x="127.66666666666667" y="0.0" width="63.666666666666671" height="22"/>
                                         <color key="tintColor" name="DarkGrayText"/>
-                                        <state key="normal" image="star" catalog="system">
+                                        <state key="normal" image="circle" catalog="system">
                                             <color key="titleColor" name="DarkGrayText"/>
                                         </state>
-                                        <state key="selected" image="star.fill" catalog="system"/>
+                                        <state key="selected" image="circle.fill" catalog="system"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
                                                 <color key="value" name="CellBackgroundColor"/>
@@ -111,10 +111,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wb-Q9-RB0">
                                         <rect key="frame" x="191.33333333333334" y="0.0" width="63.666666666666657" height="22"/>
                                         <color key="tintColor" name="DarkGrayText"/>
-                                        <state key="normal" image="star" catalog="system">
+                                        <state key="normal" image="circle" catalog="system">
                                             <color key="titleColor" name="DarkGrayText"/>
                                         </state>
-                                        <state key="selected" image="star.fill" catalog="system"/>
+                                        <state key="selected" image="circle.fill" catalog="system"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="activeColor">
                                                 <color key="value" name="CellBackgroundColor"/>
@@ -1426,16 +1426,6 @@
                                     <outlet property="delegate" destination="0ep-XW-mYa" id="J0x-fv-4hg"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zdw-Hg-ciZ">
-                                <rect key="frame" x="16" y="274" width="106" height="32"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                <state key="normal" title="Node Security">
-                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="nodeSecurityAction:" destination="0ep-XW-mYa" eventType="touchUpInside" id="6SK-fz-TMb"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qks-9A-cwS">
                                 <rect key="frame" x="316" y="171.66666666666666" width="43" height="32"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
@@ -1527,19 +1517,24 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Disabled" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qiv-kj-1DM">
-                                <rect key="frame" x="130" y="282.33333333333331" width="56.666666666666657" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Use Biometric Auth" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xO-Y5-c0o">
+                                <rect key="frame" x="16" y="290.66666666666669" width="130" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0wr-mb-T68">
+                                <rect key="frame" x="310" y="283.66666666666669" width="51" height="31"/>
+                                <connections>
+                                    <action selector="bioAuthSwithcAction:" destination="0ep-XW-mYa" eventType="valueChanged" id="mhC-bI-qsS"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="9i2-F6-jHN" secondAttribute="trailing" constant="16" id="4NZ-hx-5Wf"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="bottom" secondItem="Wyl-Wn-gD6" secondAttribute="bottom" constant="20" id="56t-iL-HJX"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="zBV-Xg-Hrh" secondAttribute="trailing" id="A64-Sr-yS9"/>
-                            <constraint firstItem="Zdw-Hg-ciZ" firstAttribute="top" secondItem="Bry-hz-MEj" secondAttribute="bottom" constant="7.3333333333333712" id="DbH-Mr-WeU"/>
                             <constraint firstItem="qks-9A-cwS" firstAttribute="top" secondItem="9i2-F6-jHN" secondAttribute="bottom" constant="35" id="EKA-W7-ea9"/>
                             <constraint firstItem="9i2-F6-jHN" firstAttribute="leading" secondItem="Nt5-pB-f9S" secondAttribute="leading" constant="16" id="FB0-6F-hbC"/>
                             <constraint firstItem="Wyl-Wn-gD6" firstAttribute="leading" secondItem="Nt5-pB-f9S" secondAttribute="leading" constant="16" id="J1C-pT-9Dt"/>
@@ -1550,25 +1545,26 @@
                             <constraint firstItem="Egx-AK-Z65" firstAttribute="centerY" secondItem="qks-9A-cwS" secondAttribute="centerY" id="O0O-hf-pYU"/>
                             <constraint firstItem="399-Qh-Ert" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bry-hz-MEj" secondAttribute="trailing" constant="8" symbolic="YES" id="Olb-Vn-cFb"/>
                             <constraint firstItem="Bry-hz-MEj" firstAttribute="trailing" secondItem="Egx-AK-Z65" secondAttribute="trailing" id="Rae-4G-0Id"/>
+                            <constraint firstItem="0wr-mb-T68" firstAttribute="trailing" secondItem="399-Qh-Ert" secondAttribute="trailing" id="Trd-1I-SRL"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="top" secondItem="EIY-z3-0J8" secondAttribute="top" constant="50" id="Ty5-pO-HFq"/>
                             <constraint firstItem="Bry-hz-MEj" firstAttribute="leading" secondItem="Egx-AK-Z65" secondAttribute="leading" id="Ulg-Ci-V2V"/>
-                            <constraint firstItem="Qiv-kj-1DM" firstAttribute="firstBaseline" secondItem="Zdw-Hg-ciZ" secondAttribute="firstBaseline" id="ZuH-id-f64"/>
                             <constraint firstItem="qks-9A-cwS" firstAttribute="trailing" secondItem="9i2-F6-jHN" secondAttribute="trailing" id="a1A-kR-XTl"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="EIY-z3-0J8" secondAttribute="trailing" id="abt-sa-Asg"/>
-                            <constraint firstItem="Zdw-Hg-ciZ" firstAttribute="leading" secondItem="Bry-hz-MEj" secondAttribute="leading" id="bpB-Yi-bEi"/>
                             <constraint firstItem="Egx-AK-Z65" firstAttribute="top" secondItem="gFA-jj-FXj" secondAttribute="bottom" constant="5" id="bq4-Cz-sCe"/>
                             <constraint firstItem="6Il-nI-y7M" firstAttribute="leading" secondItem="EIY-z3-0J8" secondAttribute="leading" id="cDF-1u-NW6"/>
                             <constraint firstItem="qks-9A-cwS" firstAttribute="leading" secondItem="Egx-AK-Z65" secondAttribute="trailing" constant="8" id="dKu-rb-ECv"/>
                             <constraint firstItem="gFA-jj-FXj" firstAttribute="leading" secondItem="Egx-AK-Z65" secondAttribute="leading" id="etE-JQ-JHj"/>
-                            <constraint firstItem="Qiv-kj-1DM" firstAttribute="leading" secondItem="Zdw-Hg-ciZ" secondAttribute="trailing" constant="8" id="eyI-nJ-6ID"/>
+                            <constraint firstItem="6xO-Y5-c0o" firstAttribute="leading" secondItem="Bry-hz-MEj" secondAttribute="leading" id="eyd-E0-IqV"/>
                             <constraint firstItem="zBV-Xg-Hrh" firstAttribute="top" secondItem="EIY-z3-0J8" secondAttribute="bottom" id="fIB-nC-AZX"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="399-Qh-Ert" secondAttribute="trailing" constant="16" id="fLG-Ff-GWW"/>
                             <constraint firstItem="Egx-AK-Z65" firstAttribute="leading" secondItem="9i2-F6-jHN" secondAttribute="leading" id="gQf-iq-a65"/>
                             <constraint firstItem="9i2-F6-jHN" firstAttribute="top" secondItem="EIY-z3-0J8" secondAttribute="bottom" constant="15" id="ioJ-Hx-Bej"/>
+                            <constraint firstItem="0wr-mb-T68" firstAttribute="centerY" secondItem="6xO-Y5-c0o" secondAttribute="centerY" id="jiX-pv-LKv"/>
                             <constraint firstItem="Nt5-pB-f9S" firstAttribute="trailing" secondItem="Wyl-Wn-gD6" secondAttribute="trailing" constant="16" id="lJZ-96-LCX"/>
                             <constraint firstItem="Bry-hz-MEj" firstAttribute="top" secondItem="5aJ-E3-X0x" secondAttribute="bottom" constant="5" id="oEJ-ek-1b8"/>
                             <constraint firstItem="uea-cp-u47" firstAttribute="centerX" secondItem="Nt5-pB-f9S" secondAttribute="centerX" id="qCG-U9-u0U"/>
                             <constraint firstItem="EIY-z3-0J8" firstAttribute="leading" secondItem="Nt5-pB-f9S" secondAttribute="leading" id="rFA-s5-zyQ"/>
+                            <constraint firstItem="6xO-Y5-c0o" firstAttribute="top" secondItem="Bry-hz-MEj" secondAttribute="bottom" constant="24" id="sE6-sg-CtC"/>
                             <constraint firstItem="399-Qh-Ert" firstAttribute="centerY" secondItem="Bry-hz-MEj" secondAttribute="centerY" id="uSM-QS-Hc9"/>
                             <constraint firstItem="6Il-nI-y7M" firstAttribute="trailing" secondItem="EIY-z3-0J8" secondAttribute="trailing" id="vcd-FS-lqQ"/>
                             <constraint firstItem="6Il-nI-y7M" firstAttribute="top" secondItem="EIY-z3-0J8" secondAttribute="bottom" id="vnx-gK-6Az"/>
@@ -1585,10 +1581,11 @@
                         <outlet property="feeTextField" destination="Egx-AK-Z65" id="70e-hE-J30"/>
                         <outlet property="loadingView" destination="uea-cp-u47" id="rVP-Jz-J0t"/>
                         <outlet property="memoTextField" destination="Bry-hz-MEj" id="qmY-Vn-gs8"/>
-                        <outlet property="nodeSecurityStateLabel" destination="Qiv-kj-1DM" id="yQc-60-Fcz"/>
                         <outlet property="toastHolderTopConstraint" destination="vnx-gK-6Az" id="vJA-JB-bXY"/>
                         <outlet property="toastHolderUnderView" destination="6Il-nI-y7M" id="LjU-DT-wfq"/>
                         <outlet property="topNavBarView" destination="EIY-z3-0J8" id="tLv-SM-WOa"/>
+                        <outlet property="useBioAuthLabel" destination="6xO-Y5-c0o" id="xYS-Z3-Gw6"/>
+                        <outlet property="useBioAuthSwitch" destination="0wr-mb-T68" id="9Z7-U1-v8J"/>
                         <segue destination="p5F-ke-AmB" kind="unwind" identifier="UnwindToWalletSegue" animates="NO" unwindAction="unwindToWalletWithSegue:" id="VI2-MM-M4I"/>
                         <segue destination="p5F-ke-AmB" kind="unwind" identifier="UnwindToWallet" animates="NO" unwindAction="unwindToWalletWithSegue:" id="hy1-SH-4GZ"/>
                         <segue destination="p5F-ke-AmB" kind="unwind" identifier="UnwindToValidators" animates="NO" unwindAction="unwindToValidatorWithSegue:" id="t6P-wG-YMk"/>
@@ -2971,6 +2968,8 @@
         <image name="atom" width="80" height="80"/>
         <image name="atom-2" width="80" height="80"/>
         <image name="bs_logo" width="101" height="29.333333969116211"/>
+        <image name="circle" catalog="system" width="64" height="60"/>
+        <image name="circle.fill" catalog="system" width="64" height="60"/>
         <image name="clear" catalog="system" width="64" height="56"/>
         <image name="clipboard" width="11.333333015441895" height="11.333333015441895"/>
         <image name="delegation" width="30" height="38"/>
@@ -2978,8 +2977,6 @@
         <image name="friendship" width="34.333332061767578" height="31.333333969116211"/>
         <image name="history" width="20.333333969116211" height="18.333333969116211"/>
         <image name="rcheckBoxChecked" width="20" height="20"/>
-        <image name="star" catalog="system" width="64" height="58"/>
-        <image name="star.fill" catalog="system" width="64" height="58"/>
         <namedColor name="CellBackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -196,6 +196,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 let action = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] alertAction in
                     if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
                         tabBar.onSecurityCheck = { [weak self] succes in
+                            tabBar.onSecurityCheck = nil
                             if succes {
                                 self?.loadingView.startAnimating()
                                 self?.toast?.hideToast()
@@ -428,6 +429,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             
             if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
                 tabBar.onSecurityCheck = { [weak self] succes in
+                    tabBar.onSecurityCheck = nil
                     if succes {
                         self?.broadcastDelegate(delegation: delegation, denom: denom, amount: amount)
                     } else {
@@ -473,6 +475,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         self.showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
             if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
                 tabBar.onSecurityCheck = { [weak self] succes in
+                    tabBar.onSecurityCheck = nil
                     if succes {
                         self?.broadcastUnbound(delegation: delegation, denom: denom, amount: amount)
                     } else {
@@ -510,6 +513,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func handleWithdraw(delegation: GaiaDelegation) {
         if AppContext.shared.node?.secured == true, let tabBar = tabBarController as? GaiaTabBarController {
             tabBar.onSecurityCheck = { [weak self] succes in
+                tabBar.onSecurityCheck = nil
                 if succes {
                     self?.broadcastWithdraw(delegation: delegation)
                 } else {
@@ -546,6 +550,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func handleWithdrawComission(delegation: GaiaDelegation) {
         if AppContext.shared.node?.secured == true, let tabBar = tabBarController as? GaiaTabBarController {
             tabBar.onSecurityCheck = { [weak self] succes in
+                tabBar.onSecurityCheck = nil
                 if succes {
                     self?.broadcastWithdrawComission(delegation: delegation)
                 } else {
