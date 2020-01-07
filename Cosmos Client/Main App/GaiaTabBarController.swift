@@ -18,11 +18,11 @@ class GaiaTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        shouldShouwSecurity = AppContext.shared.node?.secured == true
+        shouldShouwSecurity = AppContext.shared.node?.securedNodeAccess == true
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             
-            if AppContext.shared.node?.secured == true {
+            if AppContext.shared.node?.securedNodeAccess == true {
                 if (self?.isViewLoaded == true && self?.view.window != nil) {
                     self?.performSegue(withIdentifier: "ShowSecuritySegue", sender: self)
                 } else {
@@ -51,7 +51,7 @@ class GaiaTabBarController: UITabBarController {
             dest.onCollect = { _ in
             }
         }
-        if let dest = segue.destination as? GaiaCollectAmount {
+        if let dest = segue.destination as? GaiaCollectAmountController {
             dest.onConfirm = { [weak self] in
                 self?.onCollectAmountConfirm?()
             }

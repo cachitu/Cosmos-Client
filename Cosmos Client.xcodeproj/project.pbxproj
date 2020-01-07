@@ -52,7 +52,7 @@
 		EE2D63E821EDAB270002D51D /* UViewController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */; };
 		EE2D63ED21EDCFD30002D51D /* GaiaKeyCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */; };
 		EE2D643C21F306800002D51D /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D643B21F306800002D51D /* UIImage+Extensions.swift */; };
-		EE57EB0223C3A32D00A8786C /* GaiaCollectAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE57EB0123C3A32D00A8786C /* GaiaCollectAmount.swift */; };
+		EE57EB0223C3A32D00A8786C /* GaiaCollectAmountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE57EB0123C3A32D00A8786C /* GaiaCollectAmountController.swift */; };
 		EEA8AA4623B4A1500079C6E3 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8AA4523B4A1500079C6E3 /* AppContext.swift */; };
 		EEAE3E6923A7824700A336FA /* GaiaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAE3E6823A7824700A336FA /* GaiaConstants.swift */; };
 		EEAE3E6B23AA8DEA00A336FA /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAE3E6A23AA8DEA00A336FA /* Onboarding.storyboard */; };
@@ -130,7 +130,7 @@
 		EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UViewController+extensions.swift"; sourceTree = "<group>"; };
 		EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyCreateController.swift; sourceTree = "<group>"; };
 		EE2D643B21F306800002D51D /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
-		EE57EB0123C3A32D00A8786C /* GaiaCollectAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaCollectAmount.swift; sourceTree = "<group>"; };
+		EE57EB0123C3A32D00A8786C /* GaiaCollectAmountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaCollectAmountController.swift; sourceTree = "<group>"; };
 		EEA8AA4523B4A1500079C6E3 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		EEAE3E6823A7824700A336FA /* GaiaConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaConstants.swift; sourceTree = "<group>"; };
 		EEAE3E6A23AA8DEA00A336FA /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				EE17E46823C0916200DEB4F9 /* GaiaTabBarController.swift */,
-				EE57EB0123C3A32D00A8786C /* GaiaCollectAmount.swift */,
+				EE57EB0123C3A32D00A8786C /* GaiaCollectAmountController.swift */,
 				EE1578A923C09294008B9B27 /* GaiaSecurityController.swift */,
 				EE2D63DF21ECF6AF0002D51D /* GaiaWalletController.swift */,
 				8801CF792221921A004781C1 /* GaiaHistoryController.swift */,
@@ -451,7 +451,7 @@
 				8801CF78221F22EF004781C1 /* GaiaProposalController.swift in Sources */,
 				8869754521E9CAD000044EB8 /* SimpleWebView.swift in Sources */,
 				EEAFBF6321F4678D001B01EA /* AddressController.swift in Sources */,
-				EE57EB0223C3A32D00A8786C /* GaiaCollectAmount.swift in Sources */,
+				EE57EB0223C3A32D00A8786C /* GaiaCollectAmountController.swift in Sources */,
 				88A8B7E722464236004F0B82 /* LocalClient.swift in Sources */,
 				8869754321E9CAD000044EB8 /* CenteringFlowLayout.swift in Sources */,
 				8869754721E9CAD000044EB8 /* CustomLoadingView.swift in Sources */,
@@ -645,7 +645,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = SKYG56VM4S;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -665,7 +665,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = SKYG56VM4S;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

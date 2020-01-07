@@ -126,7 +126,7 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
                 }
             } else if let validErr = err {
                 self?.loadingView.stopAnimating()
-                self?.toast?.showToastAlert(validErr, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                self?.toast?.showToastAlert(validErr, type: .error, dismissable: true)
             } else {
                 self?.loadingView.stopAnimating()
                 self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
@@ -158,7 +158,7 @@ class GaiaHistoryController: UIViewController, ToastAlertViewPresentable, GaiaVa
                 }
             } else if let validErr = err {
                 self?.loadingView.stopAnimating()
-                self?.toast?.showToastAlert(validErr, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                self?.toast?.showToastAlert(validErr, type: .error, dismissable: true)
             } else {
                 self?.loadingView.stopAnimating()
                 self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)

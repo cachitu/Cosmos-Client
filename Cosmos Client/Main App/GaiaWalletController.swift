@@ -30,7 +30,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     @IBOutlet weak var feeAmountValueLabel: UILabel!
     @IBOutlet weak var feeAmountDenomLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var sendAmountTextField: UITextField!
     @IBOutlet weak var sendAmountButton: RoundedButton!
     @IBOutlet weak var denomPickerView: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
@@ -123,8 +122,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             addressLabel.text     = validKey.address
         }
         txFeeLabel.text = ""
-        sendAmountButton.isEnabled = false
-        sendAmountTextField.isEnabled = AppContext.shared.key?.watchMode != true
+        sendAmountButton.isEnabled = true
         
         amoutRoundedView?.backgroundColor = AppContext.shared.key?.watchMode == true ? .cellBackgroundColorAlpha : .cellBackgroundColor
         currencyPickerRoundedView?.backgroundColor = amoutRoundedView?.backgroundColor
@@ -178,23 +176,12 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         super.viewDidAppear(animated)
         
         if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                
-                let amount = self?.sendAmountTextField.text ?? "0"
-                let memo = AppContext.shared.node?.defaultMemo ?? ""
-                //let adjusetdDenom = denom == "iris-atto" ? "iris" : denom
-                let alert = UIAlertController(title: "Send \(amount) \(denom) to \(addrToSend)", message: "Memo: \(memo)", preferredStyle: UIAlertController.Style.alert)
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] alertAction in
-                    self?.sendAmountTextField.text = ""
-                    self?.sendAmountButton.isEnabled = false
-                    self?.loadingView.stopAnimating()
-                    self?.senderAddress = nil
-                }
-                
-                let action = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] alertAction in
-                    if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
+            senderAddress = nil
+            if let tabBar = tabBarController as? GaiaTabBarController {
+                tabBar.promptForAmount()
+                tabBar.onCollectAmountConfirm = { [weak self] in
+                    tabBar.onCollectAmountConfirm = nil
+                    if AppContext.shared.node?.securedSigning == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
                         tabBar.onSecurityCheck = { [weak self] succes in
                             tabBar.onSecurityCheck = nil
                             if succes {
@@ -202,8 +189,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                                 self?.toast?.hideToast()
                                 self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
                             } else {
-                                self?.sendAmountTextField.text = ""
-                                self?.sendAmountButton.isEnabled = false
                                 self?.senderAddress = nil
                                 self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
                             }
@@ -215,11 +200,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
                     }
                 }
-                
-                alert.addAction(cancelAction)
-                alert.addAction(action)
-                
-                self?.present(alert, animated:true, completion: nil)
             }
 
         } else {
@@ -258,12 +238,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                    key: key,
                    feeAmount: defaultFeeSigAmount,
                    toAddress: destAddress,
-                   amount: sendAmountTextField.text ?? "0",
+                   amount: AppContext.shared.collectedAmount,
                    denom: denom) { [weak self] resp, msg in
                     DispatchQueue.main.async {
                         
-                        self?.sendAmountTextField.text = ""
-                        self?.sendAmountButton.isEnabled = false
                         self?.loadingView.stopAnimating()
                         
                         if resp != nil {
@@ -275,7 +253,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             if errMsg.contains("connection was lost") {
                                 self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                             } else {
-                                self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                                self?.toast?.showToastAlert(errMsg, type: .error, dismissable: true)
                             }
                         } else {
                             self?.toast?.showToastAlert("Ooops, I failed.", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
@@ -369,6 +347,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 if let matches = account?.assets.filter({ $0.denom == self?.selectedAsset?.denom }) {
                     self?.selectedAsset = matches.first
                 }
+                if AppContext.shared.node?.feeDenom == "", let asset = self?.selectedAsset {
+                    AppContext.shared.node?.feeDenom = asset.denom ?? ""
+                }
                 self?.denomPickerView.reloadAllComponents()
                 
                 if let validAccount = account, let asset = self?.selectedAsset, let amount = asset.amount {
@@ -383,7 +364,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         if message.contains("connection was lost") {
                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                         } else {
-                            self?.toast?.showToastAlert(message, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(message, type: .error, dismissable: true)
                         }
                     }
                     self?.amountValueLabel.text = "0.00"
@@ -429,27 +410,28 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         if let tabBar = tabBarController as? GaiaTabBarController {
             AppContext.shared.colletForStaking = true
             tabBar.promptForAmount()
-            tabBar.onCollectAmountConfirm = {
+            tabBar.onCollectAmountConfirm = { [weak self] in
+                tabBar.onCollectAmountConfirm = nil
+                if AppContext.shared.node?.securedSigning == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
+                    tabBar.onSecurityCheck = { [weak self] succes in
+                        tabBar.onSecurityCheck = nil
+                        if succes {
+                            self?.broadcastDelegate(delegation: delegation, denom: denom, amount: AppContext.shared.collectedAmount)
+                        } else {
+                            self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                        }
+                    }
+                    tabBar.promptForPin()
+                } else {
+                    self?.broadcastDelegate(delegation: delegation, denom: denom, amount: AppContext.shared.collectedAmount)
+                }
             }
             return
         }
         
-        showAmountAlert(title: "Type the amount of \(denom) you want to delegate to:", message: "\(delegation.validatorAddr)\nIt holds\n\(Double(delegation.shares) ?? 0) \(denom) from you.", placeholder: "0 \(denom)") { [weak self] amount in
-            
-            if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
-                tabBar.onSecurityCheck = { [weak self] succes in
-                    tabBar.onSecurityCheck = nil
-                    if succes {
-                        self?.broadcastDelegate(delegation: delegation, denom: denom, amount: amount)
-                    } else {
-                        self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
-                    }
-                }
-                tabBar.promptForPin()
-            } else {
-                self?.broadcastDelegate(delegation: delegation, denom: denom, amount: amount)
-            }
-        }
+//        showAmountAlert(title: "Type the amount of \(denom) you want to delegate to:", message: "\(delegation.validatorAddr)\nIt holds\n\(Double(delegation.shares) ?? 0) \(denom) from you.", placeholder: "0 \(denom)") { [weak self] amount in
+//
+//        }
     }
     
     private func broadcastDelegate(delegation: GaiaDelegation, denom: String, amount: String?) {
@@ -473,7 +455,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                         if errMsg.contains("connection was lost") {
                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                         } else {
-                            self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                            self?.toast?.showToastAlert(errMsg, type: .error, dismissable: true)
                         }
                     }
             }
@@ -484,27 +466,29 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let tabBar = tabBarController as? GaiaTabBarController {
             AppContext.shared.colletForStaking = true
+            
             tabBar.promptForAmount()
-            tabBar.onCollectAmountConfirm = {
+            tabBar.onCollectAmountConfirm = { [weak self] in
+                tabBar.onCollectAmountConfirm = nil
+                if AppContext.shared.node?.securedSigning == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
+                    tabBar.onSecurityCheck = { [weak self] succes in
+                        tabBar.onSecurityCheck = nil
+                        if succes {
+                            self?.broadcastUnbound(delegation: delegation, denom: denom, amount: AppContext.shared.collectedAmount)
+                        } else {
+                            self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                        }
+                    }
+                    tabBar.promptForPin()
+                } else {
+                    self?.broadcastUnbound(delegation: delegation, denom: denom, amount: AppContext.shared.collectedAmount)
+                }
             }
             return
         }
         
-        self.showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
-            if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
-                tabBar.onSecurityCheck = { [weak self] succes in
-                    tabBar.onSecurityCheck = nil
-                    if succes {
-                        self?.broadcastUnbound(delegation: delegation, denom: denom, amount: amount)
-                    } else {
-                        self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
-                    }
-                }
-                tabBar.promptForPin()
-            } else {
-                self?.broadcastUnbound(delegation: delegation, denom: denom, amount: amount)
-            }
-        }
+//        showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
+//        }
     }
     
     private func broadcastUnbound(delegation: GaiaDelegation, denom: String, amount: String?) {
@@ -521,7 +505,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     if errMsg.contains("connection was lost") {
                         self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                     } else {
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(errMsg, type: .error, dismissable: true)
                     }
                 }
             }
@@ -529,7 +513,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     }
     
     private func handleWithdraw(delegation: GaiaDelegation) {
-        if AppContext.shared.node?.secured == true, let tabBar = tabBarController as? GaiaTabBarController {
+        if AppContext.shared.node?.securedSigning == true, let tabBar = tabBarController as? GaiaTabBarController {
             tabBar.onSecurityCheck = { [weak self] succes in
                 tabBar.onSecurityCheck = nil
                 if succes {
@@ -558,7 +542,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     if errMsg.contains("connection was lost") {
                         self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                     } else {
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(errMsg, type: .error, dismissable: true)
                     }
                 }
             }
@@ -566,7 +550,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     }
     
     private func handleWithdrawComission(delegation: GaiaDelegation) {
-        if AppContext.shared.node?.secured == true, let tabBar = tabBarController as? GaiaTabBarController {
+        if AppContext.shared.node?.securedSigning == true, let tabBar = tabBarController as? GaiaTabBarController {
             tabBar.onSecurityCheck = { [weak self] succes in
                 tabBar.onSecurityCheck = nil
                 if succes {
@@ -595,7 +579,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     if errMsg.contains("connection was lost") {
                         self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                     } else {
-                        self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                        self?.toast?.showToastAlert(errMsg, type: .error, dismissable: true)
                     }
                 }
             }
@@ -611,10 +595,6 @@ extension GaiaWalletController: UIPickerViewDelegate {
         self.selectedAsset = AppContext.shared.account?.assets[row]
         self.amountValueLabel.text = self.selectedAsset?.amount
         self.amountDenomLabel.text = self.selectedAsset?.denom
-
-        if let amount = Double(sendAmountTextField.text ?? "0"), let balanceStr = selectedAsset?.amount, let balance = Double(balanceStr) {
-            self.sendAmountButton.isEnabled = amount <= balance
-        }
     }
 }
 
@@ -632,23 +612,6 @@ extension GaiaWalletController: UIPickerViewDataSource {
         let string = AppContext.shared.account?.assets[row].denom ?? ""
         return NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGrayText])
     }
-}
-
-extension GaiaWalletController: UITextFieldDelegate {
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        guard  !textField.isSecureTextEntry else { return true }
-        
-        let newString = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
-        if let amount = Double(newString) {
-            self.sendAmountButton.isEnabled = amount >= 0
-        } else {
-            self.sendAmountButton.isEnabled = false
-        }
-        return true
-    }
-    
 }
 
 extension GaiaWalletController: UITableViewDataSource {

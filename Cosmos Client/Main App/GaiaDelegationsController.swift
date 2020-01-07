@@ -58,7 +58,7 @@ class GaiaDelegationsController: UIViewController, ToastAlertViewPresentable, Ga
                     self?.dataSource = validDelegations
                     self?.tableView.reloadData()
                 } else if let validErr = error {
-                    self?.toast?.showToastAlert(validErr, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                    self?.toast?.showToastAlert(validErr, type: .error, dismissable: true)
                 } else {
                     self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
                 }

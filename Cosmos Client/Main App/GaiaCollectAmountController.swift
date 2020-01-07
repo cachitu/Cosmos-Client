@@ -9,13 +9,13 @@
 import UIKit
 import CosmosRestApi
 
-class GaiaCollectAmount: UIViewController {
+class GaiaCollectAmountController: UIViewController {
 
     var onConfirm: (() -> ())?
     var onlyFeeMode = AppContext.shared.collectOnlyFee
     var stakingOperation = AppContext.shared.colletForStaking
     
-    private var denomPower: Double = AppContext.shared.node?.digits ?? 6
+    private var denomPower: Double = AppContext.shared.node?.decimals ?? 6
     private var maxAmountLenght = 7
     private var maxDigitsLenght = 6
     private var selectedAsset: Coin? {
@@ -237,13 +237,14 @@ class GaiaCollectAmount: UIViewController {
     
     private var pickerDataSource: [Coin] {
         if stakingOperation, !isCollectingFee, let first = AppContext.shared.account?.assets.first {
-             return [first]
+            
+            return [first]
         }
         return AppContext.shared.account?.assets ?? []
     }
 }
 
-extension GaiaCollectAmount: UIPickerViewDelegate {
+extension GaiaCollectAmountController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
@@ -261,7 +262,7 @@ extension GaiaCollectAmount: UIPickerViewDelegate {
     }
 }
 
-extension GaiaCollectAmount: UIPickerViewDataSource {
+extension GaiaCollectAmountController: UIPickerViewDataSource {
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -278,7 +279,7 @@ extension GaiaCollectAmount: UIPickerViewDataSource {
     }
 }
 
-extension GaiaCollectAmount: UITextFieldDelegate {
+extension GaiaCollectAmountController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return true

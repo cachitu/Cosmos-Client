@@ -152,7 +152,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
         super.viewWillAppear(animated)
         updateFeeLabel()
         memoTextField.text = memo
-        nodeSecurityStateLabel?.text = AppContext.shared.node?.secured == true ? "Pin" : "Disabled"
+        nodeSecurityStateLabel?.text = AppContext.shared.node?.securedNodeAccess == true ? "Pin" : "Disabled"
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -27,7 +27,7 @@ class GaiaNodeCell: UITableViewCell {
         case .unavailable: stateView.currentState = .unavailable
         case .unknown: stateView.currentState = .unknown
         }
-        securedNodeImage.isHidden = !node.secured
+        securedNodeImage.isHidden = !node.securedNodeAccess
         leftImageView.image = node.nodeLogo
         roundedView.backgroundColor = (stateView.currentState == .active || stateView.currentState == .pending) ? .cellBackgroundColor : .cellBackgroundColorAlpha
         //roundedView.backgroundColor = .cellBackgroundColor

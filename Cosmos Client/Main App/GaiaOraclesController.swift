@@ -115,7 +115,7 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
                     }
                 }
             } else if let validErr = errMsg {
-                self?.toast?.showToastAlert(validErr, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                self?.toast?.showToastAlert(validErr, type: .error, dismissable: true)
             } else {
                 self?.toast?.showToastAlert("Ooops! I Failed", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
             }
@@ -153,7 +153,7 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
                                         if errMsg.contains("connection was lost") {
                                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                                         } else {
-                                            self?.toast?.showToastAlert(errMsg, autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                                            self?.toast?.showToastAlert(errMsg, type: .error, dismissable: true)
                                         }
                                     }
                 }

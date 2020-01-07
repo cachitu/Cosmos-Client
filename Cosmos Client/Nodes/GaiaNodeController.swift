@@ -27,10 +27,16 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var secureSwitch: UISwitch!
     
     @IBAction func secureSwitchAction(_ sender: UISwitch) {
-        curentNode?.secured = sender.isOn
+        curentNode?.securedNodeAccess = sender.isOn
+        securedSigningSwitch.isEnabled = sender.isOn
         if !sender.isOn {
             AppContext.shared.node?.deletePinFromKeychain()
+            securedSigningSwitch.isOn = false
         }
+    }
+    @IBOutlet weak var securedSigningSwitch: UISwitch!
+    @IBAction func securedSigningSwitch(_ sender: UISwitch) {
+        curentNode?.securedSigning = sender.isOn
     }
     
     @IBOutlet weak var topConstraintOutlet: NSLayoutConstraint!
@@ -140,7 +146,9 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     
     private func prePopulate() {
         
-        secureSwitch.isOn = curentNode?.secured == true
+        secureSwitch.isOn = curentNode?.securedNodeAccess == true
+        securedSigningSwitch.isEnabled = secureSwitch.isOn
+        securedSigningSwitch.isOn = curentNode?.securedSigning == true
         field1RtextField.contentTextField?.text = curentNode?.name
         field2RtextField.contentTextField?.text = curentNode?.host
         field3RtextField.contentTextField?.text = curentNode?.rcpPort != nil ? "\(curentNode?.rcpPort ?? 1317)" : ""
