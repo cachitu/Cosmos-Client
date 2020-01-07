@@ -11,6 +11,8 @@ import UIKit
 class GaiaTabBarController: UITabBarController {
 
     var onSecurityCheck: ((_ success: Bool) -> ())?
+    var onCollectAmountConfirm: (() -> ())?
+    
     private var shouldShouwSecurity = false
 
     override func viewDidLoad() {
@@ -47,6 +49,11 @@ class GaiaTabBarController: UITabBarController {
                 }
             }
             dest.onCollect = { _ in
+            }
+        }
+        if let dest = segue.destination as? GaiaCollectAmount {
+            dest.onConfirm = { [weak self] in
+                self?.onCollectAmountConfirm?()
             }
         }
     }

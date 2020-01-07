@@ -13,7 +13,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     
     var toast: ToastAlertView?
     
-    var defaultFeeSigAmount: String { return AppContext.shared.node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return AppContext.shared.node?.feeAmount  ?? "0" }
 
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
@@ -153,7 +153,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         guard let validNode = AppContext.shared.node, let validKey = AppContext.shared.key, let keysDelegate = AppContext.shared.keysDelegate else { return }
         
         loadingView.startAnimating()
-        validator.unjail(node: validNode, clientDelegate: keysDelegate, key: validKey, feeAmount: defaultFeeSigAmount) { [weak self] resp, errMsg in
+        validator.unjail(node: validNode, clientDelegate: keysDelegate, key: validKey) { [weak self] resp, errMsg in
             self?.loadingView.stopAnimating()
             if let msg = errMsg {
                 if msg.contains("connection was lost") {

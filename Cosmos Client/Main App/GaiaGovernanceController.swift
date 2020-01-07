@@ -13,7 +13,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
 
     var toast: ToastAlertView?
 
-    var defaultFeeSigAmount: String { return AppContext.shared.node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return AppContext.shared.node?.feeAmount  ?? "0" }
     var selectedProposal: GaiaProposal?
     
     @IBOutlet weak var loadingView: CustomLoadingView!

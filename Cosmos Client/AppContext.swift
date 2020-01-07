@@ -22,6 +22,11 @@ struct AppContext {
     
     static var shared = AppContext()
     
+    var collectedAmount: String = "0"
+    var collectedDenom: String = ""
+    var collectOnlyFee = false
+    var colletForStaking = false
+    
     var node: TDMNode?
     var key: GaiaKey?
     var keysDelegate: LocalClient?

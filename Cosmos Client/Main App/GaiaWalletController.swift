@@ -11,7 +11,7 @@ import CosmosRestApi
 
 class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKeysManagementCapable {
     
-    var defaultFeeSigAmount: String { return AppContext.shared.node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return AppContext.shared.node?.feeAmount  ?? "0" }
 
     var toast: ToastAlertView?
     
@@ -378,7 +378,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     
                     self?.txFeeLabel.text = validAccount.firendlyAmountAndDenom(for: AppContext.shared.node?.type ?? .cosmos)
                 } else {
-                    self?.txFeeLabel.text = "Default Fee: \(validNode.defaultTxFee)"
+                    self?.txFeeLabel.text = "Default Fee: " + validNode.feeAmount
                     if let message = errMessage, message.count > 0 {
                         if message.contains("connection was lost") {
                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
@@ -427,7 +427,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func handleDelegate(delegation: GaiaDelegation, denom: String) {
         
         if let tabBar = tabBarController as? GaiaTabBarController {
+            AppContext.shared.colletForStaking = true
             tabBar.promptForAmount()
+            tabBar.onCollectAmountConfirm = {
+            }
             return
         }
         
@@ -478,6 +481,15 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     }
     
     private func handleUnbound(delegation: GaiaDelegation, denom: String) {
+        
+        if let tabBar = tabBarController as? GaiaTabBarController {
+            AppContext.shared.colletForStaking = true
+            tabBar.promptForAmount()
+            tabBar.onCollectAmountConfirm = {
+            }
+            return
+        }
+        
         self.showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
             if AppContext.shared.node?.secured == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
                 tabBar.onSecurityCheck = { [weak self] succes in

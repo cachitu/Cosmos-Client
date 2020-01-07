@@ -12,7 +12,7 @@ import LocalAuthentication
 
 class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
 
-    var defaultFeeSigAmount: String { return AppContext.shared.node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return AppContext.shared.node?.feeAmount  ?? "0" }
     var memo: String { return AppContext.shared.node?.defaultMemo  ?? "Syncnode's iOS Wallet 🙀" }
 
     var toast: ToastAlertView?
@@ -95,7 +95,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
                 self.present(alert, animated: true, completion: nil)
             }
             toast?.showToastAlert("Fee set for node \(nodeName): \(intVal)", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
-            AppContext.shared.node?.defaultTxFee = "\(intVal)"
+            AppContext.shared.node?.feeAmount = "\(intVal)"
             updateFeeLabel()
             peristNodes()
         }
@@ -120,7 +120,7 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
         if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = AppContext.shared.node {
             for savedNode in savedNodes.nodes {
                 if savedNode.network == validNode.network {
-                    savedNode.defaultTxFee = validNode.defaultTxFee
+                    savedNode.feeAmount = validNode.feeAmount
                     savedNode.defaultMemo  = validNode.defaultMemo
                 }
             }
@@ -138,7 +138,6 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
             useBioAuthSwitch.isEnabled = false
         }
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
-        updateFeeLabel()
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             AppContext.shared.node?.getStatus {
@@ -151,14 +150,9 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateFeeLabel()
         memoTextField.text = memo
         nodeSecurityStateLabel?.text = AppContext.shared.node?.secured == true ? "Pin" : "Disabled"
-        if AppContext.shared.node?.type == TDMNodeType.iris || AppContext.shared.node?.type == TDMNodeType.iris_fuxi {
-            feeTextField.isEnabled = false
-            feeTextField.text = "0.41"
-            feeSectionTitleLabel.text = "Current settings: 0.41 iris"
-            feeApplyButton.isHidden = true
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -167,9 +161,9 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
     
     func updateFeeLabel() {
         var feeText = "Current settings: 0"
-        if let amount = AppContext.shared.node?.defaultTxFee {
-            let denom = AppContext.shared.account?.feeDenom ?? ""
-            feeText = "Current settings: \(amount) \(denom)"
+        if let amount = AppContext.shared.node?.feeAmount {
+            let denom = AppContext.shared.node?.feeDenom ?? ""
+            feeText = "Current settings: " + amount + " " + denom
             if Double(amount) ?? 0 > 0.0 {
                 feeTextField.text = amount
             }

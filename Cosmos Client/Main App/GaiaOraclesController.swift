@@ -13,7 +13,7 @@ class GaiaOraclesController: UIViewController, ToastAlertViewPresentable, TerraO
 
     var toast: ToastAlertView?
 
-    var defaultFeeSigAmount: String { return AppContext.shared.node?.defaultTxFee  ?? "0" }
+    var defaultFeeSigAmount: String { return AppContext.shared.node?.feeAmount  ?? "0" }
     
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
