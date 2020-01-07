@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CosmosRestApi
 
 class GaiaCollectAmount: UIViewController {
 
@@ -14,7 +15,16 @@ class GaiaCollectAmount: UIViewController {
     
     private var maxAmountLenght = 7
     private var maxDigitsLenght = 6
-    private var selectedDenom = AppContext.shared.account?.assets.first?.denom ?? "?"
+    private var selectedAsset: Coin? {
+        didSet {
+            let dvalPwr = pow(10.0, denomPower)
+            let denom = selectedAsset?.denom ?? "?"
+            let amount = Double(selectedAsset?.amount ?? "0") ?? 0
+            denomBigLabel.text = denom
+            denomSmallLabel.text = denom
+            availableAmountLabel.text = "\(amount / dvalPwr)"
+        }
+    }
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var amountLabel: UILabel!
@@ -25,8 +35,14 @@ class GaiaCollectAmount: UIViewController {
     @IBOutlet weak var denomPickerView: UIPickerView!
     @IBOutlet weak var amountOrFeeSegment: UISegmentedControl!
     @IBOutlet weak var memoTextField: UITextField!
+    @IBOutlet weak var availableAmountLabel: UILabel!
     
     @IBAction func amountOrFeeSegmentAction(_ sender: UISegmentedControl) {
+    }
+    
+    @IBAction func useMaxAmountAction(_ sender: UIButton) {
+        let data = availableAmountLabel.text ?? "0"
+        digits = Array(data).map { String($0) }
     }
     
     @IBAction func closeAction(_ sender: UIButton) {
@@ -85,8 +101,7 @@ class GaiaCollectAmount: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        denomBigLabel.text = selectedDenom
-        denomSmallLabel.text = selectedDenom
+        selectedAsset = AppContext.shared.account?.assets.first
         amountPowerLabel.text = "\(Int(denomPower))"
         denomPickerView.isHidden = AppContext.shared.account?.assets.count ?? 0 <= 1
         memoTextField.text = AppContext.shared.node?.defaultMemo
@@ -108,9 +123,7 @@ extension GaiaCollectAmount: UIPickerViewDelegate {
         self.view.endEditing(true)
         guard AppContext.shared.account?.assets.count ?? 0 > row else { return }
 
-        let selectedAsset = AppContext.shared.account?.assets[row]
-        self.denomSmallLabel.text = selectedAsset?.denom
-        self.denomBigLabel.text = selectedAsset?.denom
+        selectedAsset = AppContext.shared.account?.assets[row]
     }
 }
 
