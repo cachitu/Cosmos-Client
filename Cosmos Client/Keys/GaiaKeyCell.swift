@@ -63,7 +63,11 @@ class GaiaSharesCell: UITableViewCell {
         leftLabel?.text = "\(parts.first ?? "0") shares to " + validatorName
         leftSubLabel?.text = delegation.validatorAddr
         leftLabel?.textColor = .darkGrayText
-        upRightLabel?.text = delegation.availableReward
+        if AppContext.shared.node?.type == .iris || AppContext.shared.node?.type == .iris_fuxi {
+            upRightLabel?.text = delegation.availableReward + "💰"
+        } else {
+            upRightLabel?.text = delegation.availableRewardNormalised(decimals: Int(AppContext.shared.node?.decimals ?? 6), displayDecimnals: 2) + "💰"
+        }
         roundedView?.backgroundColor = key?.watchMode == true ? .cellBackgroundColorAlpha : .cellBackgroundColor
     }
 }

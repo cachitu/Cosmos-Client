@@ -39,6 +39,9 @@ class GaiaSecurityController: UIViewController {
     }
     
     @IBAction func digitAction(_ sender: RoundedButton) {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+
         if digits.count >= 4 {
             return
         }
@@ -46,6 +49,9 @@ class GaiaSecurityController: UIViewController {
     }
     
     @IBAction func backAction(_ sender: RoundedButton) {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+
         guard  digits.count > 0 else {
             return
         }
@@ -53,6 +59,9 @@ class GaiaSecurityController: UIViewController {
     }
     
     @IBAction func clearAction(_ sender: RoundedButton) {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+
         clearState()
     }
     

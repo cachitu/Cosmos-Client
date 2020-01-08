@@ -122,7 +122,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             addressLabel.text     = validKey.address
         }
         txFeeLabel.text = ""
-        sendAmountButton.isEnabled = true
+        sendAmountButton.isEnabled = !(AppContext.shared.key?.watchMode == true)
         
         amoutRoundedView?.backgroundColor = AppContext.shared.key?.watchMode == true ? .cellBackgroundColorAlpha : .cellBackgroundColor
         currencyPickerRoundedView?.backgroundColor = amoutRoundedView?.backgroundColor
@@ -178,6 +178,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
             senderAddress = nil
             if let tabBar = tabBarController as? GaiaTabBarController {
+                AppContext.shared.colletForStaking = false
                 tabBar.promptForAmount()
                 tabBar.onCollectAmountConfirm = { [weak self] in
                     tabBar.onCollectAmountConfirm = nil
@@ -297,12 +298,12 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     if AppContext.shared.account?.gaiaKey.validator == delegation.validatorAddr {
                         AppContext.shared.key?.queryValidatorRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
                             if let total = rewards {
-                                delegation.availableReward = total + amount > 0 ? "\(total + amount)💰" : ""
+                                delegation.availableReward = total + amount > 0 ? "\(total + amount)" : ""
                                 self?.tableView.reloadData()
                             }
                         }
                     } else {
-                        delegation.availableReward = amount > 0 ? "\(amount)💰" : ""
+                        delegation.availableReward = amount > 0 ? "\(amount)" : ""
                         self?.tableView.reloadData()
                     }
                 }
@@ -352,14 +353,14 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 }
                 self?.denomPickerView.reloadAllComponents()
                 
-                if let validAccount = account, let asset = self?.selectedAsset, let amount = asset.amount {
-                    let finalVal = amount.split(separator: ".").first ?? "0"
-                    self?.amountValueLabel.text = "\(finalVal)"
-                    self?.amountDenomLabel.text = asset.denom
+                if let asset = self?.selectedAsset, let amount = asset.amount?.split(separator: ".").first, let denom = asset.denom {
+                    self?.amountValueLabel.text = asset.deflatedAmount(decimals: Int(AppContext.shared.node?.decimals ?? 6), displayDecimnals: 2)
+                    self?.amountDenomLabel.text = asset.upperDenom
                     
-                    self?.txFeeLabel.text = validAccount.firendlyAmountAndDenom(for: AppContext.shared.node?.type ?? .cosmos)
+                    self?.txFeeLabel.text = amount + " " + denom
                 } else {
-                    self?.txFeeLabel.text = "Default Fee: " + validNode.feeAmount
+                    self?.sendAmountButton.isEnabled = false
+                    self?.txFeeLabel.text = ""
                     if let message = errMessage, message.count > 0 {
                         if message.contains("connection was lost") {
                             self?.toast?.showToastAlert("Tx broadcasted but not confirmed yet", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
@@ -466,7 +467,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let tabBar = tabBarController as? GaiaTabBarController {
             AppContext.shared.colletForStaking = true
-            
             tabBar.promptForAmount()
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil
@@ -593,8 +593,11 @@ extension GaiaWalletController: UIPickerViewDelegate {
         guard AppContext.shared.account?.assets.count ?? 0 > row else { return }
 
         self.selectedAsset = AppContext.shared.account?.assets[row]
-        self.amountValueLabel.text = self.selectedAsset?.amount
-        self.amountDenomLabel.text = self.selectedAsset?.denom
+        self.amountValueLabel.text = self.selectedAsset?.deflatedAmount(decimals: Int(AppContext.shared.node?.decimals ?? 6), displayDecimnals: 2)
+        self.amountDenomLabel.text = self.selectedAsset?.upperDenom
+        let amount = self.selectedAsset?.amount?.split(separator: ".").first ?? "0"
+        let denom = self.selectedAsset?.denom ?? ""
+        self.txFeeLabel.text = amount + " " + denom
     }
 }
 

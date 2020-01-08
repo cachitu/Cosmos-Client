@@ -256,6 +256,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     func handleDeposit(proposal: GaiaProposal) {
         
         if let tabBar = tabBarController as? GaiaTabBarController {
+            AppContext.shared.colletForStaking = true
             tabBar.promptForAmount()
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil

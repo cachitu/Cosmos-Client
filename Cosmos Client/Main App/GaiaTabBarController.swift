@@ -24,6 +24,7 @@ class GaiaTabBarController: UITabBarController {
             
             if AppContext.shared.node?.securedNodeAccess == true {
                 if (self?.isViewLoaded == true && self?.view.window != nil) {
+                    self?.onCollectAmountConfirm = nil
                     self?.performSegue(withIdentifier: "ShowSecuritySegue", sender: self)
                 } else {
                     self?.shouldShouwSecurity = true
@@ -35,6 +36,7 @@ class GaiaTabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if shouldShouwSecurity {
+            onCollectAmountConfirm = nil
             promptForPin()
         }
         shouldShouwSecurity = false

@@ -90,6 +90,10 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     @IBAction func collectAndClose(_ sender: Any) {
         self.view.endEditing(true)
         self.collectData()
+        if curentNode?.type == .iris || curentNode?.type == .iris_fuxi {
+            curentNode?.feeAmount = "300000000000000000"
+        }
+
         self.dismiss(animated: true)
     }
     

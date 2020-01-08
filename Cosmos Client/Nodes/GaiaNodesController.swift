@@ -35,6 +35,13 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     @IBAction func editButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         tableView.setEditing(sender.isSelected, animated: true)
+        if !sender.isSelected {
+            timer?.invalidate()
+            refreshNodes()
+            timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval * 3, repeats: true) { [weak self] timer in
+                self?.refreshNodes()
+            }
+        }
     }
     
     var addressBook: GaiaAddressBook = GaiaAddressBook(items: [])

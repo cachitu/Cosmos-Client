@@ -20,21 +20,11 @@ class GaiaCollectAmountController: UIViewController {
     private var maxDigitsLenght = 6
     private var selectedAsset: Coin? {
         didSet {
-            let dvalPwr = pow(10.0, denomPower)
             let denom = selectedAsset?.denom ?? ""
-            let amount = Double(selectedAsset?.amount ?? "0") ?? 0
             AppContext.shared.collectedDenom = denom
-            denomBigLabel.text = denom
+            denomBigLabel.text = selectedAsset?.upperDenom ?? ""
             denomSmallLabel.text = denom
-            let available = amount / dvalPwr
-            let nsnum = NSNumber(value: available)
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-            numberFormatter.minimumFractionDigits = 0
-            numberFormatter.maximumSignificantDigits = maxDigitsLenght
-            let formated = numberFormatter.string(from: nsnum)
-
-            availableAmountLabel.text = formated
+            availableAmountLabel.text = selectedAsset?.deflatedAmount(decimals: Int(AppContext.shared.node?.decimals ?? 6), displayDecimnals: 6)
         }
     }
     
@@ -47,7 +37,6 @@ class GaiaCollectAmountController: UIViewController {
     @IBOutlet weak var denomBigLabel: UILabel!
     @IBOutlet weak var denomSmallLabel: UILabel!
     @IBOutlet weak var amountSubLabel: UILabel!
-    @IBOutlet weak var amountPowerLabel: UILabel!
     @IBOutlet weak var denomPickerView: UIPickerView!
     @IBOutlet weak var amountOrFeeSegment: UISegmentedControl!
     @IBOutlet weak var memoTextField: UITextField!
@@ -94,6 +83,8 @@ class GaiaCollectAmountController: UIViewController {
     }
     
     @IBAction func digitAction(_ sender: RoundedButton) {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
         self.view.endEditing(true)
         let parts = digits.joined().split(separator: ".")
         if parts.count == 1, parts.first?.count ?? 0 >= maxAmountLenght, digits.last != "." {
@@ -113,6 +104,8 @@ class GaiaCollectAmountController: UIViewController {
     }
     
     @IBAction func backAction(_ sender: RoundedButton) {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
         updatableDigits = digits
         updatableDigits.removeLast()
         if updatableDigits.joined().count < 1 {
@@ -122,6 +115,8 @@ class GaiaCollectAmountController: UIViewController {
     
     @IBAction func dotAction(_ sender: RoundedButton) {
         updatableDigits = digits
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
         if updatableDigits.joined().contains(".") {
             Animations.requireUserAtention(on: amountLabel)
             return
@@ -188,7 +183,6 @@ class GaiaCollectAmountController: UIViewController {
         if AppContext.shared.node?.feeDenom == "" {
             AppContext.shared.node?.feeDenom = selectedAsset?.denom ?? ""
         }
-        amountPowerLabel.text = "\(Int(denomPower))"
         denomPickerView.isHidden = AppContext.shared.account?.assets.count ?? 0 <= 1
         memoTextField.text = AppContext.shared.node?.defaultMemo
         let fee = AppContext.shared.node?.feeAmount ?? "0"
@@ -216,7 +210,8 @@ class GaiaCollectAmountController: UIViewController {
         let strVal = dfee > 0 ? "\(dfee / pow(10.0, denomPower))" : "0"
         updatableDigits = Array(strVal).map { String($0) }
         availableAmountLabel.text = "1"
-        denomBigLabel.text = AppContext.shared.node?.feeDenom
+        let feeDenom = AppContext.shared.node?.feeDenom ?? ""
+        denomBigLabel.text = Coin.upperDenomFrom(denom: feeDenom)
         denomSmallLabel.text = AppContext.shared.node?.feeDenom
         maxAvailableLeadingLabel.text = "Max Fee:"
     }
@@ -254,7 +249,7 @@ extension GaiaCollectAmountController: UIPickerViewDelegate {
         let coin = pickerDataSource[row]
         if isCollectingFee {
             AppContext.shared.node?.feeDenom = coin.denom ?? ""
-            denomBigLabel.text = coin.denom
+            denomBigLabel.text = coin.upperDenom
             denomSmallLabel.text = coin.denom
         } else {
             selectedAsset = coin
