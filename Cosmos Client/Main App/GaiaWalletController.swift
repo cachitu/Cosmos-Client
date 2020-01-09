@@ -128,7 +128,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         currencyPickerRoundedView?.backgroundColor = amoutRoundedView?.backgroundColor
 
         screenTitleLabel.text = AppContext.shared.node?.network ?? "Wallet"
-        swapButton.isHidden = !(AppContext.shared.node?.type == TDMNodeType.terra || AppContext.shared.node?.type == TDMNodeType.terra_118) || AppContext.shared.key?.watchMode == true
+        swapButton.isHidden = !(AppContext.shared.node?.type == TDMNodeType.terra || AppContext.shared.node?.type == TDMNodeType.terra_118) || AppContext.shared.key?.watchMode == true || AppContext.shared.account?.isEmpty == true
         historyButton.isHidden = (AppContext.shared.node?.type == TDMNodeType.iris || AppContext.shared.node?.type == TDMNodeType.iris_fuxi)
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             self?.clearFields()
@@ -179,6 +179,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             senderAddress = nil
             if let tabBar = tabBarController as? GaiaTabBarController {
                 AppContext.shared.colletForStaking = false
+                AppContext.shared.colletMaxAmount = nil
+                AppContext.shared.colletAsset = selectedAsset
                 tabBar.promptForAmount()
                 tabBar.onCollectAmountConfirm = { [weak self] in
                     tabBar.onCollectAmountConfirm = nil
@@ -354,11 +356,13 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 self?.denomPickerView.reloadAllComponents()
                 
                 if let asset = self?.selectedAsset, let amount = asset.amount?.split(separator: ".").first, let denom = asset.denom {
-                    self?.amountValueLabel.text = asset.deflatedAmount(decimals: Int(AppContext.shared.node?.decimals ?? 6), displayDecimnals: 2)
+                    AppContext.shared.account?.isEmpty = false
+                    self?.amountValueLabel.text = asset.deflatedAmount(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 2)
                     self?.amountDenomLabel.text = asset.upperDenom
                     
                     self?.txFeeLabel.text = amount + " " + denom
                 } else {
+                    AppContext.shared.account?.isEmpty = true
                     self?.sendAmountButton.isEnabled = false
                     self?.txFeeLabel.text = ""
                     if let message = errMessage, message.count > 0 {
@@ -410,6 +414,8 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let tabBar = tabBarController as? GaiaTabBarController {
             AppContext.shared.colletForStaking = true
+            AppContext.shared.colletMaxAmount = nil
+            AppContext.shared.colletAsset = nil
             tabBar.promptForAmount()
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil
@@ -467,6 +473,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let tabBar = tabBarController as? GaiaTabBarController {
             AppContext.shared.colletForStaking = true
+            let maxShares = AppContext.shared.isIrisType ? String(delegation.shares.split(separator: ".").first ?? "0") : Coin.deflatedAmountFrom(amount: delegation.shares, decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
+            AppContext.shared.colletMaxAmount = maxShares
+            AppContext.shared.colletAsset = nil
             tabBar.promptForAmount()
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil
@@ -593,7 +602,7 @@ extension GaiaWalletController: UIPickerViewDelegate {
         guard AppContext.shared.account?.assets.count ?? 0 > row else { return }
 
         self.selectedAsset = AppContext.shared.account?.assets[row]
-        self.amountValueLabel.text = self.selectedAsset?.deflatedAmount(decimals: Int(AppContext.shared.node?.decimals ?? 6), displayDecimnals: 2)
+        self.amountValueLabel.text = self.selectedAsset?.deflatedAmount(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 2)
         self.amountDenomLabel.text = self.selectedAsset?.upperDenom
         let amount = self.selectedAsset?.amount?.split(separator: ".").first ?? "0"
         let denom = self.selectedAsset?.denom ?? ""
@@ -648,8 +657,30 @@ extension GaiaWalletController: UITableViewDelegate {
         
         DispatchQueue.main.async {
             
-            guard AppContext.shared.key?.watchMode != true else {
-                self.toast?.showToastAlert("This account is read only", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
+            if AppContext.shared.key?.watchMode == true || AppContext.shared.account?.isEmpty == true {
+                if AppContext.shared.key?.watchMode == true {
+                    self.toast?.showToastAlert("This account is read only", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
+                    return
+                }
+                let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                
+                if delegation.validatorAddr == AppContext.shared.account?.gaiaKey.validator {
+                    let withdrawCommissionAction = UIAlertAction(title: "Withdraw commissions", style: .default) { [weak self] alertAction in
+                        self?.handleWithdrawComission(delegation: delegation)
+                    }
+                    optionMenu.addAction(withdrawCommissionAction)
+                }
+                let withdrawAction = UIAlertAction(title: "Withdraw rewards", style: .default) { [weak self] alertAction in
+                    self?.handleWithdraw(delegation: delegation)
+                }
+
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+                
+                optionMenu.addAction(withdrawAction)
+                optionMenu.addAction(cancelAction)
+                
+                self.present(optionMenu, animated: true, completion: nil)
+
                 return
             }
             
@@ -680,6 +711,8 @@ extension GaiaWalletController: UITableViewDelegate {
             }
             
             let redelegateAction = UIAlertAction(title: "Redelegate", style: .default) { [weak self] alertAction in
+                let maxShares = AppContext.shared.isIrisType ? String(delegation.shares.split(separator: ".").first ?? "0") : Coin.deflatedAmountFrom(amount: delegation.shares, decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
+                AppContext.shared.colletMaxAmount = maxShares
                 AppContext.shared.redelgateFrom = delegation.validatorAddr
                 self?.tabBarController?.selectedIndex = 1
             }

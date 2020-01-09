@@ -12,11 +12,13 @@ import CosmosRestApi
 class GaiaCollectAmountController: UIViewController {
 
     var onConfirm: (() -> ())?
+    var onCancel: (() -> ())?
     var onlyFeeMode = AppContext.shared.collectOnlyFee
     var stakingOperation = AppContext.shared.colletForStaking
     
     private var denomPower: Double = AppContext.shared.node?.decimals ?? 6
     private var maxAmountLenght = 7
+    private var maxFee = 1.0
     private var maxDigitsLenght = 6
     private var selectedAsset: Coin? {
         didSet {
@@ -24,7 +26,11 @@ class GaiaCollectAmountController: UIViewController {
             AppContext.shared.collectedDenom = denom
             denomBigLabel.text = selectedAsset?.upperDenom ?? ""
             denomSmallLabel.text = denom
-            availableAmountLabel.text = selectedAsset?.deflatedAmount(decimals: Int(AppContext.shared.node?.decimals ?? 6), displayDecimnals: 6)
+            availableAmountLabel.text = AppContext.shared.colletMaxAmount ?? selectedAsset?.deflatedAmount(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
+            
+            if Double(availableAmountLabel.text ?? "0") ?? 0 < Double(amountLabel.text ?? "0") ?? 0 {
+                useMaxAmountAction(confirmButton)
+            }
         }
     }
     
@@ -50,7 +56,9 @@ class GaiaCollectAmountController: UIViewController {
         AppContext.shared.collectedAmount = "0"
         AppContext.shared.collectedDenom = ""
         self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            self.onCancel?()
+        }
     }
     
 
@@ -69,10 +77,11 @@ class GaiaCollectAmountController: UIViewController {
             updateForFeeState()
         }
         if sender.selectedSegmentIndex == 0 {
-            maxAvailableLeadingLabel.text = "Available:"
-            updatableDigits = digits
+            maxAvailableLeadingLabel.text = "Max Available:"
             let tmpAsset = selectedAsset
             selectedAsset = tmpAsset
+            movePickerTo(denom: selectedAsset?.denom)
+            updatableDigits = digits
         }
         updatableDigits[0] = updatableDigits.first ?? "0"
     }
@@ -147,6 +156,19 @@ class GaiaCollectAmountController: UIViewController {
                 amountSubLabel.text = numberFormatter.string(from: pwrnum)
                 amountLabel.text = amountDigits.joined()
                 AppContext.shared.collectedAmount = amountSubLabel.text ?? "0"
+                if Double(availableAmountLabel.text ?? "0") ?? 0 < Double(amountLabel.text ?? "0") ?? 0 {
+                    Animations.requireUserAtention(on: amountLabel)
+                    useMaxAmountAction(confirmButton)
+                }
+                if let fee = AppContext.shared.node?.feeAmount, let total = amountSubLabel.text, amountLabel.text == availableAmountLabel.text, AppContext.shared.node?.feeDenom == denomSmallLabel.text {
+                    print("Should substract \(fee) from \(total)")
+                    let dtotal = Double(total) ?? 0
+                    let dfee = Double(fee) ?? 0
+                    let final = dtotal - dfee
+                    let pwrnum = NSNumber(value: final)
+                    amountSubLabel.text = numberFormatter.string(from: pwrnum)
+                    AppContext.shared.collectedAmount = amountSubLabel.text ?? "0"
+                }
             } else {
                 amountLabel.text = "0"
                 amountSubLabel.text = "0"
@@ -160,6 +182,11 @@ class GaiaCollectAmountController: UIViewController {
 
     private func updateFeeDigits() {
         if let dval = Double(feeDigits.joined()) {
+            if dval > maxFee {
+                Animations.requireUserAtention(on: amountLabel)
+                feeDigits = ["1"]
+                return
+            }
             let dvalPwr = dval * pow(10.0, denomPower)
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .none
@@ -178,8 +205,10 @@ class GaiaCollectAmountController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        maxAvailableLeadingLabel.text = "Max Available:"
         AppContext.shared.collectedAmount = "0"
-        selectedAsset = AppContext.shared.account?.assets.first
+        selectedAsset = AppContext.shared.colletAsset ?? AppContext.shared.account?.assets.first
+        movePickerTo(denom: selectedAsset?.denom)
         if AppContext.shared.node?.feeDenom == "" {
             AppContext.shared.node?.feeDenom = selectedAsset?.denom ?? ""
         }
@@ -214,9 +243,15 @@ class GaiaCollectAmountController: UIViewController {
         denomBigLabel.text = Coin.upperDenomFrom(denom: feeDenom)
         denomSmallLabel.text = AppContext.shared.node?.feeDenom
         maxAvailableLeadingLabel.text = "Max Fee:"
+        movePickerTo(denom: feeDenom)
     }
     
-
+    private func movePickerTo(denom: String?) {
+        if let match = pickerDataSource.firstIndex(where: { $0.denom == denom }) {
+            denomPickerView.selectRow(match, inComponent: 0, animated: true)
+        }
+    }
+    
     private func peristNodes() {
         if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = AppContext.shared.node {
             for savedNode in savedNodes.nodes {

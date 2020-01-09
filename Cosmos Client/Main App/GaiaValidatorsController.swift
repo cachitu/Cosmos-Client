@@ -177,7 +177,12 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         
         if let tabBar = tabBarController as? GaiaTabBarController {
             AppContext.shared.colletForStaking = true
+            AppContext.shared.colletAsset = nil
             tabBar.promptForAmount()
+            tabBar.onCollectAmountCancel = { [weak self] in
+                AppContext.shared.redelgateFrom = nil
+                self?.toast?.hideToast()
+            }
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil
                 if AppContext.shared.node?.securedSigning == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
@@ -246,6 +251,8 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         
         if let tabBar = tabBarController as? GaiaTabBarController {
             AppContext.shared.colletForStaking = true
+            AppContext.shared.colletMaxAmount = nil
+            AppContext.shared.colletAsset = nil
             tabBar.promptForAmount()
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil
@@ -393,7 +400,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
                 
                 optionMenu.addAction(detailsAction)
                 optionMenu.addAction(shareAction)
-                if AppContext.shared.key?.watchMode != true { optionMenu.addAction(delegateAction) }
+                if AppContext.shared.key?.watchMode != true, AppContext.shared.account?.isEmpty != true { optionMenu.addAction(delegateAction) }
                 optionMenu.addAction(cancelAction)
                 
 //                if validator.jailed == true {

@@ -12,7 +12,8 @@ class GaiaTabBarController: UITabBarController {
 
     var onSecurityCheck: ((_ success: Bool) -> ())?
     var onCollectAmountConfirm: (() -> ())?
-    
+    var onCollectAmountCancel: (() -> ())?
+
     private var shouldShouwSecurity = false
 
     override func viewDidLoad() {
@@ -56,6 +57,11 @@ class GaiaTabBarController: UITabBarController {
         if let dest = segue.destination as? GaiaCollectAmountController {
             dest.onConfirm = { [weak self] in
                 self?.onCollectAmountConfirm?()
+            }
+            dest.onCancel = { [weak self] in
+                self?.onCollectAmountCancel?()
+                AppContext.shared.colletMaxAmount = nil
+                AppContext.shared.colletAsset = nil
             }
         }
     }

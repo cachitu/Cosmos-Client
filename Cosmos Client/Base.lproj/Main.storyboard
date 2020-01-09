@@ -139,7 +139,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koS-7s-CGV" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="1">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -155,7 +155,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VE3-Ub-Gcd" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="85" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="2">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -171,7 +171,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tJ-zx-klg" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="170" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="3">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -192,7 +192,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFF-3e-GeB" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="4">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -208,7 +208,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kua-TW-LvD" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="85" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="5">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -224,7 +224,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amP-DI-KtV" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="170" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="6">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -245,7 +245,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6as-TN-cAR" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="7">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -261,7 +261,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mct-DH-aYq" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="85" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="8">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -277,7 +277,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbR-Ka-PgX" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="170" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="9">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -314,7 +314,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rf0-0h-SJp" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="85" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -2982,7 +2982,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-rQ-BvO" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="1">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -2998,7 +2998,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MO4-MX-KFE" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="85" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="2">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -3014,7 +3014,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vgu-hL-I8m" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="170" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="3">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -3035,7 +3035,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdj-bO-Seg" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="4">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -3051,7 +3051,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Umc-GQ-LG4" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="85" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="5">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -3067,7 +3067,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HAe-tT-fkh" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="170" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="6">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -3088,7 +3088,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oI3-uZ-UGr" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="7">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -3104,7 +3104,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Yi-TD-0f8" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="85" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="8">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -3120,7 +3120,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAF-mx-c2s" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="170" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="9">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -3158,7 +3158,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyH-cG-eaY" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="85" y="0.0" width="65" height="63.333333333333336"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" name="DarkGrayText"/>
                                                 </state>
@@ -3174,6 +3174,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Jb-on-Vew" userLabel="B" customClass="RoundedButton" customModule="T_Stake" customModuleProvider="target">
                                                 <rect key="frame" x="170" y="0.0" width="65" height="63.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <color key="tintColor" name="DarkGrayText"/>
                                                 <state key="normal" image="delete.left" catalog="system">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3216,8 +3217,8 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gkf-BD-TGK">
-                                <rect key="frame" x="313" y="15.666666666666664" width="54" height="29"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <rect key="frame" x="307" y="14" width="60" height="32"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="Confirm">
                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -3239,31 +3240,6 @@
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Available:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXZ-hX-ihb">
-                                <rect key="frame" x="16" y="170" width="64.666666666666671" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="DarkGrayText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0 uluna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1tK-rN-XAF">
-                                <rect key="frame" x="107" y="170" width="50.666666666666671" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="DarkGrayText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21I-Bv-FCG">
-                                <rect key="frame" x="172" y="165" width="30" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                <state key="normal" title="Set">
-                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="useMaxAmountAction:" destination="dvE-B7-5wz" eventType="touchUpInside" id="BAp-nn-K1a"/>
-                                </connections>
-                            </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Amount:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wF-ow-PuX">
                                 <rect key="frame" x="16" y="148" width="58" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3294,6 +3270,28 @@
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXZ-hX-ihb">
+                                <rect key="frame" x="16" y="58" width="64.666666666666671" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" name="DarkGrayText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 uluna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1tK-rN-XAF">
+                                <rect key="frame" x="84.666666666666671" y="58" width="50.666666666666671" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" name="DarkGrayText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21I-Bv-FCG">
+                                <rect key="frame" x="143.33333333333334" y="52.666666666666657" width="30" height="29"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <state key="normal" title="Set">
+                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="useMaxAmountAction:" destination="dvE-B7-5wz" eventType="touchUpInside" id="BAp-nn-K1a"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
@@ -3303,8 +3301,10 @@
                             <constraint firstItem="Nv8-Td-oMh" firstAttribute="centerY" secondItem="fkC-lt-rF6" secondAttribute="centerY" id="4ci-0X-S1i"/>
                             <constraint firstItem="Aus-mE-iY1" firstAttribute="trailing" secondItem="FCJ-h7-LR7" secondAttribute="trailing" id="5iV-CQ-uwA"/>
                             <constraint firstItem="K54-51-7UI" firstAttribute="trailing" secondItem="Gkf-BD-TGK" secondAttribute="trailing" constant="8" id="5sw-Ev-N5F"/>
+                            <constraint firstItem="1tK-rN-XAF" firstAttribute="centerY" secondItem="XXZ-hX-ihb" secondAttribute="centerY" id="7Cq-8k-qKF"/>
                             <constraint firstItem="Gkf-BD-TGK" firstAttribute="centerY" secondItem="fPX-7o-jfc" secondAttribute="centerY" id="7Nt-r1-Zfq"/>
                             <constraint firstItem="fkC-lt-rF6" firstAttribute="leading" secondItem="Nv8-Td-oMh" secondAttribute="trailing" constant="10" id="AFM-Xn-DeN"/>
+                            <constraint firstItem="1tK-rN-XAF" firstAttribute="leading" secondItem="XXZ-hX-ihb" secondAttribute="trailing" constant="4" id="DLn-tS-fIx"/>
                             <constraint firstItem="jBu-kP-5Uf" firstAttribute="leading" secondItem="V3E-So-zMn" secondAttribute="trailing" constant="4" id="G1Z-wJ-GSr"/>
                             <constraint firstItem="V3E-So-zMn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K54-51-7UI" secondAttribute="leading" constant="8" id="JqH-h2-WyM"/>
                             <constraint firstItem="fkC-lt-rF6" firstAttribute="top" secondItem="jBu-kP-5Uf" secondAttribute="bottom" constant="1" id="Lf5-Fr-h8o"/>
@@ -3314,14 +3314,18 @@
                             <constraint firstItem="FCJ-h7-LR7" firstAttribute="top" secondItem="Aus-mE-iY1" secondAttribute="bottom" constant="8.6666666666667425" id="U3I-cI-TOY"/>
                             <constraint firstItem="FCJ-h7-LR7" firstAttribute="leading" secondItem="K54-51-7UI" secondAttribute="leading" constant="70" id="UqA-Ft-DQg"/>
                             <constraint firstItem="K54-51-7UI" firstAttribute="bottom" secondItem="FCJ-h7-LR7" secondAttribute="bottom" constant="24" id="VyN-ma-nAh"/>
+                            <constraint firstItem="XXZ-hX-ihb" firstAttribute="leading" secondItem="K54-51-7UI" secondAttribute="leading" constant="16" id="WOh-pz-FTZ"/>
                             <constraint firstItem="fPX-7o-jfc" firstAttribute="centerX" secondItem="K54-51-7UI" secondAttribute="centerX" id="nbT-ll-hsQ"/>
                             <constraint firstItem="Aus-mE-iY1" firstAttribute="leading" secondItem="FCJ-h7-LR7" secondAttribute="leading" id="p2N-JQ-5IZ"/>
+                            <constraint firstItem="21I-Bv-FCG" firstAttribute="centerY" secondItem="1tK-rN-XAF" secondAttribute="centerY" id="prM-mM-NdR"/>
                             <constraint firstItem="NSU-7V-CaY" firstAttribute="leading" secondItem="Aus-mE-iY1" secondAttribute="leading" id="q9b-nA-Oa7"/>
                             <constraint firstItem="V3E-So-zMn" firstAttribute="centerX" secondItem="fPX-7o-jfc" secondAttribute="centerX" priority="750" id="ssx-D3-I8s"/>
                             <constraint firstItem="K54-51-7UI" firstAttribute="trailing" secondItem="FCJ-h7-LR7" secondAttribute="trailing" constant="70" id="tUS-Rw-3z3"/>
                             <constraint firstItem="V3E-So-zMn" firstAttribute="top" secondItem="fPX-7o-jfc" secondAttribute="bottom" constant="30" id="tdv-hC-KX0"/>
                             <constraint firstItem="NSU-7V-CaY" firstAttribute="trailing" secondItem="Aus-mE-iY1" secondAttribute="trailing" id="vWj-o4-RBj"/>
+                            <constraint firstItem="21I-Bv-FCG" firstAttribute="leading" secondItem="1tK-rN-XAF" secondAttribute="trailing" constant="8" id="yKa-7V-HnE"/>
                             <constraint firstItem="qeY-Ud-BBz" firstAttribute="leading" secondItem="K54-51-7UI" secondAttribute="leading" constant="8" id="yYY-Zo-Qwn"/>
+                            <constraint firstItem="XXZ-hX-ihb" firstAttribute="top" secondItem="K54-51-7UI" secondAttribute="top" constant="58" id="zPB-xK-9xE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="K54-51-7UI"/>
                     </view>

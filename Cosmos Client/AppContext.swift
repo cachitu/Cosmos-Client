@@ -26,7 +26,9 @@ struct AppContext {
     var collectedDenom: String = ""
     var collectOnlyFee = false
     var colletForStaking = false
-    
+    var colletAsset: Coin? = nil
+    var colletMaxAmount: String? = nil
+
     var node: TDMNode?
     var key: GaiaKey?
     var keysDelegate: LocalClient?
@@ -36,6 +38,14 @@ struct AppContext {
     var onHashPolingPending: (() -> ())?
     var onHashPolingDone: (() -> ())?
 
+    var nodeDecimals: Int {
+        return Int(node?.decimals ?? 6)
+    }
+    
+    var isIrisType: Bool {
+        return node?.type == .iris || node?.type == .iris_fuxi
+    }
+    
     private var pendingHashes: [String : PersitsableHash] = [:]
     private var polingTimer: Timer?
     

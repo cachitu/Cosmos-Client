@@ -35,7 +35,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     override func viewDidLoad() {
         super.viewDidLoad()
         addButton.layer.cornerRadius = addButton.frame.size.height / 2
-        addButton.isHidden = AppContext.shared.key?.watchMode == true
+        addButton.isHidden = AppContext.shared.key?.watchMode == true || AppContext.shared.account?.isEmpty == true
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
@@ -257,6 +257,8 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         
         if let tabBar = tabBarController as? GaiaTabBarController {
             AppContext.shared.colletForStaking = true
+            AppContext.shared.colletMaxAmount = nil
+            AppContext.shared.colletAsset = nil
             tabBar.promptForAmount()
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil
@@ -354,7 +356,7 @@ extension GaiaGovernanceController: UITableViewDelegate {
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
             
-            let editable =  AppContext.shared.key?.watchMode != true
+            let editable =  AppContext.shared.key?.watchMode != true && AppContext.shared.account?.isEmpty != true
             
             switch (proposal.status, editable) {
             case ("Passed", true)  :

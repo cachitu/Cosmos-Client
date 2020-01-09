@@ -66,7 +66,7 @@ class GaiaSharesCell: UITableViewCell {
         if AppContext.shared.node?.type == .iris || AppContext.shared.node?.type == .iris_fuxi {
             upRightLabel?.text = delegation.availableReward + "💰"
         } else {
-            upRightLabel?.text = delegation.availableRewardNormalised(decimals: Int(AppContext.shared.node?.decimals ?? 6), displayDecimnals: 2) + "💰"
+            upRightLabel?.text = delegation.availableRewardNormalised(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 2) + "💰"
         }
         roundedView?.backgroundColor = key?.watchMode == true ? .cellBackgroundColorAlpha : .cellBackgroundColor
     }
