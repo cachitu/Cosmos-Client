@@ -181,10 +181,10 @@ public class ToastAlertView: UIView {
                 case .error:
                     self.view.backgroundColor = UIColor.darkRed
                 case .info:
-                    self.view.backgroundColor = UIColor.defaultBackground
+                    self.view.backgroundColor = UIColor.systemBlue
                     imageName = "infoWhite"
                 case .success:
-                    self.view.backgroundColor = UIColor.defaultBackground
+                    self.view.backgroundColor = UIColor.systemGreen
                     imageName = "successWhite"
                 case .deletePending:
                     self.view.backgroundColor = UIColor.darkRed
