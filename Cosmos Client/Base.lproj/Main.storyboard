@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZcB-As-1TX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZcB-As-1TX">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1429,7 +1429,6 @@
                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="applyFee:" destination="0ep-XW-mYa" eventType="touchUpInside" id="5Et-gf-97x"/>
                                     <action selector="applyMemo:" destination="0ep-XW-mYa" eventType="touchUpInside" id="PbI-UC-T48"/>
                                 </connections>
                             </button>
@@ -3197,13 +3196,13 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="V3E-So-zMn">
-                                <rect key="frame" x="175.66666666666666" y="75.666666666666671" width="23.666666666666657" height="44.333333333333329"/>
+                                <rect key="frame" x="175.66666666666666" y="85.666666666666671" width="23.666666666666657" height="44.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="37"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="uluna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBu-kP-5Uf">
-                                <rect key="frame" x="203.33333333333334" y="93" width="46.333333333333343" height="23"/>
+                                <rect key="frame" x="203.33333333333334" y="103" width="46.333333333333343" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
@@ -3259,31 +3258,31 @@
                                 </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Nv8-Td-oMh">
-                                <rect key="frame" x="184" y="117" width="9.3333333333333428" height="18"/>
+                                <rect key="frame" x="184" y="127" width="9.3333333333333428" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="uluna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkC-lt-rF6">
-                                <rect key="frame" x="203.33333333333334" y="117" width="37.333333333333343" height="18"/>
+                                <rect key="frame" x="203.33333333333334" y="127" width="37.333333333333343" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXZ-hX-ihb">
-                                <rect key="frame" x="16" y="58" width="64.666666666666671" height="18"/>
+                                <rect key="frame" x="16" y="55" width="64.666666666666671" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="DarkGrayText"/>
+                                <color key="textColor" name="LigtherGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 uluna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1tK-rN-XAF">
-                                <rect key="frame" x="84.666666666666671" y="58" width="50.666666666666671" height="18"/>
+                                <rect key="frame" x="84.666666666666671" y="55" width="50.666666666666671" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="DarkGrayText"/>
+                                <color key="textColor" name="LigtherGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21I-Bv-FCG">
-                                <rect key="frame" x="143.33333333333334" y="52.666666666666657" width="30" height="29"/>
+                                <rect key="frame" x="143.33333333333334" y="49.666666666666657" width="30" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <state key="normal" title="Set">
                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3321,11 +3320,11 @@
                             <constraint firstItem="NSU-7V-CaY" firstAttribute="leading" secondItem="Aus-mE-iY1" secondAttribute="leading" id="q9b-nA-Oa7"/>
                             <constraint firstItem="V3E-So-zMn" firstAttribute="centerX" secondItem="fPX-7o-jfc" secondAttribute="centerX" priority="750" id="ssx-D3-I8s"/>
                             <constraint firstItem="K54-51-7UI" firstAttribute="trailing" secondItem="FCJ-h7-LR7" secondAttribute="trailing" constant="70" id="tUS-Rw-3z3"/>
-                            <constraint firstItem="V3E-So-zMn" firstAttribute="top" secondItem="fPX-7o-jfc" secondAttribute="bottom" constant="30" id="tdv-hC-KX0"/>
+                            <constraint firstItem="V3E-So-zMn" firstAttribute="top" secondItem="fPX-7o-jfc" secondAttribute="bottom" constant="40" id="tdv-hC-KX0"/>
                             <constraint firstItem="NSU-7V-CaY" firstAttribute="trailing" secondItem="Aus-mE-iY1" secondAttribute="trailing" id="vWj-o4-RBj"/>
                             <constraint firstItem="21I-Bv-FCG" firstAttribute="leading" secondItem="1tK-rN-XAF" secondAttribute="trailing" constant="8" id="yKa-7V-HnE"/>
                             <constraint firstItem="qeY-Ud-BBz" firstAttribute="leading" secondItem="K54-51-7UI" secondAttribute="leading" constant="8" id="yYY-Zo-Qwn"/>
-                            <constraint firstItem="XXZ-hX-ihb" firstAttribute="top" secondItem="K54-51-7UI" secondAttribute="top" constant="58" id="zPB-xK-9xE"/>
+                            <constraint firstItem="XXZ-hX-ihb" firstAttribute="top" secondItem="K54-51-7UI" secondAttribute="top" constant="55" id="zPB-xK-9xE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="K54-51-7UI"/>
                     </view>

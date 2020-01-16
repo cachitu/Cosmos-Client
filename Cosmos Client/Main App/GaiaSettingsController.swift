@@ -13,7 +13,7 @@ import LocalAuthentication
 class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
 
     var defaultFeeSigAmount: String { return AppContext.shared.node?.feeAmount  ?? "0" }
-    var memo: String { return AppContext.shared.node?.defaultMemo  ?? "Syncnode's iOS Wallet 🙀" }
+    var memo: String { return AppContext.shared.node?.defaultMemo  ?? "" }
 
     var toast: ToastAlertView?
     var context = LAContext()

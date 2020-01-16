@@ -56,9 +56,9 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     var filteredDataSource: [GaiaKey] {
         return reusePickerMode ?
             dataSource.filter {
-                $0.watchMode == false && $0.type != AppContext.shared.node?.type.rawValue
+                $0.watchMode == false && $0.networkName != AppContext.shared.node?.network
             } : dataSource.filter {
-                $0.type == AppContext.shared.node?.type.rawValue
+                $0.type == AppContext.shared.node?.type.rawValue && $0.networkName == AppContext.shared.node?.network
         }
     }
     var selectedKey: GaiaKey?
@@ -67,16 +67,16 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     
     private func createTheDefauktKey() {
         
-        guard AppContext.shared.node?.appleKeyCreated == false else {
+        guard AppContext.shared.node?.appleKeyCreated == false, let node = AppContext.shared.node else {
             return
         }
         
         let mnemonic = "find cliff book sweet clip dwarf minor boat lamp visual maid reject crazy during hollow vanish sunny salt march kangaroo episode crash anger virtual"
         
         if let appleKey = AppContext.shared.keysDelegate?.recoverKey(from: mnemonic, name: "appleTest1", password: "test1234") {
-            let gaiaKey = GaiaKey(data: appleKey, nodeId: AppContext.shared.node?.type.rawValue ?? "")
+            let gaiaKey = GaiaKey(data: appleKey, nodeId: node.type.rawValue, networkName: node.network)
             dataSource.append(gaiaKey)
-            AppContext.shared.node?.appleKeyCreated = true
+            node.appleKeyCreated = true
             if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = AppContext.shared.node {
                 for savedNode in savedNodes.nodes {
                     if savedNode.network == validNode.network {
@@ -186,7 +186,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             name: name,
             address: address,
             valAddress: nil,
-            nodeType: AppContext.shared.node?.type ?? .cosmos, nodeId: AppContext.shared.node?.nodeID ?? "")
+            nodeType: AppContext.shared.node?.type ?? .cosmos, nodeId: AppContext.shared.node?.nodeID ?? "", networkName: AppContext.shared.node?.network ?? "")
         
         DispatchQueue.main.async {
             self.dataSource.insert(gaiaKey, at: 0)
