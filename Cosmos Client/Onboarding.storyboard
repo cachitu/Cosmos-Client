@@ -1941,6 +1941,7 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lQ8-Ut-lgb">
                                         <rect key="frame" x="121" y="0.0" width="58" height="58"/>
+                                        <color key="tintColor" name="DarkGrayText"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add keys" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rev-U9-mt1">
                                         <rect key="frame" x="67.999999999999986" y="80" width="163.66666666666663" height="20.333333333333329"/>

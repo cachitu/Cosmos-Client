@@ -126,6 +126,11 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         PersistableGaiaNodes(nodes: nodes).savetoDisk()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        toast?.hideToast()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -271,6 +276,12 @@ extension GaiaNodesController: UITableViewDelegate {
                 self.performSegue(withIdentifier: "NodeEditSegue", sender: self)
             } else {
                 if (self.selectedNode?.state == .active || self.selectedNode?.state == .pending) {
+                    if self.selectedNode?.appleKeyCreated != true {
+                        for node in self.nodes {
+                            node.appleKeyCreated = true
+                        }
+                        self.selectedNode?.appleKeyCreated = false
+                    }
                     AppContext.shared.node = self.selectedNode
                     self.performSegue(withIdentifier: "ShowNodeKeysSegue", sender: self)
                 } else {

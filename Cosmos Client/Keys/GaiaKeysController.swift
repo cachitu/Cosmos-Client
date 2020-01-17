@@ -54,10 +54,11 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     
     var dataSource: [GaiaKey] = []
     var filteredDataSource: [GaiaKey] {
-        return reusePickerMode ?
-            dataSource : dataSource.filter {
-                $0.type == AppContext.shared.node?.type.rawValue && $0.nodeId == AppContext.shared.node?.nodeID
-        }
+        return
+            reusePickerMode ?
+                dataSource.filter { $0.watchMode != true && $0.nodeId != AppContext.shared.node?.nodeID }
+                :
+                dataSource.filter { $0.nodeId == AppContext.shared.node?.nodeID }
     }
     var selectedKey: GaiaKey?
     var selectedIndex: Int?
@@ -72,17 +73,9 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         let mnemonic = "find cliff book sweet clip dwarf minor boat lamp visual maid reject crazy during hollow vanish sunny salt march kangaroo episode crash anger virtual"
         
         if let appleKey = AppContext.shared.keysDelegate?.recoverKey(from: mnemonic, name: "appleTest1", password: "test1234") {
-            let gaiaKey = GaiaKey(data: appleKey, nodeId: node.type.rawValue, networkName: node.network)
+            let gaiaKey = GaiaKey(data: appleKey, nodeId: node.nodeID, networkName: node.network)
             dataSource.append(gaiaKey)
             node.appleKeyCreated = true
-            if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes, let validNode = AppContext.shared.node {
-                for savedNode in savedNodes.nodes {
-                    if savedNode.network == validNode.network {
-                        savedNode.appleKeyCreated = true
-                    }
-                }
-                PersistableGaiaNodes(nodes: savedNodes.nodes).savetoDisk()
-            }
 
             PersistableGaiaKeys(keys: dataSource).savetoDisk()
         }
@@ -122,7 +115,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         editButton.isHidden = filteredDataSource.count == 0
         
         if reusePickerMode {
-            toast?.showToastAlert("Tap on any key form any node type to recover it on this one. The public address will be generated for this node type's format.", type: .info, dismissable: true)
+            toast?.showToastAlert("Tap on any key from any node type to recover it on this one. The public address will be generated for this node type's format.", type: .info, dismissable: true)
         }
     }
     
@@ -238,7 +231,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             if key.password == pass {
                 completion?(true)
             } else {
-                self?.toast?.showToastAlert("Wrong unlock key password.", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                self?.toast?.showToastAlert("Wrong unlock key password.", type: .error, dismissable: true)
                 completion?(false)
             }
         }
@@ -352,20 +345,20 @@ extension GaiaKeysController: UITableViewDataSource {
                     if success {
                         self.purgeKey(key, index: index)
                     } else {
-//                        let alert = UIAlertController(title: "Do you want to delete this key anyway? This action can't be undone and the mnemonic is lost forever.", message: "", preferredStyle: UIAlertController.Style.alert)
-//                        
-//                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { alertAction in
-//                        }
-//
-//                        let action = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] alertAction in
-//                            self?.toast?.hideToast()
-//                            self?.purgeKey(key, index: index)
-//                        }
-//                        
-//                        alert.addAction(cancelAction)
-//                        alert.addAction(action)
-//                        
-//                        self.present(alert, animated:true, completion: nil)
+                        let alert = UIAlertController(title: "Do you want to delete this key anyway? This action can't be undone and the mnemonic is lost forever.", message: "", preferredStyle: UIAlertController.Style.alert)
+
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { alertAction in
+                        }
+
+                        let action = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] alertAction in
+                            self?.toast?.hideToast()
+                            self?.purgeKey(key, index: index)
+                        }
+
+                        alert.addAction(cancelAction)
+                        alert.addAction(action)
+
+                        self.present(alert, animated:true, completion: nil)
                     }
                 }
             }

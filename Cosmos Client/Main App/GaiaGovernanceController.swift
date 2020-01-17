@@ -153,7 +153,7 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
                     
                     dispatchGroup.notify(queue: .main) {
                         self?.loadingView.stopAnimating()
-                        self?.dataSource = tmpDataSource.sorted() { $0.proposalId > $1.proposalId }
+                        self?.dataSource = tmpDataSource.sorted() { $0.submitTime > $1.submitTime }
                         self?.tableView.reloadData()
                     }
 
