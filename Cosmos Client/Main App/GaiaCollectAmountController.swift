@@ -31,12 +31,23 @@ class GaiaCollectAmountController: UIViewController {
             if Double(availableAmountLabel.text ?? "0") ?? 0 < Double(amountLabel.text ?? "0") ?? 0 {
                 useMaxAmountAction(confirmButton)
             }
+            
+            if AppContext.shared.collectSummary.first?.starts(with: "Send") == true {
+                AppContext.shared.collectSummary[0] = "Send \(denom)"
+            }
         }
     }
     
     private var isCollectingFee: Bool {
         return amountOrFeeSegment.selectedSegmentIndex == 1
     }
+    
+    @IBOutlet weak var summary1Label: UILabel!
+    @IBOutlet weak var summary2Label: UILabel!
+    @IBOutlet weak var summary3Label: UILabel!
+    @IBOutlet weak var finalAmount: UILabel!
+    @IBOutlet weak var finalFee: UILabel!
+    @IBOutlet weak var finalMemo: UILabel!
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var amountLabel: UILabel!
@@ -48,6 +59,8 @@ class GaiaCollectAmountController: UIViewController {
     @IBOutlet weak var memoTextField: UITextField!
     @IBOutlet weak var availableAmountLabel: UILabel!
     @IBOutlet weak var maxAvailableLeadingLabel: UILabel!
+    @IBOutlet weak var summaryView: UIView!
+    @IBOutlet weak var summaryCenterX: NSLayoutConstraint!
     
     @IBOutlet weak var confirmButton: UIButton!
     
@@ -61,7 +74,41 @@ class GaiaCollectAmountController: UIViewController {
     }
     
 
+    @IBAction func backFromSummary(_ sender: UIButton) {
+        summaryCenterX.constant = UIScreen.main.bounds.width
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     @IBAction func confirmAction(_ sender: UIButton) {
+        if AppContext.shared.collectSummary.count == 3 {
+            summaryCenterX.constant = 0
+            summary1Label.text = AppContext.shared.collectSummary[0]
+            summary2Label.text = AppContext.shared.collectSummary[1]
+            summary3Label.text = AppContext.shared.collectSummary[2]
+            
+            let memo = memoTextField.text ?? ""
+            let feeDenom = AppContext.shared.node?.feeDenom ?? ""
+            let feeAmount = AppContext.shared.node?.feeAmount ?? "0"
+            finalMemo.text = "Memo: \(memo)"
+            finalAmount.text = "Amount (\(amountLabel.text ?? "0") \(denomBigLabel.text ?? "-")):\n" + AppContext.shared.collectedAmount + " " + AppContext.shared.collectedDenom
+            finalFee.text = "Fee:\n" + feeAmount + " " + feeDenom
+            
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        } else {
+            AppContext.shared.node?.defaultMemo = memoTextField.text ?? ""
+            self.peristNodes()
+            self.view.endEditing(true)
+            self.dismiss(animated: true) {
+                self.onConfirm?()
+            }
+        }
+    }
+    
+    @IBAction func confirmTransaction(_ sender: RoundedButton) {
         AppContext.shared.node?.defaultMemo = memoTextField.text ?? ""
         self.peristNodes()
         self.view.endEditing(true)
@@ -155,18 +202,22 @@ class GaiaCollectAmountController: UIViewController {
                 amountSubLabel.text = numberFormatter.string(from: pwrnum)
                 amountLabel.text = amountDigits.joined()
                 AppContext.shared.collectedAmount = amountSubLabel.text ?? "0"
-                if Double(availableAmountLabel.text ?? "0") ?? 0 < Double(amountLabel.text ?? "0") ?? 0 {
-                    Animations.requireUserAtention(on: amountLabel)
-                    useMaxAmountAction(confirmButton)
-                }
                 if let fee = AppContext.shared.node?.feeAmount, let total = amountSubLabel.text, amountLabel.text == availableAmountLabel.text, AppContext.shared.node?.feeDenom == denomSmallLabel.text {
-                    print("Should substract \(fee) from \(total)")
                     let dtotal = Double(total) ?? 0
                     let dfee = Double(fee) ?? 0
                     let final = dtotal - dfee
                     let pwrnum = NSNumber(value: final)
-                    amountSubLabel.text = numberFormatter.string(from: pwrnum)
+                    if final > 0 {
+                        amountSubLabel.text = numberFormatter.string(from: pwrnum)
+                    } else {
+                        amountSubLabel.text = "0"
+                    }
                     AppContext.shared.collectedAmount = amountSubLabel.text ?? "0"
+                }
+                confirmButton.isEnabled = amountSubLabel.text != "0"
+                if Double(availableAmountLabel.text ?? "0") ?? 0 < Double(amountLabel.text ?? "0") ?? 0 {
+                    Animations.requireUserAtention(on: amountLabel)
+                    useMaxAmountAction(confirmButton)
                 }
             } else {
                 amountLabel.text = "0"
@@ -192,7 +243,6 @@ class GaiaCollectAmountController: UIViewController {
             let pwrnum = NSNumber(value: dvalPwr)
             let formatted = numberFormatter.string(from: pwrnum) ?? "0"
             amountSubLabel.text = formatted
-            let feeDenom = AppContext.shared.node?.feeDenom ?? ""
             amountLabel.text = feeDigits.joined()
             AppContext.shared.node?.feeAmount = amountSubLabel.text ?? "0"
         } else {
@@ -212,13 +262,18 @@ class GaiaCollectAmountController: UIViewController {
         }
         denomPickerView.isHidden = AppContext.shared.account?.assets.count ?? 0 <= 1
         memoTextField.text = AppContext.shared.node?.defaultMemo
-        let fee = AppContext.shared.node?.feeAmount ?? "0"
-        let feeDenom = AppContext.shared.node?.feeDenom ?? ""
         
         if onlyFeeMode {
             amountOrFeeSegment.selectedSegmentIndex = 1
             amountOrFeeSegment.isEnabled = false
             updateForFeeState()
+        }
+        summaryCenterX.constant = UIScreen.main.bounds.size.width
+        
+        if AppContext.shared.collectSummary.count == 3 {
+            summary1Label.text = AppContext.shared.collectSummary[0]
+            summary2Label.text = AppContext.shared.collectSummary[1]
+            summary3Label.text = AppContext.shared.collectSummary[2]
         }
     }
     
@@ -237,6 +292,7 @@ class GaiaCollectAmountController: UIViewController {
     }
     
     private func updateForFeeState() {
+        confirmButton.isEnabled = false
         let fee = AppContext.shared.node?.feeAmount ?? "0"
         let dfee = Double(fee) ?? 0.0
         let strVal = dfee > 0 ? "\(dfee / pow(10.0, denomPower))" : "0"

@@ -28,7 +28,8 @@ struct AppContext {
     var colletForStaking = false
     var colletAsset: Coin? = nil
     var colletMaxAmount: String? = nil
-
+    var collectSummary: [String] = []
+    
     var collectScreenOpen = false
     var node: TDMNode?
     var key: GaiaKey?

@@ -114,6 +114,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     AppContext.shared.colletMaxAmount = nil
                     AppContext.shared.colletAsset = selectedAsset
                     tabBar.promptForAmount()
+                    AppContext.shared.collectSummary = [
+                        "Send \(denom)",
+                        "From:\n\(AppContext.shared.key?.address ?? "you")",
+                        "To:\n\(addrToSend)"]
+
                     tabBar.onCollectAmountConfirm = { [weak self] in
                         tabBar.onCollectAmountConfirm = nil
                         if AppContext.shared.node?.securedSigning == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
@@ -156,7 +161,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             addressLabel.text     = validKey.address
         }
         txFeeLabel.text = ""
-        sendAmountButton.isEnabled = !(AppContext.shared.key?.watchMode == true)
+        sendAmountButton.isEnabled = false
         
         amoutRoundedView?.backgroundColor = AppContext.shared.key?.watchMode == true ? .cellBackgroundColorAlpha : .cellBackgroundColor
         currencyPickerRoundedView?.backgroundColor = amoutRoundedView?.backgroundColor
@@ -358,6 +363,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 if let asset = self?.selectedAsset, let amount = asset.amount?.split(separator: ".").first, let denom = asset.denom {
                     AppContext.shared.account?.isEmpty = false
                     let newAmount = asset.deflatedAmount(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 2)
+                    self?.sendAmountButton.isEnabled = newAmount != "0.00" && !(AppContext.shared.key?.watchMode == true)
                     self?.amountValueLabel.text = newAmount
                     self?.amountDenomLabel.text = asset.upperDenom
                     
@@ -417,6 +423,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             AppContext.shared.colletForStaking = true
             AppContext.shared.colletMaxAmount = nil
             AppContext.shared.colletAsset = nil
+            AppContext.shared.collectSummary = [
+                "Delegate \(denom)",
+                "From:\n\(AppContext.shared.key?.address ?? "you")",
+                "To:\n\(delegation.validatorAddr)"]
             tabBar.promptForAmount()
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil
@@ -436,10 +446,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             }
             return
         }
-        
-//        showAmountAlert(title: "Type the amount of \(denom) you want to delegate to:", message: "\(delegation.validatorAddr)\nIt holds\n\(Double(delegation.shares) ?? 0) \(denom) from you.", placeholder: "0 \(denom)") { [weak self] amount in
-//
-//        }
     }
     
     private func broadcastDelegate(delegation: GaiaDelegation, denom: String, amount: String?) {
@@ -478,6 +484,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             AppContext.shared.colletMaxAmount = maxShares
             AppContext.shared.colletAsset = nil
             tabBar.promptForAmount()
+            AppContext.shared.collectSummary = [
+                "Unbond \(denom)",
+                "From:\n\(delegation.validatorAddr)",
+                "To:\n\(AppContext.shared.key?.address ?? "you")"]
+
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil
                 if AppContext.shared.node?.securedSigning == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
@@ -496,9 +507,6 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             }
             return
         }
-        
-//        showAmountAlert(title: "Type the amount of \(denom) you want to unbond", message: "\(delegation.validatorAddr) holds\n\(Int(delegation.shares) ?? 0) \(denom)", placeholder: "0 \(denom)") { [weak self] amount in
-//        }
     }
     
     private func broadcastUnbound(delegation: GaiaDelegation, denom: String, amount: String?) {

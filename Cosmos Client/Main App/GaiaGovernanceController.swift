@@ -260,6 +260,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             AppContext.shared.colletForStaking = true
             AppContext.shared.colletMaxAmount = nil
             AppContext.shared.colletAsset = nil
+            AppContext.shared.collectSummary = [
+                "Deposit \(AppContext.shared.node?.stakeDenom ?? "")",
+                "From:\n\(AppContext.shared.key?.address ?? "you")",
+                "To proposal with id:\n\(proposal.proposalId)"]
+
             tabBar.promptForAmount()
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil

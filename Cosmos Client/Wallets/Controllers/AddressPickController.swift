@@ -85,9 +85,10 @@ class AddressPickController: UIViewController, ToastAlertViewPresentable {
         walletNameRichTextField.nextResponderField = addresRichTextField.contentTextField
         walletNameRichTextField.validationRegex    = RichTextFieldView.validName
         walletNameRichTextField.limitLenght        = 30
+        
         let prefix = AppContext.shared.node?.adddressPrefix ?? ""
-        RichTextFieldView.prefix                   = prefix + "1"
-        addresRichTextField.validationRegex        = RichTextFieldView.validTDMAddress
+        let validTDMAddress    = "(\(prefix)1){1}[0-9a-z]{38}"
+        addresRichTextField.validationRegex = validTDMAddress
     }
     
     private func observreFieldsState() {
@@ -113,6 +114,7 @@ class AddressPickController: UIViewController, ToastAlertViewPresentable {
     }
 
     @IBAction func saveToAddressBookAction(_ sender: UIButton) {
+        saveButton?.isEnabled = false
         let alias = walletNameRichTextField.contentTextField?.text ?? ""
         let address = addresRichTextField.contentTextField?.text ?? ""
         
@@ -128,7 +130,8 @@ class AddressPickController: UIViewController, ToastAlertViewPresentable {
     @IBAction func useAction(_ sender: UIButton) {
         
         
-        let alias = walletNameRichTextField.contentTextField?.text ?? ""
+        var alias = walletNameRichTextField.contentTextField?.text ?? "Unnamed"
+        if alias.count == 0 { alias = "Unnamed" }
         let address = addresRichTextField.contentTextField?.text ?? ""
         let item = GaiaAddressBookItem(name: alias, address: address)
         self.dismiss(animated: true) {
@@ -248,6 +251,12 @@ extension AddressPickController: UITableViewDataSource {
         let address = gaiaAddresses[indexPath.item]
         cell.configure(address: address)
         return cell
+    }
+}
+
+extension AddressPickController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
 }
 

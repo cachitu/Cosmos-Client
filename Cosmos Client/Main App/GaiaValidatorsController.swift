@@ -180,6 +180,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             AppContext.shared.colletForStaking = true
             AppContext.shared.colletAsset = nil
             tabBar.promptForAmount()
+            AppContext.shared.collectSummary = [
+                "Redelegate \(AppContext.shared.node?.stakeDenom ?? "")",
+                "From:\n\(redelgateFrom)",
+                "To:\n\(validator.validator)"]
+
             tabBar.onCollectAmountCancel = { [weak self] in
                 AppContext.shared.redelgateFrom = nil
                 self?.toast?.hideToast()
@@ -202,11 +207,6 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             }
             return
         }
-
-//        AppContext.shared.node?.getStakingInfo() { [weak self] denom in
-//            self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to redelegate to:", message: "\(validator.validator)\nfrom\n\(redelgateFrom)", placeholder: "0 \(denom ?? "stake")") { amount in
-//            }
-//        }
     }
 
     private func broadcastRedelegate(redelgateFrom: String, validator: GaiaValidator, amount: String?) {
@@ -254,6 +254,10 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             AppContext.shared.colletForStaking = true
             AppContext.shared.colletMaxAmount = nil
             AppContext.shared.colletAsset = nil
+            AppContext.shared.collectSummary = [
+                "Delegate \(AppContext.shared.node?.stakeDenom ?? "")",
+                "From:\n\(AppContext.shared.key?.address ?? "you")",
+                "To:\n\(validator.validator)"]
             tabBar.promptForAmount()
             tabBar.onCollectAmountConfirm = { [weak self] in
                 tabBar.onCollectAmountConfirm = nil
@@ -273,11 +277,6 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             }
             return
         }
-
-//        AppContext.shared.node?.getStakingInfo() { [weak self] denom in
-//            self?.showAmountAlert(title: "Type the amount of \(denom ?? "stake") you want to delegate to:", message: "\(validator.validator)", placeholder: "0 \(denom ?? "stake")") { amount in
-//            }
-//        }
     }
     
     private func broadcastDelegate(to validator: GaiaValidator, amount: String?) {
