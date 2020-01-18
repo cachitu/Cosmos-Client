@@ -227,8 +227,14 @@ class GaiaCollectAmountController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        AppContext.shared.collectScreenOpen = true
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AppContext.shared.collectScreenOpen = false
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

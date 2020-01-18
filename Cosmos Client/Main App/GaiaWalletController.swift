@@ -131,6 +131,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         swapButton.isHidden = !(AppContext.shared.node?.type == TDMNodeType.terra || AppContext.shared.node?.type == TDMNodeType.terra_118) || AppContext.shared.key?.watchMode == true || AppContext.shared.account?.isEmpty == true
         historyButton.isHidden = (AppContext.shared.node?.type == TDMNodeType.iris || AppContext.shared.node?.type == TDMNodeType.iris_fuxi)
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            guard !AppContext.shared.collectScreenOpen else { return }
             self?.clearFields()
             AppContext.shared.node?.getStatus {
                 if AppContext.shared.node?.state == .unknown {
@@ -196,7 +197,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                                 self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
                             }
                         }
-                        tabBar.promptForPin()
+                        tabBar.promptForPin(mode: .sign)
                     } else {
                         self?.loadingView.startAnimating()
                         self?.toast?.hideToast()
@@ -429,7 +430,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
                         }
                     }
-                    tabBar.promptForPin()
+                    tabBar.promptForPin(mode: .sign)
                 } else {
                     self?.broadcastDelegate(delegation: delegation, denom: denom, amount: AppContext.shared.collectedAmount)
                 }
@@ -489,7 +490,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                             self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
                         }
                     }
-                    tabBar.promptForPin()
+                    tabBar.promptForPin(mode: .sign)
                 } else {
                     self?.broadcastUnbound(delegation: delegation, denom: denom, amount: AppContext.shared.collectedAmount)
                 }
@@ -532,7 +533,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
                 }
             }
-            tabBar.promptForPin()
+            tabBar.promptForPin(mode: .sign)
         } else {
             broadcastWithdraw(delegation: delegation)
         }
@@ -569,7 +570,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                     self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
                 }
             }
-            tabBar.promptForPin()
+            tabBar.promptForPin(mode: .sign)
         } else {
             broadcastWithdrawComission(delegation: delegation)
         }

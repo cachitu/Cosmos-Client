@@ -32,6 +32,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         if !sender.isOn {
             AppContext.shared.node?.deletePinFromKeychain()
             securedSigningSwitch.isOn = false
+            curentNode?.securedSigning = false
         }
     }
     @IBOutlet weak var securedSigningSwitch: UISwitch!

@@ -14,21 +14,22 @@ class GaiaTabBarController: UITabBarController {
     var onCollectAmountConfirm: (() -> ())?
     var onCollectAmountCancel: (() -> ())?
 
-    private var shouldShouwSecurity = false
+    private var shouldShowSecurity = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        shouldShouwSecurity = AppContext.shared.node?.securedNodeAccess == true
+        shouldShowSecurity = AppContext.shared.node?.securedNodeAccess == true
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             
+            guard !AppContext.shared.collectScreenOpen else { return }
             if AppContext.shared.node?.securedNodeAccess == true {
                 if (self?.isViewLoaded == true && self?.view.window != nil) {
                     self?.onCollectAmountConfirm = nil
                     self?.performSegue(withIdentifier: "ShowSecuritySegue", sender: self)
                 } else {
-                    self?.shouldShouwSecurity = true
+                    self?.shouldShowSecurity = true
                 }
             }
         }
@@ -36,15 +37,16 @@ class GaiaTabBarController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if shouldShouwSecurity {
+        if shouldShowSecurity {
             onCollectAmountConfirm = nil
-            promptForPin()
+            promptForPin(mode: .unlock)
         }
-        shouldShouwSecurity = false
+        shouldShowSecurity = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? GaiaSecurityController {
+            dest.collectMode = sender as? CollectMode ?? .unlock
             dest.onValidate = { [weak self] success in
                 self?.onSecurityCheck?(success)
                 if !success {
@@ -66,8 +68,8 @@ class GaiaTabBarController: UITabBarController {
         }
     }
     
-    func promptForPin() {
-        performSegue(withIdentifier: "ShowSecuritySegue", sender: self)
+    func promptForPin(mode: CollectMode) {
+        performSegue(withIdentifier: "ShowSecuritySegue", sender: mode)
     }
     
     func promptForAmount() {

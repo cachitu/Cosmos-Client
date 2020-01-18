@@ -9,17 +9,18 @@
 import UIKit
 import LocalAuthentication
 
+enum CollectMode {
+    case unlock
+    case sign
+    case collectPhase1
+    case collectPhase2
+}
+
 class GaiaSecurityController: UIViewController {
 
-    enum CollectMode {
-        case validate
-        case collectPhase1
-        case collectPhase2
-    }
-    
     var context = LAContext()
 
-    var collectMode: CollectMode = .validate
+    var collectMode: CollectMode = .unlock
     var expectedPin: String? = AppContext.shared.node?.getPinFromKeychain()
     var onValidate: ((_ success: Bool) -> ())?
     var onCollect: ((_ success: Bool) -> ())?
@@ -80,16 +81,20 @@ class GaiaSecurityController: UIViewController {
         digits = []
         firstPin = ""
         secondPin = ""
-        pinStateLabel.text = collectMode == .validate ? "Type your pin" : "Create your pin"
+        pinStateLabel.text = screenTitle()
         if collectMode == .collectPhase2 {
             collectMode = .collectPhase1
         }
     }
     
+    private func screenTitle() -> String {
+        return collectMode == .unlock ? "Unlock" : collectMode == .sign ? "Sign" : "Create your pin"
+    }
+    
     private func handleState() {
         if digits.count == 4 {
             switch collectMode {
-            case .validate:
+            case .unlock, .sign:
                 firstPin = digits.joined()
                 if firstPin == expectedPin {
                     self.dismiss(animated: true) {
@@ -157,20 +162,20 @@ class GaiaSecurityController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         isModalInPresentation = true
-        closeButton.isHidden = collectMode == .validate
+        closeButton.isHidden = collectMode == .unlock
         updateStars(value: 0)
         if AppContext.shared.node?.getPinFromKeychain() == nil {
             collectMode = .collectPhase1
         }
-        titleLabel.text = collectMode == .validate ? "Unlock" : "Create"
-        pinStateLabel.text = collectMode == .validate ? "Type your pin" : "Create your pin"
+        titleLabel.text = screenTitle()
+        pinStateLabel.text = collectMode == .unlock || collectMode == .sign ? "Type your pin" : "Create your pin"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error), UserDefaults.standard.bool(forKey: GaiaConstants.bioAuthDefautsKey), collectMode == .validate {
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error), UserDefaults.standard.bool(forKey: GaiaConstants.bioAuthDefautsKey), collectMode == .unlock {
             
             let reason = "Validate"
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason ) { [weak self] success, error in

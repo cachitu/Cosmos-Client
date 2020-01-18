@@ -28,6 +28,7 @@ class GaiaDelegationsController: UIViewController, ToastAlertViewPresentable, Ga
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            guard !AppContext.shared.collectScreenOpen else { return }
             AppContext.shared.node?.getStatus {
                 if AppContext.shared.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)

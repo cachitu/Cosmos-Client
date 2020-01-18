@@ -34,6 +34,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            guard !AppContext.shared.collectScreenOpen else { return }
             AppContext.shared.node?.getStatus {
                 if AppContext.shared.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
@@ -194,7 +195,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                             self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
                         }
                     }
-                    tabBar.promptForPin()
+                    tabBar.promptForPin(mode: .sign)
                 } else {
                     self?.broadcastRedelegate(redelgateFrom: redelgateFrom, validator: validator, amount: AppContext.shared.collectedAmount)
                 }
@@ -265,7 +266,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                             self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
                         }
                     }
-                    tabBar.promptForPin()
+                    tabBar.promptForPin(mode: .unlock)
                 } else {
                     self?.broadcastDelegate(to: validator, amount: AppContext.shared.collectedAmount)
                 }

@@ -724,6 +724,17 @@
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pJ-gS-tfw">
+                                <rect key="frame" x="0.0" y="628" width="375" height="150"/>
+                                <color key="tintColor" name="DarkGrayText"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="mEV-Tu-ruT"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="cHQ-RA-e4W" id="WF8-ch-FL3"/>
+                                    <outlet property="delegate" destination="cHQ-RA-e4W" id="h8v-Fk-S0r"/>
+                                </connections>
+                            </pickerView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cXk-p3-Bnc">
                                 <rect key="frame" x="310" y="393" width="51" height="31"/>
                                 <connections>
@@ -736,17 +747,6 @@
                                     <action selector="securedSigningSwitch:" destination="cHQ-RA-e4W" eventType="valueChanged" id="ssG-89-8BC"/>
                                 </connections>
                             </switch>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pJ-gS-tfw">
-                                <rect key="frame" x="0.0" y="628" width="375" height="150"/>
-                                <color key="tintColor" name="DarkGrayText"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="mEV-Tu-ruT"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="cHQ-RA-e4W" id="WF8-ch-FL3"/>
-                                    <outlet property="delegate" destination="cHQ-RA-e4W" id="h8v-Fk-S0r"/>
-                                </connections>
-                            </pickerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4u-mo-DxM" userLabel="Top Bar">
                                 <rect key="frame" x="0.0" y="-6" width="375" height="94"/>
                                 <subviews>
@@ -890,11 +890,12 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="bAi-do-qgz">
                                         <rect key="frame" x="121" y="0.0" width="58" height="58"/>
+                                        <color key="tintColor" name="DarkGrayText"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add keys" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsX-8m-SUL">
                                         <rect key="frame" x="67.999999999999986" y="80" width="163.66666666666663" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="DarkGrayText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>

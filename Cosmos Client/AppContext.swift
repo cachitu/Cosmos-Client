@@ -29,6 +29,7 @@ struct AppContext {
     var colletAsset: Coin? = nil
     var colletMaxAmount: String? = nil
 
+    var collectScreenOpen = false
     var node: TDMNode?
     var key: GaiaKey?
     var keysDelegate: LocalClient?
