@@ -56,9 +56,9 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     var filteredDataSource: [GaiaKey] {
         return
             reusePickerMode ?
-                dataSource.filter { $0.watchMode != true && $0.nodeId != AppContext.shared.node?.nodeID }
+                dataSource.filter { $0.watchMode != true && $0.nodeId != AppContext.shared.node?.nodeID && $0.type != AppContext.shared.node?.type.rawValue }
                 :
-                dataSource.filter { $0.nodeId == AppContext.shared.node?.nodeID }
+                dataSource.filter { $0.nodeId == AppContext.shared.node?.nodeID && $0.type == AppContext.shared.node?.type.rawValue }
     }
     var selectedKey: GaiaKey?
     var selectedIndex: Int?
@@ -203,10 +203,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             dest?.selectedkeyIndex = selectedIndex
         }
         if segue.identifier == "ShowAddressBookSegue" {
-            let nav = segue.destination as? UINavigationController
-            let dest = nav?.viewControllers.first as? AddressesListController
-            dest?.shouldPop = true
-            dest?.addressPrefix = AppContext.shared.node?.adddressPrefix ?? ""
+            let dest = segue.destination as? AddressPickController
             
             dest?.onSelectAddress = { [weak self] selected in
                 if let validAddress = selected {

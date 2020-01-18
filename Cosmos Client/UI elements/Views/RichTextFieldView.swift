@@ -9,9 +9,11 @@ import UIKit
 
 class RichTextFieldView: UIView {
     
+    static var prefix = ""
     static let validEmailRegex    = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     static let validPasswordRegex = "^.{8,}$"
     static let validEthAddress    = "(0x){1}[0-9a-fA-F]{40}"
+    static let validTDMAddress    = "(\(prefix)){1}[0-9a-z]{38}"
     static let validName          = "^[A-Za-z0-9- ]+$"
     static let minOneCharRegex    = "^.{1,}$"
     static let validTelegramID    = "(@){1}[A-Za-z0-9_]{5,32}"
@@ -35,10 +37,6 @@ class RichTextFieldView: UIView {
         didSet {
             contentTextField?.delegate = self
             contentTextField?.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
-//            if let placeholder = contentTextField?.placeholder {
-//                contentTextField?.attributedPlaceholder = NSAttributedString(string:placeholder,
-//                                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.silver])
-//            }
          }
     }
     

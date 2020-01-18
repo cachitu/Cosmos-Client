@@ -52,13 +52,14 @@
 		EE2D63E821EDAB270002D51D /* UViewController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */; };
 		EE2D63ED21EDCFD30002D51D /* GaiaKeyCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */; };
 		EE2D643C21F306800002D51D /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2D643B21F306800002D51D /* UIImage+Extensions.swift */; };
+		EE56FA8C23D3093800570F15 /* AddressPickController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE56FA8B23D3093800570F15 /* AddressPickController.swift */; };
+		EE56FA8E23D30A0800570F15 /* QRScannViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE56FA8D23D30A0800570F15 /* QRScannViewController.swift */; };
+		EE56FA9023D312A000570F15 /* GaiaWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE56FA8F23D312A000570F15 /* GaiaWalletCell.swift */; };
 		EE57EB0223C3A32D00A8786C /* GaiaCollectAmountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE57EB0123C3A32D00A8786C /* GaiaCollectAmountController.swift */; };
 		EEA8AA4623B4A1500079C6E3 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8AA4523B4A1500079C6E3 /* AppContext.swift */; };
 		EEAE3E6923A7824700A336FA /* GaiaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAE3E6823A7824700A336FA /* GaiaConstants.swift */; };
 		EEAE3E6B23AA8DEA00A336FA /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAE3E6A23AA8DEA00A336FA /* Onboarding.storyboard */; };
 		EEAFBF6221F4678D001B01EA /* Addressbook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAFBF5C21F4678D001B01EA /* Addressbook.storyboard */; };
-		EEAFBF6321F4678D001B01EA /* AddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFBF5F21F4678D001B01EA /* AddressController.swift */; };
-		EEAFBF6421F4678D001B01EA /* AddressesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFBF6021F4678D001B01EA /* AddressesListController.swift */; };
 		EEBDFBF6237DB9C900079F38 /* TendermintSigner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */; };
 		EEBDFBF7237DB9C900079F38 /* TendermintSigner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EEBDFC2323801E0400079F38 /* GaiaOraclesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */; };
@@ -130,13 +131,14 @@
 		EE2D63E721EDAB270002D51D /* UViewController+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UViewController+extensions.swift"; sourceTree = "<group>"; };
 		EE2D63EC21EDCFD30002D51D /* GaiaKeyCreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaKeyCreateController.swift; sourceTree = "<group>"; };
 		EE2D643B21F306800002D51D /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		EE56FA8B23D3093800570F15 /* AddressPickController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressPickController.swift; sourceTree = "<group>"; };
+		EE56FA8D23D30A0800570F15 /* QRScannViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannViewController.swift; sourceTree = "<group>"; };
+		EE56FA8F23D312A000570F15 /* GaiaWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaWalletCell.swift; sourceTree = "<group>"; };
 		EE57EB0123C3A32D00A8786C /* GaiaCollectAmountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaCollectAmountController.swift; sourceTree = "<group>"; };
 		EEA8AA4523B4A1500079C6E3 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		EEAE3E6823A7824700A336FA /* GaiaConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaConstants.swift; sourceTree = "<group>"; };
 		EEAE3E6A23AA8DEA00A336FA /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		EEAFBF5D21F4678D001B01EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Addressbook.storyboard; sourceTree = "<group>"; };
-		EEAFBF5F21F4678D001B01EA /* AddressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressController.swift; sourceTree = "<group>"; };
-		EEAFBF6021F4678D001B01EA /* AddressesListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesListController.swift; sourceTree = "<group>"; };
 		EEBDFBF5237DB9C900079F38 /* TendermintSigner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TendermintSigner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaOraclesController.swift; sourceTree = "<group>"; };
 		EED0718A2380413600B01E25 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -345,8 +347,9 @@
 		EEAFBF5E21F4678D001B01EA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EEAFBF5F21F4678D001B01EA /* AddressController.swift */,
-				EEAFBF6021F4678D001B01EA /* AddressesListController.swift */,
+				EE56FA8B23D3093800570F15 /* AddressPickController.swift */,
+				EE56FA8D23D30A0800570F15 /* QRScannViewController.swift */,
+				EE56FA8F23D312A000570F15 /* GaiaWalletCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -450,7 +453,6 @@
 				8867800D21E9C6A00022A09E /* GaiaKeysController.swift in Sources */,
 				8801CF78221F22EF004781C1 /* GaiaProposalController.swift in Sources */,
 				8869754521E9CAD000044EB8 /* SimpleWebView.swift in Sources */,
-				EEAFBF6321F4678D001B01EA /* AddressController.swift in Sources */,
 				EE57EB0223C3A32D00A8786C /* GaiaCollectAmountController.swift in Sources */,
 				88A8B7E722464236004F0B82 /* LocalClient.swift in Sources */,
 				8869754321E9CAD000044EB8 /* CenteringFlowLayout.swift in Sources */,
@@ -463,7 +465,9 @@
 				8869754F21E9CAD000044EB8 /* RoundedView.swift in Sources */,
 				EE2D63ED21EDCFD30002D51D /* GaiaKeyCreateController.swift in Sources */,
 				EE2D643C21F306800002D51D /* UIImage+Extensions.swift in Sources */,
+				EE56FA8E23D30A0800570F15 /* QRScannViewController.swift in Sources */,
 				EE2D63E021ECF6AF0002D51D /* GaiaWalletController.swift in Sources */,
+				EE56FA8C23D3093800570F15 /* AddressPickController.swift in Sources */,
 				8801CF7E222273D9004781C1 /* GaiaDelegationsController.swift in Sources */,
 				8869756521E9DE8500044EB8 /* CellStateRoundedView.swift in Sources */,
 				8869755321E9CB6700044EB8 /* UIColor+extensions.swift in Sources */,
@@ -473,10 +477,10 @@
 				8869756E21EA0DBB00044EB8 /* GaiaNodesController.swift in Sources */,
 				88A3F253224D4C7600BAEEE8 /* GaiaVotesController.swift in Sources */,
 				EEBDFC2323801E0400079F38 /* GaiaOraclesController.swift in Sources */,
+				EE56FA9023D312A000570F15 /* GaiaWalletCell.swift in Sources */,
 				8869754D21E9CAD000044EB8 /* RichTextFieldView.swift in Sources */,
 				8869755021E9CAD000044EB8 /* ToastAlertView.swift in Sources */,
 				EE2D63E821EDAB270002D51D /* UViewController+extensions.swift in Sources */,
-				EEAFBF6421F4678D001B01EA /* AddressesListController.swift in Sources */,
 				8869757221EA173000044EB8 /* GaiaNodeCell.swift in Sources */,
 				EEAE3E6923A7824700A336FA /* GaiaConstants.swift in Sources */,
 				EE1578AA23C09294008B9B27 /* GaiaSecurityController.swift in Sources */,
@@ -645,7 +649,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = SKYG56VM4S;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -665,7 +669,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cosmos Client/Cosmos Client.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 33;
 				DEVELOPMENT_TEAM = SKYG56VM4S;
 				INFOPLIST_FILE = "Cosmos Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

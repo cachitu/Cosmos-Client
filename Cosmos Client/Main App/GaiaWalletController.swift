@@ -105,7 +105,41 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     
 
     private var selectedAsset: Coin?
-    private var senderAddress: String?
+    private var senderAddress: String? {
+        didSet {
+            if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
+                senderAddress = nil
+                if let tabBar = tabBarController as? GaiaTabBarController {
+                    AppContext.shared.colletForStaking = false
+                    AppContext.shared.colletMaxAmount = nil
+                    AppContext.shared.colletAsset = selectedAsset
+                    tabBar.promptForAmount()
+                    tabBar.onCollectAmountConfirm = { [weak self] in
+                        tabBar.onCollectAmountConfirm = nil
+                        if AppContext.shared.node?.securedSigning == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
+                            tabBar.onSecurityCheck = { [weak self] succes in
+                                tabBar.onSecurityCheck = nil
+                                if succes {
+                                    self?.loadingView.startAnimating()
+                                    self?.toast?.hideToast()
+                                    self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
+                                } else {
+                                    self?.senderAddress = nil
+                                    self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
+                                }
+                            }
+                            tabBar.promptForPin(mode: .sign)
+                        } else {
+                            self?.loadingView.startAnimating()
+                            self?.toast?.hideToast()
+                            self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     private weak var timer: Timer?
 
     var lockClearFields = false
@@ -176,42 +210,11 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
-            senderAddress = nil
-            if let tabBar = tabBarController as? GaiaTabBarController {
-                AppContext.shared.colletForStaking = false
-                AppContext.shared.colletMaxAmount = nil
-                AppContext.shared.colletAsset = selectedAsset
-                tabBar.promptForAmount()
-                tabBar.onCollectAmountConfirm = { [weak self] in
-                    tabBar.onCollectAmountConfirm = nil
-                    if AppContext.shared.node?.securedSigning == true, let tabBar = self?.tabBarController as? GaiaTabBarController {
-                        tabBar.onSecurityCheck = { [weak self] succes in
-                            tabBar.onSecurityCheck = nil
-                            if succes {
-                                self?.loadingView.startAnimating()
-                                self?.toast?.hideToast()
-                                self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
-                            } else {
-                                self?.senderAddress = nil
-                                self?.toast?.showToastAlert("The pin you entered is incorrect. Please try again.",  type: .error, dismissable: true)
-                            }
-                        }
-                        tabBar.promptForPin(mode: .sign)
-                    } else {
-                        self?.loadingView.startAnimating()
-                        self?.toast?.hideToast()
-                        self?.sendAssetsTo(destAddress: addrToSend, denom: denom)
-                    }
-                }
-            }
-
-        } else {
-            loadingView.startAnimating()
-            toast?.hideToast()
-            clearFields()
-            loadData()
-        }
+        loadingView.startAnimating()
+        toast?.hideToast()
+        clearFields()
+        loadData()
+        
         timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
             self?.loadData(animated: false, spinner: false)
         }
@@ -271,11 +274,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         switch segue.identifier {
 
         case "ShowAddressBookSegue":
-            let nav = segue.destination as? UINavigationController
-            let dest = nav?.viewControllers.first as? AddressesListController
-            dest?.shouldPop = true
-            dest?.addressPrefix = AppContext.shared.node?.adddressPrefix ?? ""
-            
+            let dest = segue.destination as? AddressPickController
             dest?.onSelectAddress = { [weak self] selected in
                 if let validAddress = selected {
                     self?.senderAddress = validAddress.address

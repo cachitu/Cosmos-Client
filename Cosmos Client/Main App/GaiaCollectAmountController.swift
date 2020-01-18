@@ -48,7 +48,6 @@ class GaiaCollectAmountController: UIViewController {
     @IBOutlet weak var memoTextField: UITextField!
     @IBOutlet weak var availableAmountLabel: UILabel!
     @IBOutlet weak var maxAvailableLeadingLabel: UILabel!
-    @IBOutlet weak var feeCurentSettingsLabel: UILabel!
     
     @IBOutlet weak var confirmButton: UIButton!
     
@@ -194,7 +193,6 @@ class GaiaCollectAmountController: UIViewController {
             let formatted = numberFormatter.string(from: pwrnum) ?? "0"
             amountSubLabel.text = formatted
             let feeDenom = AppContext.shared.node?.feeDenom ?? ""
-            feeCurentSettingsLabel.text = formatted + " " + feeDenom
             amountLabel.text = feeDigits.joined()
             AppContext.shared.node?.feeAmount = amountSubLabel.text ?? "0"
         } else {
@@ -216,7 +214,6 @@ class GaiaCollectAmountController: UIViewController {
         memoTextField.text = AppContext.shared.node?.defaultMemo
         let fee = AppContext.shared.node?.feeAmount ?? "0"
         let feeDenom = AppContext.shared.node?.feeDenom ?? ""
-        feeCurentSettingsLabel.text = fee + " " + feeDenom
         
         if onlyFeeMode {
             amountOrFeeSegment.selectedSegmentIndex = 1

@@ -14,7 +14,7 @@
                 <viewControllerPlaceholder storyboardName="Addressbook" id="p4n-41-3xa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyr-p9-EJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="693" y="443"/>
+            <point key="canvasLocation" x="666" y="174"/>
         </scene>
         <!--Gaia Tab Bar Controller-->
         <scene sceneID="WjR-GE-ZhQ">
@@ -888,7 +888,7 @@
                         <outlet property="topConstraintOutlet" destination="e3c-ZC-rzg" id="I5p-u5-Eai"/>
                         <outlet property="topNavBarView" destination="Y3e-4F-cEe" id="mvN-sr-huT"/>
                         <outlet property="txFeeLabel" destination="uOJ-6B-HTT" id="Xc7-gI-ck1"/>
-                        <segue destination="p4n-41-3xa" kind="presentation" identifier="ShowAddressBookSegue" modalPresentationStyle="fullScreen" id="rZw-Iy-wVt"/>
+                        <segue destination="p4n-41-3xa" kind="presentation" identifier="ShowAddressBookSegue" modalPresentationStyle="automatic" id="rZw-Iy-wVt"/>
                         <segue destination="B0n-P6-Mj0" kind="unwind" identifier="UnwindToNodes" unwindAction="unwindToNodesWithSegue:" id="YGO-sg-JCQ"/>
                     </connections>
                 </viewController>
@@ -1464,7 +1464,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bs_logo" translatesAutoresizingMaskIntoConstraints="NO" id="TcP-zt-fEz">
-                                        <rect key="frame" x="141.66666666666666" y="89" width="101" height="29.333333333333329"/>
+                                        <rect key="frame" x="141.66666666666666" y="89" width="201.99999999999997" height="29.333333333333329"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29.333333333333343" id="U0f-4c-EQN"/>
@@ -1503,7 +1503,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Use FaceID / Fingerprint" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xO-Y5-c0o">
-                                <rect key="frame" x="16" y="290.66666666666669" width="162.33333333333334" height="17"/>
+                                <rect key="frame" x="16" y="290.66666666666669" width="162.66666666666666" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
@@ -1722,7 +1722,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-8J-cOI">
-                                        <rect key="frame" x="279.66666666666669" y="7" width="65.333333333333314" height="30"/>
+                                        <rect key="frame" x="269" y="7" width="76" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Swn-jI-NMX"/>
                                         </constraints>
@@ -3207,47 +3207,18 @@
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Transaction memo" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Aus-mE-iY1">
-                                <rect key="frame" x="70" y="344" width="235" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                                <connections>
-                                    <outlet property="delegate" destination="dvE-B7-5wz" id="p79-E7-Js9"/>
-                                </connections>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gkf-BD-TGK">
-                                <rect key="frame" x="307" y="14" width="60" height="32"/>
+                                <rect key="frame" x="299" y="14" width="68" height="32"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                <state key="normal" title="Confirm">
+                                <state key="normal" title="Continue">
                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="confirmAction:" destination="dvE-B7-5wz" eventType="touchUpInside" id="YTj-CZ-Bn2"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Fee:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sX-Bl-jb4">
-                                <rect key="frame" x="16" y="192" width="85.333333333333329" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="DarkGrayText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.41 iris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eoy-Rd-hWx">
-                                <rect key="frame" x="107" y="192" width="52.666666666666671" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="DarkGrayText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Amount:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wF-ow-PuX">
-                                <rect key="frame" x="16" y="148" width="58" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" name="DarkGrayText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="NSU-7V-CaY">
-                                <rect key="frame" x="70" y="236" width="235" height="100"/>
+                                <rect key="frame" x="70" y="244" width="235" height="100"/>
                                 <color key="tintColor" name="DarkGrayText"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="dMn-0v-fTG"/>
@@ -3257,6 +3228,14 @@
                                     <outlet property="delegate" destination="dvE-B7-5wz" id="2tE-Pw-csv"/>
                                 </connections>
                             </pickerView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Transaction memo" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Aus-mE-iY1">
+                                <rect key="frame" x="70" y="344" width="235" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="dvE-B7-5wz" id="p79-E7-Js9"/>
+                                </connections>
+                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Nv8-Td-oMh">
                                 <rect key="frame" x="184" y="127" width="9.3333333333333428" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -3309,7 +3288,7 @@
                             <constraint firstItem="fkC-lt-rF6" firstAttribute="top" secondItem="jBu-kP-5Uf" secondAttribute="bottom" constant="1" id="Lf5-Fr-h8o"/>
                             <constraint firstItem="fPX-7o-jfc" firstAttribute="centerY" secondItem="qeY-Ud-BBz" secondAttribute="centerY" id="M9a-83-qbS"/>
                             <constraint firstItem="fkC-lt-rF6" firstAttribute="leading" secondItem="jBu-kP-5Uf" secondAttribute="leading" id="Pue-XP-gL7"/>
-                            <constraint firstItem="Aus-mE-iY1" firstAttribute="top" secondItem="NSU-7V-CaY" secondAttribute="bottom" constant="8" id="Q9S-J9-seC"/>
+                            <constraint firstItem="Aus-mE-iY1" firstAttribute="top" secondItem="NSU-7V-CaY" secondAttribute="bottom" id="Q9S-J9-seC"/>
                             <constraint firstItem="FCJ-h7-LR7" firstAttribute="top" secondItem="Aus-mE-iY1" secondAttribute="bottom" constant="8.6666666666667425" id="U3I-cI-TOY"/>
                             <constraint firstItem="FCJ-h7-LR7" firstAttribute="leading" secondItem="K54-51-7UI" secondAttribute="leading" constant="70" id="UqA-Ft-DQg"/>
                             <constraint firstItem="K54-51-7UI" firstAttribute="bottom" secondItem="FCJ-h7-LR7" secondAttribute="bottom" constant="24" id="VyN-ma-nAh"/>
@@ -3338,7 +3317,6 @@
                         <outlet property="denomBigLabel" destination="jBu-kP-5Uf" id="ihX-Ig-ZCL"/>
                         <outlet property="denomPickerView" destination="NSU-7V-CaY" id="FNk-40-XHL"/>
                         <outlet property="denomSmallLabel" destination="fkC-lt-rF6" id="niH-Gz-p1E"/>
-                        <outlet property="feeCurentSettingsLabel" destination="eoy-Rd-hWx" id="fnf-Va-x07"/>
                         <outlet property="maxAvailableLeadingLabel" destination="XXZ-hX-ihb" id="4Je-LP-sPd"/>
                         <outlet property="memoTextField" destination="Aus-mE-iY1" id="U1Y-sq-fA8"/>
                     </connections>

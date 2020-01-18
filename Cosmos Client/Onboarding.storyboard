@@ -1350,7 +1350,7 @@
                         <outlet property="topNavBarView" destination="6P6-I6-SR2" id="pME-qd-ZPm"/>
                         <segue destination="yN4-1I-ppV" kind="presentation" identifier="ShowKeyDetailsSegue" modalPresentationStyle="fullScreen" id="rf3-Qm-6ak"/>
                         <segue destination="ZAK-uC-6LI" kind="presentation" identifier="CreateKeySegue" modalPresentationStyle="fullScreen" id="eKd-eW-vZi"/>
-                        <segue destination="HHL-Tg-DZ5" kind="presentation" identifier="ShowAddressBookSegue" modalPresentationStyle="fullScreen" id="euC-v7-FTx"/>
+                        <segue destination="HHL-Tg-DZ5" kind="presentation" identifier="ShowAddressBookSegue" modalPresentationStyle="automatic" id="euC-v7-FTx"/>
                         <segue destination="Xld-C1-KZe" kind="show" identifier="WalletSegueID" id="1ZU-md-DiX"/>
                         <segue destination="qoX-Ku-g7P" kind="presentation" identifier="ReuseKeySegue" modalPresentationStyle="fullScreen" id="lGD-aP-Gar"/>
                     </connections>
