@@ -61,6 +61,7 @@ class AddressPickController: UIViewController, ToastAlertViewPresentable {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupTextViews()
         if let gaiaAddress = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook {
             gaiaAddresses = gaiaAddress.items.filter { $0.address.contains(addressPrefix) }
             tableView.reloadData()
@@ -73,7 +74,6 @@ class AddressPickController: UIViewController, ToastAlertViewPresentable {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupTextViews()
     }
     
     override func viewDidLayoutSubviews() {
@@ -89,6 +89,7 @@ class AddressPickController: UIViewController, ToastAlertViewPresentable {
         let prefix = AppContext.shared.node?.adddressPrefix ?? ""
         let validTDMAddress    = "(\(prefix)1){1}[0-9a-z]{38}"
         addresRichTextField.validationRegex = validTDMAddress
+        addresRichTextField.contentTextField?.placeholder = prefix + "1..."
     }
     
     private func observreFieldsState() {
@@ -108,35 +109,54 @@ class AddressPickController: UIViewController, ToastAlertViewPresentable {
     }
     
     @IBAction func backAction(_ sender: Any) {
-        dismiss(animated: true) {
-            
-        }
+        view.endEditing(true)
+        dismiss(animated: true) {}
     }
 
     @IBAction func saveToAddressBookAction(_ sender: UIButton) {
+        
+        view.endEditing(true)
         saveButton?.isEnabled = false
         let alias = walletNameRichTextField.contentTextField?.text ?? ""
         let address = addresRichTextField.contentTextField?.text ?? ""
         
         if let storedBook = GaiaAddressBook.loadFromDisk() as? GaiaAddressBook {
             let item = GaiaAddressBookItem(name: alias, address: address)
-            storedBook.items.insert(item, at: 0)
-            storedBook.savetoDisk()
-            gaiaAddresses = storedBook.items.filter { $0.address.contains(addressPrefix) }
-            tableView.reloadData()
+            loadingView.startAnimating()
+            item.validate(node: AppContext.shared.node) { [weak self] success in
+                self?.loadingView.stopAnimating()
+                if success {
+                    storedBook.items.insert(item, at: 0)
+                    storedBook.savetoDisk()
+                    self?.gaiaAddresses = storedBook.items.filter { $0.address.contains(self?.addressPrefix ?? "-") }
+                    self?.tableView.reloadData()
+                } else {
+                    self?.toast?.showToastAlert("The address can't be saved because the checksum failed.", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+                }
+            }
         }
     }
     
     @IBAction func useAction(_ sender: UIButton) {
         
-        
+        view.endEditing(true)
         var alias = walletNameRichTextField.contentTextField?.text ?? "Unnamed"
         if alias.count == 0 { alias = "Unnamed" }
         let address = addresRichTextField.contentTextField?.text ?? ""
         let item = GaiaAddressBookItem(name: alias, address: address)
-        self.dismiss(animated: true) {
-            self.onSelectAddress?(item)
+        
+        loadingView.startAnimating()
+        item.validate(node: AppContext.shared.node) { [weak self] success in
+            self?.loadingView.stopAnimating()
+            if success {
+                self?.dismiss(animated: true) {
+                    self?.onSelectAddress?(item)
+                }
+            } else {
+                self?.toast?.showToastAlert("The address can't be used because the checksum failed.", autoHideAfter: GaiaConstants.autoHideToastTime, type: .error, dismissable: true)
+            }
         }
+
     }
     
     @IBAction func qrCodeAction(_ sender: Any) {

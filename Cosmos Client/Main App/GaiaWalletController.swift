@@ -363,7 +363,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                 if let asset = self?.selectedAsset, let amount = asset.amount?.split(separator: ".").first, let denom = asset.denom {
                     AppContext.shared.account?.isEmpty = false
                     let newAmount = asset.deflatedAmount(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 2)
-                    self?.sendAmountButton.isEnabled = newAmount != "0.00" && !(AppContext.shared.key?.watchMode == true)
+                    self?.sendAmountButton.isEnabled = !(AppContext.shared.key?.watchMode == true)
                     self?.amountValueLabel.text = newAmount
                     self?.amountDenomLabel.text = asset.upperDenom
                     

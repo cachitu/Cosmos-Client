@@ -110,6 +110,11 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
         timer?.invalidate()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        toast?.hideToast()
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "VotesSegueID" {
@@ -284,11 +289,6 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
             }
             return
         }
-
-//        let denom = AppContext.shared.node?.stakeDenom ?? "stake"
-//        showAmountAlert(title: "Type the amount of \(denom) you want to deposit to proposal with id \(proposal.proposalId)", message: nil, placeholder: "0 \(denom)") { [weak self] amount in
-//
-//        }
     }
     
     func broadcastDeposit(proposal: GaiaProposal, amount: String) {

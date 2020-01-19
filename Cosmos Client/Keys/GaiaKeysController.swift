@@ -56,7 +56,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
     var filteredDataSource: [GaiaKey] {
         return
             reusePickerMode ?
-                dataSource.filter { $0.watchMode != true && $0.nodeId != AppContext.shared.node?.nodeID && $0.type != AppContext.shared.node?.type.rawValue }
+                dataSource.filter { $0.mnemonic != "" && $0.watchMode != true && $0.nodeId != AppContext.shared.node?.nodeID && $0.type != AppContext.shared.node?.type.rawValue }
                 :
                 dataSource.filter { $0.nodeId == AppContext.shared.node?.nodeID && $0.type == AppContext.shared.node?.type.rawValue }
     }
@@ -142,6 +142,11 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        toast?.hideToast()
+    }
+
     func showCreateOptions() {
         
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

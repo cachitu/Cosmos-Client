@@ -91,9 +91,10 @@ class GaiaCollectAmountController: UIViewController {
             let memo = memoTextField.text ?? ""
             let feeDenom = AppContext.shared.node?.feeDenom ?? ""
             let feeAmount = AppContext.shared.node?.feeAmount ?? "0"
-            finalMemo.text = "Memo: \(memo)"
-            finalAmount.text = "Amount (\(amountLabel.text ?? "0") \(denomBigLabel.text ?? "-")):\n" + AppContext.shared.collectedAmount + " " + AppContext.shared.collectedDenom
-            finalFee.text = "Fee:\n" + feeAmount + " " + feeDenom
+            finalMemo.text = "Memo: -"
+            if memo != "" { finalMemo.text = "Memo:\n\(memo)" }
+            finalAmount.text = "Amount ~\(amountLabel.text ?? "0") \(denomBigLabel.text ?? "-"):\n" + AppContext.shared.collectedAmount + " " + AppContext.shared.collectedDenom
+            finalFee.text = "Transaction Fee:\n" + feeAmount + " " + feeDenom
             
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
@@ -269,17 +270,17 @@ class GaiaCollectAmountController: UIViewController {
             updateForFeeState()
         }
         summaryCenterX.constant = UIScreen.main.bounds.size.width
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AppContext.shared.collectScreenOpen = true
         
         if AppContext.shared.collectSummary.count == 3 {
             summary1Label.text = AppContext.shared.collectSummary[0]
             summary2Label.text = AppContext.shared.collectSummary[1]
             summary3Label.text = AppContext.shared.collectSummary[2]
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        AppContext.shared.collectScreenOpen = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {

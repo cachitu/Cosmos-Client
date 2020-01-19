@@ -88,6 +88,11 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         timer?.invalidate()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        toast?.hideToast()
+    }
+
     func loadData() {
         
         if let validNode = AppContext.shared.node {
