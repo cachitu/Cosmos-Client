@@ -85,6 +85,9 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         editButton.isHidden = nodes.count == 0
 
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
+            for node in self?.nodes ?? [] {
+                node.state = .pending
+            }
             self?.refreshNodes()
         }
         

@@ -18,7 +18,7 @@ class GaiaCollectAmountController: UIViewController {
     
     private var denomPower: Double = AppContext.shared.node?.decimals ?? 6
     private var maxAmountLenght = 7
-    private var maxFee = 1.0
+    private var maxFee = GaiaConstants.maxFee
     private var maxDigitsLenght = 6
     private var selectedAsset: Coin? {
         didSet {
@@ -89,7 +89,14 @@ class GaiaCollectAmountController: UIViewController {
             summary3Label.text = AppContext.shared.collectSummary[2]
             
             let memo = memoTextField.text ?? ""
-            let feeDenom = AppContext.shared.node?.feeDenom ?? ""
+            var feeDenom = AppContext.shared.node?.feeDenom ?? ""
+            if let assets = AppContext.shared.account?.assets, let denom = AppContext.shared.node?.feeDenom, assets.count > 0 {
+                let matches = assets.filter() { $0.denom == denom }
+                if matches.count < 1 {
+                    feeDenom = assets.first?.denom ?? ""
+                    AppContext.shared.node?.feeDenom = feeDenom
+                }
+            }
             let feeAmount = AppContext.shared.node?.feeAmount ?? "0"
             finalMemo.text = "Memo: -"
             if memo != "" { finalMemo.text = "Memo:\n\(memo)" }
@@ -235,7 +242,8 @@ class GaiaCollectAmountController: UIViewController {
         if let dval = Double(feeDigits.joined()) {
             if dval > maxFee {
                 Animations.requireUserAtention(on: amountLabel)
-                feeDigits = ["1"]
+                let feeStr = "\(maxFee))"
+                feeDigits = feeStr.map { String($0) }
                 return
             }
             let dvalPwr = dval * pow(10.0, denomPower)
@@ -296,10 +304,37 @@ class GaiaCollectAmountController: UIViewController {
         confirmButton.isEnabled = false
         let fee = AppContext.shared.node?.feeAmount ?? "0"
         let dfee = Double(fee) ?? 0.0
-        let strVal = dfee > 0 ? "\(dfee / pow(10.0, denomPower))" : "0"
-        updatableDigits = Array(strVal).map { String($0) }
-        availableAmountLabel.text = "1"
-        let feeDenom = AppContext.shared.node?.feeDenom ?? ""
+        if dfee == 0 {
+             updatableDigits = ["0"]
+        } else {
+            var length = fee.count
+            var tmpDigits = Array(fee).map { String($0) }
+            if length < Int(denomPower) - 1 {
+                while length < Int(denomPower) {
+                    tmpDigits.insert("0", at: 0)
+                    length += 1
+                }
+                tmpDigits.insert(".", at: 0)
+                tmpDigits.insert("0", at: 0)
+                while tmpDigits.last == "0" {
+                    tmpDigits.removeLast()
+                }
+                updatableDigits = tmpDigits
+            } else {
+                let strVal = dfee > 0 ? "\(dfee / pow(10.0, denomPower))" : "0"
+                updatableDigits = Array(strVal).map { String($0) }
+            }
+        }
+        availableAmountLabel.text = "\(maxFee)"
+        var feeDenom = AppContext.shared.node?.feeDenom ?? selectedAsset?.denom ?? ""
+        if let assets = AppContext.shared.account?.assets, let denom = AppContext.shared.node?.feeDenom, assets.count > 0 {
+            let matches = assets.filter() { $0.denom == denom }
+            if matches.count < 1 {
+                feeDenom = assets.first?.denom ?? ""
+                AppContext.shared.node?.feeDenom = feeDenom
+            }
+        }
+
         denomBigLabel.text = Coin.upperDenomFrom(denom: feeDenom)
         denomSmallLabel.text = AppContext.shared.node?.feeDenom
         maxAvailableLeadingLabel.text = "Max Fee:"

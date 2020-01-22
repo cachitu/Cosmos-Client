@@ -86,8 +86,8 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
         view.endEditing(true)
         if feeTextField.text == "" { feeTextField.text = "0" }
         if var value = feeTextField.text, let intVal = Int(value) {
-            if intVal > Int(pow(10, node.decimals)) {
-                value = "\(Int(pow(10, node.decimals)))"
+            if intVal > Int(GaiaConstants.maxFee * pow(10, node.decimals)) {
+                value = "\(Int(GaiaConstants.maxFee * pow(10, node.decimals)))"
                 feeTextField.text = value
                 
                 let alert = UIAlertController(title: nil, message: "One million should be enough, don't waste them on fees.", preferredStyle: .alert)
@@ -95,8 +95,8 @@ class GaiaSettingsController: UIViewController, ToastAlertViewPresentable {
                 alert.addAction(cancelAction)
                 self.present(alert, animated: true, completion: nil)
             }
-            toast?.showToastAlert("\(intVal) fee set for node \(nodeName).", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
-            AppContext.shared.node?.feeAmount = "\(intVal)"
+            toast?.showToastAlert("\(value) fee set for node \(nodeName).", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
+            AppContext.shared.node?.feeAmount = "\(value)"
             updateFeeLabel()
             peristNodes()
         }

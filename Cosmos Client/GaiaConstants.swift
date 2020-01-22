@@ -14,5 +14,6 @@ enum GaiaConstants {
     static let historyPageSize = 900
     static let autoHideToastTime = 5.0
     static let bioAuthDefautsKey = "BioAuthDefaultsKey"
+    static let maxFee = 3.5
 }
 
