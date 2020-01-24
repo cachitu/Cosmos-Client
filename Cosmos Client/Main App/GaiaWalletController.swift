@@ -68,7 +68,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
                        initialSpringVelocity: 2,
                        options: [.curveEaseInOut],
                        animations: { [weak self] in
-                        self?.qrVisualBackground.alpha = alpha
+                        self?.qrVisualBackground.isHidden = alpha < 1
                         self?.qrShareButton.alpha = alpha
                         self?.qrCloseButton.alpha = alpha
                         self?.view.layoutIfNeeded()

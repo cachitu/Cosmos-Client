@@ -8,22 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="TFX-Qv-BGd">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="iW5-Xz-g9h" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YGZ-nS-Awc">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IXK-4Q-8Fh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3520.8000000000002" y="-322.48875562218893"/>
-        </scene>
         <!--Address Pick Controller-->
         <scene sceneID="ZBt-fL-6C2">
             <objects>
@@ -164,7 +148,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tbu-Dv-7Lq">
                                 <rect key="frame" x="15" y="240.66666666666663" width="80" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="coL-9A-rg1"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="coL-9A-rg1"/>
                                     <constraint firstAttribute="height" constant="40" id="spP-uo-azP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
@@ -340,6 +324,7 @@
                             <constraint firstItem="fYJ-Q0-seF" firstAttribute="trailing" secondItem="lpA-fR-An7" secondAttribute="trailing" id="6Gq-Mx-aqC"/>
                             <constraint firstItem="Nmg-Cz-N1C" firstAttribute="leading" secondItem="fYJ-Q0-seF" secondAttribute="leading" constant="15" id="80a-Jk-GWO"/>
                             <constraint firstItem="zdV-wq-7f1" firstAttribute="centerX" secondItem="Nmg-Cz-N1C" secondAttribute="centerX" id="Cc5-dV-cqt"/>
+                            <constraint firstItem="DAM-HX-mO5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2V1-9t-vuV" secondAttribute="trailing" constant="5" id="FCB-83-ayM"/>
                             <constraint firstItem="zdV-wq-7f1" firstAttribute="leading" secondItem="fYJ-Q0-seF" secondAttribute="leading" id="JKW-xO-UMp"/>
                             <constraint firstItem="fYJ-Q0-seF" firstAttribute="top" secondItem="7gL-ff-Vjb" secondAttribute="top" constant="50" id="LTc-62-taX"/>
                             <constraint firstItem="YBD-YC-goC" firstAttribute="top" secondItem="DAM-HX-mO5" secondAttribute="bottom" constant="8" id="Mqw-gS-RGl"/>
