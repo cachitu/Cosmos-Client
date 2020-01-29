@@ -78,17 +78,17 @@ class GaiaKeyCreateController: UIViewController, ToastAlertViewPresentable, Gaia
             return
         }
         
-        let mnemonicOk = seedTextView.isHidden || seedTextView.text.split(separator: " ").count == 24
+        let mnemonicOk = seedTextView.isHidden || seedTextView.text.split(separator: " ").count == 24 || seedTextView.text.split(separator: " ").count == 12
 
         guard mnemonicOk else {
-            toast?.showToastAlert("The seed must have 24 words", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
+            toast?.showToastAlert("The seed must have 12 or 24 words", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
             return
         }
         
         var mnemonic: String? = nil
         if seedTextView.isHidden == false, let text = seedTextView.text {
             let words = text.components(separatedBy: " ")
-            if words.count == 24 {
+            if words.count == 24 || words.count == 12 {
                 mnemonic = text }
         }
         self.loadingView.startAnimating()

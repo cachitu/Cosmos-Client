@@ -261,8 +261,8 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             return
         }
         
-        guard key.mnemonic.split(separator: " ").count == 24 else {
-            toast?.showToastAlert("The seed must have 24 words", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
+        if key.mnemonic.split(separator: " ").count != 24 ||  key.mnemonic.split(separator: " ").count != 12 {
+            toast?.showToastAlert("The seed must have 12 or 24 words", autoHideAfter: GaiaConstants.autoHideToastTime, type: .info, dismissable: true)
             return
         }
         
