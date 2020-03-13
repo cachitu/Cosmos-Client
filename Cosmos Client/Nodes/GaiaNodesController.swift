@@ -67,10 +67,11 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         } else {
             nodes = [
                 TDMNode(name: TDMNodeType.cosmos.rawValue, type: .cosmos, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1317, secured: true),
-                TDMNode(name: TDMNodeType.iris.rawValue,  type: .iris,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1327, secured: true),
-                TDMNode(name: TDMNodeType.terra.rawValue,  type: .terra,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
-                TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347, secured: true),
+                TDMNode(name: TDMNodeType.iris.rawValue,  type: .iris, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1327, secured: true),
+                TDMNode(name: TDMNodeType.terra.rawValue,  type: .terra, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
+                TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347, secured: true),
                 TDMNode(name: TDMNodeType.terra.rawValue + " (Old HD)",  type: .terra_118,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
+                TDMNode(name: TDMNodeType.kava.rawValue + " (Old HD)",  type: .kava_118, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347, secured: true),
                 TDMNode(name: "Iris Nyancat Testnet",  type: .iris_fuxi,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1337, secured: false),
                 TDMNode(name: "Cosmos testnet",  type: .cosmos,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1317, secured: false),
                 TDMNode(name: "Terra testnet",  type: .terra,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1347, secured: false),
