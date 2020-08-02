@@ -12,9 +12,10 @@ import CosmosRestApi
 class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, GaiaValidatorsCapable, GaiaKeysManagementCapable {
     
     var toast: ToastAlertView?
-    
+    var validatorState = "bonded"
     var defaultFeeSigAmount: String { return AppContext.shared.node?.feeAmount  ?? "0" }
 
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var loadingView: CustomLoadingView!
     @IBOutlet weak var toastHolderUnderView: UIView!
     @IBOutlet weak var toastHolderTopConstraint: NSLayoutConstraint!
@@ -25,7 +26,12 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     @IBOutlet weak var logsButton: RoundedButton!
     @IBAction func logsAction(_ sender: UIButton) {
     }
-
+    
+    @IBAction func segmentControlAction(_ sender: UISegmentedControl) {
+        validatorState = sender.selectedSegmentIndex == 2 ? "unbonded" : sender.selectedSegmentIndex == 1 ? "unbonding" : "bonded"
+        loadData(status: validatorState)
+    }
+    
     var dataSource: [GaiaValidator] = []
     private weak var timer: Timer?
 
@@ -39,7 +45,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                 if AppContext.shared.node?.state == .unknown {
                     self?.performSegue(withIdentifier: "UnwindToNodes", sender: self)
                 } else {
-                    self?.loadData()
+                    self?.loadData(status: self?.validatorState ?? "bonded")
                 }
             }
         }
@@ -74,9 +80,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        loadData()
-        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
-            self?.loadData()
+        loadData(status: validatorState)
+        timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval * 3, repeats: true) { [weak self] timer in
+            self?.loadData(status: self?.validatorState ?? "bonded")
         }
 
     }
@@ -93,7 +99,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
         toast?.hideToast()
     }
 
-    func loadData() {
+    func loadData(status: String) {
         
         if let validNode = AppContext.shared.node {
             
@@ -102,7 +108,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
             }
 
             loadingView.startAnimating()
-            retrieveAllValidators(node: validNode) { [weak self] validators, errMsg in
+            retrieveAllValidators(node: validNode, status: status) { [weak self] validators, errMsg in
                 self?.loadingView.stopAnimating()
                 if let validValidators = validators {
                     for validator in validValidators {
@@ -227,8 +233,8 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                 toValidator: validator.validator,
                 amount: validAmount) { [weak self] resp, msg in
                     AppContext.shared.redelgateFrom = nil
-                    self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval, repeats: true) { [weak self] timer in
-                        self?.loadData()
+                    self?.timer = Timer.scheduledTimer(withTimeInterval: GaiaConstants.refreshInterval * 3, repeats: true) { [weak self] timer in
+                        self?.loadData(status: self?.validatorState ?? "bonded")
                     }
                     
                     if resp != nil {
@@ -239,7 +245,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                         
                         AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                             self?.loadingView.stopAnimating()
-                            self?.loadData()
+                            self?.loadData(status: self?.validatorState ?? "bonded")
                         }
                     } else if let errMsg = msg {
                         self?.loadingView.stopAnimating()
@@ -304,7 +310,7 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                             self?.toast?.showToastAlert("Delegation submitted\n[\(msg ?? "...")]", autoHideAfter: GaiaConstants.autoHideToastTime, type: .validatePending, dismissable: true)
                             AppContext.shared.key?.getDelegations(node: validNode) { [weak self] delegations, error in
                                 self?.loadingView.stopAnimating()
-                                self?.loadData()
+                                self?.loadData(status: self?.validatorState ?? "bonded")
                             }
                         } else if let errMsg = msg {
                             self?.loadingView.stopAnimating()

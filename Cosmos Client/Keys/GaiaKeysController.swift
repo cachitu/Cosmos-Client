@@ -124,7 +124,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         
         guard let validNode = AppContext.shared.node else { return }
         AppContext.shared.node?.getStakingInfo() { [weak self] denom in
-            self?.retrieveAllValidators(node: validNode) { validators, errMsg in
+            self?.retrieveAllValidators(node: validNode, status: "bonded") { validators, errMsg in
                 if let validValidators = validators {
                     for validator in validValidators {
                         validNode.knownValidators[validator.validator] = validator.moniker
