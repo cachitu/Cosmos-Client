@@ -30,6 +30,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     @IBOutlet weak var topNavBarView: UIView!
     @IBOutlet weak var addButton: UIButton!
     @IBAction func unwindToNodes(segue:UIStoryboardSegue) { }
+    @IBOutlet weak var versionLabel: UILabel!
     
     @IBOutlet weak var editButton: UIButton!
     @IBAction func editButtonAction(_ sender: UIButton) {
@@ -56,6 +57,9 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            versionLabel.text = "Ver. " + appVersion
+        }
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         addButton.layer.cornerRadius = addButton.frame.size.height / 2
         if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {

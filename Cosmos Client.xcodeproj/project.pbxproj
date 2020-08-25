@@ -656,7 +656,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.syncnode.tendermint-tools";
 				PRODUCT_NAME = "T-Stake";
 				SWIFT_VERSION = 5.0;
@@ -678,7 +678,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.syncnode.tendermint-tools";
 				PRODUCT_NAME = "T-Stake";
 				PROVISIONING_PROFILE_SPECIFIER = "";

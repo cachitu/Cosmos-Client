@@ -34,6 +34,7 @@ public class LocalClient: KeysClientDelegate {
         case .emoney    : self.signer = TendermintClient(coin: .emoney)
         case .regen     : self.signer = TendermintClient(coin: .regen)
         case .certik    : self.signer = TendermintClient(coin: .certik)
+        case .microtick : self.signer = TendermintClient(coin: .microtick)
         }
     }
     
@@ -61,6 +62,47 @@ public class LocalClient: KeysClientDelegate {
         return key
     }
     
+    public func signV2(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, completion:((RestResult<TxValueSignatureV2>) -> Void)?) {
+        
+        var signable = TxSignable()
+        signable.accountNumber = account.accNumber
+        signable.chainId = node.network
+        signable.fee = transferData?.value?.fee
+        signable.memo = transferData?.value?.memo
+        signable.msgs = transferData?.value?.msg
+        signable.sequence = account.accSequence
+        
+        var jsonData = Data()
+        var jsString = ""
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        encoder.dataEncodingStrategy = .base64
+        do {
+            jsonData = try encoder.encode(signable)
+            jsString = String(data: jsonData, encoding: String.Encoding.utf8) ?? ""
+        } catch {
+            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
+            completion?(.failure(error))
+        }
+        jsString = jsString.replacingOccurrences(of: "\\", with: "")
+        print(jsString)
+
+        let goodBuffer = jsString.data(using: .utf8)?.sha256() ?? Data()
+        let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
+        
+        //let type = "tendermint/PubKeySecp256k1"
+        //let value = hdaccount.privateKey.publicKey.getBase64()
+        let hash = signer.signHash(transferData: goodBuffer, hdAccount: hdaccount)
+        
+        let sig = TxValueSignatureV2(
+            sig: hash,
+            value: account.pubKey,
+            accNum: account.accNumber,
+            seq: account.accSequence)
+
+        completion?(.success(sig))
+    }
+
     public func sign(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, completion:((RestResult<[TransactionTx]>) -> Void)?) {
         
         var signable = TxSignable()

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n2c-oa-V7z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n2c-oa-V7z">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,10 +20,10 @@
                                 <rect key="frame" x="37.666666666666657" y="347" width="300" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nodes" translatesAutoresizingMaskIntoConstraints="NO" id="8Ka-ED-jeA">
-                                        <rect key="frame" x="98" y="0.0" width="104" height="104"/>
+                                        <rect key="frame" x="124" y="0.0" width="52" height="52"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add nodes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xx-Cm-hip">
-                                        <rect key="frame" x="61.666666666666671" y="125.99999999999999" width="176.33333333333331" height="20.333333333333329"/>
+                                        <rect key="frame" x="61.666666666666671" y="74" width="176.33333333333331" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -401,14 +401,22 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6et-1I-HI8">
+                                        <rect key="frame" x="8" y="74.666666666666671" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" name="DefaultBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="94" id="3az-oi-KSJ"/>
+                                    <constraint firstItem="6et-1I-HI8" firstAttribute="leading" secondItem="3Ih-PL-JMo" secondAttribute="leading" constant="8" id="4SG-SO-wM0"/>
                                     <constraint firstAttribute="trailing" secondItem="FcL-oX-sc1" secondAttribute="trailing" constant="8" id="AnU-p9-q1T"/>
                                     <constraint firstItem="9s1-cR-0fb" firstAttribute="centerX" secondItem="3Ih-PL-JMo" secondAttribute="centerX" id="LnX-0i-Ly8"/>
                                     <constraint firstItem="FcL-oX-sc1" firstAttribute="centerY" secondItem="9s1-cR-0fb" secondAttribute="centerY" id="bSE-NX-Tl4"/>
                                     <constraint firstAttribute="bottom" secondItem="9s1-cR-0fb" secondAttribute="bottom" constant="9" id="pWz-ur-uPd"/>
+                                    <constraint firstItem="6et-1I-HI8" firstAttribute="centerY" secondItem="9s1-cR-0fb" secondAttribute="centerY" id="rUe-58-8Wt"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLr-dS-Y8y" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
@@ -467,6 +475,7 @@
                         <outlet property="toastHolderTopConstraint" destination="uvq-Qd-bqk" id="Wdm-8I-KB8"/>
                         <outlet property="toastHolderUnderView" destination="wnC-3l-bm4" id="DWj-EC-hJ9"/>
                         <outlet property="topNavBarView" destination="3Ih-PL-JMo" id="FfE-uA-f5I"/>
+                        <outlet property="versionLabel" destination="6et-1I-HI8" id="yKu-Sq-g8a"/>
                         <segue destination="cHQ-RA-e4W" kind="presentation" identifier="NodeEditSegue" modalPresentationStyle="fullScreen" id="cp0-Cr-RUl"/>
                         <segue destination="Kpz-ey-gVZ" kind="show" identifier="ShowNodeKeysSegue" id="jkz-Po-nH9"/>
                     </connections>
@@ -509,14 +518,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Gaia Node" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qFa-76-jdr">
-                                                <rect key="frame" x="0.0" y="23.666666666666671" width="343" height="20"/>
+                                                <rect key="frame" x="0.0" y="22.999999999999986" width="343" height="21"/>
                                                 <color key="tintColor" name="DarkGrayText"/>
                                                 <color key="textColor" name="DarkGrayText"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                             </textField>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dE-M0-F2r" userLabel="Separator">
-                                                <rect key="frame" x="0.0" y="46.666666666666671" width="343" height="1"/>
+                                                <rect key="frame" x="0.0" y="46.999999999999986" width="343" height="1"/>
                                                 <color key="backgroundColor" red="0.80784313730000001" green="0.83137254900000002" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="GKG-Af-K6t"/>
@@ -561,14 +570,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.0.0.0.0" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="u0M-lk-YG2">
-                                                <rect key="frame" x="0.0" y="23.666666666666657" width="343" height="20"/>
+                                                <rect key="frame" x="0.0" y="23.333333333333343" width="343" height="21"/>
                                                 <color key="tintColor" name="DarkGrayText"/>
                                                 <color key="textColor" name="DarkGrayText"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                             </textField>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgb-kL-c99" userLabel="Separator">
-                                                <rect key="frame" x="0.0" y="47.666666666666657" width="343" height="1"/>
+                                                <rect key="frame" x="0.0" y="48.333333333333343" width="343" height="1"/>
                                                 <color key="backgroundColor" red="0.80784313730000001" green="0.82745098039999998" blue="0.85500001910000001" alpha="0.30705325700000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="XSc-hE-lXc"/>
@@ -889,11 +898,11 @@
                                 <rect key="frame" x="37.666666666666657" y="347" width="300" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="bAi-do-qgz">
-                                        <rect key="frame" x="121" y="0.0" width="58" height="58"/>
+                                        <rect key="frame" x="135.33333333333334" y="0.0" width="29" height="29.333333333333332"/>
                                         <color key="tintColor" name="DarkGrayText"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add keys" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsX-8m-SUL">
-                                        <rect key="frame" x="67.999999999999986" y="80" width="163.66666666666663" height="20.333333333333329"/>
+                                        <rect key="frame" x="67.999999999999986" y="51.333333333333314" width="163.66666666666663" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" name="DarkGrayText"/>
                                         <nil key="highlightedColor"/>
@@ -1653,14 +1662,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a name here" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EXg-SB-57D">
-                                                <rect key="frame" x="0.0" y="29.999999999999986" width="343" height="20"/>
+                                                <rect key="frame" x="0.0" y="29.333333333333329" width="343" height="21"/>
                                                 <color key="tintColor" name="DarkGrayText"/>
                                                 <color key="textColor" name="DarkGrayText"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                             </textField>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycc-qj-1si" userLabel="Separator">
-                                                <rect key="frame" x="0.0" y="52.999999999999986" width="343" height="1"/>
+                                                <rect key="frame" x="0.0" y="53.333333333333329" width="343" height="1"/>
                                                 <color key="backgroundColor" red="0.80784313730000001" green="0.83137254900000002" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="rJ6-CM-04l"/>
@@ -1774,7 +1783,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r70-ol-lN6">
-                                        <rect key="frame" x="275" y="7" width="70" height="30"/>
+                                        <rect key="frame" x="285.66666666666669" y="7" width="59.333333333333314" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="BAj-Dv-ibj"/>
                                         </constraints>
@@ -1941,11 +1950,11 @@
                                 <rect key="frame" x="37.666666666666657" y="347" width="300" height="128"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="keyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lQ8-Ut-lgb">
-                                        <rect key="frame" x="121" y="0.0" width="58" height="58"/>
+                                        <rect key="frame" x="135.33333333333334" y="0.0" width="29" height="29.333333333333332"/>
                                         <color key="tintColor" name="DarkGrayText"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add keys" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rev-U9-mt1">
-                                        <rect key="frame" x="67.999999999999986" y="80" width="163.66666666666663" height="20.333333333333329"/>
+                                        <rect key="frame" x="67.999999999999986" y="51.333333333333314" width="163.66666666666663" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2413,17 +2422,21 @@
             <point key="canvasLocation" x="-446" y="933"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cp0-Cr-RUl"/>
+    </inferredMetricsTieBreakers>
+    <color key="tintColor" name="DefaultBackground"/>
     <resources>
         <image name="NavbarAdd" width="19" height="19"/>
         <image name="NavbarBack" width="10.333333015441895" height="19"/>
         <image name="NavbarClose" width="27" height="27"/>
         <image name="Nodes" width="52" height="52"/>
         <image name="atom" width="80" height="80"/>
-        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
-        <image name="circle" catalog="system" width="64" height="60"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="clipboard" width="11.333333015441895" height="11.333333015441895"/>
         <image name="keyIcon" width="29" height="29.333333969116211"/>
-        <image name="lock" catalog="system" width="64" height="64"/>
+        <image name="lock" catalog="system" width="128" height="128"/>
         <image name="rcheckBoxChecked" width="20" height="20"/>
         <namedColor name="CellBackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2447,8 +2460,4 @@
             <color red="0.80784313725490198" green="0.83137254901960789" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="cp0-Cr-RUl"/>
-    </inferredMetricsTieBreakers>
-    <color key="tintColor" name="DefaultBackground"/>
 </document>
