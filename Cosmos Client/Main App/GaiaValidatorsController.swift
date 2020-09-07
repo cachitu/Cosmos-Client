@@ -27,6 +27,10 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     @IBAction func logsAction(_ sender: UIButton) {
     }
     
+    @IBAction func getUnbondingsAction(_ sender: UIButton) {
+        getUnbondings()
+    }
+    
     @IBAction func segmentControlAction(_ sender: UISegmentedControl) {
         validatorState = sender.selectedSegmentIndex == 2 ? "unbonded" : sender.selectedSegmentIndex == 1 ? "unbonding" : "bonded"
         loadData(status: validatorState)
@@ -320,6 +324,26 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
                                 self?.toast?.showToastAlert(errMsg, type: .error, dismissable: true)
                             }
                         }
+                }
+            }
+        }
+    }
+    
+    private func getUnbondings() {
+        if let validNode = AppContext.shared.node, let validKey = AppContext.shared.key {
+            validKey.getUnbondingDelegations(node: validNode) { [weak self] (unbondings, error) in
+                if unbondings?.count ?? 0 > 0 {
+                    var result = "Unbondings:\n"
+                    for unbonding in unbondings ?? [] {
+                        for entry in unbonding.entries ?? [] {
+                            if let balance = entry.balance, let ctime = entry.completionTime {
+                                result += balance + " - " + ctime + "\n"
+                            }
+                        }
+                    }
+                    self?.toast?.showToastAlert(result, type: .info, dismissable: true)
+                } else {
+                    self?.toast?.showToastAlert("No unbondings in progress", autoHideAfter: 5, type: .info, dismissable: true)
                 }
             }
         }

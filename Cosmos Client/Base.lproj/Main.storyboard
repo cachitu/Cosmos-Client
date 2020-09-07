@@ -1062,13 +1062,27 @@
                                         <color key="textColor" name="LigthText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29k-zt-2yd" userLabel="History">
+                                        <rect key="frame" x="331" y="56" width="44" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="4Iy-fS-eGR"/>
+                                            <constraint firstAttribute="height" constant="37" id="Mbv-eK-hb8"/>
+                                        </constraints>
+                                        <color key="tintColor" name="LigthText"/>
+                                        <state key="normal" image="history"/>
+                                        <connections>
+                                            <action selector="getUnbondingsAction:" destination="6Ja-jx-Fju" eventType="touchUpInside" id="yvz-sI-Qck"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="DefaultBackground"/>
                                 <color key="tintColor" name="DefaultBackground"/>
                                 <constraints>
+                                    <constraint firstItem="29k-zt-2yd" firstAttribute="centerY" secondItem="9Cl-zo-Lvg" secondAttribute="centerY" id="56j-j8-Mq6"/>
                                     <constraint firstAttribute="bottom" secondItem="9Cl-zo-Lvg" secondAttribute="bottom" constant="9" id="8sr-Fq-bhp"/>
                                     <constraint firstItem="9Cl-zo-Lvg" firstAttribute="centerX" secondItem="fej-b2-DDY" secondAttribute="centerX" id="FJ7-Ho-h60"/>
                                     <constraint firstAttribute="height" constant="94" id="cze-sY-Bf6"/>
+                                    <constraint firstAttribute="trailing" secondItem="29k-zt-2yd" secondAttribute="trailing" id="sIO-CJ-dMU"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04a-Ih-g4c" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">

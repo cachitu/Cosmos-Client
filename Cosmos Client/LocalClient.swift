@@ -23,6 +23,7 @@ public class LocalClient: KeysClientDelegate {
         self.networkID = netID
         self.type = networkType
         switch networkType {
+        case .stargate  : self.signer = TendermintClient(coin: .stargate)
         case .cosmos    : self.signer = TendermintClient(coin: .cosmos)
         case .iris      : self.signer = TendermintClient(coin: .iris)
         case .iris_fuxi : self.signer = TendermintClient(coin: .iris_fuxi)
