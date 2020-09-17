@@ -74,16 +74,19 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
                 TDMNode(name: TDMNodeType.iris.rawValue,  type: .iris, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1327, secured: true),
                 TDMNode(name: TDMNodeType.terra.rawValue,  type: .terra, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
                 TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347, secured: true),
-                TDMNode(name: TDMNodeType.terra.rawValue + " (Old HD)",  type: .terra_118,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
-                TDMNode(name: TDMNodeType.kava.rawValue + " (Old HD)",  type: .kava_118, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347, secured: true),
-                TDMNode(name: "Iris Nyancat Testnet",  type: .iris_fuxi,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1337, secured: false),
-                TDMNode(name: "Cosmos testnet",  type: .cosmos,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1317, secured: false),
-                TDMNode(name: "Terra testnet",  type: .terra,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1347, secured: false),
-                TDMNode(name: "Regen Network",  type: .regen,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 5317, secured: false),
-                TDMNode(name: TDMNodeType.bitsong.rawValue,  type: .bitsong,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 2347, secured: false),
-                TDMNode(name: TDMNodeType.emoney.rawValue,  type: .emoney,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1327, secured: false),
-                TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 4317, secured: false),
-                TDMNode(name: "Iris Fuxy Testnet",  type: .iris_fuxi,scheme: "https", host: "lcd.testnet.irisnet.org", rcpPort: nil, secured: false)]
+                TDMNode(name: TDMNodeType.emoney.rawValue,  type: .emoney, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1357, secured: true)
+
+                //TDMNode(name: TDMNodeType.terra.rawValue + " (Old HD)",  type: .terra_118,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
+                //TDMNode(name: TDMNodeType.kava.rawValue + " (Old HD)",  type: .kava_118, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347, secured: true),
+                //TDMNode(name: "Iris Nyancat Testnet",  type: .iris_fuxi,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1337, secured: false),
+                //TDMNode(name: "Cosmos testnet",  type: .cosmos,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1317, secured: false),
+                //TDMNode(name: "Terra testnet",  type: .terra,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1347, secured: false),
+                //TDMNode(name: "Regen Network",  type: .regen,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 5317, secured: false),
+                //TDMNode(name: TDMNodeType.bitsong.rawValue,  type: .bitsong,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 2347, secured: false),
+                //TDMNode(name: TDMNodeType.emoney.rawValue,  type: .emoney,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1327, secured: false),
+                //TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 4317, secured: false),
+                //TDMNode(name: "Iris Fuxy Testnet",  type: .iris_fuxi,scheme: "https", host: "lcd.testnet.irisnet.org", rcpPort: nil, secured: false)
+            ]
             
             PersistableGaiaNodes(nodes: nodes).savetoDisk()
         }
