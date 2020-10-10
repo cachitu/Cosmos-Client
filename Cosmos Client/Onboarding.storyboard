@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n2c-oa-V7z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n2c-oa-V7z">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +25,7 @@
                                         <rect key="frame" x="124" y="0.0" width="52" height="52"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add nodes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xx-Cm-hip">
-                                        <rect key="frame" x="61.666666666666671" y="74" width="176.33333333333331" height="20.333333333333329"/>
+                                        <rect key="frame" x="62.333333333333343" y="74" width="175" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -382,7 +384,7 @@
                                 <rect key="frame" x="0.0" y="-6" width="375" height="94"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FcL-oX-sc1">
-                                        <rect key="frame" x="335" y="57.666666666666657" width="32" height="34"/>
+                                        <rect key="frame" x="336" y="57.666666666666657" width="31" height="34"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Edit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -441,6 +443,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Dzz-Vi-ZoU"/>
                         <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="wnC-3l-bm4" firstAttribute="trailing" secondItem="3Ih-PL-JMo" secondAttribute="trailing" id="9Ga-12-xH7"/>
@@ -463,7 +466,6 @@
                             <constraint firstItem="wnC-3l-bm4" firstAttribute="top" secondItem="3Ih-PL-JMo" secondAttribute="bottom" id="uvq-Qd-bqk"/>
                             <constraint firstItem="Dzz-Vi-ZoU" firstAttribute="trailing" secondItem="xNB-Kk-rWn" secondAttribute="trailing" id="x1s-LL-RlS"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Dzz-Vi-ZoU"/>
                     </view>
                     <navigationItem key="navigationItem" id="Au3-UN-1Iq"/>
                     <connections>
@@ -773,7 +775,7 @@
                                             <action selector="closeButtonAction:" destination="cHQ-RA-e4W" eventType="touchUpInside" id="jBy-GD-JEu"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMK-GN-ova" userLabel="Add Button">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMK-GN-ova" userLabel="Add Button">
                                         <rect key="frame" x="316" y="50" width="51" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Abi-Di-kHd"/>
@@ -791,7 +793,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gaia Node" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQl-Xx-dnm">
-                                        <rect key="frame" x="146.33333333333334" y="62.000000000000007" width="82.333333333333343" height="20.333333333333336"/>
+                                        <rect key="frame" x="146.66666666666666" y="62.000000000000007" width="82" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -817,6 +819,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Vlf-Fa-sf9"/>
                         <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="Vlf-Fa-sf9" firstAttribute="trailing" secondItem="wpg-b8-t55" secondAttribute="trailing" id="01f-bu-T2q"/>
@@ -843,7 +846,6 @@
                             <constraint firstItem="i29-nj-ZEf" firstAttribute="top" secondItem="3Xa-H0-PMH" secondAttribute="bottom" constant="23.5" id="vqT-nZ-oDb"/>
                             <constraint firstItem="uIV-HS-TrO" firstAttribute="top" secondItem="wpg-b8-t55" secondAttribute="bottom" constant="32" id="wb1-po-Yog"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Vlf-Fa-sf9"/>
                     </view>
                     <navigationItem key="navigationItem" id="gxW-Jk-8xy"/>
                     <connections>
@@ -902,7 +904,7 @@
                                         <color key="tintColor" name="DarkGrayText"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add keys" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsX-8m-SUL">
-                                        <rect key="frame" x="67.999999999999986" y="51.333333333333314" width="163.66666666666663" height="20.333333333333329"/>
+                                        <rect key="frame" x="68.666666666666671" y="51.333333333333314" width="162.66666666666663" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" name="DarkGrayText"/>
                                         <nil key="highlightedColor"/>
@@ -958,12 +960,12 @@
                                                             <color key="textColor" name="LigtherGrayText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tso-7m-SIu">
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tso-7m-SIu">
                                                             <rect key="frame" x="302" y="11" width="35" height="29"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                             <color key="tintColor" name="DefaultBackground"/>
                                                             <state key="normal" title="Copy">
-                                                                <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" systemColor="systemBlueColor"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="copyAction:" destination="VJH-8Y-OQ7" eventType="touchUpInside" id="bCf-Sx-RMl"/>
@@ -1273,7 +1275,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Qz-fn-nTc">
-                                        <rect key="frame" x="335" y="57.666666666666657" width="32" height="34"/>
+                                        <rect key="frame" x="336" y="57.666666666666657" width="31" height="34"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Edit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1321,6 +1323,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="i8m-Qo-aJp"/>
                         <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="i8m-Qo-aJp" firstAttribute="top" secondItem="6P6-I6-SR2" secondAttribute="top" constant="50" id="4JQ-fy-Bgr"/>
@@ -1343,7 +1346,6 @@
                             <constraint firstItem="bvT-B7-lOd" firstAttribute="centerY" secondItem="i8m-Qo-aJp" secondAttribute="centerY" id="m7k-8G-rrw"/>
                             <constraint firstItem="lV1-gt-C2Q" firstAttribute="leading" secondItem="i8m-Qo-aJp" secondAttribute="leading" id="quX-hC-TIO"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="i8m-Qo-aJp"/>
                     </view>
                     <navigationItem key="navigationItem" id="HhA-GV-wNu"/>
                     <connections>
@@ -1446,7 +1448,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gaia Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PA1-C4-Hvf">
-                                        <rect key="frame" x="143.66666666666666" y="57.666666666666657" width="88" height="26"/>
+                                        <rect key="frame" x="144" y="57.666666666666657" width="87" height="26"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1480,11 +1482,11 @@
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHB-Vp-N0M">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHB-Vp-N0M">
                                 <rect key="frame" x="329" y="180.33333333333334" width="31" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <state key="normal" title="Copy">
-                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemBlueColor"/>
                                 </state>
                                 <connections>
                                     <action selector="copyAddress:" destination="yN4-1I-ppV" eventType="touchUpInside" id="dc9-BO-EXq"/>
@@ -1508,11 +1510,11 @@
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNE-id-l6l">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNE-id-l6l">
                                 <rect key="frame" x="329" y="397.66666666666669" width="31" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <state key="normal" title="Copy">
-                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemBlueColor"/>
                                 </state>
                                 <connections>
                                     <action selector="copySeed:" destination="yN4-1I-ppV" eventType="touchUpInside" id="ce1-yk-yp2"/>
@@ -1528,7 +1530,7 @@
                                 <rect key="frame" x="16" y="456.33333333333331" width="67" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <state key="normal" title="Show Seed">
-                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemBlueColor"/>
                                 </state>
                                 <state key="selected" title="Hide Seed"/>
                                 <connections>
@@ -1544,6 +1546,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="TpR-0q-2NQ"/>
                         <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="8wN-9X-t7H" firstAttribute="trailing" secondItem="Zq8-xA-EIS" secondAttribute="trailing" id="0PG-yG-Jzk"/>
@@ -1596,7 +1599,6 @@
                             <constraint firstItem="c7d-iQ-Jwj" firstAttribute="leading" secondItem="8wN-9X-t7H" secondAttribute="leading" id="yY9-td-W66"/>
                             <constraint firstItem="8wN-9X-t7H" firstAttribute="top" secondItem="Zq8-xA-EIS" secondAttribute="bottom" constant="24" id="zVI-49-oh3"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="TpR-0q-2NQ"/>
                     </view>
                     <navigationItem key="navigationItem" id="Yij-49-K8x"/>
                     <connections>
@@ -1767,7 +1769,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recover from seed" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jc-Ze-Sh3">
                                         <rect key="frame" x="30" y="0.0" width="142.66666666666666" height="44"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" systemColor="systemBlueColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiq-PG-gYc">
@@ -1790,7 +1792,7 @@
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="tintColor" name="DarkGrayText"/>
                                         <state key="normal" title="   Paste" image="clipboard">
-                                            <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" systemColor="systemBlueColor"/>
                                         </state>
                                         <connections>
                                             <action selector="pasteAction:" destination="ZAK-uC-6LI" eventType="touchUpInside" id="fBG-wW-hQF"/>
@@ -1840,7 +1842,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Gaia Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8z-no-2sd">
-                                        <rect key="frame" x="124.33333333333331" y="61.333333333333336" width="126.66666666666669" height="21.333333333333336"/>
+                                        <rect key="frame" x="124.33333333333334" y="61.333333333333336" width="126.33333333333334" height="21.333333333333336"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21.5" id="ocg-m9-Qov"/>
                                         </constraints>
@@ -1848,7 +1850,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlZ-tP-0PO" userLabel="Add Button">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlZ-tP-0PO" userLabel="Add Button">
                                         <rect key="frame" x="316" y="50" width="51" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="US8-kl-7Xk"/>
@@ -1893,6 +1895,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Huo-Nr-Iun"/>
                         <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="npH-gS-nGs" firstAttribute="centerY" secondItem="Huo-Nr-Iun" secondAttribute="centerY" id="1kU-XN-2oZ"/>
@@ -1916,7 +1919,6 @@
                             <constraint firstItem="v1X-dc-09o" firstAttribute="leading" secondItem="Huo-Nr-Iun" secondAttribute="leading" constant="8" id="umb-97-g17"/>
                             <constraint firstItem="Huo-Nr-Iun" firstAttribute="trailing" secondItem="yCd-ae-yca" secondAttribute="trailing" id="zPV-7g-OF0"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Huo-Nr-Iun"/>
                     </view>
                     <navigationItem key="navigationItem" id="NRg-VC-LTe"/>
                     <connections>
@@ -1954,7 +1956,7 @@
                                         <color key="tintColor" name="DarkGrayText"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on + to add keys" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rev-U9-mt1">
-                                        <rect key="frame" x="67.999999999999986" y="51.333333333333314" width="163.66666666666663" height="20.333333333333329"/>
+                                        <rect key="frame" x="68.666666666666671" y="51.333333333333314" width="162.66666666666663" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2006,7 +2008,7 @@
                                                             <color key="textColor" name="LigtherGrayText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6v-g2-Uq0">
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6v-g2-Uq0">
                                                             <rect key="frame" x="307" y="12" width="30" height="27"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="tintColor" name="DefaultBackground"/>
@@ -2323,7 +2325,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRo-kh-g2d">
-                                        <rect key="frame" x="335" y="57.666666666666657" width="32" height="34"/>
+                                        <rect key="frame" x="336" y="57.666666666666657" width="31" height="34"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Edit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2374,6 +2376,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="4jY-t5-Lit"/>
                         <color key="backgroundColor" name="ContentBackground"/>
                         <constraints>
                             <constraint firstItem="4jY-t5-Lit" firstAttribute="trailing" secondItem="K2r-9e-5ca" secondAttribute="trailing" id="4AU-TM-eBG"/>
@@ -2396,7 +2399,6 @@
                             <constraint firstItem="2Tg-0G-VOh" firstAttribute="top" secondItem="rJ1-eH-jqy" secondAttribute="bottom" constant="-1" id="vID-he-btF"/>
                             <constraint firstItem="rJ1-eH-jqy" firstAttribute="trailing" secondItem="1nf-Ld-cZg" secondAttribute="trailing" id="war-nR-SOn"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="4jY-t5-Lit"/>
                     </view>
                     <navigationItem key="navigationItem" id="U40-RA-PHl"/>
                     <connections>
@@ -2459,5 +2461,8 @@
         <namedColor name="Silver">
             <color red="0.80784313725490198" green="0.83137254901960789" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

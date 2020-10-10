@@ -67,6 +67,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             showHint = false
             for node in nodes {
                 node.state = .pending
+                node.broadcastMode = .async
             }
         } else {
             nodes = [
