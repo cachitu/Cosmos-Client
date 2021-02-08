@@ -18,7 +18,13 @@ class GaiaTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if AppContext.shared.node?.type == .emoney {
+            self.viewControllers?.remove(at: 2)
+        } else {
+            self.viewControllers?.remove(at: 3)
+        }
+        
         shouldShowSecurity = AppContext.shared.node?.securedNodeAccess == true
         
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in

@@ -56,6 +56,7 @@
 		EE56FA8E23D30A0800570F15 /* QRScannViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE56FA8D23D30A0800570F15 /* QRScannViewController.swift */; };
 		EE56FA9023D312A000570F15 /* GaiaWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE56FA8F23D312A000570F15 /* GaiaWalletCell.swift */; };
 		EE57EB0223C3A32D00A8786C /* GaiaCollectAmountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE57EB0123C3A32D00A8786C /* GaiaCollectAmountController.swift */; };
+		EE6D02B52553160F0042C099 /* GaiaMarketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D02B42553160F0042C099 /* GaiaMarketController.swift */; };
 		EEA8AA4623B4A1500079C6E3 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8AA4523B4A1500079C6E3 /* AppContext.swift */; };
 		EEAE3E6923A7824700A336FA /* GaiaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAE3E6823A7824700A336FA /* GaiaConstants.swift */; };
 		EEAE3E6B23AA8DEA00A336FA /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAE3E6A23AA8DEA00A336FA /* Onboarding.storyboard */; };
@@ -135,6 +136,7 @@
 		EE56FA8D23D30A0800570F15 /* QRScannViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannViewController.swift; sourceTree = "<group>"; };
 		EE56FA8F23D312A000570F15 /* GaiaWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaWalletCell.swift; sourceTree = "<group>"; };
 		EE57EB0123C3A32D00A8786C /* GaiaCollectAmountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaCollectAmountController.swift; sourceTree = "<group>"; };
+		EE6D02B42553160F0042C099 /* GaiaMarketController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaMarketController.swift; sourceTree = "<group>"; };
 		EEA8AA4523B4A1500079C6E3 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		EEAE3E6823A7824700A336FA /* GaiaConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaiaConstants.swift; sourceTree = "<group>"; };
 		EEAE3E6A23AA8DEA00A336FA /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				8801CF7D222273D9004781C1 /* GaiaDelegationsController.swift */,
 				EEE87A7521F8521B00CA9CDA /* GaiaValidatorCell.swift */,
 				EE2D63E321ECF9440002D51D /* GaiaGovernanceController.swift */,
+				EE6D02B42553160F0042C099 /* GaiaMarketController.swift */,
 				46A4D0A323B647E200CC55F4 /* GaiaHashesController.swift */,
 				EEBDFC2223801E0400079F38 /* GaiaOraclesController.swift */,
 				88A3F252224D4C7600BAEEE8 /* GaiaVotesController.swift */,
@@ -480,6 +483,7 @@
 				EE56FA9023D312A000570F15 /* GaiaWalletCell.swift in Sources */,
 				8869754D21E9CAD000044EB8 /* RichTextFieldView.swift in Sources */,
 				8869755021E9CAD000044EB8 /* ToastAlertView.swift in Sources */,
+				EE6D02B52553160F0042C099 /* GaiaMarketController.swift in Sources */,
 				EE2D63E821EDAB270002D51D /* UViewController+extensions.swift in Sources */,
 				8869757221EA173000044EB8 /* GaiaNodeCell.swift in Sources */,
 				EEAE3E6923A7824700A336FA /* GaiaConstants.swift in Sources */,
@@ -659,7 +663,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.13;
+				MARKETING_VERSION = 1.1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.syncnode.tendermint-tools";
 				PRODUCT_NAME = "T-Stake";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -682,7 +686,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.13;
+				MARKETING_VERSION = 1.1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.syncnode.tendermint-tools";
 				PRODUCT_NAME = "T-Stake";
 				PROVISIONING_PROFILE_SPECIFIER = "";
