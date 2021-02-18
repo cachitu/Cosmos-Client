@@ -30,7 +30,7 @@ public extension UIViewController {
         optionMenu.addAction(unboundAction)
         optionMenu.addAction(redelegateAction)
         optionMenu.addAction(cancelAction)
-        
+        optionMenu.popoverPresentationController?.sourceView = self.view
         self.present(optionMenu, animated: true, completion: nil)
     }
 
@@ -58,7 +58,7 @@ public extension UIViewController {
         alert.addAction(action2)
         alert.addAction(action3)
         alert.addAction(action4)
-
+        alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated:true, completion: nil)
     }
 
@@ -79,6 +79,7 @@ public extension UIViewController {
         alert.setValue(messageText, forKey: "attributedMessage")
         let cancelAction = UIAlertAction(title: "Close", style: .cancel)
         alert.addAction(cancelAction)
+        alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated:true, completion: nil)
     }
 
@@ -100,7 +101,7 @@ public extension UIViewController {
         
         alert.addAction(cancelAction)
         alert.addAction(action)
-        
+        alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated:true, completion: nil)
     }
 
@@ -122,7 +123,7 @@ public extension UIViewController {
         
         alert.addAction(cancelAction)
         alert.addAction(action)
-        
+        alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated:true, completion: nil)
     }
 
@@ -137,7 +138,7 @@ public extension UIViewController {
         }
         alert.addAction(cancelAction)
         alert.addAction(action)
-        
+        alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated:true, completion: nil)
     }
 

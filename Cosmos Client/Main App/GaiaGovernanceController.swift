@@ -378,7 +378,7 @@ extension GaiaGovernanceController: UITableViewDelegate {
 
             optionMenu.addAction(detailsAction)
             optionMenu.addAction(cancelAction)
-            
+            optionMenu.popoverPresentationController?.sourceView = self.tableView
             self.present(optionMenu, animated: true, completion: nil)
         }
     }

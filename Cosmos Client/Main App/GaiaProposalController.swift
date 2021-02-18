@@ -107,7 +107,7 @@ class GaiaProposalController: UIViewController, ToastAlertViewPresentable {
         //optionMenu.addAction(op2)
         optionMenu.addAction(op3)
         optionMenu.addAction(cancelAction)
-
+        optionMenu.popoverPresentationController?.sourceView = self.topBarView
         self.present(optionMenu, animated: true, completion: nil)
 
     }

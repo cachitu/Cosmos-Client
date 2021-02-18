@@ -217,7 +217,7 @@ extension GaiaHistoryController: UITableViewDelegate {
             optionMenu.addAction(shareAction)
             optionMenu.addAction(viewAction)
             optionMenu.addAction(cancelAction)
-            
+            optionMenu.popoverPresentationController?.sourceView = self.tableView
             self.present(optionMenu, animated: true, completion: nil)
         }
     }

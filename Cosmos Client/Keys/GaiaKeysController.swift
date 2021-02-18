@@ -171,6 +171,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         optionMenu.addAction(reuse)
         optionMenu.addAction(cancelAction)
         
+        optionMenu.popoverPresentationController?.sourceView = self.addButton
         self.present(optionMenu, animated: true, completion: nil)
     }
     

@@ -688,6 +688,8 @@ extension GaiaWalletController: UITableViewDelegate {
                 optionMenu.addAction(withdrawAction)
                 optionMenu.addAction(cancelAction)
                 
+                optionMenu.popoverPresentationController?.sourceView = self.tableView
+                
                 self.present(optionMenu, animated: true, completion: nil)
 
                 return
@@ -733,7 +735,7 @@ extension GaiaWalletController: UITableViewDelegate {
             optionMenu.addAction(delegateAction)
             optionMenu.addAction(unboundAction)
             optionMenu.addAction(cancelAction)
-            
+            optionMenu.popoverPresentationController?.sourceView = self.tableView
             self.present(optionMenu, animated: true, completion: nil)
         }
     }

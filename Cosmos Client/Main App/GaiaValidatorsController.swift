@@ -444,7 +444,7 @@ extension GaiaValidatorsController: UITableViewDelegate {
 //                    }
 //                    optionMenu.addAction(unjailAction)
 //                }
-                
+                optionMenu.popoverPresentationController?.sourceView = self.tableView
                 self.present(optionMenu, animated: true, completion: nil)
             }
         }
