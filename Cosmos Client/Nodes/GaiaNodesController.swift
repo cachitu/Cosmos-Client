@@ -62,7 +62,13 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         }
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         addButton.layer.cornerRadius = addButton.frame.size.height / 2
-        if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let forceUpdated = UserDefaults.standard.bool(forKey: "1.1.17.ForceUpdated")
+        if appVersion == "1.1.17", forceUpdated != true {
+            UserDefaults.standard.set(true, forKey: "1.1.17.ForceUpdated")
+            UserDefaults.standard.synchronize()
+            createDefaultNodes()
+        } else if let savedNodes = PersistableGaiaNodes.loadFromDisk() as? PersistableGaiaNodes {
             nodes = savedNodes.nodes
             showHint = false
             for node in nodes {
@@ -70,26 +76,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
                 node.broadcastMode = .async
             }
         } else {
-            nodes = [
-                TDMNode(name: TDMNodeType.cosmos.rawValue, type: .cosmos, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1317, secured: true),
-                TDMNode(name: TDMNodeType.iris.rawValue,  type: .iris, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1327, secured: true),
-                TDMNode(name: TDMNodeType.terra.rawValue,  type: .terra, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
-                TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347, secured: true),
-                TDMNode(name: TDMNodeType.emoney.rawValue,  type: .emoney, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1357, secured: true)
-
-                //TDMNode(name: TDMNodeType.terra.rawValue + " (Old HD)",  type: .terra_118,scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1337, secured: true),
-                //TDMNode(name: TDMNodeType.kava.rawValue + " (Old HD)",  type: .kava_118, scheme: "http", host: "wallet01.syncnode.ro", rcpPort: 1347, secured: true),
-                //TDMNode(name: "Iris Nyancat Testnet",  type: .iris_fuxi,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1337, secured: false),
-                //TDMNode(name: "Cosmos testnet",  type: .cosmos,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1317, secured: false),
-                //TDMNode(name: "Terra testnet",  type: .terra,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1347, secured: false),
-                //TDMNode(name: "Regen Network",  type: .regen,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 5317, secured: false),
-                //TDMNode(name: TDMNodeType.bitsong.rawValue,  type: .bitsong,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 2347, secured: false),
-                //TDMNode(name: TDMNodeType.emoney.rawValue,  type: .emoney,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 1327, secured: false),
-                //TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava,scheme: "http", host: "testwallet.syncnode.ro", rcpPort: 4317, secured: false),
-                //TDMNode(name: "Iris Fuxy Testnet",  type: .iris_fuxi,scheme: "https", host: "lcd.testnet.irisnet.org", rcpPort: nil, secured: false)
-            ]
-            
-            PersistableGaiaNodes(nodes: nodes).savetoDisk()
+            createDefaultNodes()
         }
         
         noDataView.isHidden = nodes.count > 0
@@ -179,6 +166,23 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
         }
     }
     
+    private func createDefaultNodes() {
+        nodes = [
+            TDMNode(name: TDMNodeType.stargate.rawValue, type: .stargate, scheme: "https", host: "cosmoshub.stakesystems.io"),
+            TDMNode(name: TDMNodeType.iris.rawValue,  type: .iris, scheme: "https", host: "irishub.stakesystems.io"),
+            TDMNode(name: TDMNodeType.terra.rawValue,  type: .terra, scheme: "https", host: "terra.stakesystems.io"),
+            TDMNode(name: TDMNodeType.terra_118.rawValue,  type: .terra_118, scheme: "https", host: "terra.stakesystems.io"),
+            TDMNode(name: TDMNodeType.kava.rawValue,  type: .kava, scheme: "https", host: "kava.stakesystems.io"),
+            TDMNode(name: TDMNodeType.kava_118.rawValue,  type: .kava_118, scheme: "https", host: "kava.stakesystems.io"),
+            TDMNode(name: TDMNodeType.emoney.rawValue,  type: .emoney, scheme: "https", host: "emoney.stakesystems.io"),
+            TDMNode(name: TDMNodeType.certik.rawValue,  type: .certik, scheme: "https", host: "certik.stakesystems.io"),
+            TDMNode(name: TDMNodeType.microtick.rawValue,  type: .microtick, scheme: "https", host: "microtick.stakesystems.io"),
+            TDMNode(name: TDMNodeType.bitsong.rawValue,  type: .bitsong, scheme: "https", host: "bitsong.stakesystems.io")
+        ]
+        
+        PersistableGaiaNodes(nodes: nodes).savetoDisk()
+    }
+    
     private func refreshNodes() {
         guard !tableView.isEditing else { return }
         weak var weakSelf = self
@@ -186,15 +190,7 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             noDataView.isHidden = true
             editButton.isHidden = false
 
-//            loadingView.startAnimating()
-//            editButton.isEnabled = false
-//            addButton.isEnabled = false
-//            editButton.alpha = 0.2
             getStatusFor(nodes: validNodes) {
-//                weakSelf?.editButton.alpha = 1.0
-//                weakSelf?.editButton.isEnabled = true
-//                weakSelf?.addButton.isEnabled = true
-//                weakSelf?.loadingView.stopAnimating()
                 weakSelf?.tableView.reloadData()
             }
         } else {

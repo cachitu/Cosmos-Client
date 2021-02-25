@@ -349,7 +349,7 @@ extension GaiaGovernanceController: UITableViewDelegate {
             }
             
             let detailsAction = UIAlertAction(title: "Details", style: .default) { [weak self] alertAction in
-                self?.showProposalDetailsAlert(title: proposal.title, message: proposal.description)
+                self?.showFormattedLongAlert(title: proposal.title, message: proposal.description)
             }
             
             let voteAction = UIAlertAction(title: "Submit Vote", style: .default) { [weak self] alertAction in

@@ -110,7 +110,7 @@ extension GaiaHashesController: UITableViewDelegate {
                         self?.present(activityViewController, animated: true, completion: nil)
                     }
                     let viewAction = UIAlertAction(title: "View Log", style: .default) { [weak self] alertAction in
-                        self?.showProposalDetailsAlert(title: nil, message: valid.rawLog.data(using: .utf8)?.prettyPrintedJSONString)
+                        self?.showFormattedLongAlert(title: nil, message: valid.rawLog.data(using: .utf8)?.prettyPrintedJSONString)
                     }
                     
                     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

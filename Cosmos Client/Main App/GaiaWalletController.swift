@@ -168,7 +168,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
 
         screenTitleLabel.text = AppContext.shared.node?.network ?? "Wallet"
         swapButton.isHidden = !(AppContext.shared.node?.type == TDMNodeType.terra || AppContext.shared.node?.type == TDMNodeType.terra_118) || AppContext.shared.key?.watchMode == true || AppContext.shared.account?.isEmpty == true
-        historyButton.isHidden = (AppContext.shared.node?.type == TDMNodeType.iris || AppContext.shared.node?.type == TDMNodeType.iris_fuxi)
+        historyButton.isHidden = false
         let _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { [weak self] note in
             guard !AppContext.shared.collectScreenOpen else { return }
             self?.clearFields()
@@ -300,16 +300,18 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func queryRewards(validDelegations: [GaiaDelegation]) {
         guard let validNode = AppContext.shared.node else { return }
         for delegation in validDelegations {
-            AppContext.shared.key?.queryDelegationRewards(node: validNode, validatorAddr: delegation.validatorAddr) { [weak self] rewards, err in
+            AppContext.shared.key?.queryDelegationRewards(node: validNode, validatorAddr: delegation.validatorAddr) { [weak self] rewards, items, err in
                 if let amount = rewards {
                     if AppContext.shared.account?.gaiaKey.validator == delegation.validatorAddr {
-                        AppContext.shared.key?.queryValidatorRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, err in
+                        AppContext.shared.key?.queryValidatorRewards(node: validNode, validator: delegation.validatorAddr) { [weak self] rewards, items, err in
                             if let total = rewards {
+                                delegation.allRewards = items
                                 delegation.availableReward = total + amount > 0 ? "\(total + amount)" : ""
                                 self?.tableView.reloadData()
                             }
                         }
                     } else {
+                        delegation.allRewards = items
                         delegation.availableReward = amount > 0 ? "\(amount)" : ""
                         self?.tableView.reloadData()
                     }
@@ -480,7 +482,7 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
         
         if let tabBar = tabBarController as? GaiaTabBarController {
             AppContext.shared.colletForStaking = true
-            let maxShares = AppContext.shared.isIrisType ? String(delegation.shares.split(separator: ".").first ?? "0") : Coin.deflatedAmountFrom(amount: delegation.shares, decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
+            let maxShares = Coin.deflatedAmountFrom(amount: delegation.shares, decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
             AppContext.shared.colletMaxAmount = maxShares
             AppContext.shared.colletAsset = nil
             tabBar.promptForAmount()
@@ -651,7 +653,15 @@ extension GaiaWalletController: UITableViewDataSource {
         let validatorName = AppContext.shared.node?.knownValidators[delegation.validatorAddr] ?? ""
         
         cell.configure(key: AppContext.shared.key, delegation: delegation, validatorName: validatorName)
-        
+        cell.onInfoTap = { items in
+            var result: String = ""
+            for item in items {
+                if let amount = item.amount, let denom = item.denom {
+                    result += "\(denom): \(amount)\n"
+                }
+            }
+            self.showFormattedLongAlert(title: "All available for withdraw", message: result)
+        }
         if AppContext.shared.account?.gaiaKey.validator == delegation.validatorAddr {
             cell.leftLabel?.textColor = .pendingYellow
         }
@@ -722,7 +732,7 @@ extension GaiaWalletController: UITableViewDelegate {
             }
             
             let redelegateAction = UIAlertAction(title: "Redelegate", style: .default) { [weak self] alertAction in
-                let maxShares = AppContext.shared.isIrisType ? String(delegation.shares.split(separator: ".").first ?? "0") : Coin.deflatedAmountFrom(amount: delegation.shares, decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
+                let maxShares = Coin.deflatedAmountFrom(amount: delegation.shares, decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
                 AppContext.shared.colletMaxAmount = maxShares
                 AppContext.shared.redelgateFrom = delegation.validatorAddr
                 self?.tabBarController?.selectedIndex = 1

@@ -648,17 +648,31 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="kytzu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8b-UA-O3G">
-                                                            <rect key="frame" x="35" y="15.666666666666668" width="292" height="17.000000000000004"/>
+                                                            <rect key="frame" x="35" y="15.666666666666668" width="263.66666666666669" height="17.000000000000004"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P70-Ys-i37">
-                                                            <rect key="frame" x="332" y="17" width="8" height="14"/>
+                                                            <rect key="frame" x="303.66666666666669" y="17" width="8" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" name="DarkGrayText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9KY-zc-Cwm">
+                                                            <rect key="frame" x="315.66666666666669" y="12.333333333333334" width="24.333333333333314" height="23.666666666666664"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="23.666666666666664" id="KHx-Ot-5cY"/>
+                                                                <constraint firstAttribute="width" constant="24.333333333333314" id="NCS-74-2wm"/>
+                                                            </constraints>
+                                                            <color key="tintColor" systemColor="linkColor"/>
+                                                            <state key="normal" image="info.circle" catalog="system">
+                                                                <color key="titleColor" systemColor="systemBlueColor"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="infoAction:" destination="S3P-lh-O5M" eventType="touchUpInside" id="Lv5-h7-Wox"/>
+                                                            </connections>
+                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmos1r627wlvrhkk637d4zarv2jpkuwuwurj9mnyskt" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haO-RA-Rrf">
                                                             <rect key="frame" x="15" y="35.666666666666664" width="325" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -670,14 +684,16 @@
                                                     <constraints>
                                                         <constraint firstItem="haO-RA-Rrf" firstAttribute="top" secondItem="G8b-UA-O3G" secondAttribute="bottom" constant="3" id="KLJ-ZF-1Jx"/>
                                                         <constraint firstItem="G8b-UA-O3G" firstAttribute="leading" secondItem="uEa-Eq-jZE" secondAttribute="trailing" constant="8" id="OcE-7E-AtD"/>
+                                                        <constraint firstItem="9KY-zc-Cwm" firstAttribute="trailing" secondItem="haO-RA-Rrf" secondAttribute="trailing" id="Rnm-nw-c9V"/>
                                                         <constraint firstItem="G8b-UA-O3G" firstAttribute="centerY" secondItem="uEa-Eq-jZE" secondAttribute="centerY" id="XcJ-vT-E0a"/>
                                                         <constraint firstAttribute="trailing" secondItem="haO-RA-Rrf" secondAttribute="trailing" constant="5" id="XrS-wY-Ta6"/>
+                                                        <constraint firstItem="9KY-zc-Cwm" firstAttribute="leading" secondItem="P70-Ys-i37" secondAttribute="trailing" constant="4" id="drV-2v-JYN"/>
+                                                        <constraint firstItem="9KY-zc-Cwm" firstAttribute="centerY" secondItem="P70-Ys-i37" secondAttribute="centerY" id="hcC-J3-Pb2"/>
                                                         <constraint firstItem="P70-Ys-i37" firstAttribute="centerY" secondItem="G8b-UA-O3G" secondAttribute="centerY" id="jbr-ZV-w7A"/>
                                                         <constraint firstItem="P70-Ys-i37" firstAttribute="leading" secondItem="G8b-UA-O3G" secondAttribute="trailing" constant="5" id="ltc-1b-qSs"/>
                                                         <constraint firstItem="uEa-Eq-jZE" firstAttribute="leading" secondItem="LLP-k0-kpV" secondAttribute="leading" constant="15" id="m5N-n2-noE"/>
                                                         <constraint firstItem="haO-RA-Rrf" firstAttribute="leading" secondItem="uEa-Eq-jZE" secondAttribute="leading" id="vRz-6z-hwB"/>
                                                         <constraint firstItem="uEa-Eq-jZE" firstAttribute="top" secondItem="LLP-k0-kpV" secondAttribute="top" constant="13" id="xGn-3I-YGw"/>
-                                                        <constraint firstItem="P70-Ys-i37" firstAttribute="trailing" secondItem="haO-RA-Rrf" secondAttribute="trailing" id="xZl-T1-w3K"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
@@ -3723,7 +3739,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="jaK-Ex-JiS"/>
+        <segue reference="5t3-G3-Clc"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="DefaultBackground"/>
     <resources>
@@ -3745,6 +3761,7 @@
         <image name="delete.left" catalog="system" width="128" height="104"/>
         <image name="friendship" width="34.333332061767578" height="31.333333969116211"/>
         <image name="history" width="20.333333969116211" height="18.333333969116211"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="rcheckBoxChecked" width="20" height="20"/>
         <namedColor name="CellBackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3773,6 +3790,9 @@
         <namedColor name="Silver">
             <color red="0.80784313725490198" green="0.83137254901960789" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

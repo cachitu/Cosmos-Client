@@ -49,25 +49,28 @@ class GaiaSharesCell: UITableViewCell {
     @IBOutlet weak var stateView: CellStateRoundedView!
     @IBOutlet weak var copyButton: UIButton?
     
+    @IBAction func infoAction(_ sender: Any) {
+        onInfoTap?(items)
+    }
+    
     @IBAction func copyAction(_ sender: Any) {
         UIPasteboard.general.string = leftSubLabel?.text
         onCopy?()
     }
     
     var onCopy:(() -> ())?
+    var onInfoTap:((_ items: [TxFeeAmount]) -> ())?
+
+    private var items: [TxFeeAmount] = []
     
     func configure(key: GaiaKey?, delegation: GaiaDelegation, validatorName: String) {
         
         let parts = delegation.shares.split(separator: ".")
-
+        items = delegation.allRewards ?? []
         leftLabel?.text = "\(parts.first ?? "0") shares to " + validatorName
         leftSubLabel?.text = delegation.validatorAddr
         leftLabel?.textColor = .darkGrayText
-        if AppContext.shared.node?.type == .iris || AppContext.shared.node?.type == .iris_fuxi {
-            upRightLabel?.text = delegation.availableReward + "💰"
-        } else {
-            upRightLabel?.text = delegation.availableRewardNormalised(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 2) + "💰"
-        }
+        upRightLabel?.text = delegation.availableRewardNormalised(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 2)// + "💰"
         roundedView?.backgroundColor = key?.watchMode == true ? .cellBackgroundColorAlpha : .cellBackgroundColor
     }
 }

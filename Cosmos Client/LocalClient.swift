@@ -24,7 +24,6 @@ public class LocalClient: KeysClientDelegate {
         self.type = networkType
         switch networkType {
         case .stargate  : self.signer = TendermintClient(coin: .stargate)
-        case .cosmos    : self.signer = TendermintClient(coin: .cosmos)
         case .iris      : self.signer = TendermintClient(coin: .iris)
         case .iris_fuxi : self.signer = TendermintClient(coin: .iris_fuxi)
         case .terra     : self.signer = TendermintClient(coin: .terra)
@@ -149,58 +148,6 @@ public class LocalClient: KeysClientDelegate {
             completion?(.success([final]))
         }
     }
-    
-    public func signIris(transferData: TransactionTx?, account: GaiaAccount, node: TDMNode, renameShares: Bool, completion:((RestResult<[TransactionTx]>) -> Void)?) {
-        
-        var signable = TxSignableIris()
-        signable.accountNumber = account.accNumber
-        signable.chainId = node.network
-        signable.fee = transferData?.value?.fee
-        signable.memo = transferData?.value?.memo
-        if let msg = transferData?.value?.msg?.first?.value {
-            signable.msgs = [msg]
-        }
-        signable.sequence = account.accSequence
-
-        var jsonData = Data()
-        var jsString = ""
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .sortedKeys
-        encoder.dataEncodingStrategy = .base64
-        do {
-            jsonData = try encoder.encode(signable)
-            jsString = String(data: jsonData, encoding: String.Encoding.utf8) ?? ""
-        } catch {
-            let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not encode data"])
-            completion?(.failure(error))
-        }
-        jsString = jsString.replacingOccurrences(of: "\\", with: "")
-        if renameShares {
-            jsString = jsString.replacingOccurrences(of: "shares_amount", with: "shares")
-        }
-        //print(jsString)
-        
-        let goodBuffer = jsString.data(using: .utf8)?.sha256() ?? Data()
-        let hdaccount = signer.recoverKey(from: account.gaiaKey.mnemonic)
-        
-        let type = "tendermint/PubKeySecp256k1"
-        let value = hdaccount.privateKey.publicKey.getBase64()
-        let hash = signer.signHash(transferData: goodBuffer, hdAccount: hdaccount)
-        
-        let sig = TxValueSignature(
-            sig: hash,
-            type: type,
-            value: value,
-            accNum: account.accNumber,
-            seq: account.accSequence)
-        var signed = transferData
-        signed?.value?.signatures = [sig]
-        
-        if let final = signed {
-            completion?(.success([final]))
-        }
-    }
-    
 }
 
 public struct TxSignable: Codable {
@@ -223,28 +170,5 @@ public struct TxSignable: Codable {
         case fee
         case msgs
         case memo
-    }
-}
-
-public struct TxSignableIris: Codable {
-    
-    public var accountNumber: String?
-    public var chainId: String?
-    public var fee: TxValueFee?
-    public var memo: String?
-    public var msgs: [TxMsgVal]?
-    public var sequence: String?
-    
-    public init() {
-        
-    }
-    
-    enum CodingKeys : String, CodingKey {
-        case accountNumber = "account_number"
-        case chainId = "chain_id"
-        case fee
-        case memo
-        case msgs
-        case sequence
     }
 }

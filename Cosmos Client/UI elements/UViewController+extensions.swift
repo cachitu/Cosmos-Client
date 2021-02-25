@@ -62,7 +62,7 @@ public extension UIViewController {
         self.present(alert, animated:true, completion: nil)
     }
 
-    func showProposalDetailsAlert(title: String?, message: String?) {
+    func showFormattedLongAlert(title: String?, message: String?) {
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .left

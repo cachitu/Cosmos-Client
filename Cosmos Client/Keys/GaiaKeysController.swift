@@ -85,7 +85,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
         super.viewDidLoad()
         
         addButton.layer.cornerRadius = addButton.frame.size.height / 2
-        AppContext.shared.keysDelegate = LocalClient(networkType: AppContext.shared.node?.type ?? .cosmos, netID: AppContext.shared.node?.nodeID ?? "-1")
+        AppContext.shared.keysDelegate = LocalClient(networkType: AppContext.shared.node?.type ?? .stargate, netID: AppContext.shared.node?.nodeID ?? "-1")
         
         toast = createToastAlert(creatorView: view, holderUnderView: toastHolderUnderView, holderTopDistanceConstraint: toastHolderTopConstraint, coveringView: topNavBarView)
         noDataView.isHidden = filteredDataSource.count > 0  || reusePickerMode
@@ -187,7 +187,7 @@ class GaiaKeysController: UIViewController, GaiaKeysManagementCapable, ToastAler
             name: name,
             address: address,
             valAddress: nil,
-            nodeType: AppContext.shared.node?.type ?? .cosmos, nodeId: AppContext.shared.node?.nodeID ?? "", networkName: AppContext.shared.node?.network ?? "")
+            nodeType: AppContext.shared.node?.type ?? .stargate, nodeId: AppContext.shared.node?.nodeID ?? "", networkName: AppContext.shared.node?.network ?? "")
         
         DispatchQueue.main.async {
             self.dataSource.insert(gaiaKey, at: 0)
