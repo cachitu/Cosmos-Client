@@ -25,9 +25,9 @@ struct AppContext {
     var collectedAmount: String = "0"
     var collectedDenom: String = ""
     var collectOnlyFee = false
-    var colletForStaking = false
-    var colletAsset: Coin? = nil
-    var colletMaxAmount: String? = nil
+    var collectForStaking = false
+    var collectAsset: Coin? = nil
+    var collectMaxAmount: String? = nil
     var collectSummary: [String] = []
     
     var collectScreenOpen = false

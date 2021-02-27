@@ -14,7 +14,7 @@ class GaiaCollectAmountController: UIViewController {
     var onConfirm: (() -> ())?
     var onCancel: (() -> ())?
     var onlyFeeMode = AppContext.shared.collectOnlyFee
-    var stakingOperation = AppContext.shared.colletForStaking
+    var stakingOperation = AppContext.shared.collectForStaking
     
     private var denomPower: Double = AppContext.shared.node?.decimals ?? 6
     private var maxAmountLenght = 7
@@ -26,7 +26,7 @@ class GaiaCollectAmountController: UIViewController {
             AppContext.shared.collectedDenom = denom
             denomBigLabel.text = selectedAsset?.upperDenom ?? ""
             denomSmallLabel.text = denom
-            availableAmountLabel.text = AppContext.shared.colletMaxAmount ?? selectedAsset?.deflatedAmount(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
+            availableAmountLabel.text = AppContext.shared.collectMaxAmount ?? selectedAsset?.deflatedAmount(decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
             
             if Double(availableAmountLabel.text ?? "0") ?? 0 < Double(amountLabel.text ?? "0") ?? 0 {
                 useMaxAmountAction(confirmButton)
@@ -72,7 +72,6 @@ class GaiaCollectAmountController: UIViewController {
             self.onCancel?()
         }
     }
-    
 
     @IBAction func backFromSummary(_ sender: UIButton) {
         summaryCenterX.constant = UIScreen.main.bounds.width
@@ -264,7 +263,15 @@ class GaiaCollectAmountController: UIViewController {
         super.viewDidLoad()
         maxAvailableLeadingLabel.text = "Max Available:"
         AppContext.shared.collectedAmount = "0"
-        selectedAsset = AppContext.shared.colletAsset ?? AppContext.shared.account?.assets.first
+        selectedAsset = AppContext.shared.collectAsset ?? AppContext.shared.account?.assets.first
+        if stakingOperation, !isCollectingFee {
+            if let denom = AppContext.shared.node?.stakeDenom, let match = AppContext.shared.account?.assets.filter({ (asset) in
+                asset.denom == denom
+            }).first {
+                selectedAsset = match
+            }
+        }
+
         movePickerTo(denom: selectedAsset?.denom)
         if AppContext.shared.node?.feeDenom == "" {
             AppContext.shared.node?.feeDenom = selectedAsset?.denom ?? ""
@@ -361,9 +368,15 @@ class GaiaCollectAmountController: UIViewController {
     }
     
     private var pickerDataSource: [Coin] {
-        if stakingOperation, !isCollectingFee, let first = AppContext.shared.account?.assets.first {
-            
-            return [first]
+        
+        if stakingOperation, !isCollectingFee {
+            if let denom = AppContext.shared.node?.stakeDenom, let match = AppContext.shared.account?.assets.filter({ (asset) in
+                asset.denom == denom
+            }).first {
+                return [match]
+            } else  if let first = AppContext.shared.account?.assets.first {
+                return [first]
+            }
         }
         return AppContext.shared.account?.assets ?? []
     }

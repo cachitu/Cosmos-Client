@@ -192,8 +192,8 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     private func handleRedelegate(redelgateFrom: String, validator: GaiaValidator) {
         
         if let tabBar = tabBarController as? GaiaTabBarController {
-            AppContext.shared.colletForStaking = true
-            AppContext.shared.colletAsset = nil
+            AppContext.shared.collectForStaking = true
+            AppContext.shared.collectAsset = nil
             tabBar.promptForAmount()
             AppContext.shared.collectSummary = [
                 "Redelegate \(AppContext.shared.node?.stakeDenom ?? "")",
@@ -266,9 +266,9 @@ class GaiaValidatorsController: UIViewController, ToastAlertViewPresentable, Gai
     private func handleDelegate(to validator: GaiaValidator) {
         
         if let tabBar = tabBarController as? GaiaTabBarController {
-            AppContext.shared.colletForStaking = true
-            AppContext.shared.colletMaxAmount = nil
-            AppContext.shared.colletAsset = nil
+            AppContext.shared.collectForStaking = true
+            AppContext.shared.collectMaxAmount = nil
+            AppContext.shared.collectAsset = nil
             AppContext.shared.collectSummary = [
                 "Delegate \(AppContext.shared.node?.stakeDenom ?? "")",
                 "From:\n\(AppContext.shared.key?.address ?? "you")",

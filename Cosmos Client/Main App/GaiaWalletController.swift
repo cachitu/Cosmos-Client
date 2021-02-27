@@ -110,9 +110,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
             if let addrToSend = senderAddress, let denom = selectedAsset?.denom {
                 senderAddress = nil
                 if let tabBar = tabBarController as? GaiaTabBarController {
-                    AppContext.shared.colletForStaking = false
-                    AppContext.shared.colletMaxAmount = nil
-                    AppContext.shared.colletAsset = selectedAsset
+                    AppContext.shared.collectForStaking = false
+                    AppContext.shared.collectMaxAmount = nil
+                    AppContext.shared.collectAsset = selectedAsset
                     tabBar.promptForAmount()
                     AppContext.shared.collectSummary = [
                         "Send \(denom)",
@@ -422,9 +422,9 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func handleDelegate(delegation: GaiaDelegation, denom: String) {
         
         if let tabBar = tabBarController as? GaiaTabBarController {
-            AppContext.shared.colletForStaking = true
-            AppContext.shared.colletMaxAmount = nil
-            AppContext.shared.colletAsset = nil
+            AppContext.shared.collectForStaking = true
+            AppContext.shared.collectMaxAmount = nil
+            AppContext.shared.collectAsset = nil
             AppContext.shared.collectSummary = [
                 "Delegate \(denom)",
                 "From:\n\(AppContext.shared.key?.address ?? "you")",
@@ -481,10 +481,10 @@ class GaiaWalletController: UIViewController, ToastAlertViewPresentable, GaiaKey
     private func handleUnbound(delegation: GaiaDelegation, denom: String) {
         
         if let tabBar = tabBarController as? GaiaTabBarController {
-            AppContext.shared.colletForStaking = true
+            AppContext.shared.collectForStaking = true
             let maxShares = Coin.deflatedAmountFrom(amount: delegation.shares, decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
-            AppContext.shared.colletMaxAmount = maxShares
-            AppContext.shared.colletAsset = nil
+            AppContext.shared.collectMaxAmount = maxShares
+            AppContext.shared.collectAsset = nil
             tabBar.promptForAmount()
             AppContext.shared.collectSummary = [
                 "Unbond \(denom)",
@@ -733,7 +733,7 @@ extension GaiaWalletController: UITableViewDelegate {
             
             let redelegateAction = UIAlertAction(title: "Redelegate", style: .default) { [weak self] alertAction in
                 let maxShares = Coin.deflatedAmountFrom(amount: delegation.shares, decimals: AppContext.shared.nodeDecimals, displayDecimnals: 6)
-                AppContext.shared.colletMaxAmount = maxShares
+                AppContext.shared.collectMaxAmount = maxShares
                 AppContext.shared.redelgateFrom = delegation.validatorAddr
                 self?.tabBarController?.selectedIndex = 1
             }

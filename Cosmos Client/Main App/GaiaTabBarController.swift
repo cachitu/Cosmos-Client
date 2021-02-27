@@ -68,8 +68,8 @@ class GaiaTabBarController: UITabBarController {
             }
             dest.onCancel = { [weak self] in
                 self?.onCollectAmountCancel?()
-                AppContext.shared.colletMaxAmount = nil
-                AppContext.shared.colletAsset = nil
+                AppContext.shared.collectMaxAmount = nil
+                AppContext.shared.collectAsset = nil
             }
         }
     }

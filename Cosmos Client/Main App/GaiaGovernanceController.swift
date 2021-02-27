@@ -262,9 +262,9 @@ class GaiaGovernanceController: UIViewController, ToastAlertViewPresentable, Gai
     func handleDeposit(proposal: GaiaProposal) {
         
         if let tabBar = tabBarController as? GaiaTabBarController {
-            AppContext.shared.colletForStaking = true
-            AppContext.shared.colletMaxAmount = nil
-            AppContext.shared.colletAsset = nil
+            AppContext.shared.collectForStaking = true
+            AppContext.shared.collectMaxAmount = nil
+            AppContext.shared.collectAsset = nil
             AppContext.shared.collectSummary = [
                 "Deposit \(AppContext.shared.node?.stakeDenom ?? "")",
                 "From:\n\(AppContext.shared.key?.address ?? "you")",
