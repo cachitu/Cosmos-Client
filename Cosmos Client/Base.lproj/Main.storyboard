@@ -2733,7 +2733,7 @@
                                     <constraint firstAttribute="height" constant="44" id="x7H-DW-SFs"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gi8-Jx-MyS" userLabel="Add">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gi8-Jx-MyS" userLabel="Add">
                                 <rect key="frame" x="317" y="671" width="50" height="50"/>
                                 <color key="backgroundColor" name="DarkRed"/>
                                 <constraints>
@@ -3739,7 +3739,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="5t3-G3-Clc"/>
+        <segue reference="jaK-Ex-JiS"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="DefaultBackground"/>
     <resources>
