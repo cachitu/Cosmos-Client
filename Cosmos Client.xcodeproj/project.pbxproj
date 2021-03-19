@@ -663,7 +663,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.19;
+				MARKETING_VERSION = 1.1.20;
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.syncnode.tendermint-tools";
 				PRODUCT_NAME = "T-Stake";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -687,7 +687,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.19;
+				MARKETING_VERSION = 1.1.20;
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.syncnode.tendermint-tools";
 				PRODUCT_NAME = "T-Stake";
 				PROVISIONING_PROFILE_SPECIFIER = "";
