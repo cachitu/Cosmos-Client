@@ -35,6 +35,7 @@ public class LocalClient: KeysClientDelegate {
         case .regen     : self.signer = TendermintClient(coin: .regen)
         case .certik    : self.signer = TendermintClient(coin: .certik)
         case .microtick : self.signer = TendermintClient(coin: .microtick)
+        case .agoric    : self.signer = TendermintClient(coin: .agoric)
         }
     }
     
