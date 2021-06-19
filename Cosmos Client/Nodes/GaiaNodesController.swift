@@ -178,7 +178,9 @@ class GaiaNodesController: UIViewController, ToastAlertViewPresentable {
             TDMNode(name: TDMNodeType.certik.rawValue,  type: .certik, scheme: "https", host: "certik.stakesystems.io"),
             TDMNode(name: TDMNodeType.microtick.rawValue,  type: .microtick, scheme: "https", host: "microtick.stakesystems.io"),
             TDMNode(name: TDMNodeType.bitsong.rawValue,  type: .bitsong, scheme: "https", host: "bitsong.stakesystems.io"),
-            TDMNode(name: TDMNodeType.agoric.rawValue,  type: .agoric, scheme: "https", host: "agoric.stakesystems.io")
+            TDMNode(name: TDMNodeType.agoric.rawValue,  type: .agoric, scheme: "https", host: "agoric.stakesystems.io"),
+            TDMNode(name: TDMNodeType.regen.rawValue,  type: .regen, scheme: "https", host: "regen.stakesystems.io"),
+            TDMNode(name: TDMNodeType.osmosis.rawValue,  type: .osmosis, scheme: "https", host: "osmosis.stakesystems.io")
         ]
         
         PersistableGaiaNodes(nodes: nodes).savetoDisk()
