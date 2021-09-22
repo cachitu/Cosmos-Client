@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZcB-As-1TX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZcB-As-1TX">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -624,13 +624,13 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="nnZ-Lf-Fhj">
-                                    <rect key="frame" x="0.0" y="129.33333206176758" width="375" height="50"/>
+                                    <rect key="frame" x="0.0" y="123" width="375" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaSharesCellID" id="S3P-lh-O5M" customClass="GaiaSharesCell" customModule="T_Stake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
+                                        <rect key="frame" x="0.0" y="49" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S3P-lh-O5M" id="eZk-ML-Koh">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
@@ -942,13 +942,13 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Z47-B5-Rwm">
-                                    <rect key="frame" x="0.0" y="166.33333206176758" width="375" height="60"/>
+                                    <rect key="frame" x="0.0" y="160" width="375" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaValidatorCellID" id="cXJ-g2-wDZ" customClass="GaiaValidatorCell" customModule="T_Stake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="110"/>
+                                        <rect key="frame" x="0.0" y="49" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cXJ-g2-wDZ" id="hG7-d9-dtc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
@@ -1197,7 +1197,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaOraclesCellID" id="YRc-fz-kcE" customClass="GaiaOracleCell" customModule="T_Stake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="49" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YRc-fz-kcE" id="uCz-YN-zRy">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -1403,6 +1403,104 @@
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wyl-Wn-gD6" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
+                                <rect key="frame" x="16" y="519" width="343" height="190"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSq-W8-voj" userLabel="syncnode link">
+                                        <rect key="frame" x="8" y="73" width="133" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <state key="normal" title="Design by 01node">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="openSyncnodeUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="eaL-Ui-izM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYT-d5-A7q" userLabel="kytzu link">
+                                        <rect key="frame" x="8" y="109" width="147" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <state key="normal" title="Developed by kytzu">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="openKytzuUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="kQr-nn-txE"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security audit by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jF8-97-M3F">
+                                        <rect key="frame" x="8.0000000000000071" y="153.66666666666663" width="125.66666666666669" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bs_logo" translatesAutoresizingMaskIntoConstraints="NO" id="TcP-zt-fEz">
+                                        <rect key="frame" x="141.66666666666666" y="149" width="101" height="29.333333333333343"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29.333333333333343" id="U0f-4c-EQN"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFd-Aj-xUP">
+                                        <rect key="frame" x="8" y="147" width="327" height="33"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="xKp-Ft-ZDB"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="openBitSentinel:" destination="0ep-XW-mYa" eventType="touchUpInside" id="wOp-dT-F8J"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6Y-jO-A1b" userLabel="syncnode link">
+                                        <rect key="frame" x="8" y="37" width="167" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <state key="normal" title="Infra by stake.systems">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="openSyncnodeUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="w0S-Z3-Mym"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-O3-xU6" userLabel="syncnode link">
+                                        <rect key="frame" x="8" y="1" width="158" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <state key="normal" title="Created by syncnode">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="openSyncnodeUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="Wwz-ic-n1r"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="DefaultBackground"/>
+                                <constraints>
+                                    <constraint firstItem="LSq-W8-voj" firstAttribute="top" secondItem="E6Y-jO-A1b" secondAttribute="bottom" constant="4" id="2o3-l3-m3v"/>
+                                    <constraint firstItem="oFd-Aj-xUP" firstAttribute="leading" secondItem="Wyl-Wn-gD6" secondAttribute="leading" constant="8" id="439-1e-Ka7"/>
+                                    <constraint firstAttribute="bottom" secondItem="oFd-Aj-xUP" secondAttribute="bottom" constant="10" id="44L-NN-TnN"/>
+                                    <constraint firstItem="TcP-zt-fEz" firstAttribute="leading" secondItem="jF8-97-M3F" secondAttribute="trailing" constant="8" id="6bJ-Sa-iDu"/>
+                                    <constraint firstItem="E6Y-jO-A1b" firstAttribute="top" secondItem="Rth-O3-xU6" secondAttribute="bottom" constant="4" id="6fe-Ew-Ekk"/>
+                                    <constraint firstItem="jF8-97-M3F" firstAttribute="centerY" secondItem="oFd-Aj-xUP" secondAttribute="centerY" id="7KT-Kw-qMS"/>
+                                    <constraint firstItem="Rth-O3-xU6" firstAttribute="leading" secondItem="E6Y-jO-A1b" secondAttribute="leading" id="8rO-Mg-3Nj"/>
+                                    <constraint firstAttribute="height" constant="190" id="A0u-Ol-Jy8"/>
+                                    <constraint firstItem="TcP-zt-fEz" firstAttribute="centerY" secondItem="oFd-Aj-xUP" secondAttribute="centerY" id="Egq-eE-xDO"/>
+                                    <constraint firstItem="jF8-97-M3F" firstAttribute="leading" secondItem="oFd-Aj-xUP" secondAttribute="leading" id="HRH-Mp-Sxq"/>
+                                    <constraint firstItem="LSq-W8-voj" firstAttribute="leading" secondItem="dYT-d5-A7q" secondAttribute="leading" id="Nwk-uH-MTj"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LSq-W8-voj" secondAttribute="trailing" constant="8" id="Zi6-sN-4rw"/>
+                                    <constraint firstItem="oFd-Aj-xUP" firstAttribute="top" secondItem="dYT-d5-A7q" secondAttribute="bottom" constant="6" id="eOs-pJ-tX7"/>
+                                    <constraint firstItem="E6Y-jO-A1b" firstAttribute="leading" secondItem="LSq-W8-voj" secondAttribute="leading" id="jka-7g-FgO"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dYT-d5-A7q" secondAttribute="trailing" constant="8" id="m96-aY-CWs"/>
+                                    <constraint firstItem="dYT-d5-A7q" firstAttribute="top" secondItem="LSq-W8-voj" secondAttribute="bottom" constant="4" id="q6J-G2-mrU"/>
+                                    <constraint firstAttribute="trailing" secondItem="oFd-Aj-xUP" secondAttribute="trailing" constant="8" id="thH-D5-hIH"/>
+                                    <constraint firstItem="dYT-d5-A7q" firstAttribute="leading" secondItem="oFd-Aj-xUP" secondAttribute="leading" id="zXh-C6-EPl"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIY-z3-0J8" userLabel="Top Bar">
                                 <rect key="frame" x="0.0" y="-6" width="375" height="94"/>
                                 <subviews>
@@ -1418,14 +1516,6 @@
                                     <constraint firstItem="Yje-IX-wGj" firstAttribute="centerX" secondItem="EIY-z3-0J8" secondAttribute="centerX" id="K3V-Ul-yfd"/>
                                     <constraint firstAttribute="height" constant="94" id="cp7-uZ-dU5"/>
                                     <constraint firstAttribute="bottom" secondItem="Yje-IX-wGj" secondAttribute="bottom" constant="9" id="ewy-jx-A0q"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uea-cp-u47" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
-                                <rect key="frame" x="165.66666666666666" y="364.66666666666669" width="44" height="44"/>
-                                <color key="backgroundColor" name="DarkRed"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="RQt-5P-dSE"/>
-                                    <constraint firstAttribute="width" constant="44" id="mNl-2o-0j3"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Current settings: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFA-jj-FXj">
@@ -1485,80 +1575,8 @@
                                     <action selector="applyMemo:" destination="0ep-XW-mYa" eventType="touchUpInside" id="PbI-UC-T48"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wyl-Wn-gD6" customClass="RoundedView" customModule="T_Stake" customModuleProvider="target">
-                                <rect key="frame" x="16" y="579" width="343" height="130"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSq-W8-voj" userLabel="syncnode link">
-                                        <rect key="frame" x="8" y="13" width="158" height="32"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <state key="normal" title="Created by syncnode">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="openSyncnodeUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="eaL-Ui-izM"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYT-d5-A7q" userLabel="kytzu link">
-                                        <rect key="frame" x="8" y="49" width="147" height="32"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <state key="normal" title="Developed by kytzu">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="openKytzuUrl:" destination="0ep-XW-mYa" eventType="touchUpInside" id="kQr-nn-txE"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security audit by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jF8-97-M3F">
-                                        <rect key="frame" x="8.0000000000000071" y="93.666666666666629" width="125.66666666666669" height="20"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bs_logo" translatesAutoresizingMaskIntoConstraints="NO" id="TcP-zt-fEz">
-                                        <rect key="frame" x="141.66666666666666" y="89" width="101" height="29.333333333333329"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="29.333333333333343" id="U0f-4c-EQN"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFd-Aj-xUP">
-                                        <rect key="frame" x="8" y="87" width="327" height="33"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="xKp-Ft-ZDB"/>
-                                        </constraints>
-                                        <connections>
-                                            <action selector="openBitSentinel:" destination="0ep-XW-mYa" eventType="touchUpInside" id="wOp-dT-F8J"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" name="DefaultBackground"/>
-                                <constraints>
-                                    <constraint firstItem="oFd-Aj-xUP" firstAttribute="leading" secondItem="Wyl-Wn-gD6" secondAttribute="leading" constant="8" id="439-1e-Ka7"/>
-                                    <constraint firstAttribute="bottom" secondItem="oFd-Aj-xUP" secondAttribute="bottom" constant="10" id="44L-NN-TnN"/>
-                                    <constraint firstItem="TcP-zt-fEz" firstAttribute="leading" secondItem="jF8-97-M3F" secondAttribute="trailing" constant="8" id="6bJ-Sa-iDu"/>
-                                    <constraint firstItem="jF8-97-M3F" firstAttribute="centerY" secondItem="oFd-Aj-xUP" secondAttribute="centerY" id="7KT-Kw-qMS"/>
-                                    <constraint firstAttribute="height" constant="130" id="A0u-Ol-Jy8"/>
-                                    <constraint firstItem="TcP-zt-fEz" firstAttribute="centerY" secondItem="oFd-Aj-xUP" secondAttribute="centerY" id="Egq-eE-xDO"/>
-                                    <constraint firstItem="jF8-97-M3F" firstAttribute="leading" secondItem="oFd-Aj-xUP" secondAttribute="leading" id="HRH-Mp-Sxq"/>
-                                    <constraint firstItem="LSq-W8-voj" firstAttribute="leading" secondItem="dYT-d5-A7q" secondAttribute="leading" id="Nwk-uH-MTj"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LSq-W8-voj" secondAttribute="trailing" constant="8" id="Zi6-sN-4rw"/>
-                                    <constraint firstItem="oFd-Aj-xUP" firstAttribute="top" secondItem="dYT-d5-A7q" secondAttribute="bottom" constant="6" id="eOs-pJ-tX7"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dYT-d5-A7q" secondAttribute="trailing" constant="8" id="m96-aY-CWs"/>
-                                    <constraint firstItem="dYT-d5-A7q" firstAttribute="top" secondItem="LSq-W8-voj" secondAttribute="bottom" constant="4" id="q6J-G2-mrU"/>
-                                    <constraint firstAttribute="trailing" secondItem="oFd-Aj-xUP" secondAttribute="trailing" constant="8" id="thH-D5-hIH"/>
-                                    <constraint firstItem="dYT-d5-A7q" firstAttribute="leading" secondItem="oFd-Aj-xUP" secondAttribute="leading" id="zXh-C6-EPl"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Use FaceID / Fingerprint" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xO-Y5-c0o">
-                                <rect key="frame" x="16" y="290.66666666666669" width="161.66666666666666" height="17"/>
+                                <rect key="frame" x="16" y="290.66666666666669" width="162" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <color key="textColor" name="DarkGrayText"/>
                                 <nil key="highlightedColor"/>
@@ -1569,6 +1587,14 @@
                                     <action selector="bioAuthSwithcAction:" destination="0ep-XW-mYa" eventType="valueChanged" id="mhC-bI-qsS"/>
                                 </connections>
                             </switch>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uea-cp-u47" customClass="CustomLoadingView" customModule="T_Stake" customModuleProvider="target">
+                                <rect key="frame" x="165.66666666666666" y="364.66666666666669" width="44" height="44"/>
+                                <color key="backgroundColor" name="DarkRed"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="RQt-5P-dSE"/>
+                                    <constraint firstAttribute="width" constant="44" id="mNl-2o-0j3"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Nt5-pB-f9S"/>
                         <color key="backgroundColor" name="ContentBackground"/>
@@ -1636,7 +1662,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8U-Oy-ot9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="p5F-ke-AmB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3392.8000000000002" y="173.64532019704436"/>
+            <point key="canvasLocation" x="3191" y="174"/>
         </scene>
         <!--Gaia Proposal Controller-->
         <scene sceneID="9k9-4n-ikM">
@@ -1959,7 +1985,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaHistoryCellID" id="Uc6-FM-Npu" customClass="GaiaHistoryCell" customModule="T_Stake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="110"/>
+                                        <rect key="frame" x="0.0" y="49" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uc6-FM-Npu" id="uxg-7a-v0J">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
@@ -2183,7 +2209,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaDelegationCellID" id="S0r-SO-nWX" customClass="GaiaDelegationCell" customModule="T_Stake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
+                                        <rect key="frame" x="0.0" y="49" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S0r-SO-nWX" id="j1s-b7-WPd">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
@@ -2356,7 +2382,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaVoteCellID" id="9ZM-fa-eF9" customClass="GaiaVoteCell" customModule="T_Stake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
+                                        <rect key="frame" x="0.0" y="49" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9ZM-fa-eF9" id="i93-1g-xM0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
@@ -2520,13 +2546,13 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="hPo-jp-jRk">
-                                    <rect key="frame" x="0.0" y="236.33333206176758" width="375" height="60"/>
+                                    <rect key="frame" x="0.0" y="230" width="375" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaGovernanceCellID" id="RHO-cK-qBx" customClass="GaiaGovernanceCell" customModule="T_Stake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="180"/>
+                                        <rect key="frame" x="0.0" y="49" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RHO-cK-qBx" id="ffW-NG-3a8">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
@@ -2836,7 +2862,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GaiaHashCellID" id="Zia-dq-wog" customClass="GaiaHashCell" customModule="T_Stake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="73"/>
+                                        <rect key="frame" x="0.0" y="49" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zia-dq-wog" id="roY-V0-urJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
@@ -3591,7 +3617,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MarketCellID" textLabel="9JZ-LQ-Zl6" detailTextLabel="ZS0-Bf-B6L" style="IBUITableViewCellStyleSubtitle" id="1p8-Hi-hzD">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="55.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="55.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1p8-Hi-hzD" id="kPv-4q-cAm">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="55.666667938232422"/>
@@ -3767,16 +3793,16 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ContentBackground">
-            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.93333333333333335" green="0.94509803921568625" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DarkGrayText">
-            <color red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.14901960784313725" green="0.078431372549019607" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DarkRed">
             <color red="0.81176470588235294" green="0.054901960784313725" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DefaultBackground">
-            <color red="0.17254901960784313" green="0.17254901960784313" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.14901960784313725" green="0.078431372549019607" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="LigthText">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
