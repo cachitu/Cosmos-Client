@@ -100,6 +100,9 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
         if curentNode?.type == .osmosis {
             curentNode?.feeAmount = "100000"
         }
+        if curentNode?.type == .juno {
+            curentNode?.feeAmount = "10000"
+        }
         if curentNode?.type == .iris || curentNode?.type == .iris_fuxi {
             curentNode?.feeAmount = "300000"
         }
