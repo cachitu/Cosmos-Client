@@ -91,6 +91,7 @@ class GaiaNodeController: UIViewController, ToastAlertViewPresentable {
     @IBAction func collectAndClose(_ sender: Any) {
         self.view.endEditing(true)
         self.collectData()
+        curentNode?.feeAmount = "10000"
         if curentNode?.type == .emoney {
             curentNode?.feeAmount = "500000"
         }
